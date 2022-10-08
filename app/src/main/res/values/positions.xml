@@ -60,4 +60,5 @@
     <dimen name="popup_left_right_margins">60dp</dimen>
     <dimen name="text_left_right_padding">15dp</dimen>
 
+
 </resources>
