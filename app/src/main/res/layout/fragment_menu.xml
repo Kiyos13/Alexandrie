@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/menu_fragment_weight"
+            android:orientation="vertical"
+            android:background="@color/foreground_color">
+
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_logo_menu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/logo_top_bottom_margins"/>
+
+            <View
+                android:id="@+id/firstLine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginTop="@dimen/logo_top_bottom_margins"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:background="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+            <Button
+                android:id="@+id/account"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:backgroundTint="@color/transparent"
+                android:text="Compte"
+                android:textAllCaps="false"
+                android:textColor="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/firstLine"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/menu_font_size"
+                android:layout_marginTop="@dimen/menu_text_text_margin"
+                android:drawableLeft="@drawable/ic_account"
+                android:drawableTint="@color/background_color"/>
+
+            <Button
+                android:id="@+id/logout"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:backgroundTint="@color/transparent"
+                android:text="Déconnexion"
+                android:textAllCaps="false"
+                android:textColor="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/account"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/menu_font_size"
+                android:layout_marginTop="@dimen/menu_text_text_margin"
+                android:drawableLeft="@drawable/ic_logout"
+                android:drawableTint="@color/background_color"/>
+
+            <View
+                android:id="@+id/secondLine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginTop="@dimen/logo_top_bottom_margins"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:background="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logout" />
+
+            <Button
+                android:id="@+id/homePage"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:backgroundTint="@color/transparent"
+                android:text="Page d'acceuil"
+                android:textAllCaps="false"
+                android:textColor="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/secondLine"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/menu_font_size"
+                android:layout_marginTop="@dimen/menu_text_text_margin"
+                android:drawableLeft="@drawable/ic_home"
+                android:drawableTint="@color/background_color"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/semitransparentLyt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/menu_fragment_void_weight"
+            android:orientation="vertical"
+            android:background="@color/background_color"
+            android:alpha="0.5">
+
+            <View
+                android:id="@+id/semitransparentView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

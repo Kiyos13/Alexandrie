@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginConnectionActivity"
+    android:background="@color/background_color">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/background_color">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/userNameInputLyt"
+                    android:layout_width="407dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/min_height_inputs"
+                    android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                    android:layout_marginRight="@dimen/inputs_left_right_margins"
+                    android:textColorHint="@color/background_color"
+                    app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                    app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_login"
+                    app:startIconTint="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/min_height_inputs"
+                        android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                        android:layout_marginRight="@dimen/inputs_left_right_margins"
+                        android:backgroundTint="@color/foreground_color"
+                        android:hint="Nom d'utilisateur"
+                        android:paddingTop="@dimen/inputs_top_bottom_padding"
+                        android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                        android:textColor="@color/background_color"
+                        android:textCursorDrawable="@null" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordInputLyt"
+                    android:layout_width="407dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/min_height_inputs"
+                    android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                    android:layout_marginTop="@dimen/standard_top_bottom_margin"
+                    android:layout_marginRight="@dimen/inputs_left_right_margins"
+                    android:textColorHint="@color/background_color"
+                    app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                    app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextColor="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userNameInputLyt"
+                    app:startIconDrawable="@drawable/ic_password"
+                    app:startIconTint="@color/background_color"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/min_height_inputs"
+                        android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                        android:layout_marginRight="@dimen/inputs_left_right_margins"
+                        android:backgroundTint="@color/foreground_color"
+                        android:hint="Mot de passe"
+                        android:paddingTop="@dimen/inputs_top_bottom_padding"
+                        android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                        android:textColor="@color/background_color"
+                        android:textCursorDrawable="@null"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <android.widget.Button
+                    android:id="@+id/connectBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                    android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                    android:layout_marginRight="@dimen/buttons_left_right_margins"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/first_dominant_color"
+                    android:paddingTop="@dimen/buttons_top_bottom_padding"
+                    android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                    android:text="Se connecter"
+                    android:textAllCaps="false"
+                    android:textColor="@color/background_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordInputLyt" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/forgotPasswordBtn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                android:layout_marginRight="@dimen/buttons_left_right_margins"
+                android:backgroundTint="@color/transparent"
+                android:text="Mot de passe oublié ?"
+                android:textAllCaps="false"
+                android:textColor="@color/foreground_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/createAcountBtn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                android:layout_marginRight="@dimen/buttons_left_right_margins"
+                android:backgroundTint="@color/transparent"
+                android:text="Créer un compte"
+                android:textAllCaps="false"
+                android:textColor="@color/foreground_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forgotPasswordBtn" />
+
+            <ImageView
+                android:id="@+id/googleImg"
+                android:layout_width="@dimen/google_button_side"
+                android:layout_height="@dimen/google_button_side"
+                android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createAcountBtn"
+                app:srcCompat="@drawable/logo_google" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/popupCoFragContainerV"
+        android:name="com.example.alexandrie.MessagePopupFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

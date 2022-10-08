@@ -1,0 +1,151 @@
+<resources>
+    <string name="app_name">Alexandrie</string>
+    <string name="title_activity_one_book_in_list_books">OneBookInListBooksActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string-array name="titles">
+        <item>Ajin</item>
+        <item>Ajin</item>
+        <item>Ajintestttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</item>
+        <item>Ajin</item>
+        <item>Ajin</item>
+        <item>Ajin</item>
+        <item>Ajin</item>
+        <item>Ajin</item>
+        <item>Ajin</item>
+    </string-array>
+
+    <string-array name="volumes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>444444444444444444444444444444444</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="authors">
+        <item>Gamon Sakuraihhhhhhhhhhhhhhhhhhh</item>
+        <item>GamonSakuraiiiiiiiiiiiiiiiiiiiiiiiiiiihhhhhhhhhyyyyyyy</item>
+        <item>Gamon Sakurai</item>
+        <item>Gamon Sakurai</item>
+        <item>Gamon Sakurai</item>
+        <item>Gamon Sakurai</item>
+        <item>Gamon Sakurai</item>
+        <item>Gamon Sakurai</item>
+        <item>Gamon Sakurai</item>
+    </string-array>
+
+    <string-array name="series">
+        <item>Ajins</item>
+        <item>Ajinseriessssssssssssssss</item>
+        <item>Ajin série</item>
+        <item>Ajin serie</item>
+        <item>Ajin serie</item>
+        <item>Ajin serie</item>
+        <item>Ajin serie</item>
+        <item>Ajin serie</item>
+        <item>Ajin serie</item>
+    </string-array>
+
+    <string-array name="tags1">
+        <item>Mangaaaaaaaaaaaaaa</item>
+        <item>Manga</item>
+        <item>Manga</item>
+        <item>Manga</item>
+        <item>Manga</item>
+        <item>Manga</item>
+        <item>Manga</item>
+        <item>Manga</item>
+        <item>Manga</item>
+    </string-array>
+
+    <string-array name="tags2">
+        <item>Suspenseeeeeeee</item>
+        <item>Action</item>
+        <item></item>
+        <item>Thriller</item>
+        <item>Horreur</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="tags3">
+        <item>Actionnnnnnnnnnn</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Suspense</item>
+        <item>Action</item>
+        <item>Horreur</item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="all_book_types">
+        <item>Roman</item>
+        <item>Manga</item>
+        <item>BD</item>
+        <item>Magasine</item>
+        <item>Nouvelle</item>
+        <item>Poème</item>
+        <item>Conte</item>
+        <item>Biographie</item>
+        <item>Autobiographie</item>
+        <item>Journal</item>
+        <item>Mythe</item>
+        <item>Légende</item>
+        <item>Chronique</item>
+    </string-array>
+
+    <string-array name="all_book_genres">
+        <item>Action</item>
+        <item>Aventure</item>
+        <item>Comédie</item>
+        <item>Drame</item>
+        <item>Suspence</item>
+        <item>Horreur</item>
+        <item>SF</item>
+        <item>Fantastique</item>
+        <item>Documentaire</item>
+        <item>Romance</item>
+        <item>Historique</item>
+        <item>Policier</item>
+        <item>Mystère</item>
+        <item>Thriller</item>
+    </string-array>
+
+    <string-array name="all_series">
+        <item></item>
+    </string-array>
+
+    <string-array name="all_authors">
+        <item></item>
+    </string-array>
+
+    <string-array name="checks">
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

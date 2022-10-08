@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    tools:context=".MessagePopupFragment">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.alexandrie.BlurryBackgroundFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/popup_left_right_margins"
+            android:layout_marginRight="@dimen/popup_left_right_margins"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/foreground_color"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/titleError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_top_bottom_margin"
+                android:paddingLeft="@dimen/text_left_right_padding"
+                android:paddingRight="@dimen/text_left_right_padding"
+                android:gravity="center"
+                android:text="Erreur"
+                android:textColor="@color/background_color"
+                android:textSize="@dimen/filter_order_title_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_top_bottom_margin"
+                android:layout_marginBottom="@dimen/text_top_bottom_margin"
+                android:paddingLeft="@dimen/text_left_right_padding"
+                android:paddingRight="@dimen/text_left_right_padding"
+                android:gravity="center"
+                android:text="Description de l'errreur"
+                android:textColor="@color/background_color" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/background_color" />
+
+            <android.widget.Button
+                android:id="@+id/okBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/foreground_color"
+                android:paddingTop="@dimen/buttons_top_bottom_padding"
+                android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                android:text="Ok"
+                android:textAllCaps="false"
+                android:textColor="@color/first_dominant_color"
+                android:textSize="@dimen/filter_order_title_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordInputLyt" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

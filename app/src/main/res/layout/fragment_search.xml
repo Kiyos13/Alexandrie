@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment"
+    android:background="@color/background_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_search_margins"
+                android:layout_marginBottom="@dimen/input_search_margins"
+                android:layout_marginLeft="@dimen/input_search_margins"
+                android:layout_weight="8"
+                android:textColorHint="@color/background_color"
+                app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintTextColor="@color/transparent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/foreground_color"
+                    android:hint="Nom d'utilisateur"
+                    android:paddingTop="@dimen/inputs_top_bottom_padding"
+                    android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                    android:textColor="@color/background_color"
+                    android:textCursorDrawable="@null" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/foreground_color"
+                android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginLeft="@dimen/line_left_margin"
+            android:layout_marginRight="@dimen/line_right_margin"
+            android:background="@color/foreground_color"/>
+
+    </LinearLayout>
+
+</FrameLayout>
