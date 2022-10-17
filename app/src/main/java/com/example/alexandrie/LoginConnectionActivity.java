@@ -3,6 +3,7 @@ package com.example.alexandrie;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +35,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
     private TextInputLayout userNameInputLyt, passwordInputLyt;
     private String userName, password;
     public static SharedPreferences sharedPrefLogs;
+    private String errorTitle, errorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +67,10 @@ public class LoginConnectionActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginConnectionActivity.this, ListBooksActivity.class));
                     else if (hasAccount == 0) {
                         System.out.println("\tDoesn't have an account !");
-                        FragmentContainerView menuFragContainerV = findViewById(R.id.popupCoFragContainerV);
-                        TextView titleTxtV = menuFragContainerV.findViewById(R.id.titleError);
-                        TextView textTxtV = menuFragContainerV.findViewById(R.id.textError);
-                        titleTxtV.setText("Erreur de connexion");
-                        textTxtV.setText("Aucun compte ne correspond au nom d'utilisateur que vous avez entré.");
-                        menuFragContainerV.setVisibility(View.VISIBLE);
+                        errorTitle = "Erreur de connexion";
+                        errorText = "Aucun compte ne correspond au nom d'utilisateur que vous avez entré.";
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
                     }
                 }
             }
@@ -109,7 +109,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
         boolean emptyUserName = (userName.length() == 0);
         boolean emptyPassword = (password.length() == 0);
         boolean hasToDisplayPopup = false;
-        String errorTitle = "Erreur de connexion", errorText = "";
+        errorTitle = "Erreur de connexion";
+        errorText = "";
         if (emptyUserName && emptyPassword) {
             hasToDisplayPopup = true;
             errorText = "Votre nom d'utilisateur et votre mot de passe sont vide.";
@@ -124,14 +125,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
         }
 
         if (hasToDisplayPopup) {
-            FragmentContainerView menuFragContainerV = findViewById(R.id.popupCoFragContainerV);
-            TextView titleTxtV = menuFragContainerV.findViewById(R.id.titleError);
-            TextView textTxtV = menuFragContainerV.findViewById(R.id.textError);
-            titleTxtV.setText(errorTitle);
-            textTxtV.setText(errorText);
-            menuFragContainerV.setVisibility(View.VISIBLE);
-
-            //getSupportFragmentManager().beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment()).commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
         }
 
         return hasToDisplayPopup;
@@ -186,12 +181,10 @@ public class LoginConnectionActivity extends AppCompatActivity {
                 return 1;
             else if (currentUserName.equals(userName) && !currentPassword.equals(password)) {
                 System.out.println("\tWrong password !");
-                FragmentContainerView menuFragContainerV = findViewById(R.id.popupCoFragContainerV);
-                TextView titleTxtV = menuFragContainerV.findViewById(R.id.titleError);
-                TextView textTxtV = menuFragContainerV.findViewById(R.id.textError);
-                titleTxtV.setText("Erreur de connexion");
-                textTxtV.setText("Votre mot de passe ne correspond pas à votre nom d'utilisateur.");
-                menuFragContainerV.setVisibility(View.VISIBLE);
+                errorTitle = "Erreur de connexion";
+                errorText = "Votre mot de passe ne correspond pas à votre nom d'utilisateur.";
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
                 return 2;
             }
         }

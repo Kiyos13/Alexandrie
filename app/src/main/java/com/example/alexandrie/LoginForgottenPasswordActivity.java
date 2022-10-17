@@ -4,6 +4,7 @@ import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
     private Button sendEmailButton;
     private TextInputLayout emailInputLyt;
     private String email;
+    private String errorTitle, errorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
                 SetEmail();
                 boolean emailIsEmpty = EmailIsEmpty();
                 if (!emailIsEmpty) {
-
+                    // TODO : send email with reset password
                 }
             }
         });
@@ -46,17 +48,13 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
 
     private boolean EmailIsEmpty() {
         boolean emptyEmail = (email.length() == 0);
-        String errorTitle = "Erreur", errorText = "L'email que vous avez entré est vide.";
         if (emptyEmail) {
-            FragmentContainerView menuFragContainerV = findViewById(R.id.popupFPFragContainerV);
-            TextView titleTxtV = menuFragContainerV.findViewById(R.id.titleError);
-            TextView textTxtV = menuFragContainerV.findViewById(R.id.textError);
-            titleTxtV.setText(errorTitle);
-            textTxtV.setText(errorText);
-            menuFragContainerV.setVisibility(View.VISIBLE);
+            errorTitle = "Erreur";
+            errorText = "L'email que vous avez entré est vide.";
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().add(R.id.popupFPFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
             return true;
         }
-
         return false;
     }
 }

@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/foreground_color"
-                    android:hint="Nom d'utilisateur"
+                    android:hint="Recherche"
                     android:paddingTop="@dimen/inputs_top_bottom_padding"
                     android:paddingBottom="@dimen/inputs_top_bottom_padding"
                     android:textColor="@color/background_color"

@@ -7,6 +7,7 @@ import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
     private android.widget.Button createAccountButton;
     private TextInputLayout userNameInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
     private String userName, password, secondPassword, email;
+    private String errorTitle, errorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +54,10 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                         AddAccountToSharedPrefs(sharedPrefLogs);
                     else {
                         System.out.println("\tUser name already taken !");
-                        FragmentContainerView menuFragContainerV = findViewById(R.id.popupCrFragContainerV);
-                        TextView titleTxtV = menuFragContainerV.findViewById(R.id.titleError);
-                        TextView textTxtV = menuFragContainerV.findViewById(R.id.textError);
-                        titleTxtV.setText("Erreur de création de compte");
-                        textTxtV.setText("Malheureusement, le nom d'utilisateur que vous avez entré est déjà pris. Veuillez en enter un autre différent.");
-                        menuFragContainerV.setVisibility(View.VISIBLE);
+                        errorTitle = "Erreur de création de compte";
+                        errorText = "Malheureusement, le nom d'utilisateur que vous avez entré est déjà pris. Veuillez en enter un autre différent.";
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
                     }
                 }
             }
@@ -81,7 +81,8 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         boolean emptyEmail = (email.length() == 0);
         boolean passwordsAreEquals = FirstAndSecondPasswordsAreEquals();
         boolean infosAreValid = true;
-        String errorTitle = "Erreur de création de compte", errorText = "";
+        errorTitle = "Erreur de création de compte";
+        errorText = "";
 
         if (emptyUserName || emptyPassword || emptyEmail || !passwordsAreEquals)
             infosAreValid = false;
@@ -104,12 +105,8 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
             errorText += "Votre mot de passe et sa confirmation sont différents.";
 
         if (!infosAreValid) {
-            FragmentContainerView menuFragContainerV = findViewById(R.id.popupCrFragContainerV);
-            TextView titleTxtV = menuFragContainerV.findViewById(R.id.titleError);
-            TextView textTxtV = menuFragContainerV.findViewById(R.id.textError);
-            titleTxtV.setText(errorTitle);
-            textTxtV.setText(errorText);
-            menuFragContainerV.setVisibility(View.VISIBLE);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
         }
 
         return infosAreValid;

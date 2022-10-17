@@ -70,9 +70,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         semitransparentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                Activity activity = getActivity();
-                FragmentContainerView menuFragContainerV = activity.findViewById(R.id.menuFragContainerV);
-                menuFragContainerV.setVisibility(View.GONE);
+                getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
             }
         });
 

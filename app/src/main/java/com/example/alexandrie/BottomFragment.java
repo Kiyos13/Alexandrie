@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -75,22 +76,13 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                Activity activity = getActivity();
-                FragmentContainerView menuFragContainerV = activity.findViewById(R.id.menuFragContainerV);
-                menuFragContainerV.setVisibility(View.VISIBLE);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.menuFragContainerV, new MenuFragment()).commit();
 
                 /* PUT in top fragment
-                Activity activity = getActivity();
-                FragmentContainerView searchFragContainerV = activity.findViewById(R.id.searchFragContainerV);
-                searchFragContainerV.setVisibility(View.VISIBLE);
-
-                Activity activity = getActivity();
-                FragmentContainerView filterFragContainerV = activity.findViewById(R.id.filterFragContainerV);
-                filterFragContainerV.setVisibility(View.VISIBLE);
-
-                Activity activity = getActivity();
-                FragmentContainerView orderFragContainerV = activity.findViewById(R.id.orderFragContainerV);
-                orderFragContainerV.setVisibility(View.VISIBLE);
+                fragmentManager.beginTransaction().replace(R.id.searchFragContainerV, new SearchFragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.filterFragContainerV, new FilterFragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.orderFragContainerV, new OrderFragment()).commit();
                  */
             }
         });

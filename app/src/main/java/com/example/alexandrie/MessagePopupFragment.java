@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentContainerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +19,8 @@ import android.view.ViewGroup;
 public class MessagePopupFragment extends Fragment implements View.OnClickListener {
 
     private android.widget.Button okButton;
+    private TextView titleTxtV, textTxtV;
+    private String titleTxt, textTxt;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +33,11 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
 
     public MessagePopupFragment() {
         // Required empty public constructor
+    }
+
+    public MessagePopupFragment(String errorTitle, String errorText) {
+        titleTxt = errorTitle;
+        textTxt = errorText;
     }
 
     /**
@@ -65,11 +73,15 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_message_popup, container, false);
 
         okButton = view.findViewById(R.id.okBtn);
+        TextView titleTxtV = view.findViewById(R.id.titleError);
+        TextView textTxtV = view.findViewById(R.id.textError);
+        titleTxtV.setText(titleTxt);
+        textTxtV.setText(textTxt);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                view.setVisibility(View.GONE);
+                getParentFragmentManager().beginTransaction().remove(MessagePopupFragment.this).commit();
             }
         });
 
