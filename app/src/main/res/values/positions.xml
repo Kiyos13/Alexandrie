@@ -64,6 +64,9 @@
     <dimen name="add_fragment_bottom_margin">70dp</dimen>
     <dimen name="add_fragment_right_left_margin">20dp</dimen>
 
+    <dimen name="bin_fragment_bottom_margin">70dp</dimen>
+    <dimen name="bin_fragment_right_left_margin">20dp</dimen>
+
     <dimen name="top_fragment_return_arrow_left_margin">20dp</dimen>
     <dimen name="top_fragment_icons_right_margin">20dp</dimen>
     <dimen name="top_fragment_icons_padding">10dp</dimen>
