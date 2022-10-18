@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
-    tools:context=".MessagePopupFragment">
+    tools:context=".ConfirmPopupFragment">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/blurryMessageFragContainerV"
+        android:id="@+id/blurryConfirmFragContainerV"
         android:name="com.example.alexandrie.BlurryBackgroundFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -33,14 +33,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/titleError"
+                android:id="@+id/titleConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_top_bottom_margin"
                 android:paddingLeft="@dimen/text_left_right_padding"
                 android:paddingRight="@dimen/text_left_right_padding"
                 android:gravity="center"
-                android:text="Erreur"
+                android:text="Titre de la confirmation"
                 android:textColor="@color/background_color"
                 android:textSize="@dimen/filter_order_title_size"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                 android:paddingLeft="@dimen/text_left_right_padding"
                 android:paddingRight="@dimen/text_left_right_padding"
                 android:gravity="center"
-                android:text="Description de l'errreur"
+                android:text="Question de confirmation"
                 android:textColor="@color/background_color" />
 
             <View
@@ -62,18 +62,39 @@
                 android:layout_height="@dimen/line_height"
                 android:background="@color/background_color" />
 
-            <android.widget.Button
-                android:id="@+id/okBtn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round_corners"
-                android:backgroundTint="@color/foreground_color"
-                android:paddingTop="@dimen/buttons_top_bottom_padding"
-                android:paddingBottom="@dimen/buttons_top_bottom_padding"
-                android:text="Ok"
-                android:textAllCaps="false"
-                android:textColor="@color/first_dominant_color"
-                android:textSize="@dimen/filter_order_title_size" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <android.widget.Button
+                    android:id="@+id/yesBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/foreground_color"
+                    android:paddingTop="@dimen/buttons_top_bottom_padding"
+                    android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                    android:text="Oui"
+                    android:textAllCaps="false"
+                    android:textColor="@color/first_dominant_color"
+                    android:textSize="@dimen/filter_order_title_size" />
+
+                <android.widget.Button
+                    android:id="@+id/noBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/foreground_color"
+                    android:paddingTop="@dimen/buttons_top_bottom_padding"
+                    android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                    android:text="Non"
+                    android:textAllCaps="false"
+                    android:textColor="@color/first_dominant_color"
+                    android:textSize="@dimen/filter_order_title_size" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
