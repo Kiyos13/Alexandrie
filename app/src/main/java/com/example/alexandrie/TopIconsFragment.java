@@ -71,24 +71,42 @@ public class TopIconsFragment extends Fragment implements View.OnClickListener {
         filterIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.filterFragContainerV, new FilterFragment()).commit();
+                Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.filterFragContainerV);
+                if (currentFragment instanceof FilterFragment) {
+                    getParentFragmentManager().beginTransaction().remove(currentFragment).commit();
+                }
+                else {
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.filterFragContainerV, new FilterFragment()).commit();
+                }
             }
         });
 
         orderIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.orderFragContainerV, new OrderFragment()).commit();
+                Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.orderFragContainerV);
+                if (currentFragment instanceof OrderFragment) {
+                    getParentFragmentManager().beginTransaction().remove(currentFragment).commit();
+                }
+                else {
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.orderFragContainerV, new OrderFragment()).commit();
+                }
             }
         });
 
         searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.searchFragContainerV, new SearchFragment()).commit();
+                Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.searchFragContainerV);
+                if (currentFragment instanceof SearchFragment) {
+                    getParentFragmentManager().beginTransaction().remove(currentFragment).commit();
+                }
+                else {
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.searchFragContainerV, new SearchFragment()).commit();
+                }
             }
         });
 
