@@ -13,6 +13,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/appBarLyt"
+                layout="@layout/app_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/returnArrowListBooksFragContainerV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/appBarIconsListBooksFragContainerV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/searchFragContainerV"
             android:layout_width="match_parent"
@@ -33,14 +61,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/vertical_recyclerView_left_right_margins"
-            android:layout_marginTop="@dimen/vertical_recyclerView_top_bottom_margins"
+            android:layout_marginTop="@dimen/vertical_recyclerView_top_margin"
             android:layout_marginRight="@dimen/vertical_recyclerView_left_right_margins"
-            android:layout_marginBottom="@dimen/vertical_recyclerView_top_bottom_margins" />
+            android:layout_marginBottom="@dimen/vertical_recyclerView_bottom_margin" />
 
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/bottomFragContainerV"
         android:name="com.example.alexandrie.BottomFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,5 +83,13 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/addFragContainerV"
+        android:name="com.example.alexandrie.AddFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

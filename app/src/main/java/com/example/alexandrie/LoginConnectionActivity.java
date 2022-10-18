@@ -45,7 +45,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
 
         connectButton = findViewById(R.id.connectBtn);
         forgottenPasswordButton = findViewById(R.id.forgotPasswordBtn);
-        createAccountButton = findViewById(R.id.createAcountBtn);
+        createAccountButton = findViewById(R.id.createAccountBtn);
         userNameInputLyt = findViewById(R.id.userNameInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
         sharedPrefLogs = getSharedPreferences("SharedPrefLogs", MODE_PRIVATE);

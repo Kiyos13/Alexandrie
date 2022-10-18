@@ -27,6 +27,10 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_forgotten_password);
         colorSystemBarTop(getWindow(), getResources(), this);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Intent returnIntent = new Intent(LoginForgottenPasswordActivity.this, LoginConnectionActivity.class);
+        fragmentManager.beginTransaction().add(R.id.returnArrowFPFragContainerV, new ReturnArrowFragment(returnIntent)).commit();
+
         sendEmailButton = findViewById(R.id.sendEmailBtn);
         emailInputLyt = findViewById(R.id.emailInputLyt);
 

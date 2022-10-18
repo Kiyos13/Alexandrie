@@ -37,6 +37,10 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_create_account);
         colorSystemBarTop(getWindow(), getResources(), this);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Intent returnIntent = new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class);
+        fragmentManager.beginTransaction().add(R.id.returnArrowCrFragContainerV, new ReturnArrowFragment(returnIntent)).commit();
+
         createAccountButton = findViewById(R.id.createAcountBtn);
         userNameInputLyt = findViewById(R.id.userNameInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);

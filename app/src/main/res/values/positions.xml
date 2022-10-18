@@ -19,7 +19,8 @@
     <dimen name="text_input_margin">20dp</dimen>
 
     <dimen name="vertical_recyclerView_left_right_margins">10dp</dimen>
-    <dimen name="vertical_recyclerView_top_bottom_margins">10dp</dimen>
+    <dimen name="vertical_recyclerView_top_margin">10dp</dimen>
+    <dimen name="vertical_recyclerView_bottom_margin">60dp</dimen>
 
     <dimen name="item_image_margins">10dp</dimen>
     <dimen name="item_text_image_margin">10dp</dimen>
@@ -59,6 +60,13 @@
 
     <dimen name="popup_left_right_margins">60dp</dimen>
     <dimen name="text_left_right_padding">15dp</dimen>
+
+    <dimen name="add_fragment_bottom_margin">70dp</dimen>
+    <dimen name="add_fragment_right_left_margin">20dp</dimen>
+
+    <dimen name="top_fragment_return_arrow_left_margin">20dp</dimen>
+    <dimen name="top_fragment_icons_right_margin">20dp</dimen>
+    <dimen name="top_fragment_icons_padding">10dp</dimen>
 
 
 </resources>

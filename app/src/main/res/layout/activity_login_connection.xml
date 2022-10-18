@@ -7,6 +7,11 @@
     tools:context=".LoginConnectionActivity"
     android:background="@color/background_color">
 
+    <include
+        layout="@layout/app_bar"
+        android:id="@+id/appBarLyt">
+    </include>
+
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
@@ -163,7 +168,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/createAcountBtn"
+                android:id="@+id/createAccountBtn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -185,7 +190,7 @@
                 android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/createAcountBtn"
+                app:layout_constraintTop_toBottomOf="@+id/createAccountBtn"
                 app:srcCompat="@drawable/logo_google" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,11 @@ import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +35,10 @@ public class ListBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_books);
         colorSystemBarTop(getWindow(), getResources(), this);
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.appBarIconsListBooksFragContainerV, new TopIconsFragment()).commit();
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
 
