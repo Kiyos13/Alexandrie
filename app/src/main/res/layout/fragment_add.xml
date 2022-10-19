@@ -6,14 +6,16 @@
     android:layout_height="wrap_content"
     tools:context=".AddFragment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/addBookBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/round_buttons_width_height"
+        android:layout_height="@dimen/round_buttons_width_height"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_add"
+        android:src="@drawable/ic_add"
         android:layout_marginEnd="@dimen/add_fragment_right_left_margin"
         android:layout_marginBottom="@dimen/add_fragment_bottom_margin"
         app:tint="@color/background_color"
-        app:backgroundTint="@color/first_dominant_color" />
+        app:backgroundTint="@color/first_dominant_color"
+        android:background="@drawable/round_button_first_dominant"
+        android:scaleType="fitCenter"/>
 </FrameLayout>
