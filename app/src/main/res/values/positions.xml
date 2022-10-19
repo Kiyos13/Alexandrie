@@ -72,5 +72,7 @@
     <dimen name="top_fragment_icons_padding">10dp</dimen>
 
     <dimen name="round_buttons_width_height">56dp</dimen>
+    <dimen name="round_button_add_padding">5dp</dimen>
+    <dimen name="round_button_del_padding">10dp</dimen>
 
 </resources>

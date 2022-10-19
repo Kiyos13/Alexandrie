@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:context=".DeleteFragment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/addBookBtn"
         android:layout_width="@dimen/round_buttons_width_height"
         android:layout_height="@dimen/round_buttons_width_height"
@@ -17,5 +17,6 @@
         app:tint="@color/background_color"
         app:backgroundTint="@color/first_dominant_color"
         android:background="@drawable/round_button_first_dominant"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:padding="@dimen/round_button_del_padding"/>
 </FrameLayout>

@@ -17,5 +17,6 @@
         app:tint="@color/background_color"
         app:backgroundTint="@color/first_dominant_color"
         android:background="@drawable/round_button_first_dominant"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:padding="@dimen/round_button_add_padding"/>
 </FrameLayout>
