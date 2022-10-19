@@ -93,10 +93,10 @@ public class LoginConnectionActivity extends AppCompatActivity {
 
     public static void colorSystemBarTop(Window window, Resources resources, Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.setStatusBarColor(resources.getColor(R.color.foreground_color, context.getTheme()));
+            window.setStatusBarColor(resources.getColor(R.color.first_dominant_color, context.getTheme()));
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(resources.getColor(R.color.foreground_color));
+            window.setStatusBarColor(resources.getColor(R.color.first_dominant_color));
         }
     }
 
