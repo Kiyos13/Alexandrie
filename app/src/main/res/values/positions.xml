@@ -28,8 +28,8 @@
     <dimen name="line_left_margin">10dp</dimen>
     <dimen name="line_right_margin">10dp</dimen>
     <dimen name="line_height">1dp</dimen>
-    <dimen name="one_item_book_height">110dp</dimen>
-    <dimen name="one_item_book_without_line_height">105dp</dimen>
+    <dimen name="one_item_book_height">105dp</dimen>
+    <dimen name="one_item_book_bottom_margin">10dp</dimen>
     <dimen name="max_width_title_in_one_item">170dp</dimen>
     <dimen name="max_width_volume_in_one_item">60dp</dimen>
     <dimen name="max_width_author_in_one_item">230dp</dimen>

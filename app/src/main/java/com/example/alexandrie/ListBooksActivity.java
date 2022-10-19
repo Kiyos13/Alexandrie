@@ -23,9 +23,9 @@ public class ListBooksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewBooks;
     private String[] strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strChecks;
-    private int images[] = {R.drawable.ajin1, R.drawable.ajin1, R.drawable.ajin1,
-            R.drawable.ajin1, R.drawable.ajin1, R.drawable.ajin1,
-            R.drawable.ajin1, R.drawable.ajin1, R.drawable.ajin1};
+    private int images[] = {R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
+            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
+            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4};
     public static SharedPreferences sharedPrefBooks;
     private LinkedHashSet<String>[] valuesSharedPrefs;
     private LinkedHashSet<String> currentHashSetValues;
