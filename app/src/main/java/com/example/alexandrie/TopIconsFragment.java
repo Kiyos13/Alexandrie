@@ -18,6 +18,9 @@ import android.widget.ImageView;
 public class TopIconsFragment extends Fragment implements View.OnClickListener {
 
     private ImageView filterIcon, orderIcon, searchIcon;
+    private Fragment filterFragment, orderFragment, searchFragment;
+    private FragmentManager fragmentManager;
+    private Boolean filterIsDisplayed, orderIsDisplayed, searchIsDisplayed;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,17 +70,32 @@ public class TopIconsFragment extends Fragment implements View.OnClickListener {
         filterIcon = view.findViewById(R.id.filterImgV);
         orderIcon = view.findViewById(R.id.orderImgV);
         searchIcon = view.findViewById(R.id.searchImgV);
+        filterIsDisplayed = false;
+        orderIsDisplayed = false;
+        searchIsDisplayed = false;
 
         filterIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.filterFragContainerV);
-                if (currentFragment instanceof FilterFragment) {
-                    getParentFragmentManager().beginTransaction().remove(currentFragment).commit();
+                updateFragments();
+
+                if (filterFragment instanceof FilterFragment) {
+                    getParentFragmentManager().beginTransaction().remove(filterFragment).commit();
+                    filterIsDisplayed = false;
                 }
                 else {
-                    FragmentManager fragmentManager = getParentFragmentManager();
+                    if (orderIsDisplayed) {
+                        getParentFragmentManager().beginTransaction().remove(orderFragment).commit();
+                        orderIsDisplayed = false;
+                    }
+                    if (searchIsDisplayed) {
+                        getParentFragmentManager().beginTransaction().remove(searchFragment).commit();
+                        searchIsDisplayed = false;
+                    }
+
+                    fragmentManager = getParentFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.filterFragContainerV, new FilterFragment()).commit();
+                    filterIsDisplayed = true;
                 }
             }
         });
@@ -85,13 +103,25 @@ public class TopIconsFragment extends Fragment implements View.OnClickListener {
         orderIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.orderFragContainerV);
-                if (currentFragment instanceof OrderFragment) {
-                    getParentFragmentManager().beginTransaction().remove(currentFragment).commit();
+                updateFragments();
+
+                if (orderFragment instanceof OrderFragment) {
+                    getParentFragmentManager().beginTransaction().remove(orderFragment).commit();
+                    orderIsDisplayed = false;
                 }
                 else {
+                    if (filterIsDisplayed) {
+                        getParentFragmentManager().beginTransaction().remove(filterFragment).commit();
+                        filterIsDisplayed = false;
+                    }
+                    if (searchIsDisplayed) {
+                        getParentFragmentManager().beginTransaction().remove(searchFragment).commit();
+                        searchIsDisplayed = false;
+                    }
+
                     FragmentManager fragmentManager = getParentFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.orderFragContainerV, new OrderFragment()).commit();
+                    orderIsDisplayed = true;
                 }
             }
         });
@@ -99,13 +129,25 @@ public class TopIconsFragment extends Fragment implements View.OnClickListener {
         searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                Fragment currentFragment = getParentFragmentManager().findFragmentById(R.id.searchFragContainerV);
-                if (currentFragment instanceof SearchFragment) {
-                    getParentFragmentManager().beginTransaction().remove(currentFragment).commit();
+                updateFragments();
+
+                if (searchFragment instanceof SearchFragment) {
+                    getParentFragmentManager().beginTransaction().remove(searchFragment).commit();
+                    searchIsDisplayed = false;
                 }
                 else {
+                    if (filterIsDisplayed) {
+                        getParentFragmentManager().beginTransaction().remove(filterFragment).commit();
+                        filterIsDisplayed = false;
+                    }
+                    if (orderIsDisplayed) {
+                        getParentFragmentManager().beginTransaction().remove(orderFragment).commit();
+                        orderIsDisplayed = false;
+                    }
+
                     FragmentManager fragmentManager = getParentFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.searchFragContainerV, new SearchFragment()).commit();
+                    searchIsDisplayed = true;
                 }
             }
         });
@@ -115,4 +157,10 @@ public class TopIconsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) { }
+
+    private void updateFragments() {
+        filterFragment = getParentFragmentManager().findFragmentById(R.id.filterFragContainerV);
+        orderFragment = getParentFragmentManager().findFragmentById(R.id.orderFragContainerV);
+        searchFragment = getParentFragmentManager().findFragmentById(R.id.searchFragContainerV);
+    }
 }
