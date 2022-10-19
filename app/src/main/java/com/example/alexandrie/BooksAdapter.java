@@ -17,17 +17,16 @@ import java.util.HashSet;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-    String dataTitles[], dataVolumes[], dataAuthors[], dataSeries[], dataTags1[], dataTags2[], dataTags3[], dataChecks[];
+    String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[], dataChecks[];
     int images[];
     Context context;
 
-    public BooksAdapter(Context ctx, String strTitles[], String strVolumes[], String strAuthors[], String strSeries[],
+    public BooksAdapter(Context ctx, String strTitles[], String strVolumes[], String strAuthors[],
                         String strTags1[], String strTags2[], String strTags3[], int imgs[], String boolChecks[]) {
         context = ctx;
         dataTitles = strTitles;
         dataVolumes = strVolumes;
         dataAuthors = strAuthors;
-        dataSeries = strSeries;
         dataTags1 = strTags1;
         dataTags2 = strTags2;
         dataTags3 = strTags3;
@@ -48,7 +47,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.titleTxt.setText(dataTitles[position]);
         holder.volumeTxt.setText("Tome " + dataVolumes[position]);
         holder.authorTxt.setText(dataAuthors[position]);
-        holder.serieTxt.setText(dataSeries[position]);
         onBindViewHolderTags(holder, position);
         holder.imageView.setImageResource(images[position]);
         if ((dataChecks[position].equals("true")) || (dataChecks[position].equals("True")))
@@ -117,7 +115,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     public class BooksViewHolder extends RecyclerView.ViewHolder {
 
-        TextView titleTxt, volumeTxt, authorTxt, serieTxt, tag1Txt, tag2Txt, tag3Txt;
+        TextView titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
         ImageView imageView;
         CheckBox checkBool;
 
@@ -126,7 +124,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             titleTxt = itemView.findViewById(R.id.titleTxtView);
             volumeTxt = itemView.findViewById(R.id.volumeTxtView);
             authorTxt = itemView.findViewById(R.id.authorTxtView);
-            serieTxt = itemView.findViewById(R.id.serieTxtView);
             tag1Txt = itemView.findViewById(R.id.tag1TxtView);
             tag2Txt = itemView.findViewById(R.id.tag2TxtView);
             tag3Txt = itemView.findViewById(R.id.tag3TxtView);

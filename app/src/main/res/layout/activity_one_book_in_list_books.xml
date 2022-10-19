@@ -74,25 +74,24 @@
                         android:textColor="@color/foreground_color" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/serieTxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/max_width_serie_in_one_item"
-                    android:maxLines="1"
-                    android:text="Série"
-                    android:textColor="@color/foreground_color" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/authorTxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/item_text_text_margin"
-                    android:maxWidth="@dimen/max_width_author_in_one_item"
-                    android:maxLines="1"
-                    android:text="Auteur"
-                    android:textColor="@color/foreground_color"
-                    android:textStyle="italic" />
+                    <TextView
+                        android:id="@+id/authorTxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:maxWidth="@dimen/max_width_author_in_one_item"
+                        android:maxLines="1"
+                        android:text="Auteur"
+                        android:textColor="@color/foreground_color"
+                        android:textStyle="italic" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

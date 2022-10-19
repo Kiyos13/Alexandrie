@@ -22,7 +22,7 @@ import java.util.Set;
 public class ListBooksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewBooks;
-    private String[] strTitles, strVolumes, strAuthors, strSeries, strTags1, strTags2, strTags3, strChecks;
+    private String[] strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strChecks;
     private int images[] = {R.drawable.ajin1, R.drawable.ajin1, R.drawable.ajin1,
             R.drawable.ajin1, R.drawable.ajin1, R.drawable.ajin1,
             R.drawable.ajin1, R.drawable.ajin1, R.drawable.ajin1};
@@ -45,7 +45,6 @@ public class ListBooksActivity extends AppCompatActivity {
         strTitles = getResources().getStringArray(R.array.titles);
         strVolumes = getResources().getStringArray(R.array.volumes);
         strAuthors = getResources().getStringArray(R.array.authors);
-        strSeries = getResources().getStringArray(R.array.series);
         strTags1 = getResources().getStringArray(R.array.tags1);
         strTags2 = getResources().getStringArray(R.array.tags2);
         strTags3 = getResources().getStringArray(R.array.tags3);
@@ -60,11 +59,10 @@ public class ListBooksActivity extends AppCompatActivity {
             currentHashSetValues.add("1_" + strTitles[i]);
             currentHashSetValues.add("2_" + strVolumes[i]);
             currentHashSetValues.add("3_" + strAuthors[i]);
-            currentHashSetValues.add("4_" + strSeries[i]);
-            currentHashSetValues.add("5_" + strTags1[i]);
-            currentHashSetValues.add("6_" + strTags2[i]);
-            currentHashSetValues.add("7_" + strTags3[i]);
-            currentHashSetValues.add("8_" + strChecks[i]);
+            currentHashSetValues.add("4_" + strTags1[i]);
+            currentHashSetValues.add("5_" + strTags2[i]);
+            currentHashSetValues.add("6_" + strTags3[i]);
+            currentHashSetValues.add("7_" + strChecks[i]);
             valuesSharedPrefs[i] = currentHashSetValues;
 
             SharedPreferences.Editor editor = sharedPrefBooks.edit();
@@ -82,7 +80,7 @@ public class ListBooksActivity extends AppCompatActivity {
          */
 
         BooksAdapter booksAdapter = new BooksAdapter(this, strTitles, strVolumes, strAuthors,
-                                                    strSeries, strTags1, strTags2, strTags3, images, strChecks);
+                                                    strTags1, strTags2, strTags3, images, strChecks);
         recyclerViewBooks.setAdapter(booksAdapter);
         recyclerViewBooks.setLayoutManager(new LinearLayoutManager(this));
     }
