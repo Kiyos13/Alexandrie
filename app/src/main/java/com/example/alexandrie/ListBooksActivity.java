@@ -4,14 +4,19 @@ import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,8 +27,12 @@ import java.util.Set;
 public class ListBooksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewBooks;
-    private String[] strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strChecks;
+    private String[] strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3;
     private int images[] = {R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
+            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
+            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
+            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
+            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
             R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
             R.drawable.hp4, R.drawable.hp4, R.drawable.hp4};
     public static SharedPreferences sharedPrefBooks;
@@ -48,7 +57,6 @@ public class ListBooksActivity extends AppCompatActivity {
         strTags1 = getResources().getStringArray(R.array.tags1);
         strTags2 = getResources().getStringArray(R.array.tags2);
         strTags3 = getResources().getStringArray(R.array.tags3);
-        strChecks = getResources().getStringArray(R.array.checks);
 
         sharedPrefBooks = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
 
@@ -62,7 +70,6 @@ public class ListBooksActivity extends AppCompatActivity {
             currentHashSetValues.add("4_" + strTags1[i]);
             currentHashSetValues.add("5_" + strTags2[i]);
             currentHashSetValues.add("6_" + strTags3[i]);
-            currentHashSetValues.add("7_" + strChecks[i]);
             valuesSharedPrefs[i] = currentHashSetValues;
 
             SharedPreferences.Editor editor = sharedPrefBooks.edit();
@@ -79,8 +86,13 @@ public class ListBooksActivity extends AppCompatActivity {
         }
          */
 
+        View selectAllItemsCheckboxView = findViewById(R.id.checkSelectAllBooks);
+        TextView swipeTextTxtV = findViewById(R.id.swipeTextTxtV);
+        TextView nbSelectedBooksTextTxtV = findViewById(R.id.nbBooksSelectedTxtV);
+
         BooksAdapter booksAdapter = new BooksAdapter(this, strTitles, strVolumes, strAuthors,
-                                                    strTags1, strTags2, strTags3, images, strChecks);
+                                                    strTags1, strTags2, strTags3, images, recyclerViewBooks,
+                                                    selectAllItemsCheckboxView, swipeTextTxtV, nbSelectedBooksTextTxtV);
         recyclerViewBooks.setAdapter(booksAdapter);
         recyclerViewBooks.setLayoutManager(new LinearLayoutManager(this));
     }

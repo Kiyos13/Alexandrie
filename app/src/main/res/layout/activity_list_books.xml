@@ -56,6 +56,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/vertical_recyclerView_left_right_margins"
+            android:layout_marginTop="@dimen/vertical_recyclerView_top_margin"
+            android:layout_marginRight="@dimen/vertical_recyclerView_left_right_margins">
+
+            <LinearLayout
+                android:id="@+id/checkSelectAllBooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/checkboxSelectAllBooks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/transparent"
+                    android:buttonTint="@color/foreground_color"
+                    android:minHeight="0dp"
+                    android:text=""
+                    android:textColor="@color/foreground_color" />
+
+                <TextView
+                    android:id="@+id/fragCheckboxTxtV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Tous"
+                    android:textColor="@color/foreground_color"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/swipeTextTxtV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Swipe lu / non lu :\nSwiper à droite pour marquer un livre comme lu \net à gauche pour non lu"
+                android:textColor="@color/foreground_color"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/nbBooksSelectedTxtV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\nAucun livre n'est sélectionné\n"
+                android:textColor="@color/foreground_color"
+                android:textStyle="italic"
+                android:visibility="gone"/>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewBooks"
             android:layout_width="match_parent"
@@ -63,7 +118,9 @@
             android:layout_marginLeft="@dimen/vertical_recyclerView_left_right_margins"
             android:layout_marginTop="@dimen/vertical_recyclerView_top_margin"
             android:layout_marginRight="@dimen/vertical_recyclerView_left_right_margins"
-            android:layout_marginBottom="@dimen/vertical_recyclerView_bottom_margin" />
+            android:layout_marginBottom="@dimen/vertical_recyclerView_bottom_margin"
+            android:paddingBottom="@dimen/vertical_recyclerView_bottom_padding"
+            android:clipToPadding="false" />
 
     </LinearLayout>
 
@@ -85,7 +142,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/addFragContainerV"
+        android:id="@+id/addDelFragContainerV"
         android:name="com.example.alexandrie.AddFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

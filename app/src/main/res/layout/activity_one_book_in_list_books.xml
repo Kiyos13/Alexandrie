@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_one_book_in_list"
     android:layout_marginBottom="@dimen/one_item_book_bottom_margin"
     tools:context=".OneBookInListBooksActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/oneBookInListLyt"
         android:layout_width="match_parent"
         android:layout_height="@dimen/one_item_book_height"
         android:orientation="horizontal"
@@ -17,124 +16,133 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/coverImgV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="bottom|center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/titleTxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/item_text_text_margin"
-                    android:maxWidth="@dimen/max_width_title_in_one_item"
-                    android:maxLines="1"
-                    android:text="Titre"
-                    android:textColor="@color/background_color"
-                    android:textSize="@dimen/title_font_size"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/volumeTxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/max_width_volume_in_one_item"
-                    android:maxLines="1"
-                    android:text="Tome"
-                    android:textColor="@color/background_color" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/authorTxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/item_text_text_margin"
-                    android:maxWidth="@dimen/max_width_author_in_one_item"
-                    android:maxLines="1"
-                    android:text="Auteur"
-                    android:textColor="@color/background_color"
-                    android:textStyle="italic" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="top|center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tag1TxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/item_text_text_margin"
-                    android:maxWidth="@dimen/max_width_tags_in_one_item"
-                    android:maxLines="1"
-                    android:text="Tag 1"
-                    android:textColor="@color/background_color" />
-
-                <TextView
-                    android:id="@+id/tag2TxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/item_text_text_margin"
-                    android:maxWidth="@dimen/max_width_tags_in_one_item"
-                    android:maxLines="1"
-                    android:text="Tag 2"
-                    android:textColor="@color/background_color" />
-
-                <TextView
-                    android:id="@+id/tag3TxtView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/max_width_tags_in_one_item"
-                    android:maxLines="1"
-                    android:text="Tag 3"
-                    android:textColor="@color/background_color" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/checkReadNotRead"
+        <CheckBox android:id="@+id/checkReadNotRead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:text=""
+            android:buttonTint="@color/foreground_color"
             android:background="@color/transparent"
-            android:buttonTint="@color/background_color"
-            android:text="" />
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/oneBookInListWithoutCheckboxLyt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/one_item_book_border_margins"
+            android:background="@drawable/background_one_book_in_list">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/coverImgV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titleTxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:maxWidth="@dimen/max_width_title_in_one_item"
+                        android:maxLines="1"
+                        android:text="Titre"
+                        android:textColor="@color/background_color"
+                        android:textSize="@dimen/title_font_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/volumeTxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="@dimen/max_width_volume_in_one_item"
+                        android:maxLines="1"
+                        android:text="Tome"
+                        android:textColor="@color/background_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/authorTxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:maxWidth="@dimen/max_width_author_in_one_item"
+                        android:maxLines="1"
+                        android:text="Auteur"
+                        android:textColor="@color/background_color"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="top|center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tag1TxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:maxWidth="@dimen/max_width_tags_in_one_item"
+                        android:maxLines="1"
+                        android:text="Tag 1"
+                        android:textColor="@color/background_color" />
+
+                    <TextView
+                        android:id="@+id/tag2TxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:maxWidth="@dimen/max_width_tags_in_one_item"
+                        android:maxLines="1"
+                        android:text="Tag 2"
+                        android:textColor="@color/background_color" />
+
+                    <TextView
+                        android:id="@+id/tag3TxtView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="@dimen/max_width_tags_in_one_item"
+                        android:maxLines="1"
+                        android:text="Tag 3"
+                        android:textColor="@color/background_color" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

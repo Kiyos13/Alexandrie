@@ -21,6 +21,7 @@
     <dimen name="vertical_recyclerView_left_right_margins">10dp</dimen>
     <dimen name="vertical_recyclerView_top_margin">10dp</dimen>
     <dimen name="vertical_recyclerView_bottom_margin">60dp</dimen>
+    <dimen name="vertical_recyclerView_bottom_padding">80dp</dimen>
 
     <dimen name="item_image_margins">10dp</dimen>
     <dimen name="item_text_image_margin">10dp</dimen>
@@ -30,10 +31,10 @@
     <dimen name="line_height">1dp</dimen>
     <dimen name="one_item_book_height">105dp</dimen>
     <dimen name="one_item_book_bottom_margin">10dp</dimen>
+    <dimen name="one_item_book_border_margins">5dp</dimen>
     <dimen name="max_width_title_in_one_item">170dp</dimen>
     <dimen name="max_width_volume_in_one_item">60dp</dimen>
     <dimen name="max_width_author_in_one_item">230dp</dimen>
-    <dimen name="max_width_serie_in_one_item">230dp</dimen>
     <dimen name="max_width_tags_in_one_item">70dp</dimen>
     <dimen name="title_font_size">20sp</dimen>
     
