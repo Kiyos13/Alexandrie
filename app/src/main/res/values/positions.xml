@@ -36,6 +36,7 @@
     <dimen name="max_width_volume_in_one_item">60dp</dimen>
     <dimen name="max_width_author_in_one_item">230dp</dimen>
     <dimen name="max_width_tags_in_one_item">70dp</dimen>
+    <dimen name="tags_in_one_item_padding">5dp</dimen>
     <dimen name="title_font_size">20sp</dimen>
     
     <dimen name="bottom_fragment_height">50dp</dimen>

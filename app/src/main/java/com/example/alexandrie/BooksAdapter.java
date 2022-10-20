@@ -167,6 +167,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 holder.tag1Txt.setText("#" + dataTags2[position]);
                 if (dataTags3[position].length() != 0)
                     holder.tag2Txt.setText("#" + dataTags3[position]);
+                else
+                    holder.tag2Txt.setBackgroundResource(0);
+                holder.tag3Txt.setBackgroundResource(0);
             }
         }
         else {
@@ -174,11 +177,16 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             if (dataTags2[position].length() == 0) {
                 if (dataTags3[position].length() != 0)
                     holder.tag2Txt.setText("#" + dataTags3[position]);
+                else
+                    holder.tag2Txt.setBackgroundResource(0);
+                holder.tag3Txt.setBackgroundResource(0);
             }
             else {
                 holder.tag2Txt.setText("#" + dataTags2[position]);
                 if (dataTags3[position].length() != 0)
                     holder.tag3Txt.setText("#" + dataTags3[position]);
+                else
+                    holder.tag3Txt.setBackgroundResource(0);
             }
         }
     }
