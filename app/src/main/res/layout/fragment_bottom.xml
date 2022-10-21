@@ -37,37 +37,5 @@
             android:layout_weight="1"
             android:src="@drawable/ic_showcase"
             app:tint="@color/background_color" />
-
-        <!--
-                <Button
-                    android:id="@+id/menuBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/transparent"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:drawableLeft="@drawable/ic_menu"
-                    android:drawableTint="@color/background_color" />
-
-                <Button
-                    android:id="@+id/switchBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/transparent"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:drawableLeft="@drawable/ic_switch_view"
-                    android:drawableTint="@color/background_color"/>
-
-                <Button
-                    android:id="@+id/showcaseBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/transparent"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:drawableLeft="@drawable/ic_showcase"
-                    android:drawableTint="@color/background_color"/>
-                    -->
     </LinearLayout>
 </FrameLayout>
