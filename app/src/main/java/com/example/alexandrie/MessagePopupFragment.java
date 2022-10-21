@@ -11,25 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MessagePopupFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MessagePopupFragment extends Fragment implements View.OnClickListener {
 
     private android.widget.Button okButton;
     private TextView titleTxtV, textTxtV;
     private String titleTxt, textTxt;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public MessagePopupFragment() {
         // Required empty public constructor
@@ -40,31 +26,9 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
         textTxt = errorText;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MessagePopupFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MessagePopupFragment newInstance(String param1, String param2) {
-        MessagePopupFragment fragment = new MessagePopupFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -73,8 +37,8 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_message_popup, container, false);
 
         okButton = view.findViewById(R.id.okBtn);
-        TextView titleTxtV = view.findViewById(R.id.titleError);
-        TextView textTxtV = view.findViewById(R.id.textError);
+        titleTxtV = view.findViewById(R.id.titleError);
+        textTxtV = view.findViewById(R.id.textError);
         titleTxtV.setText(titleTxt);
         textTxtV.setText(textTxt);
 

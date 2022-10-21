@@ -60,12 +60,12 @@ public class ListBooksActivity extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT:
                     System.out.println("\t\tswipe left ! " + position);
-                    strReadStatus[position] = "true";
+                    strReadStatus[position] = "false";
                     recyclerViewBooks.getAdapter().notifyItemChanged(position);
                     break;
                 case ItemTouchHelper.RIGHT:
                     System.out.println("\t\tswipe right ! " + position);
-                    strReadStatus[position] = "false";
+                    strReadStatus[position] = "true";
                     recyclerViewBooks.getAdapter().notifyItemChanged(position);
                     break;
             }
