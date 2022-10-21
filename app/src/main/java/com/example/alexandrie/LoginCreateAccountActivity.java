@@ -54,8 +54,10 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                 boolean infosAreValid = UserNameEmailPasswordAreValid();
 
                 if (infosAreValid) {
-                    if (UserNameIsFree(sharedPrefLogs, userName))
+                    if (UserNameIsFree(sharedPrefLogs, userName)) {
                         AddAccountToSharedPrefs(sharedPrefLogs);
+                        startActivity(new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class));
+                    }
                     else {
                         System.out.println("\tUser name already taken !");
                         errorTitle = "Erreur de création de compte";
