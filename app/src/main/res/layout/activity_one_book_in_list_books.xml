@@ -117,37 +117,57 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:background="@drawable/rounded_border_tags_foreground"
                         android:maxWidth="@dimen/max_width_tags_in_one_item"
                         android:maxLines="1"
-                        android:text="Tag 1"
-                        android:textColor="@color/background_color"
                         android:padding="@dimen/tags_in_one_item_padding"
-                        android:background="@drawable/rounded_border_tags_foreground" />
+                        android:text="Tag 1"
+                        android:textColor="@color/background_color" />
 
                     <TextView
                         android:id="@+id/tag2TxtView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/item_text_text_margin"
+                        android:background="@drawable/rounded_border_tags_foreground"
                         android:maxWidth="@dimen/max_width_tags_in_one_item"
                         android:maxLines="1"
-                        android:text="Tag 2"
-                        android:textColor="@color/background_color"
                         android:padding="@dimen/tags_in_one_item_padding"
-                        android:background="@drawable/rounded_border_tags_foreground" />
+                        android:text="Tag 2"
+                        android:textColor="@color/background_color" />
 
                     <TextView
                         android:id="@+id/tag3TxtView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_border_tags_foreground"
                         android:maxWidth="@dimen/max_width_tags_in_one_item"
                         android:maxLines="1"
-                        android:text="Tag 3"
-                        android:textColor="@color/background_color"
                         android:padding="@dimen/tags_in_one_item_padding"
-                        android:background="@drawable/rounded_border_tags_foreground" />
+                        android:text="Tag 3"
+                        android:textColor="@color/background_color" />
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/unreadImgV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/read_status_in_one_item_right_margin"
+                app:srcCompat="@drawable/ic_uncheck"
+                app:tint="@color/background_color" />
+
+            <ImageView
+                android:id="@+id/readImgV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/read_status_in_one_item_right_margin"
+                app:srcCompat="@drawable/ic_check"
+                app:tint="@color/background_color"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import android.app.Activity;
 import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.content.Context;
 import android.content.Context;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Field;
@@ -27,7 +29,7 @@ import java.util.HashSet;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-    String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[];
+    String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[], dataReadStatus[];
     int images[];
     Context context;
     private ViewGroup recyclerviewVG;
@@ -39,7 +41,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     private ObservableInteger nbSelectedBooks = new ObservableInteger();
 
     public BooksAdapter(Context ctx, String strTitles[], String strVolumes[], String strAuthors[],
-                        String strTags1[], String strTags2[], String strTags3[], int imgs[], RecyclerView recyclerView,
+                        String strTags1[], String strTags2[], String strTags3[],
+                        String strReadStatus[], int imgs[], RecyclerView recyclerView,
                         View checkboxView, TextView swipeTextTxtView, TextView nbSelectedBooksTextTxtV) {
         context = ctx;
         dataTitles = strTitles;
@@ -48,6 +51,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         dataTags1 = strTags1;
         dataTags2 = strTags2;
         dataTags3 = strTags3;
+        dataReadStatus = strReadStatus;
         images = imgs;
         recyclerViewBooks = recyclerView;
         selectAllItemsCheckboxView = checkboxView;
@@ -100,7 +104,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.volumeTxt.setText("Tome " + dataVolumes[position]);
         holder.authorTxt.setText(dataAuthors[position]);
         onBindViewHolderTags(holder, position);
-        holder.imageView.setImageResource(images[position]);
+        onBindViewHolderReadStatus(holder, position);
+        holder.coverImgV.setImageResource(images[position]);
 
         holder.oneBookInListLyt.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -191,6 +196,18 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         }
     }
 
+    private void onBindViewHolderReadStatus(@NonNull BooksViewHolder holder, int position) {
+        Boolean readStatus = dataReadStatus[position].equals("true");
+        if (readStatus) {
+            holder.unreadImgV.setVisibility(View.GONE);
+            holder.readImgV.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.unreadImgV.setVisibility(View.VISIBLE);
+            holder.readImgV.setVisibility(View.GONE);
+        }
+    }
+
     private void displayAllCheckBoxes() {
         View child;
         for (int i = 0; i <= recyclerviewVG.getChildCount(); i++) {
@@ -244,10 +261,20 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         return dataTitles.length;
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public class BooksViewHolder extends RecyclerView.ViewHolder {
 
         TextView titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
-        ImageView imageView;
+        ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
 
@@ -259,19 +286,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             tag1Txt = itemView.findViewById(R.id.tag1TxtView);
             tag2Txt = itemView.findViewById(R.id.tag2TxtView);
             tag3Txt = itemView.findViewById(R.id.tag3TxtView);
-            imageView = itemView.findViewById(R.id.coverImgV);
+            coverImgV = itemView.findViewById(R.id.coverImgV);
+            unreadImgV = itemView.findViewById(R.id.unreadImgV);
+            readImgV = itemView.findViewById(R.id.readImgV);
             oneBookInListLyt = itemView.findViewById(R.id.oneBookInListLyt);
             selectedBookCheckbox = itemView.findViewById(R.id.checkReadNotRead);
         }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position;
     }
 }
