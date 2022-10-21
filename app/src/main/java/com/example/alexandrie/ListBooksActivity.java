@@ -44,8 +44,7 @@ public class ListBooksActivity extends AppCompatActivity {
     private LinkedHashSet<String>[] valuesSharedPrefs;
     private LinkedHashSet<String> currentHashSetValues;
     private RecyclerView.Adapter booksAdapter;
-
-    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+    private ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;

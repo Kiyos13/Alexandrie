@@ -29,9 +29,9 @@ import java.util.HashSet;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-    String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[], dataReadStatus[];
-    int images[];
-    Context context;
+    private String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[], dataReadStatus[];
+    private int images[];
+    private Context context;
     private ViewGroup recyclerviewVG;
     private RecyclerView recyclerViewBooks;
     private Boolean isLongClicked = false, allBooksSelected = false, allBooksUnselected = false;
