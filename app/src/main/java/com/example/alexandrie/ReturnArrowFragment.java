@@ -20,6 +20,7 @@ public class ReturnArrowFragment extends Fragment {
     }
 
     public ReturnArrowFragment(Intent intent) {
+        // Set activity to return to
         returnIntent = intent;
     }
 
@@ -34,9 +35,11 @@ public class ReturnArrowFragment extends Fragment {
 
         returnArrowIcon = view.findViewById(R.id.returnArrowImgV);
 
+        // Return arrow click listener
         returnArrowIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Replace current activity by the one given as parameter on return arrow creation
                 startActivity(returnIntent);
             }
         });

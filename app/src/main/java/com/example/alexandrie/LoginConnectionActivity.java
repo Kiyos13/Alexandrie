@@ -41,7 +41,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_connection);
-        colorSystemBarTop(getWindow(), getResources(), this);
+        colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
         connectButton = findViewById(R.id.connectBtn);
         forgottenPasswordButton = findViewById(R.id.forgotPasswordBtn);
@@ -49,24 +49,31 @@ public class LoginConnectionActivity extends AppCompatActivity {
         userNameInputLyt = findViewById(R.id.userNameInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
         sharedPrefLogs = getSharedPreferences("SharedPrefLogs", MODE_PRIVATE);
-        // sharedPrefLogs.edit().clear().commit();
+        // sharedPrefLogs.edit().clear().commit(); // Clean SharedPreferences
 
+        // Connect button click listener
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SetUserInfosConnection();
-                boolean userNameAndOrPasswordEmpty = UserNameAndOrPasswordIsEmpty();
+                SetUserInfosConnection(); // Retrieve and update user infos
+                boolean userNameAndOrPasswordEmpty = UserNameAndOrPasswordIsEmpty(); // Check user name and password not empty
                 if (!userNameAndOrPasswordEmpty) {
+                    // Retrieve accounts from SharedPreferences
                     List<String>[] accounts = RetrieveDataInSharedPrefs(sharedPrefLogs);
                     for (int i = 0; i < accounts.length; i++) {
                         SortStringListByFirstChar(accounts[i]);
                     }
 
+                    // Check the account exists and the password is good
                     int hasAccount = HasAccountAndGoodPassword(accounts);
-                    if (hasAccount == 1)
+                    if (hasAccount == 1) {
+                        // Connect to the user account and change activity to the horizontals lists
+                        // TODO : change the activity to the horizontals lists
                         startActivity(new Intent(LoginConnectionActivity.this, ListBooksActivity.class));
+                    }
                     else if (hasAccount == 0) {
                         System.out.println("\tDoesn't have an account !");
+                        // Display a message error if the account doesn't exists
                         errorTitle = "Erreur de connexion";
                         errorText = "Aucun compte ne correspond au nom d'utilisateur que vous avez entré.";
                         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -76,21 +83,26 @@ public class LoginConnectionActivity extends AppCompatActivity {
             }
         });
 
+        // Forgotten password button click listener
         forgottenPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Change activity to LoginForgottenPasswordActivity
                 startActivity(new Intent(LoginConnectionActivity.this, LoginForgottenPasswordActivity.class));
             }
         });
 
+        // Create account button click listener
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Change activity to LoginCreateAccountActivity
                 startActivity(new Intent(LoginConnectionActivity.this, LoginCreateAccountActivity.class));
             }
         });
     }
 
+    // Set the color of the system bar at the top
     public static void colorSystemBarTop(Window window, Resources resources, Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.setStatusBarColor(resources.getColor(R.color.first_dominant_color, context.getTheme()));
@@ -100,11 +112,13 @@ public class LoginConnectionActivity extends AppCompatActivity {
         }
     }
 
+    // Set user infos
     private void SetUserInfosConnection() {
-        userName = userNameInputLyt.getEditText().getText().toString();
-        password = passwordInputLyt.getEditText().getText().toString();
+        userName = userNameInputLyt.getEditText().getText().toString(); // Set user name
+        password = passwordInputLyt.getEditText().getText().toString(); // Set password
     }
 
+    // Checks if user name and password are empty
     private boolean UserNameAndOrPasswordIsEmpty() {
         boolean emptyUserName = (userName.length() == 0);
         boolean emptyPassword = (password.length() == 0);
@@ -125,6 +139,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
         }
 
         if (hasToDisplayPopup) {
+            // Display error message according to the errors
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
         }
@@ -132,32 +147,35 @@ public class LoginConnectionActivity extends AppCompatActivity {
         return hasToDisplayPopup;
     }
 
+    // Return length of SharedPreferences
     public static int SharedPrefLength(SharedPreferences sharedPrefs) {
         int nbAccountsAlreadyExisting = 0;
-        Map<String, ?> allEntries = sharedPrefs.getAll();
+        Map<String, ?> allEntries = sharedPrefs.getAll(); // Retrieve all SharedPreferences datas
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             nbAccountsAlreadyExisting++;
         }
         return nbAccountsAlreadyExisting;
     }
 
+    // Return accounts in SharedPreferences
     private List<String>[] RetrieveDataInSharedPrefs(SharedPreferences sharedPrefs) {
         int nbAccounts = 0;
-        int totalNbAccounts = SharedPrefLength(sharedPrefs);
+        int totalNbAccounts = SharedPrefLength(sharedPrefs); // Number of accounts
         Set<String> currentSet;
         List<String> currentAccount;
-        List<String>[] accounts = new List[totalNbAccounts];
-        Map<String, ?> allEntries = sharedPrefs.getAll();
+        List<String>[] accounts = new List[totalNbAccounts]; // List of all the accounts
+        Map<String, ?> allEntries = sharedPrefs.getAll(); // Retrieve all SharedPreferences datas
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             nbAccounts++;
             currentSet = sharedPrefs.getStringSet(String.valueOf(nbAccounts), new HashSet<>());
 
-            currentAccount = new ArrayList<String>(currentSet);
+            currentAccount = new ArrayList<String>(currentSet); // Add current account to the list
             accounts[nbAccounts - 1] = currentAccount;
         }
         return accounts;
     }
 
+    // Sort a list by its first char (alphabéticly or number)
     public static void SortStringListByFirstChar(List<String> list) {
         Collections.sort(list, new Comparator<String>() {
             @Override
@@ -167,20 +185,22 @@ public class LoginConnectionActivity extends AppCompatActivity {
         });
     }
 
+    // Check the password is good and the account exists
     private int HasAccountAndGoodPassword(List<String>[] accounts) {
         List<String> currentAccountInfos;
         String currentUserName, currentPassword;
         for (int i = 0; i < accounts.length; i++) {
             currentAccountInfos = accounts[i];
-            currentUserName = currentAccountInfos.get(1);
-            currentUserName = currentUserName.substring(2);
-            currentPassword = currentAccountInfos.get(2);
-            currentPassword = currentPassword.substring(2);
+            currentUserName = currentAccountInfos.get(1); // Retrieve user name
+            currentUserName = currentUserName.substring(2); // user name without 2 firsts char : "1_"
+            currentPassword = currentAccountInfos.get(2); // Retrieve password
+            currentPassword = currentPassword.substring(2); // password without 2 firsts char : "2_"
 
             if (currentUserName.equals(userName) && currentPassword.equals(password))
                 return 1;
             else if (currentUserName.equals(userName) && !currentPassword.equals(password)) {
                 System.out.println("\tWrong password !");
+                // Display error message if the password is not good but the user name exists
                 errorTitle = "Erreur de connexion";
                 errorText = "Votre mot de passe ne correspond pas à votre nom d'utilisateur.";
                 FragmentManager fragmentManager = getSupportFragmentManager();

@@ -4,6 +4,7 @@ interface OnIntegerChangeListener {
     public void onIntegerChanged(int newValue);
 }
 
+// Int with change listener
 public class ObservableInteger {
     private OnIntegerChangeListener listener;
     private int value;
@@ -18,7 +19,7 @@ public class ObservableInteger {
 
     public void set(int value) {
         this.value = value;
-        if(listener != null) {
+        if (listener != null) {
             listener.onIntegerChanged(value);
         }
     }

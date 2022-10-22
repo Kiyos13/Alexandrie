@@ -56,28 +56,30 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         recyclerViewBooks = recyclerView;
         selectAllItemsCheckboxView = checkboxView;
         selectAllItemsCheckbox = selectAllItemsCheckboxView.findViewById(R.id.checkboxSelectAllBooks);
+        // Checkbox to select all book items change listener
         selectAllItemsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (selectAllItemsCheckbox.isChecked()) {
                     allBooksSelected = true;
                     allBooksUnselected = false;
-                    selectAllCheckBoxes();
+                    selectAllCheckBoxes(); // Select all the items
                 }
                 else {
                     allBooksSelected = false;
                     allBooksUnselected = true;
-                    unselectAllCheckBoxes();
+                    unselectAllCheckBoxes(); // Unselect all the items
                 }
             }
         });
         swipeTxtTV = swipeTextTxtView;
         nbSelectedBooksTxtTV = nbSelectedBooksTextTxtV;
         nbSelectedBooks.set(0);
+        // Change listener on the number of selected book items to update the text with the number of selected items
         nbSelectedBooks.setOnIntegerChangeListener(new OnIntegerChangeListener() {
             @Override
             public void onIntegerChanged(int newValue) {
-                int nbSelectedBooksForTxt = nbSelectedBooks.get();
+                int nbSelectedBooksForTxt = nbSelectedBooks.get(); // Retrieve the number of selected books
                 if (nbSelectedBooksForTxt == 0)
                     nbSelectedBooksTxtTV.setText("\nAucun livre n'est sélectionné\n");
                 else if (nbSelectedBooksForTxt == 1)
@@ -94,7 +96,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     public BooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_one_book_in_list_books, parent, false);
-        recyclerviewVG = parent;
+        recyclerviewVG = parent; // ViewGroup global variable
         return new BooksViewHolder(view);
     }
 
@@ -103,62 +105,73 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.titleTxt.setText(dataTitles[position]);
         holder.volumeTxt.setText("Tome " + dataVolumes[position]);
         holder.authorTxt.setText(dataAuthors[position]);
-        onBindViewHolderTags(holder, position);
-        onBindViewHolderReadStatus(holder, position);
+        onBindViewHolderTags(holder, position); // Set tags
+        onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
         holder.coverImgV.setImageResource(images[position]);
 
+        // Book item layout long click listener
         holder.oneBookInListLyt.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 System.out.println("\t\tLong click !");
-                isLongClicked = true;
+                isLongClicked = true; // Boolean to check if user has long clicked on item set to true
 
+                // Replace AddFragment by DeleteFragment
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
 
+                // Replace swipe text by number off selected items text
                 swipeTxtTV.setVisibility(View.GONE);
                 nbSelectedBooksTxtTV.setVisibility(View.VISIBLE);
 
+                // Show checkbox to select all book items
                 selectAllItemsCheckboxView.setVisibility(View.VISIBLE);
 
+                // Display and check checkbox user long click
+                // Change background of item under long click
                 holder.selectedBookCheckbox.setVisibility(View.VISIBLE);
                 holder.selectedBookCheckbox.setChecked(true);
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
                 nbSelectedBooks.set(nbSelectedBooks.get() + 1);
 
-                displayAllCheckBoxes();
+                displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
                 return true;
             }
         });
 
+        // RecyclerView scroll listener
         holder.oneBookInListLyt.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
                 if (isLongClicked)
-                    displayAllCheckBoxes();
+                    displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
                 if (allBooksSelected)
-                    selectAllCheckBoxes();
+                    selectAllCheckBoxes(); // Select all the checkboxes of all book items in recyclerView
                 if (allBooksUnselected)
-                    unselectAllCheckBoxes();
+                    unselectAllCheckBoxes(); // Unselect all the checkboxes of all book items in recyclerView
             }
         });
 
+        // Book item layout click listener
         holder.oneBookInListLyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                selectAndUnselectBooksInList(holder);
+                selectAndUnselectBooksInList(holder); // Select or Unselect item book
             }
         });
 
+        // Book item checkbox click listener
         holder.selectedBookCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Switch item checkbox checked status
                 holder.selectedBookCheckbox.setChecked(!holder.selectedBookCheckbox.isChecked());
-                selectAndUnselectBooksInList(holder);
+                selectAndUnselectBooksInList(holder); // Select or Unselect item book
             }
         });
     }
 
+    // Set tags without space if one before or in the middle is empty (tag offset)
     private void onBindViewHolderTags(@NonNull BooksViewHolder holder, int position) {
         holder.tag1Txt.setText("");
         holder.tag2Txt.setText("");
@@ -196,62 +209,75 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         }
     }
 
+    // Update book item icon (read/unread)
     private void onBindViewHolderReadStatus(@NonNull BooksViewHolder holder, int position) {
-        Boolean readStatus = dataReadStatus[position].equals("true");
-        if (readStatus) {
-            holder.unreadImgV.setVisibility(View.GONE);
-            holder.readImgV.setVisibility(View.VISIBLE);
+        Boolean readStatus = dataReadStatus[position].equals("true"); // Check if book item status is read
+        if (readStatus) { // If the book is read
+            holder.unreadImgV.setVisibility(View.GONE); // Remove unread icon
+            holder.readImgV.setVisibility(View.VISIBLE); // Display read icon
         }
         else {
-            holder.unreadImgV.setVisibility(View.VISIBLE);
-            holder.readImgV.setVisibility(View.GONE);
+            holder.unreadImgV.setVisibility(View.VISIBLE); // Display unread icon
+            holder.readImgV.setVisibility(View.GONE); // Remove read icon
         }
     }
 
+    // Display checkboxes of all book items
     private void displayAllCheckBoxes() {
         View child;
         for (int i = 0; i <= recyclerviewVG.getChildCount(); i++) {
-            child = recyclerviewVG.getChildAt(i);
+            child = recyclerviewVG.getChildAt(i); // Retrieve child in groupView
             if (child != null)
-                child.findViewById(R.id.checkReadNotRead).setVisibility(View.VISIBLE);
+                child.findViewById(R.id.checkReadNotRead).setVisibility(View.VISIBLE); // Set visible the child checkbox
         }
     }
 
+    // Select checkboxes of all book items
     private void selectAllCheckBoxes() {
         View child;
         for (int i = 0; i <= recyclerviewVG.getChildCount(); i++) {
-            child = recyclerviewVG.getChildAt(i);
+            child = recyclerviewVG.getChildAt(i); // Retrieve child in groupView
+            // Set the number of selected book items to the maximum
             nbSelectedBooks.set(recyclerViewBooks.getAdapter().getItemCount());
             if (child != null) {
+                // Check the child checkbox
                 ((CheckBox) child.findViewById(R.id.checkReadNotRead)).setChecked(true);
+                // Change the child background
                 child.findViewById(R.id.oneBookInListLyt). setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
             }
         }
     }
 
+    // Remove checkboxes of all book items
     private void unselectAllCheckBoxes() {
         View child;
         for (int i = 0; i <= recyclerviewVG.getChildCount(); i++) {
-            child = recyclerviewVG.getChildAt(i);
+            child = recyclerviewVG.getChildAt(i); // Retrieve child in groupView
+            // Set the number of selected book items to 0
             nbSelectedBooks.set(0);
             if (child != null) {
+                // Uncheck the child checkbox
                 ((CheckBox) child.findViewById(R.id.checkReadNotRead)).setChecked(false);
+                // Change the child background
                 child.findViewById(R.id.oneBookInListLyt).setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_background_color));
             }
         }
     }
 
+    // Select or Unselect book item when a long click on an item hapened
     private void selectAndUnselectBooksInList(@NonNull BooksViewHolder holder) {
         if (isLongClicked) {
             if (holder.selectedBookCheckbox.isChecked()) {
-                holder.selectedBookCheckbox.setChecked(false);
+                holder.selectedBookCheckbox.setChecked(false); // Uncheck the checkbox of the current book item
+                // Change book item background
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_background_color));
-                nbSelectedBooks.set(nbSelectedBooks.get() - 1);
+                nbSelectedBooks.set(nbSelectedBooks.get() - 1); // Decrease the number of selected items by one
             }
             else {
-                holder.selectedBookCheckbox.setChecked(true);
+                holder.selectedBookCheckbox.setChecked(true); // Check the checkbox of the current book item
+                // Change book item background
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
-                nbSelectedBooks.set(nbSelectedBooks.get() + 1);
+                nbSelectedBooks.set(nbSelectedBooks.get() + 1); // Increase the number of selected items by one
             }
         }
     }
@@ -273,6 +299,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     public class BooksViewHolder extends RecyclerView.ViewHolder {
 
+        // Elements in each book item
         TextView titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
         ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
@@ -280,17 +307,17 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTxt = itemView.findViewById(R.id.titleTxtView);
-            volumeTxt = itemView.findViewById(R.id.volumeTxtView);
-            authorTxt = itemView.findViewById(R.id.authorTxtView);
-            tag1Txt = itemView.findViewById(R.id.tag1TxtView);
-            tag2Txt = itemView.findViewById(R.id.tag2TxtView);
-            tag3Txt = itemView.findViewById(R.id.tag3TxtView);
-            coverImgV = itemView.findViewById(R.id.coverImgV);
-            unreadImgV = itemView.findViewById(R.id.unreadImgV);
-            readImgV = itemView.findViewById(R.id.readImgV);
-            oneBookInListLyt = itemView.findViewById(R.id.oneBookInListLyt);
-            selectedBookCheckbox = itemView.findViewById(R.id.checkReadNotRead);
+            titleTxt = itemView.findViewById(R.id.titleTxtView); // Title of the book item
+            volumeTxt = itemView.findViewById(R.id.volumeTxtView); // Volume of the book item
+            authorTxt = itemView.findViewById(R.id.authorTxtView); // Author of the book item
+            tag1Txt = itemView.findViewById(R.id.tag1TxtView); // First tag of the book item
+            tag2Txt = itemView.findViewById(R.id.tag2TxtView); // Second tag of the book item
+            tag3Txt = itemView.findViewById(R.id.tag3TxtView); // Third tag of the book item
+            coverImgV = itemView.findViewById(R.id.coverImgV); // Cover image of the book item
+            unreadImgV = itemView.findViewById(R.id.unreadImgV); // Unread icon of the book item
+            readImgV = itemView.findViewById(R.id.readImgV); // Read icon of the book item
+            oneBookInListLyt = itemView.findViewById(R.id.oneBookInListLyt); // All layout of the book item
+            selectedBookCheckbox = itemView.findViewById(R.id.checkReadNotRead); // Checkbox of the book item
         }
     }
 }

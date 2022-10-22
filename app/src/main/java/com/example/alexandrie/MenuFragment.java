@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
-    private View semitransparentView;
+    private View semitransparentView; // View to the right of the menu
     private Button accountButton, logoutButton, homePageButton;
 
     public MenuFragment() {
@@ -36,32 +36,42 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         logoutButton = view.findViewById(R.id.logoutBtn);
         homePageButton = view.findViewById(R.id.homePageBtn);
 
+        // View to the right of the menu click listener : to close the menu
         semitransparentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Remove MenuFragment from activity
                 getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
             }
         });
 
+        // Account click listener
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-
+                // Remove MenuFragment
+                // Change activity by AccountSettingsActivity
             }
         });
 
+        // Logout click listener
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Remove MenuFragment
                 getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
+                // Change activity by LoginConnectionActivity (starting activity)
                 startActivity(new Intent(getActivity(), LoginConnectionActivity.class));
             }
         });
 
+        // Home page click listener
         homePageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Remove MenuFragment
                 getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
+                // Change activity by ... (horizontals lists activity)
                 startActivity(new Intent(getActivity(), ListBooksActivity.class)); // TODO : change horizontal lists
             }
         });

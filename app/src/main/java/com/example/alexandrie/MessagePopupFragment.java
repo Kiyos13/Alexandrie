@@ -21,9 +21,9 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
         // Required empty public constructor
     }
 
-    public MessagePopupFragment(String errorTitle, String errorText) {
-        titleTxt = errorTitle;
-        textTxt = errorText;
+    public MessagePopupFragment(String messageTitle, String messageText) {
+        titleTxt = messageTitle; // Set the title of the message
+        textTxt = messageText; // Set the description of the message
     }
 
     @Override
@@ -41,9 +41,11 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
         titleTxtV.setText(titleTxt);
         textTxtV.setText(textTxt);
 
+        // Ok button click listener
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Remove MessagePopupFragment for current activity
                 getParentFragmentManager().beginTransaction().remove(MessagePopupFragment.this).commit();
             }
         });

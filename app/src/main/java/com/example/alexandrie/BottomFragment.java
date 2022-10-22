@@ -36,25 +36,29 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         switchIcon = view.findViewById(R.id.switchImgV);
         shwocaseIcon = view.findViewById(R.id.showcaseImgV);
 
+        // Menu click listener
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Put a new MenuFragment in the menuFragContainerV in BottomFragment
                 FragmentManager fragmentManager = getParentFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.menuFragContainerV, new MenuFragment()).commit();
             }
         });
 
+        // Switch click listener
         switchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-
+                // Switch activity between ListBooksActivity and ... (horizontal lists)
             }
         });
 
+        // Menu click listener
         shwocaseIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-
+                // Switch activity between ListBooksActivity and ... (main showcase)
             }
         });
 
