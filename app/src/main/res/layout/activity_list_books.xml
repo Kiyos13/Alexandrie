@@ -17,6 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/topBarLBFragContainerV"
+                android:name="com.example.alexandrie.AppBarFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--
             <include
                 android:id="@+id/appBarLyt"
                 layout="@layout/app_bar"
@@ -39,6 +48,8 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            -->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.fragment.app.FragmentContainerView

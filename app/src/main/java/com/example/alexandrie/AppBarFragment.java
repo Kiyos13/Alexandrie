@@ -1,25 +1,45 @@
 package com.example.alexandrie;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class TopIconsFragment extends Fragment implements View.OnClickListener {
+public class AppBarFragment extends Fragment implements View.OnClickListener {
 
-    private ImageView filterIcon, orderIcon, searchIcon;
+    private ImageView returnArrowIcon;
+    private Intent returnIntent;
+    private ImageView filterIcon, orderIcon, searchIcon, returnArrow;
     private Fragment filterFragment, orderFragment, searchFragment;
     private FragmentManager fragmentManager;
     // Booleans to display one fragment at a time (filter or order or search)
-    private Boolean filterIsDisplayed, orderIsDisplayed, searchIsDisplayed;
+    private Boolean filterIsDisplayed, orderIsDisplayed, searchIsDisplayed, hasFilterIcons, hasReturnArrow;
+    private View iconsLyt;
 
-    public TopIconsFragment() {
+    public AppBarFragment() {
         // Required empty public constructor
+        hasFilterIcons = false;
+        hasReturnArrow = false;
+    }
+
+    public AppBarFragment(Intent intent) {
+        // Set activity to return to
+        returnIntent = intent;
+        hasReturnArrow = true;
+        hasFilterIcons = false;
+    }
+
+    public AppBarFragment(Boolean hasIcons) {
+        // Set activity to return to
+        hasReturnArrow = false;
+        hasFilterIcons = hasIcons;
     }
 
     @Override
@@ -29,14 +49,32 @@ public class TopIconsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_top_icons, container, false);
+        View view = inflater.inflate(R.layout.fragment_app_bar, container, false);
 
+        returnArrowIcon = view.findViewById(R.id.returnArrowImgV);
         filterIcon = view.findViewById(R.id.filterImgV);
         orderIcon = view.findViewById(R.id.orderImgV);
         searchIcon = view.findViewById(R.id.searchImgV);
         filterIsDisplayed = false;
         orderIsDisplayed = false;
         searchIsDisplayed = false;
+        if (hasFilterIcons) {
+            iconsLyt = view.findViewById(R.id.topBarFilterIconsLyt);
+            iconsLyt.setVisibility(View.VISIBLE);
+        }
+        if (hasReturnArrow) {
+            returnArrow = view.findViewById(R.id.returnArrowImgV);
+            returnArrow.setVisibility(View.VISIBLE);
+        }
+
+        // Return arrow click listener
+        returnArrowIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View InputFragmentView) {
+                // Replace current activity by the one given as parameter on return arrow creation
+                startActivity(returnIntent);
+            }
+        });
 
         // Filter click listener
         filterIcon.setOnClickListener(new View.OnClickListener() {

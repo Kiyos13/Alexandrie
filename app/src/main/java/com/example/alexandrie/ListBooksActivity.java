@@ -80,7 +80,7 @@ public class ListBooksActivity extends AppCompatActivity {
 
         // Display icons (filter, order, search) fragments on the top bar
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.appBarIconsListBooksFragContainerV, new TopIconsFragment()).commit();
+        fragmentManager.beginTransaction().add(R.id.topBarLBFragContainerV, new AppBarFragment(true)).commit();
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
         strTitles = getResources().getStringArray(R.array.titles);

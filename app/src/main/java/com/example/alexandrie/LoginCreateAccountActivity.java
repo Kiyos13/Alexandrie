@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -41,7 +42,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         // Link the ReturnArrowFragment to the LoginConnectionActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         Intent returnIntent = new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class);
-        fragmentManager.beginTransaction().add(R.id.returnArrowCrFragContainerV, new ReturnArrowFragment(returnIntent)).commit();
+        fragmentManager.beginTransaction().add(R.id.topBarLogCrFragContainerV, new AppBarFragment(returnIntent)).commit();
 
         createAccountButton = findViewById(R.id.createAcountBtn);
         userNameInputLyt = findViewById(R.id.userNameInputLyt);

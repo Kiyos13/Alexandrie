@@ -31,7 +31,7 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
         // Link the ReturnArrowFragment to the LoginConnectionActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         Intent returnIntent = new Intent(LoginForgottenPasswordActivity.this, LoginConnectionActivity.class);
-        fragmentManager.beginTransaction().add(R.id.returnArrowFPFragContainerV, new ReturnArrowFragment(returnIntent)).commit();
+        fragmentManager.beginTransaction().add(R.id.topBarLogFPFragContainerV, new AppBarFragment(returnIntent)).commit();
 
         sendEmailButton = findViewById(R.id.sendEmailBtn);
         emailInputLyt = findViewById(R.id.emailInputLyt);
