@@ -59,6 +59,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View InputFragmentView) {
                 // Switch activity between ListBooksActivity and ... (main showcase)
+                startActivity(new Intent(getActivity(), ActivityDisplayMenu.class));
             }
         });
 
