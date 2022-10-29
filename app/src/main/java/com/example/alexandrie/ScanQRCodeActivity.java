@@ -15,10 +15,13 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class ScanQRCodeActivity extends AppCompatActivity {
 
     private CodeScanner codeScanner;
-    private String linkStr;
+    private String isbn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,17 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        linkStr = result.getText();
+                        isbn = result.getText();
+                        System.out.println("\tISBN code = " + isbn);
                         Toast.makeText(ScanQRCodeActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(ScanQRCodeActivity.this, OneBookAllInfoActivity.class);
+                        Bundle bundle = new Bundle();
+                        //bundle.putString("mode", "see");
+                        bundle.putString("mode", "edit");
+                        intent.putExtras(bundle); //Put your id to your next Intent
+                        startActivity(intent);
+                        finish();
                     }
                 });
             }
