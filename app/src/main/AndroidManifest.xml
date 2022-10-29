@@ -4,6 +4,7 @@
     package="com.example.alexandrie">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -17,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alexandrie"
         tools:targetApi="31">
+        <activity
+            android:name=".ActivityDisplayMenu"
+            android:exported="false" />
+        <activity
+            android:name=".DisplayDetailBook"
+            android:exported="false" />
         <activity
             android:name=".ScanQRCodeActivity"
             android:exported="false" />
@@ -42,4 +49,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
