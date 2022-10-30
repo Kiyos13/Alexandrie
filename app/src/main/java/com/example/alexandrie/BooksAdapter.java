@@ -24,12 +24,13 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-    private String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[], dataReadStatus[];
+    private ArrayList<String> dataTitles, dataVolumes, dataAuthors, dataTags1, dataTags2, dataTags3, dataReadStatus;
     private int images[];
     private Context context;
     private ViewGroup recyclerviewVG;
@@ -40,9 +41,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     private TextView swipeTxtTV, nbSelectedBooksTxtTV;
     private ObservableInteger nbSelectedBooks = new ObservableInteger();
 
-    public BooksAdapter(Context ctx, String strTitles[], String strVolumes[], String strAuthors[],
-                        String strTags1[], String strTags2[], String strTags3[],
-                        String strReadStatus[], int imgs[], RecyclerView recyclerView,
+    public BooksAdapter(Context ctx, ArrayList<String> strTitles, ArrayList<String> strVolumes, ArrayList<String> strAuthors,
+                        ArrayList<String> strTags1, ArrayList<String> strTags2, ArrayList<String> strTags3,
+                        ArrayList<String> strReadStatus, int imgs[], RecyclerView recyclerView,
                         View checkboxView, TextView swipeTextTxtView, TextView nbSelectedBooksTextTxtV) {
         context = ctx;
         dataTitles = strTitles;
@@ -102,9 +103,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public void onBindViewHolder(@NonNull BooksViewHolder holder, int position) {
-        holder.titleTxt.setText(dataTitles[position]);
-        holder.volumeTxt.setText("Tome " + dataVolumes[position]);
-        holder.authorTxt.setText(dataAuthors[position]);
+        holder.titleTxt.setText(dataTitles.get(position));
+        holder.volumeTxt.setText("Tome " + dataVolumes.get(position));
+        holder.authorTxt.setText(dataAuthors.get(position));
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
         holder.coverImgV.setImageResource(images[position]);
@@ -176,33 +177,34 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.tag1Txt.setText("");
         holder.tag2Txt.setText("");
         holder.tag3Txt.setText("");
-        if (dataTags1[position].length() == 0) {
-            if (dataTags2[position].length() == 0) {
-                if (dataTags3[position].length() != 0)
-                    holder.tag1Txt.setText("#" + dataTags3[position]);
+
+        if (dataTags1.get(position).length() == 0) {
+            if (dataTags2.get(position).length() == 0) {
+                if (dataTags3.get(position).length() != 0)
+                    holder.tag1Txt.setText("#" + dataTags3.get(position));
             }
             else {
-                holder.tag1Txt.setText("#" + dataTags2[position]);
-                if (dataTags3[position].length() != 0)
-                    holder.tag2Txt.setText("#" + dataTags3[position]);
+                holder.tag1Txt.setText("#" + dataTags2.get(position));
+                if (dataTags3.get(position).length() != 0)
+                    holder.tag2Txt.setText("#" + dataTags3.get(position));
                 else
                     holder.tag2Txt.setBackgroundResource(0);
                 holder.tag3Txt.setBackgroundResource(0);
             }
         }
         else {
-            holder.tag1Txt.setText("#" + dataTags1[position]);
-            if (dataTags2[position].length() == 0) {
-                if (dataTags3[position].length() != 0)
-                    holder.tag2Txt.setText("#" + dataTags3[position]);
+            holder.tag1Txt.setText("#" + dataTags1.get(position));
+            if (dataTags2.get(position).length() == 0) {
+                if (dataTags3.get(position).length() != 0)
+                    holder.tag2Txt.setText("#" + dataTags3.get(position));
                 else
                     holder.tag2Txt.setBackgroundResource(0);
                 holder.tag3Txt.setBackgroundResource(0);
             }
             else {
-                holder.tag2Txt.setText("#" + dataTags2[position]);
-                if (dataTags3[position].length() != 0)
-                    holder.tag3Txt.setText("#" + dataTags3[position]);
+                holder.tag2Txt.setText("#" + dataTags2.get(position));
+                if (dataTags3.get(position).length() != 0)
+                    holder.tag3Txt.setText("#" + dataTags3.get(position));
                 else
                     holder.tag3Txt.setBackgroundResource(0);
             }
@@ -211,7 +213,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     // Update book item icon (read/unread)
     private void onBindViewHolderReadStatus(@NonNull BooksViewHolder holder, int position) {
-        Boolean readStatus = dataReadStatus[position].equals("true"); // Check if book item status is read
+        // Boolean readStatus = dataReadStatus[position].equals("true"); // Check if book item status is read
+        Boolean readStatus = dataReadStatus.get(position).equals("true"); // Check if book item status is read
         if (readStatus) { // If the book is read
             holder.unreadImgV.setVisibility(View.GONE); // Remove unread icon
             holder.readImgV.setVisibility(View.VISIBLE); // Display read icon
@@ -284,7 +287,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public int getItemCount() {
-        return dataTitles.length;
+        // return dataTitles.length;
+        return dataTitles.size();
     }
 
     @Override

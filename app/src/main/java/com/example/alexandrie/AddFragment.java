@@ -32,10 +32,18 @@ public class AddFragment extends Fragment {
         addBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                // Remove MenuFragment
-                // getParentFragmentManager().beginTransaction().remove(AddFragment.this).commit();
                 // Change activity to ScanQRCodeActivity
-                startActivity(new Intent(getActivity(), ScanQRCodeActivity.class));
+                // startActivity(new Intent(getActivity(), ScanQRCodeActivity.class));
+
+                Intent intent = new Intent(getActivity(), OneBookAllInfoActivity.class);
+                Bundle bundle = new Bundle();
+                //bundle.putString("mode", "see");
+                bundle.putString("mode", "edit");
+                //bundle.putString("prevActivity", "horizontalList");
+                bundle.putString("prevActivity", "verticalList");
+                intent.putExtras(bundle); //Put your id to your next Intent
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 

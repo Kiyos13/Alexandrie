@@ -1,5 +1,6 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.annotation.NonNull;
@@ -23,9 +24,11 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,7 +36,7 @@ public class ListBooksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewBooks;
     // String arrays for each book item field
-    private String[] strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strReadStatus;
+    private ArrayList<String> strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strReadStatus;
     // Covers of each book item
     private int images[] = {R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
             R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
@@ -43,8 +46,6 @@ public class ListBooksActivity extends AppCompatActivity {
             R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
             R.drawable.hp4, R.drawable.hp4, R.drawable.hp4};
     public static SharedPreferences sharedPrefBooks;
-    private LinkedHashSet<String>[] valuesSharedPrefs;
-    private LinkedHashSet<String> currentHashSetValues;
     private RecyclerView.Adapter booksAdapter;
     // Movements handler on book item
     private ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -60,12 +61,14 @@ public class ListBooksActivity extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT: // Swipe LEFT
                     System.out.println("\t\tswipe left ! " + position);
-                    strReadStatus[position] = "false"; // Mark the book item has unread
+                    // strReadStatus[position] = "false"; // Mark the book item has unread
+                    strReadStatus.set(position, "false"); // Mark the book item has unread
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
                 case ItemTouchHelper.RIGHT:
                     System.out.println("\t\tswipe right ! " + position);
-                    strReadStatus[position] = "true"; // Mark the book item has read
+                    // strReadStatus[position] = "true"; // Mark the book item has read
+                    strReadStatus.set(position, "true"); // Mark the book item has read
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
             }
@@ -83,42 +86,17 @@ public class ListBooksActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().add(R.id.topBarLBFragContainerV, new AppBarFragment(true)).commit();
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
-        strTitles = getResources().getStringArray(R.array.titles);
-        strVolumes = getResources().getStringArray(R.array.volumes);
-        strAuthors = getResources().getStringArray(R.array.authors);
-        strTags1 = getResources().getStringArray(R.array.tags1);
-        strTags2 = getResources().getStringArray(R.array.tags2);
-        strTags3 = getResources().getStringArray(R.array.tags3);
-        strReadStatus = getResources().getStringArray(R.array.read_status);
+        strTitles = new ArrayList<String>();
+        strVolumes = new ArrayList<String>();
+        strAuthors = new ArrayList<String>();
+        strTags1 = new ArrayList<String>();
+        strTags2 = new ArrayList<String>();
+        strTags3 = new ArrayList<String>();
+        strReadStatus = new ArrayList<String>();
 
-        sharedPrefBooks = getSharedPreferences("SharedPrefs", MODE_PRIVATE); // Retrieve SharedPreferences
-
-        valuesSharedPrefs = new LinkedHashSet[images.length];
-        for (int i = 0; i < images.length; i++) { // Fill SharedPreferences
-            currentHashSetValues = new LinkedHashSet<>(); // Initialize (empty) current set
-            currentHashSetValues.add("0_" + String.valueOf(i)); // Add index to the current set
-            currentHashSetValues.add("1_" + strTitles[i]); // Add title to the current set
-            currentHashSetValues.add("2_" + strVolumes[i]); // Add volume to the current set
-            currentHashSetValues.add("3_" + strAuthors[i]); // Add author to the current set
-            currentHashSetValues.add("4_" + strTags1[i]); // Add first tag to the current set
-            currentHashSetValues.add("5_" + strTags2[i]); // Add second tag to the current set
-            currentHashSetValues.add("6_" + strTags3[i]); // Add third tag to the current set
-            currentHashSetValues.add("7_" + strReadStatus[i]); // Add read status to the current set
-            valuesSharedPrefs[i] = currentHashSetValues;
-
-            SharedPreferences.Editor editor = sharedPrefBooks.edit();
-            editor.putStringSet(String.valueOf(i), currentHashSetValues); // Add current set to SharedPreferences
-            editor.commit();
-        }
-        /*
-        for (int i = 0; i < images.length; i++) {
-            System.out.println("valuesSharedPrefs " + i + " - length = " + valuesSharedPrefs[i].size() + " - content = " + valuesSharedPrefs[i]);
-        }
-        Map<String, ?> allEntries = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            System.out.println("key " + entry.getKey() + " : " + entry.getValue().toString());
-        }
-         */
+        sharedPrefBooks = getSharedPreferences("SharedPrefsBooks", MODE_PRIVATE); // Retrieve SharedPreferences
+        // sharedPrefBooks.edit().clear().commit(); // Clean SharedPreferences
+        retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
 
         // View with the checkbox to select all book items (to pass to the adapter)
         View selectAllItemsCheckboxView = findViewById(R.id.checkSelectAllBooks);
@@ -137,5 +115,32 @@ public class ListBooksActivity extends AppCompatActivity {
 
         ItemTouchHelper swipeITH = new ItemTouchHelper(callback); // Creation of the swipe ItemTouchHelper
         swipeITH.attachToRecyclerView(recyclerViewBooks); // Link the swipe ItemTouchHelper to the recyclerView
+    }
+
+    private void retrieveBooksFromSharedPreferences(SharedPreferences sharedPreferences) {
+        Map<String, ?> allEntries = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            String bookData = entry.getValue().toString();
+            bookData = bookData.substring(1);
+            bookData = bookData.substring(0, bookData.length() - 1);
+
+            List<String> bookDataList = new ArrayList<String>(Arrays.asList(bookData.split(", ")));
+            SortStringListByFirstChar(bookDataList);
+
+            int bookDataListLength = bookDataList.size();
+            String currentData;
+            for (int i = 0; i < bookDataListLength; i++) {
+                currentData = bookDataList.get(i).substring(2);
+                bookDataList.set(i, currentData);
+            }
+
+            strTitles.add(bookDataList.get(1));
+            strVolumes.add(bookDataList.get(2));
+            strAuthors.add(bookDataList.get(4));
+            strTags1.add(bookDataList.get(5));
+            strTags2.add(bookDataList.get(6));
+            strTags3.add(bookDataList.get(7));
+            strReadStatus.add(bookDataList.get(8));
+        }
     }
 }
