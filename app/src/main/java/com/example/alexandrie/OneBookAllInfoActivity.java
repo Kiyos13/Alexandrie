@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
+import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -29,6 +30,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_book_all_info);
+        colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
         editLayout = findViewById(R.id.oneBookAllLytEdit);
         seeLayout = findViewById(R.id.oneBookAllLytSee);
@@ -71,6 +73,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                     for (Map.Entry<String, ?> entry : allEntries.entrySet())
                         nbBooksAlreadySaved++;
                     nbBooksAlreadySaved++;
+                    System.out.println("nbBooksAlreadySaved = " + nbBooksAlreadySaved);
                     bookHashSetValues = new LinkedHashSet<>(); // Initialize (empty) current set
                     bookHashSetValues.add("a_" + String.valueOf(nbBooksAlreadySaved)); // Add index to the current set
                     bookHashSetValues.add("b_" + title); // Add title

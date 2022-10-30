@@ -7,7 +7,7 @@
     tools:context=".DeleteFragment">
 
     <ImageButton
-        android:id="@+id/addBookBtn"
+        android:id="@+id/deleteBookBtn"
         android:layout_width="@dimen/round_buttons_width_height"
         android:layout_height="@dimen/round_buttons_width_height"
         android:clickable="true"

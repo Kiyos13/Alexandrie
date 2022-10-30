@@ -2,6 +2,7 @@ package com.example.alexandrie;
 
 import androidx.annotation.NonNull;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ import java.util.HashSet;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-    private ArrayList<String> dataTitles, dataVolumes, dataAuthors, dataTags1, dataTags2, dataTags3, dataReadStatus;
+    private ArrayList<String> dataIndexesSharedPrefs, dataTitles, dataVolumes, dataAuthors, dataTags1, dataTags2, dataTags3, dataReadStatus;
     private int images[];
     private Context context;
     private ViewGroup recyclerviewVG;
@@ -40,12 +41,14 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     private CheckBox selectAllItemsCheckbox;
     private TextView swipeTxtTV, nbSelectedBooksTxtTV;
     private ObservableInteger nbSelectedBooks = new ObservableInteger();
+    public static ArrayList<Integer> indexListSelectedItemBooks;
 
-    public BooksAdapter(Context ctx, ArrayList<String> strTitles, ArrayList<String> strVolumes, ArrayList<String> strAuthors,
+    public BooksAdapter(Context ctx, ArrayList<String> strIndexesSharedPrefs, ArrayList<String> strTitles, ArrayList<String> strVolumes, ArrayList<String> strAuthors,
                         ArrayList<String> strTags1, ArrayList<String> strTags2, ArrayList<String> strTags3,
                         ArrayList<String> strReadStatus, int imgs[], RecyclerView recyclerView,
                         View checkboxView, TextView swipeTextTxtView, TextView nbSelectedBooksTextTxtV) {
         context = ctx;
+        dataIndexesSharedPrefs = strIndexesSharedPrefs;
         dataTitles = strTitles;
         dataVolumes = strVolumes;
         dataAuthors = strAuthors;
@@ -98,11 +101,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_one_book_in_list_books, parent, false);
         recyclerviewVG = parent; // ViewGroup global variable
+        indexListSelectedItemBooks = new ArrayList<Integer>();
         return new BooksViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BooksViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BooksViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.sharedPrefIndexTxt.setText(dataIndexesSharedPrefs.get(position));
         holder.titleTxt.setText(dataTitles.get(position));
         holder.volumeTxt.setText("Tome " + dataVolumes.get(position));
         holder.authorTxt.setText(dataAuthors.get(position));
@@ -115,28 +120,34 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             @Override
             public boolean onLongClick(View view) {
                 System.out.println("\t\tLong click !");
-                isLongClicked = true; // Boolean to check if user has long clicked on item set to true
+                if (!isLongClicked) {
+                    isLongClicked = true; // Boolean to check if user has long clicked on item set to true
 
-                // Replace AddFragment by DeleteFragment
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
+                    // Replace AddFragment by DeleteFragment
+                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
 
-                // Replace swipe text by number off selected items text
-                swipeTxtTV.setVisibility(View.GONE);
-                nbSelectedBooksTxtTV.setVisibility(View.VISIBLE);
+                    // Replace swipe text by number off selected items text
+                    swipeTxtTV.setVisibility(View.GONE);
+                    nbSelectedBooksTxtTV.setVisibility(View.VISIBLE);
 
-                // Show checkbox to select all book items
-                selectAllItemsCheckboxView.setVisibility(View.VISIBLE);
+                    // Show checkbox to select all book items
+                    selectAllItemsCheckboxView.setVisibility(View.VISIBLE);
 
-                // Display and check checkbox user long click
-                // Change background of item under long click
-                holder.selectedBookCheckbox.setVisibility(View.VISIBLE);
-                holder.selectedBookCheckbox.setChecked(true);
-                holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
-                nbSelectedBooks.set(nbSelectedBooks.get() + 1);
+                    // Display and check checkbox user long click
+                    // Change background of item under long click
+                    holder.selectedBookCheckbox.setVisibility(View.VISIBLE);
+                    holder.selectedBookCheckbox.setChecked(true);
+                    holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
+                    nbSelectedBooks.set(nbSelectedBooks.get() + 1);
 
-                displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
-                return true;
+                    // Add current index to the list of selected book items
+                    indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
+
+                    displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -249,6 +260,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 child.findViewById(R.id.oneBookInListLyt). setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
             }
         }
+        // Add all indexes to the list of selected book items
+        indexListSelectedItemBooks = new ArrayList<Integer>();
+        BooksViewHolder holder;
+        for (int i = 0; i < this.getItemCount(); i++) {
+            holder = (BooksViewHolder) recyclerViewBooks.findViewHolderForAdapterPosition(i);
+            indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
+        }
     }
 
     // Remove checkboxes of all book items
@@ -265,6 +283,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 child.findViewById(R.id.oneBookInListLyt).setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_background_color));
             }
         }
+        // Remove all indexes of the list of selected book items
+        indexListSelectedItemBooks = new ArrayList<Integer>();
     }
 
     // Select or Unselect book item when a long click on an item hapened
@@ -275,19 +295,24 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 // Change book item background
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_background_color));
                 nbSelectedBooks.set(nbSelectedBooks.get() - 1); // Decrease the number of selected items by one
+
+                // Remove current index from the list of selected book items
+                indexListSelectedItemBooks.remove(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
             }
             else {
                 holder.selectedBookCheckbox.setChecked(true); // Check the checkbox of the current book item
                 // Change book item background
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
                 nbSelectedBooks.set(nbSelectedBooks.get() + 1); // Increase the number of selected items by one
+
+                // Add current index to the list of selected book items
+                indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
             }
         }
     }
 
     @Override
     public int getItemCount() {
-        // return dataTitles.length;
         return dataTitles.size();
     }
 
@@ -304,13 +329,14 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     public class BooksViewHolder extends RecyclerView.ViewHolder {
 
         // Elements in each book item
-        TextView titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
+        TextView sharedPrefIndexTxt, titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
         ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
+            sharedPrefIndexTxt = itemView.findViewById(R.id.sharedPrefsIndexTxtView); // Index of the book item in the sharePrefs
             titleTxt = itemView.findViewById(R.id.titleTxtView); // Title of the book item
             volumeTxt = itemView.findViewById(R.id.volumeTxtView); // Volume of the book item
             authorTxt = itemView.findViewById(R.id.authorTxtView); // Author of the book item

@@ -36,7 +36,7 @@ public class ListBooksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewBooks;
     // String arrays for each book item field
-    private ArrayList<String> strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strReadStatus;
+    private ArrayList<String> strIndexesSharedPrefs, strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strReadStatus;
     // Covers of each book item
     private int images[] = {R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
             R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
@@ -84,6 +84,7 @@ public class ListBooksActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().add(R.id.topBarLBFragContainerV, new AppBarFragment(true)).commit();
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
+        strIndexesSharedPrefs = new ArrayList<String>();
         strTitles = new ArrayList<String>();
         strVolumes = new ArrayList<String>();
         strAuthors = new ArrayList<String>();
@@ -104,7 +105,7 @@ public class ListBooksActivity extends AppCompatActivity {
         TextView nbSelectedBooksTextTxtV = findViewById(R.id.nbBooksSelectedTxtV);
 
         // Creation of the books adapter
-        booksAdapter = new BooksAdapter(this, strTitles, strVolumes, strAuthors,
+        booksAdapter = new BooksAdapter(this, strIndexesSharedPrefs, strTitles, strVolumes, strAuthors,
                                                     strTags1, strTags2, strTags3,
                                                     strReadStatus, images, recyclerViewBooks,
                                                     selectAllItemsCheckboxView, swipeTextTxtV, nbSelectedBooksTextTxtV);
@@ -134,6 +135,7 @@ public class ListBooksActivity extends AppCompatActivity {
             }
 
             if (bookDataList.size() >= 8) {
+                strIndexesSharedPrefs.add(bookDataList.get(0));
                 strTitles.add(bookDataList.get(1));
                 strVolumes.add(bookDataList.get(2));
                 strAuthors.add(bookDataList.get(4));
