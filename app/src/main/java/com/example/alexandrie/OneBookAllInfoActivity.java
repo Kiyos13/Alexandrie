@@ -94,7 +94,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                     bookHashSetValues.add("a_" + String.valueOf(indexBook)); // Add index to the current set
                     bookHashSetValues.add("b_" + title); // Add title
                     bookHashSetValues.add("c_" + volume); // Add volume
-                    bookHashSetValues.add("d_" + serie); // Add author
+                    bookHashSetValues.add("d_" + serie); // Add serie
                     bookHashSetValues.add("e_" + author); // Add author
                     bookHashSetValues.add("f_" + "t1"); // Add first tag
                     bookHashSetValues.add("g_" + "t2"); // Add second tag

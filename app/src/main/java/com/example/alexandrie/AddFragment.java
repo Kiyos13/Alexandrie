@@ -35,6 +35,8 @@ public class AddFragment extends Fragment {
                 // Change activity to ScanQRCodeActivity
                 // startActivity(new Intent(getActivity(), ScanQRCodeActivity.class));
 
+                // Bypass scan activity
+                // /*
                 Intent intent = new Intent(getActivity(), OneBookAllInfoActivity.class);
                 Bundle bundle = new Bundle();
                 //bundle.putString("mode", "see");
@@ -44,6 +46,7 @@ public class AddFragment extends Fragment {
                 intent.putExtras(bundle); //Put your id to your next Intent
                 startActivity(intent);
                 getActivity().finish();
+                // */
             }
         });
 
