@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff4db"
+    android:background="@color/background_color"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".ActivityDisplayMenu">
@@ -15,7 +15,7 @@
         android:layout_marginTop="180dp"
         android:layout_marginBottom="5dp"
         android:text="Livres en cours de lecture"
-        android:textColor="#b25a6a"
+        android:textColor="@color/first_dominant_dark"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Livres parus récemment"
         android:layout_marginBottom="5dp"
-        android:textColor="#b25a6a"
+        android:textColor="@color/first_dominant_dark"
         android:textSize="20sp"
         android:textStyle="bold" />
 
