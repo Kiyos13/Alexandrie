@@ -113,7 +113,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.authorTxt.setText(dataAuthors.get(position));
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
-        holder.coverImgV.setImageResource(images[position]);
+        holder.coverImgV.setImageResource(images[0]);
 
         // Book item layout long click listener
         holder.oneBookInListLyt.setOnLongClickListener(new View.OnLongClickListener() {

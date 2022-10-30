@@ -38,13 +38,7 @@ public class ListBooksActivity extends AppCompatActivity {
     // String arrays for each book item field
     private ArrayList<String> strIndexesSharedPrefs, strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strReadStatus;
     // Covers of each book item
-    private int images[] = {R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
-            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
-            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
-            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
-            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
-            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4,
-            R.drawable.hp4, R.drawable.hp4, R.drawable.hp4};
+    private int images[] = { R.drawable.hp4 }; // TODO : change to real covers
     public static SharedPreferences sharedPrefBooks;
     private RecyclerView.Adapter booksAdapter;
     // Movements handler on book item
