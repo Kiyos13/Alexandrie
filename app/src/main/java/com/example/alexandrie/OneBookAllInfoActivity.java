@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
+import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.view.View;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -68,14 +71,27 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 if (previousActivity.equals("verticalList")) {
                     SetBookInfosConnection(); // Retrieve and update book infos
 
-                    int nbBooksAlreadySaved = 0;
+                    int indexBook = 0, maxIndexBooks = 0;
+                    String bookData;
                     Map<String, ?> allEntries = sharedPrefBooks.getAll();
-                    for (Map.Entry<String, ?> entry : allEntries.entrySet())
-                        nbBooksAlreadySaved++;
-                    nbBooksAlreadySaved++;
-                    System.out.println("nbBooksAlreadySaved = " + nbBooksAlreadySaved);
+                    for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+                        bookData = entry.getValue().toString();
+                        bookData = bookData.substring(1);
+                        bookData = bookData.substring(0, bookData.length() - 1);
+
+                        List<String> bookDataList = new ArrayList<String>(Arrays.asList(bookData.split(", ")));
+                        SortStringListByFirstChar(bookDataList);
+
+                        String currentData = bookDataList.get(0).substring(2);
+                        int currentDataInt = Integer.parseInt(currentData);
+                        if (currentDataInt > maxIndexBooks)
+                            maxIndexBooks = currentDataInt;
+                    }
+                    indexBook = maxIndexBooks;
+                    indexBook++;
+                    System.out.println("nbBooksAlreadySaved = " + indexBook);
                     bookHashSetValues = new LinkedHashSet<>(); // Initialize (empty) current set
-                    bookHashSetValues.add("a_" + String.valueOf(nbBooksAlreadySaved)); // Add index to the current set
+                    bookHashSetValues.add("a_" + String.valueOf(indexBook)); // Add index to the current set
                     bookHashSetValues.add("b_" + title); // Add title
                     bookHashSetValues.add("c_" + volume); // Add volume
                     bookHashSetValues.add("d_" + serie); // Add author
@@ -88,7 +104,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                     bookHashSetValues.add("k_" + releaseDate); // Add releaseDate
 
                     SharedPreferences.Editor editor = sharedPrefBooks.edit();
-                    editor.putStringSet(String.valueOf(nbBooksAlreadySaved), bookHashSetValues); // Add current set to SharedPreferences
+                    editor.putStringSet(String.valueOf(indexBook), bookHashSetValues); // Add current set to SharedPreferences
                     editor.commit();
 
                     startActivity(new Intent(OneBookAllInfoActivity.this, ListBooksActivity.class));

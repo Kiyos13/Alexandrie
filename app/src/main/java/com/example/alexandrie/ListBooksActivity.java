@@ -94,7 +94,7 @@ public class ListBooksActivity extends AppCompatActivity {
         strReadStatus = new ArrayList<String>();
 
         sharedPrefBooks = getSharedPreferences("SharedPrefsBooks", MODE_PRIVATE); // Retrieve SharedPreferences
-        // sharedPrefBooks.edit().clear().commit(); // Clean SharedPreferences
+        //sharedPrefBooks.edit().clear().commit(); // Clean SharedPreferences
         retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
 
         // View with the checkbox to select all book items (to pass to the adapter)
