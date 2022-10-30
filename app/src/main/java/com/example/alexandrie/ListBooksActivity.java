@@ -61,13 +61,11 @@ public class ListBooksActivity extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT: // Swipe LEFT
                     System.out.println("\t\tswipe left ! " + position);
-                    // strReadStatus[position] = "false"; // Mark the book item has unread
                     strReadStatus.set(position, "false"); // Mark the book item has unread
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
                 case ItemTouchHelper.RIGHT:
                     System.out.println("\t\tswipe right ! " + position);
-                    // strReadStatus[position] = "true"; // Mark the book item has read
                     strReadStatus.set(position, "true"); // Mark the book item has read
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
@@ -117,6 +115,7 @@ public class ListBooksActivity extends AppCompatActivity {
         swipeITH.attachToRecyclerView(recyclerViewBooks); // Link the swipe ItemTouchHelper to the recyclerView
     }
 
+    // Retrieve books infos from SharedPreferences to fill arrayLists
     private void retrieveBooksFromSharedPreferences(SharedPreferences sharedPreferences) {
         Map<String, ?> allEntries = sharedPreferences.getAll();
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
@@ -134,13 +133,15 @@ public class ListBooksActivity extends AppCompatActivity {
                 bookDataList.set(i, currentData);
             }
 
-            strTitles.add(bookDataList.get(1));
-            strVolumes.add(bookDataList.get(2));
-            strAuthors.add(bookDataList.get(4));
-            strTags1.add(bookDataList.get(5));
-            strTags2.add(bookDataList.get(6));
-            strTags3.add(bookDataList.get(7));
-            strReadStatus.add(bookDataList.get(8));
+            if (bookDataList.size() >= 8) {
+                strTitles.add(bookDataList.get(1));
+                strVolumes.add(bookDataList.get(2));
+                strAuthors.add(bookDataList.get(4));
+                strTags1.add(bookDataList.get(5));
+                strTags2.add(bookDataList.get(6));
+                strTags3.add(bookDataList.get(7));
+                strReadStatus.add(bookDataList.get(8));
+            }
         }
     }
 }
