@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class DeleteFragment extends Fragment {
 
+    private Activity activity;
     private ImageButton deleteBookButton;
 
     public DeleteFragment() {
@@ -37,29 +38,26 @@ public class DeleteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_delete, container, false);
 
+        activity = getActivity();
         deleteBookButton = view.findViewById(R.id.deleteBookBtn);
 
         deleteBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                int nbSelectedBookItems = indexListSelectedItemBooks.size();
-
-                int key;
-                Map<String, ?> allEntries = sharedPrefBooks.getAll();
-                for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-                    key = Integer.parseInt(entry.getKey());
-                    System.out.println("key = " + key + " data = " + entry.getValue().toString());
-
-
-                    for (int i = 0; i < nbSelectedBookItems; i++) {
-                        System.out.println("indexListSelectedItemBooks.get(i) = " + indexListSelectedItemBooks.get(i));
-                        if (key == indexListSelectedItemBooks.get(i)) {
-                            SharedPreferences.Editor editor = sharedPrefBooks.edit();
-                            editor.remove(String.valueOf(key));
-                            editor.apply();
-                            Activity activity = getActivity();
-                            activity.finish();
-                            startActivity(activity.getIntent());
+                if (activity instanceof ListBooksActivity) {
+                    int nbSelectedBookItems = indexListSelectedItemBooks.size();
+                    int key;
+                    Map<String, ?> allEntries = sharedPrefBooks.getAll();
+                    for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+                        key = Integer.parseInt(entry.getKey());
+                        for (int i = 0; i < nbSelectedBookItems; i++) {
+                            if (key == indexListSelectedItemBooks.get(i)) {
+                                SharedPreferences.Editor editor = sharedPrefBooks.edit();
+                                editor.remove(String.valueOf(key));
+                                editor.apply();
+                                activity.finish();
+                                startActivity(activity.getIntent());
+                            }
                         }
                     }
                 }
