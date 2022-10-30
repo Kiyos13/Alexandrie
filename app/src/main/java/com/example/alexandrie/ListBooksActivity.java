@@ -119,8 +119,9 @@ public class ListBooksActivity extends AppCompatActivity {
     // Retrieve books infos from SharedPreferences to fill arrayLists
     private void retrieveBooksFromSharedPreferences(SharedPreferences sharedPreferences) {
         Map<String, ?> allEntries = sharedPreferences.getAll();
+        String bookData;
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            String bookData = entry.getValue().toString();
+            bookData = entry.getValue().toString();
             bookData = bookData.substring(1);
             bookData = bookData.substring(0, bookData.length() - 1);
 
