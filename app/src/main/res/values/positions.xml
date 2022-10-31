@@ -87,4 +87,6 @@
     <dimen name="favorite_icon_size">50dp</dimen>
     <dimen name="candle_icon_size">70dp</dimen>
 
+    <dimen name="spinners_left_right_margins">20dp</dimen>
+
 </resources>

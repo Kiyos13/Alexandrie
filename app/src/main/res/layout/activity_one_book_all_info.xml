@@ -284,7 +284,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
                     android:textColor="@color/foreground_color"
-                    android:backgroundTint="@color/foreground_color"  />
+                    android:backgroundTint="@color/foreground_color"
+                    android:layout_marginLeft="@dimen/spinners_left_right_margins"
+                    android:layout_marginRight="@dimen/spinners_left_right_margins"  />
 
                 <TextView
                     android:id="@+id/showcasesOneBookTxtVEdit"
@@ -303,7 +305,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
                     android:textColor="@color/foreground_color"
-                    android:backgroundTint="@color/foreground_color"  />
+                    android:backgroundTint="@color/foreground_color"
+                    android:layout_marginLeft="@dimen/spinners_left_right_margins"
+                    android:layout_marginRight="@dimen/spinners_left_right_margins"  />
 
                 <TextView
                     android:id="@+id/descriptionOneBookTxtVEdit"

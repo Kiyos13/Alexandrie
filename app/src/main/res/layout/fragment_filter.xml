@@ -31,15 +31,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Spinner
-                    android:id="@+id/spinnerType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spinner_other_top_bottom_margins"
-                    android:textColor="@color/foreground_color"
-                    android:backgroundTint="@color/foreground_color" />
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/spinners_left_right_margins"
+                android:layout_marginRight="@dimen/spinners_left_right_margins" >
 
                 <Spinner
                     android:id="@+id/spinnerGenre"
@@ -48,13 +42,6 @@
                     android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
                     android:textColor="@color/foreground_color"
                     android:backgroundTint="@color/foreground_color" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
                 <Spinner
                     android:id="@+id/spinnerSerie"
@@ -71,7 +58,6 @@
                     android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
                     android:textColor="@color/foreground_color"
                     android:backgroundTint="@color/foreground_color" />
-
             </LinearLayout>
         </LinearLayout>
 

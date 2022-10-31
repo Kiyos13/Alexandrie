@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class FilterFragment extends Fragment {
 
-    private Spinner spinnerType, spinnerGenre, spinnerSerie, spinnerAuthor;
-    private ArrayList<String> listBookTypes, listBookGenres, listBookSeries, listBookAuthors;
+    private Spinner spinnerGenre, spinnerSerie, spinnerAuthor;
+    private ArrayList<String> listBookGenres, listBookSeries, listBookAuthors;
 
     public FilterFragment() {
         // Required empty public constructor
@@ -32,54 +32,23 @@ public class FilterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    /*
-        Spinner spinnerType = (Spinner) getView().findViewById(R.id.spinnerType);
-        ArrayAdapter<CharSequence> adapterType = ArrayAdapter.createFromResource(getView().getContext(),
-                R.array.all_book_types, android.R.layout.simple_spinner_item);
-        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerType.setAdapter(adapterType);
-
-        Spinner spinnerGenre = (Spinner) getView().findViewById(R.id.spinnerGenre);
-        ArrayAdapter<CharSequence> adapterGenre = ArrayAdapter.createFromResource(getView().getContext(),
-                R.array.all_book_genres, android.R.layout.simple_spinner_item);
-        adapterGenre.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGenre.setAdapter(adapterGenre);
-
-        Spinner spinnerSerie = (Spinner) getView().findViewById(R.id.spinnerSerie);
-        ArrayAdapter<CharSequence> adapterSerie = ArrayAdapter.createFromResource(getView().getContext(),
-                R.array.all_series, android.R.layout.simple_spinner_item);
-        adapterSerie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSerie.setAdapter(adapterSerie);
-
-        Spinner spinnerAuthor = (Spinner) getView().findViewById(R.id.spinnerAuthor);
-        ArrayAdapter<CharSequence> adapterAuthor = ArrayAdapter.createFromResource(getView().getContext(),
-                R.array.all_authors, android.R.layout.simple_spinner_item);
-        adapterAuthor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerAuthor.setAdapter(adapterAuthor);
-        */
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
 
-        listBookTypes = new ArrayList<String>();
         listBookGenres = new ArrayList<String>();
         listBookSeries = new ArrayList<String>();
         listBookAuthors = new ArrayList<String>();
 
         retrieveBooksSpinnersFromSharedPreferences(sharedPrefBooks);
 
-        spinnerType = view.findViewById(R.id.spinnerType);
         spinnerGenre = view.findViewById(R.id.spinnerGenre);
         spinnerSerie = view.findViewById(R.id.spinnerSerie);
         spinnerAuthor = view.findViewById(R.id.spinnerAuthor);
 
         ArrayAdapter<String> adapter;
-
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listBookTypes);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerType.setAdapter(adapter);
 
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listBookGenres);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -126,13 +95,9 @@ public class FilterFragment extends Fragment {
                     listBookAuthors.add(currentElement);
 
                 for (int i = 5; i < 8; i++) {
-                    currentElement = bookDataList.get(5);
-                    if (currentElement.length() != 0) {
-                        if (!listBookTypes.contains(currentElement))
-                            listBookTypes.add(currentElement);
-                        if (!listBookGenres.contains(currentElement))
-                            listBookGenres.add(currentElement);
-                    }
+                    currentElement = bookDataList.get(i);
+                    if (!listBookGenres.contains(currentElement) && (currentElement.length() != 0))
+                        listBookGenres.add(currentElement);
                 }
             }
         }
