@@ -6,20 +6,23 @@ public class Book
     String title;
     String author;
     String summary;
+    Integer average_rating;
 
-    public Book(Integer image, String title, String author)
+    public Book(Integer image, String title, String author, Integer average_rating)
     {
         this.image = image;
         this.title = title;
         this.author = author;
+        this.average_rating = average_rating;
     }
 
-    public Book(Integer image, String title, String author, String summary)
+    public Book(Integer image, String title, String author, String summary, Integer average_rating)
     {
         this.image = image;
         this.title = title;
         this.author = author;
         this.summary = summary;
+        this.average_rating = average_rating;
     }
 
 
@@ -57,6 +60,14 @@ public class Book
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public Integer getAverage_rating() {
+        return average_rating;
+    }
+
+    public void setAverage_rating(Integer average_rating) {
+        this.average_rating = average_rating;
     }
 }
 

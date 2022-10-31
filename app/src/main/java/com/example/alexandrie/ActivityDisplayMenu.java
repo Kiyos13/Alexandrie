@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,11 @@ public class ActivityDisplayMenu extends AppCompatActivity implements RecyclerVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_menu);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Intent returnIntent = new Intent(ActivityDisplayMenu.this, ListBooksActivity.class);
+        fragmentManager.beginTransaction().add(R.id.topBarDisplayMenu, new AppBarFragment(returnIntent)).commit();
+
+
         recycler_view_livres_en_cours_de_lecture = findViewById(R.id.livres_en_cours_de_lecture);
         recycler_view_livres_parus_récemment = findViewById(R.id.livres_parus_récemment);
 
@@ -49,7 +55,7 @@ public class ActivityDisplayMenu extends AppCompatActivity implements RecyclerVi
         livres_parus_récemment = new ArrayList<>();
         for(int i=0; i<image_livres.length; i++)
         {
-            Book livre_à_ajouter = new Book(image_livres[i], titre_livres[i], auteur_livres[i], resume_livres[i]);
+            Book livre_à_ajouter = new Book(image_livres[i], titre_livres[i], auteur_livres[i], resume_livres[i], 4);
             tous_les_livres.add(livre_à_ajouter);
         }
 
