@@ -1,5 +1,7 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.ListBooksActivity.hasToUpdateListBooksRecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -47,6 +49,8 @@ public class AddFragment extends Fragment {
                 startActivity(intent);
                 getActivity().finish();
                 // */
+
+                hasToUpdateListBooksRecyclerView = true;
             }
         });
 

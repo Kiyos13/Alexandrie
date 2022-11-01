@@ -35,11 +35,12 @@ import java.util.Set;
 public class ListBooksActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewBooks;
-    // String arrays for each book item field
-    private ArrayList<String> strIndexesSharedPrefs, strTitles, strVolumes, strAuthors, strTags1, strTags2, strTags3, strReadStatus;
+    // Array list of string arrays for each book item field
+    public static ArrayList<ArrayList<String>> listBooksInSharedPrefs;
     // Covers of each book item
     private int images[] = { R.drawable.hp4 }; // TODO : change to real covers
     public static SharedPreferences sharedPrefBooks;
+    public static Boolean hasToUpdateListBooksRecyclerView;
     private RecyclerView.Adapter booksAdapter;
     // Movements handler on book item
     private ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -55,12 +56,12 @@ public class ListBooksActivity extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT: // Swipe LEFT
                     System.out.println("\t\tswipe left ! " + position);
-                    strReadStatus.set(position, "false"); // Mark the book item has unread
+                    listBooksInSharedPrefs.get(8).set(position, "false"); // Mark the book item has unread
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
                 case ItemTouchHelper.RIGHT:
                     System.out.println("\t\tswipe right ! " + position);
-                    strReadStatus.set(position, "true"); // Mark the book item has read
+                    listBooksInSharedPrefs.get(8).set(position, "true"); // Mark the book item has read
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
             }
@@ -73,23 +74,23 @@ public class ListBooksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_books);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
+        hasToUpdateListBooksRecyclerView = true;
+
         // Display icons (filter, order, search) fragments on the top bar
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.topBarLBFragContainerV, new AppBarFragment(true)).commit();
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
-        strIndexesSharedPrefs = new ArrayList<String>();
-        strTitles = new ArrayList<String>();
-        strVolumes = new ArrayList<String>();
-        strAuthors = new ArrayList<String>();
-        strTags1 = new ArrayList<String>();
-        strTags2 = new ArrayList<String>();
-        strTags3 = new ArrayList<String>();
-        strReadStatus = new ArrayList<String>();
+
+        listBooksInSharedPrefs = new ArrayList<ArrayList<String>>();
+        for (int i = 0; i <= 11; i++) {
+            listBooksInSharedPrefs.add(i, new ArrayList<String>());
+        }
 
         sharedPrefBooks = getSharedPreferences("SharedPrefsBooks", MODE_PRIVATE); // Retrieve SharedPreferences
         //sharedPrefBooks.edit().clear().commit(); // Clean SharedPreferences
-        retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
+        if (hasToUpdateListBooksRecyclerView)
+            retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
 
         // View with the checkbox to select all book items (to pass to the adapter)
         View selectAllItemsCheckboxView = findViewById(R.id.checkSelectAllBooks);
@@ -99,10 +100,8 @@ public class ListBooksActivity extends AppCompatActivity {
         TextView nbSelectedBooksTextTxtV = findViewById(R.id.nbBooksSelectedTxtV);
 
         // Creation of the books adapter
-        booksAdapter = new BooksAdapter(this, strIndexesSharedPrefs, strTitles, strVolumes, strAuthors,
-                                                    strTags1, strTags2, strTags3,
-                                                    strReadStatus, images, recyclerViewBooks,
-                                                    selectAllItemsCheckboxView, swipeTextTxtV, nbSelectedBooksTextTxtV);
+        booksAdapter = new BooksAdapter(this, images, recyclerViewBooks,
+                                        selectAllItemsCheckboxView, swipeTextTxtV, nbSelectedBooksTextTxtV);
         recyclerViewBooks.setAdapter(booksAdapter); // Link the adapter to the recyclerView
         recyclerViewBooks.setLayoutManager(new LinearLayoutManager(this));
 
@@ -129,16 +128,12 @@ public class ListBooksActivity extends AppCompatActivity {
                 bookDataList.set(i, currentData);
             }
 
-            if (bookDataList.size() >= 8) {
-                strIndexesSharedPrefs.add(bookDataList.get(0));
-                strTitles.add(bookDataList.get(1));
-                strVolumes.add(bookDataList.get(2));
-                strAuthors.add(bookDataList.get(4));
-                strTags1.add(bookDataList.get(5));
-                strTags2.add(bookDataList.get(6));
-                strTags3.add(bookDataList.get(7));
-                strReadStatus.add(bookDataList.get(8));
+            int nbFields = 11;
+            if (bookDataList.size() >= nbFields) {
+                for (int i = 0; i <= nbFields; i++)
+                    listBooksInSharedPrefs.get(i).add(bookDataList.get(i));
             }
         }
+        hasToUpdateListBooksRecyclerView = false;
     }
 }

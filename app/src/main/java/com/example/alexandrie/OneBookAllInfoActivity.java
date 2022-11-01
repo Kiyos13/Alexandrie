@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -28,7 +29,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private String mode, previousActivity;
     private android.widget.Button saveBookButton;
     private TextInputLayout titleTxtInputLyt, volumeTxtInputLyt, serieTxtInputLyt, authorTxtInputLyt, releaseDateTxtInputLyt, descriptionTxtInputLyt;
-    private String title, volume, serie, author, releaseDate, description;
+    private TextView addDateTxtInputLyt;
+    private String title, volume, serie, author, addDate, releaseDate, description;
     private LinkedHashSet<String> bookHashSetValues;
     private Spinner spinnerGenre;
     private ArrayList<String> listBookGenres;
@@ -48,6 +50,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         authorTxtInputLyt = findViewById(R.id.authorOneBookInfoTxtInputLytEdit);
         releaseDateTxtInputLyt = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
         descriptionTxtInputLyt = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
+        addDateTxtInputLyt = findViewById(R.id.addDateTxtVEdit);
         spinnerGenre = findViewById(R.id.spinnerGenreOneBookEdit);
 
         listBookGenres = new ArrayList<String>();
@@ -113,7 +116,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                     bookHashSetValues.add("h_" + "t3"); // Add third tag
                     bookHashSetValues.add("i_" + "false"); // Add read status
                     bookHashSetValues.add("j_" + description); // Add description
-                    bookHashSetValues.add("k_" + releaseDate); // Add releaseDate
+                    bookHashSetValues.add("k_" + addDate); // Add releaseDate
+                    bookHashSetValues.add("l_" + releaseDate); // Add releaseDate
 
                     SharedPreferences.Editor editor = sharedPrefBooks.edit();
                     editor.putStringSet(String.valueOf(indexBook), bookHashSetValues); // Add current set to SharedPreferences
@@ -131,6 +135,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         volume = volumeTxtInputLyt.getEditText().getText().toString(); // Set the volume
         serie = serieTxtInputLyt.getEditText().getText().toString(); // Set the serie
         author = authorTxtInputLyt.getEditText().getText().toString(); // Set the author
+        addDate = addDateTxtInputLyt.getText().toString(); // Set the add date
         releaseDate = releaseDateTxtInputLyt.getEditText().getText().toString(); // Set the release date
         description = descriptionTxtInputLyt.getEditText().getText().toString(); // Set the description
     }
