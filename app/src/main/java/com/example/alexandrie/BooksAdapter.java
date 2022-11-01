@@ -5,6 +5,8 @@ import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
 import androidx.annotation.NonNull;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.content.Context;
@@ -91,7 +93,12 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.sharedPrefIndexTxt.setText(listBooksInSharedPrefs.get(0).get(position));
         holder.titleTxt.setText(listBooksInSharedPrefs.get(1).get(position));
         holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(2).get(position));
+        holder.serieTxt = listBooksInSharedPrefs.get(3).get(position);
         holder.authorTxt.setText(listBooksInSharedPrefs.get(4).get(position));
+        holder.descriptionTxt = listBooksInSharedPrefs.get(9).get(position);
+        holder.addDateTxt = listBooksInSharedPrefs.get(10).get(position);
+        holder.releaseDateTxt = listBooksInSharedPrefs.get(11).get(position);
+        holder.isFavorite = (listBooksInSharedPrefs.get(12).get(position).equals("true")) ? true : false;
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
         holder.coverImgV.setImageResource(images[0]);
@@ -149,7 +156,28 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.oneBookInListLyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                selectAndUnselectBooksInList(holder); // Select or Unselect item book
+                if (isLongClicked)
+                    selectAndUnselectBooksInList(holder); // Select or Unselect item book
+                else {
+                    Intent intent = new Intent(context, OneBookAllInfoActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mode", "see");
+                    bundle.putString("prevActivity", "verticalList");
+                    bundle.putString("title", holder.titleTxt.getText().toString());
+                    bundle.putString("volume", holder.volumeTxt.getText().toString());
+                    bundle.putString("serie", holder.serieTxt);
+                    bundle.putString("author", holder.authorTxt.getText().toString());
+                    bundle.putString("releaseDate", holder.releaseDateTxt);
+                    bundle.putString("addDate", holder.addDateTxt);
+                    bundle.putString("tag1", holder.tag1Txt.getText().toString().substring(1));
+                    bundle.putString("tag2", holder.tag2Txt.getText().toString().substring(1));
+                    bundle.putString("tag3", holder.tag3Txt.getText().toString().substring(1));
+                    bundle.putBoolean("readStatus", holder.selectedBookCheckbox.isChecked());
+                    bundle.putString("description", holder.descriptionTxt);
+                    bundle.putBoolean("isFavorite", holder.isFavorite);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
             }
         });
 
@@ -318,6 +346,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
+        Boolean isFavorite;
+        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);

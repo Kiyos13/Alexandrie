@@ -44,6 +44,9 @@ public class ListBooksActivity extends AppCompatActivity {
     private int images[] = { R.drawable.hp4 }; // TODO : change to real covers
     public static SharedPreferences sharedPrefBooks;
     public static RecyclerView.Adapter booksAdapter;
+    private String keyBookInSharedPrefs;
+    private Set<String> set;
+    private SharedPreferences.Editor editor;
     // Movements handler on book item
     private ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
@@ -58,11 +61,43 @@ public class ListBooksActivity extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT: // Swipe LEFT
                     System.out.println("\t\tswipe left ! " + position);
+
+                    // Edit Set
+                    keyBookInSharedPrefs = listBooksInSharedPrefs.get(0).get(position);
+                    set = sharedPrefBooks.getStringSet(keyBookInSharedPrefs, null);
+                    for (String obj : set) {
+                        if (obj.charAt(0) == 'i') {
+                            set.remove(obj);
+                            set.add("i_false");
+                            break;
+                        }
+                    }
+                    // Edit SharedPrefs
+                    editor = sharedPrefBooks.edit();
+                    editor.remove(keyBookInSharedPrefs).commit();
+                    editor.putStringSet(keyBookInSharedPrefs, set).commit();
+
                     listBooksInSharedPrefs.get(8).set(position, "false"); // Mark the book item has unread
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
                 case ItemTouchHelper.RIGHT:
                     System.out.println("\t\tswipe right ! " + position);
+
+                    // Edit Set
+                    keyBookInSharedPrefs = listBooksInSharedPrefs.get(0).get(position);
+                    set = sharedPrefBooks.getStringSet(keyBookInSharedPrefs, null);
+                    for (String obj : set) {
+                        if (obj.charAt(0) == 'i') {
+                            set.remove(obj);
+                            set.add("i_true");
+                            break;
+                        }
+                    }
+                    // Edit SharedPrefs
+                    editor = sharedPrefBooks.edit();
+                    editor.remove(keyBookInSharedPrefs).commit();
+                    editor.putStringSet(keyBookInSharedPrefs, set).commit();
+
                     listBooksInSharedPrefs.get(8).set(position, "true"); // Mark the book item has read
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
@@ -83,7 +118,7 @@ public class ListBooksActivity extends AppCompatActivity {
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
 
         listBooksInSharedPrefs = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i <= 11; i++) {
+        for (int i = 0; i <= 12; i++) {
             listBooksInSharedPrefs.add(i, new ArrayList<String>());
         }
 
@@ -129,9 +164,9 @@ public class ListBooksActivity extends AppCompatActivity {
                 bookDataList.set(i, currentData);
             }
 
-            int nbFields = 11;
+            int nbFields = listBooksInSharedPrefs.size();
             if (bookDataList.size() >= nbFields) {
-                for (int i = 0; i <= nbFields; i++)
+                for (int i = 0; i < nbFields; i++)
                     listBooksInSharedPrefs.get(i).add(bookDataList.get(i));
             }
         }

@@ -44,7 +44,7 @@ public class AddFragment extends Fragment {
                 bundle.putString("mode", "edit");
                 //bundle.putString("prevActivity", "horizontalList");
                 bundle.putString("prevActivity", "verticalList");
-                intent.putExtras(bundle); //Put your id to your next Intent
+                intent.putExtras(bundle);
                 startActivity(intent);
                 getActivity().finish();
                 // */

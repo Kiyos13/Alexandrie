@@ -51,8 +51,9 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                         //bundle.putString("mode", "see");
                         bundle.putString("mode", "edit");
                         //bundle.putString("prevActivity", "horizontalList");
-                        bundle.putString("prevActivity", "verticalList");
-                        intent.putExtras(bundle); //Put your id to your next Intent
+                        //bundle.putString("prevActivity", "verticalList");
+                        bundle.putString("prevActivity", "scan");
+                        intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
                     }
