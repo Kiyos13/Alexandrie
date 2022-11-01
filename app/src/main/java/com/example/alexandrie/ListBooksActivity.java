@@ -2,6 +2,9 @@ package com.example.alexandrie;
 
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.OrderFragment.SortBooksArrayListOfArrayLists;
+import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPrefs;
+import static com.example.alexandrie.OrderFragment.currentWayOrder;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -40,8 +43,7 @@ public class ListBooksActivity extends AppCompatActivity {
     // Covers of each book item
     private int images[] = { R.drawable.hp4 }; // TODO : change to real covers
     public static SharedPreferences sharedPrefBooks;
-    public static Boolean hasToUpdateListBooksRecyclerView;
-    private RecyclerView.Adapter booksAdapter;
+    public static RecyclerView.Adapter booksAdapter;
     // Movements handler on book item
     private ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
@@ -74,8 +76,6 @@ public class ListBooksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_books);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
-        hasToUpdateListBooksRecyclerView = true;
-
         // Display icons (filter, order, search) fragments on the top bar
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.topBarLBFragContainerV, new AppBarFragment(true)).commit();
@@ -89,8 +89,9 @@ public class ListBooksActivity extends AppCompatActivity {
 
         sharedPrefBooks = getSharedPreferences("SharedPrefsBooks", MODE_PRIVATE); // Retrieve SharedPreferences
         //sharedPrefBooks.edit().clear().commit(); // Clean SharedPreferences
-        if (hasToUpdateListBooksRecyclerView)
-            retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
+        retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
+        // Sort arraylists
+        listBooksInSharedPrefs.set(currentOrderIndexInSharedPrefs, SortBooksArrayListOfArrayLists(currentOrderIndexInSharedPrefs, currentWayOrder, listBooksInSharedPrefs.size()));
 
         // View with the checkbox to select all book items (to pass to the adapter)
         View selectAllItemsCheckboxView = findViewById(R.id.checkSelectAllBooks);
@@ -134,6 +135,5 @@ public class ListBooksActivity extends AppCompatActivity {
                     listBooksInSharedPrefs.get(i).add(bookDataList.get(i));
             }
         }
-        hasToUpdateListBooksRecyclerView = false;
     }
 }
