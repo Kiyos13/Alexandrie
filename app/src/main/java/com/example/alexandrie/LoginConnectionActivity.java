@@ -32,8 +32,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
 
     private android.widget.Button connectButton;
     private Button forgottenPasswordButton, createAccountButton;
-    private TextInputLayout userNameInputLyt, passwordInputLyt;
-    private String userName, password;
+    private TextInputLayout identifierInputLyt, passwordInputLyt;
+    private String identifier, password;
     public static SharedPreferences sharedPrefLogs;
     private String errorTitle, errorText;
 
@@ -46,7 +46,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
         connectButton = findViewById(R.id.connectBtn);
         forgottenPasswordButton = findViewById(R.id.forgotPasswordBtn);
         createAccountButton = findViewById(R.id.createAccountBtn);
-        userNameInputLyt = findViewById(R.id.userNameInputLyt);
+        identifierInputLyt = findViewById(R.id.identifierInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
         sharedPrefLogs = getSharedPreferences("SharedPrefLogs", MODE_PRIVATE);
         // sharedPrefLogs.edit().clear().commit(); // Clean SharedPreferences
@@ -114,13 +114,13 @@ public class LoginConnectionActivity extends AppCompatActivity {
 
     // Set user infos
     private void SetUserInfosConnection() {
-        userName = userNameInputLyt.getEditText().getText().toString(); // Set user name
+        identifier = identifierInputLyt.getEditText().getText().toString(); // Set user name
         password = passwordInputLyt.getEditText().getText().toString(); // Set password
     }
 
     // Checks if user name and password are empty
     private boolean UserNameAndOrPasswordIsEmpty() {
-        boolean emptyUserName = (userName.length() == 0);
+        boolean emptyUserName = (identifier.length() == 0);
         boolean emptyPassword = (password.length() == 0);
         boolean hasToDisplayPopup = false;
         errorTitle = "Erreur de connexion";
@@ -194,9 +194,9 @@ public class LoginConnectionActivity extends AppCompatActivity {
             currentPassword = currentAccountInfos.get(2); // Retrieve password
             currentPassword = currentPassword.substring(2); // password without 2 firsts char : "2_"
 
-            if (currentUserName.equals(userName) && currentPassword.equals(password))
+            if (currentUserName.equals(identifier) && currentPassword.equals(password))
                 return 1;
-            else if (currentUserName.equals(userName) && !currentPassword.equals(password)) {
+            else if (currentUserName.equals(identifier) && !currentPassword.equals(password)) {
                 System.out.println("\tWrong password !");
                 // Display error message if the password is not good but the user name exists
                 errorTitle = "Erreur de connexion";

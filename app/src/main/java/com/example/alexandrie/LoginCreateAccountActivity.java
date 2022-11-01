@@ -6,15 +6,12 @@ import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -28,8 +25,8 @@ import java.util.Set;
 public class LoginCreateAccountActivity extends AppCompatActivity {
 
     private android.widget.Button createAccountButton;
-    private TextInputLayout userNameInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
-    private String userName, password, secondPassword, email;
+    private TextInputLayout identifierInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
+    private String identifier, password, secondPassword, email;
     private String errorTitle, errorText;
 
     @Override
@@ -45,7 +42,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().add(R.id.topBarLogCrFragContainerV, new AppBarFragment(returnIntent)).commit();
 
         createAccountButton = findViewById(R.id.createAcountBtn);
-        userNameInputLyt = findViewById(R.id.userNameInputLyt);
+        identifierInputLyt = findViewById(R.id.identifierInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
         repeatPasswordInputLyt = findViewById(R.id.repeatPasswordInputLyt);
         emailInputLyt = findViewById(R.id.emailInputLyt);
@@ -58,7 +55,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                 boolean infosAreValid = UserNameEmailPasswordAreValid(); // Checks infos are valid
 
                 if (infosAreValid) {
-                    if (UserNameIsFree(sharedPrefLogs, userName)) {
+                    if (UserNameIsFree(sharedPrefLogs, identifier)) {
                         // If the infos are valid and the user name is not already taken, creation of a new account in SharedPreferences
                         AddAccountToSharedPrefs(sharedPrefLogs);
                         // Return to the LoginConnectionActivity
@@ -79,7 +76,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
 
     // Set the user information
     private void SetUserInfos() {
-        userName = userNameInputLyt.getEditText().getText().toString(); // Set user name
+        identifier = identifierInputLyt.getEditText().getText().toString(); // Set user name
         password = passwordInputLyt.getEditText().getText().toString(); // Set password
         secondPassword = repeatPasswordInputLyt.getEditText().getText().toString(); // Set password confirmation
         email = emailInputLyt.getEditText().getText().toString(); // Set email
@@ -92,7 +89,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
 
     // Checks that the user name, the email and the password are valid (not empty)
     private boolean UserNameEmailPasswordAreValid() {
-        boolean emptyUserName = (userName.length() == 0);
+        boolean emptyUserName = (identifier.length() == 0);
         boolean emptyPassword = (password.length() == 0);
         boolean emptyEmail = (email.length() == 0);
         boolean passwordsAreEquals = FirstAndSecondPasswordsAreEquals();
@@ -162,7 +159,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         // Add information to the hashSet
         // Add numbers before info to sort it later on retrieve
         hashSetAccount.add("0_" + String.valueOf(nbAccountsAlreadyExisting));
-        hashSetAccount.add("1_" + userName);
+        hashSetAccount.add("1_" + identifier);
         hashSetAccount.add("2_" + password);
         hashSetAccount.add("3_" + email);
 

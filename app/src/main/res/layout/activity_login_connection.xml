@@ -63,7 +63,7 @@
                 android:gravity="center">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/userNameInputLyt"
+                    android:id="@+id/identifierInputLyt"
                     android:layout_width="407dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/inputs_left_right_margins"
@@ -88,7 +88,7 @@
                         android:layout_marginLeft="@dimen/inputs_left_right_margins"
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
                         android:backgroundTint="@color/foreground_color"
-                        android:hint="Nom d'utilisateur"
+                        android:hint="Identifiant"
                         android:textColorHint="@color/background_color"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
@@ -112,7 +112,7 @@
                     app:boxStrokeWidth="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/userNameInputLyt"
+                    app:layout_constraintTop_toBottomOf="@+id/identifierInputLyt"
                     app:startIconDrawable="@drawable/ic_password"
                     app:startIconTint="@color/background_color"
                     app:passwordToggleEnabled="true"
