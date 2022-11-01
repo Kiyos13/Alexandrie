@@ -33,7 +33,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private android.widget.Button saveBookButton;
     private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit;
     private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee;
-    private TextView addDateTxtVSee, genresListTxtVSee, showcasesListTxtVSee;
+    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, showcasesListTxtVSee;
     private ImageView readImgVEdit, notReadImgVEdit, readImgVSee, notReadImgVSee;
     private ImageView favoriteImgVEdit, notFavoriteImgVEdit, favoriteImgVSee, notFavoriteImgVSee;
     private String title, volume, serie, author, addDate, releaseDate, description;
@@ -56,6 +56,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         volumeTxtInputLytEdit = findViewById(R.id.volumeOneBookInfoTxtInputLytEdit);
         serieTxtInputLytEdit = findViewById(R.id.serieOneBookInfoTxtInputLytEdit);
         authorTxtInputLytEdit = findViewById(R.id.authorOneBookInfoTxtInputLytEdit);
+        addDateTxtVEdit = findViewById(R.id.addDateOneBookInfoTxtInputLytEdit);
         releaseDateTxtInputLytEdit = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
         descriptionTxtInputLytEdit = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
         spinnerGenre = findViewById(R.id.spinnerGenreOneBookInfoTxtInputLytEdit);
@@ -74,10 +75,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         genresListTxtVSee = findViewById(R.id.genresListOneBookTxtVSee);
         showcasesListTxtVSee = findViewById(R.id.showcasesListOneBookTxtVSee);
         tags = new String[3];
-        readImgVSee = findViewById(R.id.fullCandleImgVSee);
-        notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
-        favoriteImgVSee = findViewById(R.id.favoriteFullImgVSee);
-        notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVSee);
 
         isFavorite = false;
         isRead = false;
@@ -102,7 +99,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             returnIntent = new Intent(OneBookAllInfoActivity.this, ListBooksActivity.class);
         // if (previousActivity.equals("verticalList"))
 
-        if (mode.equals("edit")) {
+        if (mode.equals("create")) {
             editLayout.setVisibility(View.VISIBLE);
             seeLayout.setVisibility(View.GONE);
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVEdit, new AppBarFragment(returnIntent)).commit();
@@ -110,8 +107,17 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         else if (mode.equals("see")) {
             editLayout.setVisibility(View.GONE);
             seeLayout.setVisibility(View.VISIBLE);
-            fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent)).commit();
+
+            RetrieveBookInfosFromBundle(bundle);
+            String[] strings = {
+                title, volume, serie, author, addDate, releaseDate, description, tags[0], tags[1], tags[2],
+            };
+            Boolean[] booleans = { isRead, isFavorite };
+            fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, "verticalList", strings, booleans, listBookGenres)).commit();
             SetBookInfosConnectionSee(bundle);
+        }
+        else if (mode.equals("edit")) {
+            SetBookInfosConnectionEdit(bundle);
         }
 
         // Save a book button click listener
@@ -119,7 +125,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (previousActivity.equals("verticalList")) {
-                    SetBookInfosConnectionEdit(); // Retrieve and update book infos
+                    SetBookInfosConnectionCreate(); // Retrieve and update book infos
 
                     int indexBook = 0, maxIndexBooks = 0;
                     String bookData;
@@ -165,8 +171,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         });
     }
 
-    // Set book infos (edit mode)
-    private void SetBookInfosConnectionEdit() {
+    // Set book infos (create mode)
+    private void SetBookInfosConnectionCreate() {
         title = titleTxtInputLytEdit.getEditText().getText().toString(); // Set the title
         volume = volumeTxtInputLytEdit.getEditText().getText().toString(); // Set the volume
         serie = serieTxtInputLytEdit.getEditText().getText().toString(); // Set the serie
@@ -179,8 +185,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDate = formatter.format(date); // Set the add date
     }
 
-    // Set book infos (see mode)
-    private void SetBookInfosConnectionSee(Bundle bundle) {
+    private void RetrieveBookInfosFromBundle(Bundle bundle) {
         title = bundle.getString("title");
         volume = bundle.getString("volume");
         serie = bundle.getString("serie");
@@ -194,6 +199,46 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         isRead = (bundle.getBoolean("readStatus"));
         isFavorite = (bundle.getBoolean("isFavorite"));
         // vitrines
+    }
+
+    // Set book infos (edit mode)
+    private void SetBookInfosConnectionEdit(Bundle bundle) {
+        RetrieveBookInfosFromBundle(bundle);
+
+        titleTxtInputLytEdit.getEditText().setText(title); // Set the title
+        volumeTxtInputLytEdit.getEditText().setText(volume); // Set the volume
+        serieTxtInputLytEdit.getEditText().setText(serie); // Set the serie
+        authorTxtInputLytEdit.getEditText().setText(author); // Set the author
+        releaseDateTxtInputLytEdit.getEditText().setText(releaseDate); // Set the release date
+        descriptionTxtInputLytEdit.getEditText().setText(description); // Set the description
+        // showcasesListTxtVSee;
+
+        readImgVSee = findViewById(R.id.fullCandleImgVEdit);
+        notReadImgVSee = findViewById(R.id.emptyCandleImgVEdit);
+        favoriteImgVSee = findViewById(R.id.favoriteFullImgVEdit);
+        notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVEdit);
+
+        if (isRead) {
+            readImgVEdit.setVisibility(View.VISIBLE);
+            notReadImgVEdit.setVisibility(View.GONE);
+        }
+        else {
+            readImgVEdit.setVisibility(View.GONE);
+            notReadImgVEdit.setVisibility(View.VISIBLE);
+        }
+        if (isFavorite) {
+            favoriteImgVEdit.setVisibility(View.VISIBLE);
+            notFavoriteImgVEdit.setVisibility(View.GONE);
+        }
+        else {
+            favoriteImgVEdit.setVisibility(View.GONE);
+            notFavoriteImgVEdit.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // Set book infos (see mode)
+    private void SetBookInfosConnectionSee(Bundle bundle) {
+        RetrieveBookInfosFromBundle(bundle);
 
         titleTxtInputLytSee.getEditText().setText(title); // Set the title
         volumeTxtInputLytSee.getEditText().setText(volume); // Set the volume
@@ -205,23 +250,24 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         genresListTxtVSee.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]); // Set the tags
         // showcasesListTxtVSee;
 
+        readImgVSee = findViewById(R.id.fullCandleImgVSee);
+        notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
+        favoriteImgVSee = findViewById(R.id.favoriteFullImgVSee);
+        notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVSee);
+
         if (isRead) {
-            System.out.println("\t isRead");
             readImgVSee.setVisibility(View.VISIBLE);
             notReadImgVSee.setVisibility(View.GONE);
         }
         else {
-            System.out.println("\t isNotRead");
             readImgVSee.setVisibility(View.GONE);
             notReadImgVSee.setVisibility(View.VISIBLE);
         }
         if (isFavorite) {
-            System.out.println("\t isFavorite");
             favoriteImgVSee.setVisibility(View.VISIBLE);
             notFavoriteImgVSee.setVisibility(View.GONE);
         }
         else {
-            System.out.println("\t isNotFavorite");
             favoriteImgVSee.setVisibility(View.GONE);
             notFavoriteImgVSee.setVisibility(View.VISIBLE);
         }
