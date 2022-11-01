@@ -95,6 +95,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(2).get(position));
         holder.serieTxt = listBooksInSharedPrefs.get(3).get(position);
         holder.authorTxt.setText(listBooksInSharedPrefs.get(4).get(position));
+        holder.isRead = (listBooksInSharedPrefs.get(8).get(position).equals("true")) ? true : false;
         holder.descriptionTxt = listBooksInSharedPrefs.get(9).get(position);
         holder.addDateTxt = listBooksInSharedPrefs.get(10).get(position);
         holder.releaseDateTxt = listBooksInSharedPrefs.get(11).get(position);
@@ -172,7 +173,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     bundle.putString("tag1", holder.tag1Txt.getText().toString().substring(1));
                     bundle.putString("tag2", holder.tag2Txt.getText().toString().substring(1));
                     bundle.putString("tag3", holder.tag3Txt.getText().toString().substring(1));
-                    bundle.putBoolean("readStatus", holder.selectedBookCheckbox.isChecked());
+                    bundle.putBoolean("readStatus", holder.isRead);
                     bundle.putString("description", holder.descriptionTxt);
                     bundle.putBoolean("isFavorite", holder.isFavorite);
                     intent.putExtras(bundle);
@@ -346,7 +347,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
-        Boolean isFavorite;
+        Boolean isRead, isFavorite;
         String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt;
 
         public BooksViewHolder(@NonNull View itemView) {

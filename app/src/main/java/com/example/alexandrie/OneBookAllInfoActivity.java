@@ -206,18 +206,22 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         // showcasesListTxtVSee;
 
         if (isRead) {
+            System.out.println("\t isRead");
             readImgVSee.setVisibility(View.VISIBLE);
             notReadImgVSee.setVisibility(View.GONE);
         }
         else {
+            System.out.println("\t isNotRead");
             readImgVSee.setVisibility(View.GONE);
             notReadImgVSee.setVisibility(View.VISIBLE);
         }
         if (isFavorite) {
+            System.out.println("\t isFavorite");
             favoriteImgVSee.setVisibility(View.VISIBLE);
             notFavoriteImgVSee.setVisibility(View.GONE);
         }
         else {
+            System.out.println("\t isNotFavorite");
             favoriteImgVSee.setVisibility(View.GONE);
             notFavoriteImgVSee.setVisibility(View.VISIBLE);
         }
