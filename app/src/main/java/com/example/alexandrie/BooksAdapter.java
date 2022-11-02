@@ -90,7 +90,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public void onBindViewHolder(@NonNull BooksViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.sharedPrefIndexTxt.setText(listBooksInSharedPrefs.get(0).get(position));
+        holder.sharedPrefIndexTxt = listBooksInSharedPrefs.get(0).get(position);
         holder.titleTxt.setText(listBooksInSharedPrefs.get(1).get(position));
         holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(2).get(position));
         holder.serieTxt = listBooksInSharedPrefs.get(3).get(position);
@@ -131,7 +131,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     nbSelectedBooks.set(nbSelectedBooks.get() + 1);
 
                     // Add current index to the list of selected book items
-                    indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
+                    indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
 
                     displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
                     return true;
@@ -164,6 +164,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     Bundle bundle = new Bundle();
                     bundle.putString("mode", "see");
                     bundle.putString("prevActivity", "verticalList");
+                    bundle.putString("indexInSharedPrefs", holder.sharedPrefIndexTxt);
                     bundle.putString("title", holder.titleTxt.getText().toString());
                     bundle.putString("volume", holder.volumeTxt.getText().toString());
                     bundle.putString("serie", holder.serieTxt);
@@ -278,7 +279,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         BooksViewHolder holder;
         for (int i = 0; i < this.getItemCount(); i++) {
             holder = (BooksViewHolder) recyclerViewBooks.findViewHolderForAdapterPosition(i);
-            indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
+            indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
         }
     }
 
@@ -310,7 +311,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 nbSelectedBooks.set(nbSelectedBooks.get() - 1); // Decrease the number of selected items by one
 
                 // Remove current index from the list of selected book items
-                indexListSelectedItemBooks.remove(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
+                indexListSelectedItemBooks.remove(Integer.parseInt(holder.sharedPrefIndexTxt));
             }
             else {
                 holder.selectedBookCheckbox.setChecked(true); // Check the checkbox of the current book item
@@ -319,7 +320,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 nbSelectedBooks.set(nbSelectedBooks.get() + 1); // Increase the number of selected items by one
 
                 // Add current index to the list of selected book items
-                indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt.getText().toString()));
+                indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
             }
         }
     }
@@ -343,16 +344,15 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     public class BooksViewHolder extends RecyclerView.ViewHolder {
 
         // Elements in each book item
-        TextView sharedPrefIndexTxt, titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
+        TextView titleTxt, volumeTxt, authorTxt, tag1Txt, tag2Txt, tag3Txt;
         ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
         Boolean isRead, isFavorite;
-        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt;
+        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt, sharedPrefIndexTxt;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
-            sharedPrefIndexTxt = itemView.findViewById(R.id.sharedPrefsIndexTxtView); // Index of the book item in the sharePrefs
             titleTxt = itemView.findViewById(R.id.titleTxtView); // Title of the book item
             volumeTxt = itemView.findViewById(R.id.volumeTxtView); // Volume of the book item
             authorTxt = itemView.findViewById(R.id.authorTxtView); // Author of the book item

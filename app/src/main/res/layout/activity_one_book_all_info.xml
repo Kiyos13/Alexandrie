@@ -367,6 +367,23 @@
                     android:textAllCaps="false"
                     android:textColor="@color/background_color" />
 
+                <android.widget.Button
+                    android:id="@+id/saveEditOneBookBtnEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                    android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                    android:layout_marginBottom="@dimen/standard_buttons_top_bottom_margin"
+                    android:layout_marginRight="@dimen/buttons_left_right_margins"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/first_dominant_color"
+                    android:paddingTop="@dimen/buttons_top_bottom_padding"
+                    android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                    android:text="Enregistrer les modifications"
+                    android:textAllCaps="false"
+                    android:textColor="@color/background_color"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
         </LinearLayout>
