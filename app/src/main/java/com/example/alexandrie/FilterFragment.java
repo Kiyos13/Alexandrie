@@ -6,6 +6,9 @@ import static com.example.alexandrie.ListBooksActivity.retrieveBooksFromSharedPr
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
+import static com.example.alexandrie.OrderFragment.SortBooksArrayListOfArrayLists;
+import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPrefs;
+import static com.example.alexandrie.OrderFragment.currentWayOrder;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -212,6 +215,8 @@ public class FilterFragment extends Fragment {
         }
 
         listBooksInSharedPrefs = newlistBooks;
+        // Sort arraylists
+        listBooksInSharedPrefs.set(currentOrderIndexInSharedPrefs, SortBooksArrayListOfArrayLists(currentOrderIndexInSharedPrefs, currentWayOrder, listBooksInSharedPrefs.size()));
         booksAdapter.notifyDataSetChanged();
     }
 }
