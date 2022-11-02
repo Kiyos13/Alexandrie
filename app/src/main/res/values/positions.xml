@@ -90,4 +90,8 @@
 
     <dimen name="spinners_left_right_margins">20dp</dimen>
 
+    <dimen name="account_settings_text_left_right_margins">10dp</dimen>
+    <dimen name="account_settings_text_and_input_top_bottom_margins">30dp</dimen>
+    <dimen name="account_settings_text_to_input_top_bottom_margins">10dp</dimen>
+    <dimen name="account_settings_inputs_right_margin">10dp</dimen>
 </resources>

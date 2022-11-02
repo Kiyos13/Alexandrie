@@ -50,7 +50,13 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View InputFragmentView) {
                 // Remove MenuFragment
+                getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
                 // Change activity by AccountSettingsActivity
+                Intent intent = new Intent(getActivity(), AccountSettingsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("activity", getActivity().toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

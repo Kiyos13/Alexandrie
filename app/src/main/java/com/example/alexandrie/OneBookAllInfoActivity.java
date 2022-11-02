@@ -174,7 +174,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         saveEditBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : edit SharedPrefs
                 UpdateBookInfosCreateAndEditModes();
 
                 Set<String> set = CreateAndFillSet(); // Create Set
