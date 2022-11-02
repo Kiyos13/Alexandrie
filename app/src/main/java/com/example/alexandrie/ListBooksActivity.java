@@ -7,30 +7,20 @@ import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPref
 import static com.example.alexandrie.OrderFragment.currentWayOrder;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Canvas;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -117,11 +107,6 @@ public class ListBooksActivity extends AppCompatActivity {
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
 
-        listBooksInSharedPrefs = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i <= 12; i++) {
-            listBooksInSharedPrefs.add(i, new ArrayList<String>());
-        }
-
         sharedPrefBooks = getSharedPreferences("SharedPrefsBooks", MODE_PRIVATE); // Retrieve SharedPreferences
         //sharedPrefBooks.edit().clear().commit(); // Clean SharedPreferences
         retrieveBooksFromSharedPreferences(sharedPrefBooks); // Fill ListArrays from SharedPreferences
@@ -145,8 +130,17 @@ public class ListBooksActivity extends AppCompatActivity {
         swipeITH.attachToRecyclerView(recyclerViewBooks); // Link the swipe ItemTouchHelper to the recyclerView
     }
 
+    // Init global list books
+    public static void initGlobalListBooks() {
+        listBooksInSharedPrefs = new ArrayList<ArrayList<String>>();
+        for (int i = 0; i <= 12; i++) {
+            listBooksInSharedPrefs.add(i, new ArrayList<String>());
+        }
+    }
+
     // Retrieve books infos from SharedPreferences to fill arrayLists
-    private void retrieveBooksFromSharedPreferences(SharedPreferences sharedPreferences) {
+    public static void retrieveBooksFromSharedPreferences(SharedPreferences sharedPreferences) {
+        initGlobalListBooks();
         Map<String, ?> allEntries = sharedPreferences.getAll();
         String bookData;
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {

@@ -55,7 +55,7 @@
     <dimen name="rbuttons_top_bottom_margin">20dp</dimen>
     <dimen name="rbuttons_rbuttons_top_bottom_margin">10dp</dimen>
 
-    <dimen name="spinner_spiner_top_bottom_margins">10dp</dimen>
+    <dimen name="spinner_spiner_top_bottom_margins">20dp</dimen>
     <dimen name="spinner_other_top_bottom_margins">20dp</dimen>
     <dimen name="checkbox_checkbox_left_right_margins">20dp</dimen>
 

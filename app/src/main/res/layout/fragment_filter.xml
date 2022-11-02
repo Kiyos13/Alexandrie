@@ -47,7 +47,7 @@
                     android:id="@+id/spinnerSerie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spinner_other_top_bottom_margins"
+                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
                     android:textColor="@color/foreground_color"
                     android:backgroundTint="@color/foreground_color" />
 
