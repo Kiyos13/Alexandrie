@@ -28,6 +28,9 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
     private TextInputLayout identifierInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
     private String identifier, password, secondPassword, email;
     private String errorTitle, errorText;
+    public static int indexInSharedPrefLogsIndex = 0, indexInSharedPrefLogsIdentifier = 1;
+    public static int indexInSharedPrefLogsPassword = 2, indexInSharedPrefLogsEmail = 3;
+    public static int nbFieldsInSharedPrefLogs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +142,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
             currentSet = sharedPrefs.getStringSet(String.valueOf(nbAccounts), new HashSet<>());
             currentAccount = new ArrayList<String>(currentSet);
             SortStringListByFirstChar(currentAccount); // Sort the set
-            currentUserName = currentAccount.get(1); // Retrieve user name from set
+            currentUserName = currentAccount.get(indexInSharedPrefLogsIdentifier); // Retrieve user name from set
             currentUserName = currentUserName.substring(2); // Removing 2 firsts char from user name : "1_"
             // If the current user name equals the input user name then it's already taken and the user will have to choose another one
             if (currentUserName.equals(name))

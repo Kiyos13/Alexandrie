@@ -1,6 +1,19 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksDescription;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIsFavorite;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReleaseDate;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksSerie;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag1;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag2;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag3;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTitle;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksVolume;
 
 import androidx.annotation.NonNull;
 
@@ -90,16 +103,16 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public void onBindViewHolder(@NonNull BooksViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.sharedPrefIndexTxt = listBooksInSharedPrefs.get(0).get(position);
-        holder.titleTxt.setText(listBooksInSharedPrefs.get(1).get(position));
-        holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(2).get(position));
-        holder.serieTxt = listBooksInSharedPrefs.get(3).get(position);
-        holder.authorTxt.setText(listBooksInSharedPrefs.get(4).get(position));
-        holder.isRead = (listBooksInSharedPrefs.get(8).get(position).equals("true")) ? true : false;
-        holder.descriptionTxt = listBooksInSharedPrefs.get(9).get(position);
-        holder.addDateTxt = listBooksInSharedPrefs.get(10).get(position);
-        holder.releaseDateTxt = listBooksInSharedPrefs.get(11).get(position);
-        holder.isFavorite = (listBooksInSharedPrefs.get(12).get(position).equals("true")) ? true : false;
+        holder.sharedPrefIndexTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).get(position);
+        holder.titleTxt.setText(listBooksInSharedPrefs.get(indexInSharedPrefBooksTitle).get(position));
+        holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(indexInSharedPrefBooksVolume).get(position));
+        holder.serieTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksSerie).get(position);
+        holder.authorTxt.setText(listBooksInSharedPrefs.get(indexInSharedPrefBooksAuthor).get(position));
+        holder.isRead = (listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).get(position).equals("true")) ? true : false;
+        holder.descriptionTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksDescription).get(position);
+        holder.addDateTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksAddDate).get(position);
+        holder.releaseDateTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksReleaseDate).get(position);
+        holder.isFavorite = (listBooksInSharedPrefs.get(indexInSharedPrefBooksIsFavorite).get(position).equals("true")) ? true : false;
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
         holder.coverImgV.setImageResource(images[0]);
@@ -200,9 +213,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.tag2Txt.setText("");
         holder.tag3Txt.setText("");
 
-        ArrayList<String> tags1 = listBooksInSharedPrefs.get(5);
-        ArrayList<String> tags2 = listBooksInSharedPrefs.get(6);
-        ArrayList<String> tags3 = listBooksInSharedPrefs.get(7);
+        ArrayList<String> tags1 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag1);
+        ArrayList<String> tags2 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag2);
+        ArrayList<String> tags3 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag3);
 
         if (tags1.get(position).length() == 0) {
             if (tags2.get(position).length() == 0) {
@@ -239,8 +252,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     // Update book item icon (read/unread)
     private void onBindViewHolderReadStatus(@NonNull BooksViewHolder holder, int position) {
-        Boolean readStatus = listBooksInSharedPrefs.get(8).get(position).equals("true"); // Check if book item status is read
-        if (readStatus) { // If the book is read
+        if (holder.isRead) { // If the book is read
             holder.unreadImgV.setVisibility(View.GONE); // Remove unread icon
             holder.readImgV.setVisibility(View.VISIBLE); // Display read icon
         }
@@ -327,8 +339,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public int getItemCount() {
-        return listBooksInSharedPrefs.get(0).size();
-        // return strTitles.size();
+        return listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).size();
     }
 
     @Override

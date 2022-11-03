@@ -4,6 +4,13 @@ import static com.example.alexandrie.ListBooksActivity.booksAdapter;
 import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
 import static com.example.alexandrie.ListBooksActivity.retrieveBooksFromSharedPreferences;
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag1;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag2;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag3;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTitle;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksVolume;
 import static com.example.alexandrie.OrderFragment.SortBooksArrayListOfArrayLists;
 import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPrefs;
 import static com.example.alexandrie.OrderFragment.currentWayOrder;
@@ -76,7 +83,7 @@ public class SearchFragment extends Fragment {
         retrieveBooksFromSharedPreferences(sharedPrefBooks);
 
         int nbFields = listBooksInSharedPrefs.size();
-        int nbBooks = listBooksInSharedPrefs.get(0).size();
+        int nbBooks = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).size();
 
         ArrayList<ArrayList<String>> newlistBooks = new ArrayList<ArrayList<String>>();
         for (int i = 0; i <= nbFields; i++) {
@@ -85,12 +92,12 @@ public class SearchFragment extends Fragment {
 
         for (int i = 0; i < nbBooks; i++) {
             String currentGenre1, currentGenre2, currentGenre3, currentTitle, currentVolume, currentAuthor;
-            currentTitle = listBooksInSharedPrefs.get(1).get(i);
-            currentVolume = listBooksInSharedPrefs.get(2).get(i);
-            currentAuthor = listBooksInSharedPrefs.get(4).get(i);
-            currentGenre1 = listBooksInSharedPrefs.get(5).get(i);
-            currentGenre2 = listBooksInSharedPrefs.get(6).get(i);
-            currentGenre3 = listBooksInSharedPrefs.get(7).get(i);
+            currentTitle = listBooksInSharedPrefs.get(indexInSharedPrefBooksTitle).get(i);
+            currentVolume = listBooksInSharedPrefs.get(indexInSharedPrefBooksVolume).get(i);
+            currentAuthor = listBooksInSharedPrefs.get(indexInSharedPrefBooksAuthor).get(i);
+            currentGenre1 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag1).get(i);
+            currentGenre2 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag2).get(i);
+            currentGenre3 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag3).get(i);
 
             // We use upper cases to not have strict equality
             Boolean titleContainsSearchText = currentTitle.toUpperCase().contains(currentSearch.toUpperCase());

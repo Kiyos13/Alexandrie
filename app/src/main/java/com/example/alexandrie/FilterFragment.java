@@ -6,6 +6,13 @@ import static com.example.alexandrie.ListBooksActivity.retrieveBooksFromSharedPr
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksSerie;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag1;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag2;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag3;
 import static com.example.alexandrie.OrderFragment.SortBooksArrayListOfArrayLists;
 import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPrefs;
 import static com.example.alexandrie.OrderFragment.currentWayOrder;
@@ -174,16 +181,16 @@ public class FilterFragment extends Fragment {
             }
 
             String currentElement;
-            if (bookDataList.size() >= 7) {
-                currentElement = bookDataList.get(3);
+            if (bookDataList.size() >= indexInSharedPrefBooksTag3) {
+                currentElement = bookDataList.get(indexInSharedPrefBooksSerie);
                 if (!listBookSeries.contains(currentElement) && (currentElement.length() != 0))
                     listBookSeries.add(currentElement);
 
-                currentElement = bookDataList.get(4);
+                currentElement = bookDataList.get(indexInSharedPrefBooksAuthor);
                 if (!listBookAuthors.contains(currentElement) && (currentElement.length() != 0))
                     listBookAuthors.add(currentElement);
 
-                for (int i = 5; i < 8; i++) {
+                for (int i = indexInSharedPrefBooksTag1; i <= indexInSharedPrefBooksTag3; i++) {
                     currentElement = bookDataList.get(i);
                     if (!listBookGenres.contains(currentElement) && (currentElement.length() != 0))
                         listBookGenres.add(currentElement);
@@ -207,7 +214,7 @@ public class FilterFragment extends Fragment {
         retrieveBooksFromSharedPreferences(sharedPrefBooks);
 
         int nbFields = listBooksInSharedPrefs.size();
-        int nbBooks = listBooksInSharedPrefs.get(0).size();
+        int nbBooks = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).size();
 
         ArrayList<ArrayList<String>> newlistBooks = new ArrayList<ArrayList<String>>();
         for (int i = 0; i <= nbFields; i++) {
@@ -216,12 +223,12 @@ public class FilterFragment extends Fragment {
 
         for (int i = 0; i < nbBooks; i++) {
             String currentGenre1, currentGenre2, currentGenre3, currentSerie, currentAuthor, currentReadStatus;
-            currentSerie = listBooksInSharedPrefs.get(3).get(i);
-            currentAuthor = listBooksInSharedPrefs.get(4).get(i);
-            currentGenre1 = listBooksInSharedPrefs.get(5).get(i);
-            currentGenre2 = listBooksInSharedPrefs.get(6).get(i);
-            currentGenre3 = listBooksInSharedPrefs.get(7).get(i);
-            currentReadStatus = listBooksInSharedPrefs.get(8).get(i);
+            currentSerie = listBooksInSharedPrefs.get(indexInSharedPrefBooksSerie).get(i);
+            currentAuthor = listBooksInSharedPrefs.get(indexInSharedPrefBooksAuthor).get(i);
+            currentGenre1 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag1).get(i);
+            currentGenre2 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag2).get(i);
+            currentGenre3 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag3).get(i);
+            currentReadStatus = listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).get(i);
 
             Boolean genreNotSelected = selectedItemSpinnerGenres.equals(listBookGenresLabel);
             Boolean serieNotSelected = selectedItemSpinnerSeries.equals(listBookSeriesLabel);

@@ -2,6 +2,9 @@ package com.example.alexandrie;
 
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
+import static com.example.alexandrie.OneBookAllInfoActivity.nbFieldsInSharedPrefBooks;
 import static com.example.alexandrie.OrderFragment.SortBooksArrayListOfArrayLists;
 import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPrefs;
 import static com.example.alexandrie.OrderFragment.currentWayOrder;
@@ -53,7 +56,7 @@ public class ListBooksActivity extends AppCompatActivity {
                     System.out.println("\t\tswipe left ! " + position);
 
                     // Edit Set
-                    keyBookInSharedPrefs = listBooksInSharedPrefs.get(0).get(position);
+                    keyBookInSharedPrefs = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).get(position);
                     set = sharedPrefBooks.getStringSet(keyBookInSharedPrefs, null);
                     for (String obj : set) {
                         if (obj.charAt(0) == 'i') {
@@ -67,14 +70,14 @@ public class ListBooksActivity extends AppCompatActivity {
                     editor.remove(keyBookInSharedPrefs).commit();
                     editor.putStringSet(keyBookInSharedPrefs, set).commit();
 
-                    listBooksInSharedPrefs.get(8).set(position, "false"); // Mark the book item has unread
+                    listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).set(position, "false"); // Mark the book item has unread
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
                 case ItemTouchHelper.RIGHT:
                     System.out.println("\t\tswipe right ! " + position);
 
                     // Edit Set
-                    keyBookInSharedPrefs = listBooksInSharedPrefs.get(0).get(position);
+                    keyBookInSharedPrefs = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).get(position);
                     set = sharedPrefBooks.getStringSet(keyBookInSharedPrefs, null);
                     for (String obj : set) {
                         if (obj.charAt(0) == 'i') {
@@ -88,7 +91,7 @@ public class ListBooksActivity extends AppCompatActivity {
                     editor.remove(keyBookInSharedPrefs).commit();
                     editor.putStringSet(keyBookInSharedPrefs, set).commit();
 
-                    listBooksInSharedPrefs.get(8).set(position, "true"); // Mark the book item has read
+                    listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).set(position, "true"); // Mark the book item has read
                     recyclerViewBooks.getAdapter().notifyItemChanged(position); // Notify the change to the adapter
                     break;
             }
@@ -133,7 +136,7 @@ public class ListBooksActivity extends AppCompatActivity {
     // Init global list books
     public static void initGlobalListBooks() {
         listBooksInSharedPrefs = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i <= 12; i++) {
+        for (int i = 0; i <= nbFieldsInSharedPrefBooks; i++) {
             listBooksInSharedPrefs.add(i, new ArrayList<String>());
         }
     }

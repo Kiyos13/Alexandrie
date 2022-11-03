@@ -45,6 +45,12 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private Boolean isRead, isFavorite;
     private Spinner spinnerGenre;
     private ArrayList<String> listBookGenres;
+    public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
+    public static int indexInSharedPrefBooksSerie = 3, indexInSharedPrefBooksAuthor = 4, indexInSharedPrefBooksTag1 = 5;
+    public static int indexInSharedPrefBooksTag2 = 6, indexInSharedPrefBooksTag3 = 7, indexInSharedPrefBooksReadStatus = 8;
+    public static int indexInSharedPrefBooksDescription = 9, indexInSharedPrefBooksAddDate = 10;
+    public static int indexInSharedPrefBooksReleaseDate = 11, indexInSharedPrefBooksIsFavorite = 12;
+    public static int nbFieldsInSharedPrefBooks = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -342,8 +348,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             }
 
             String currentElement;
-            if (bookDataList.size() >= 7) {
-                for (int i = 5; i < 8; i++) {
+            if (bookDataList.size() >= nbFieldsInSharedPrefBooks) {
+                for (int i = indexInSharedPrefBooksTag1; i < indexInSharedPrefBooksTag3; i++) {
                     currentElement = bookDataList.get(i);
                     if (!listBookGenres.contains(currentElement) && (currentElement.length() != 0))
                         listBookGenres.add(currentElement);
