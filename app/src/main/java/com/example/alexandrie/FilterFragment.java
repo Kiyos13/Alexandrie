@@ -109,8 +109,7 @@ public class FilterFragment extends Fragment {
         spinnerGenre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                retrieveSpinnersItems();
-                retrieveBooksToKeep();
+                executeFilter();
 
             }
 
@@ -121,8 +120,7 @@ public class FilterFragment extends Fragment {
         spinnerSerie.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                retrieveSpinnersItems();
-                retrieveBooksToKeep();
+                executeFilter();
             }
 
             @Override
@@ -132,8 +130,7 @@ public class FilterFragment extends Fragment {
         spinnerAuthor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                retrieveSpinnersItems();
-                retrieveBooksToKeep();
+                executeFilter();
             }
 
             @Override
@@ -143,16 +140,14 @@ public class FilterFragment extends Fragment {
         readCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                retrieveSpinnersItems();
-                retrieveBooksToKeep();
+                executeFilter();
             }
         });
 
         notReadCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                retrieveSpinnersItems();
-                retrieveBooksToKeep();
+                executeFilter();
             }
         });
 
@@ -264,5 +259,11 @@ public class FilterFragment extends Fragment {
         // Sort arraylists
         listBooksInSharedPrefs.set(currentOrderIndexInSharedPrefs, SortBooksArrayListOfArrayLists(currentOrderIndexInSharedPrefs, currentWayOrder, listBooksInSharedPrefs.size()));
         booksAdapter.notifyDataSetChanged();
+    }
+
+    // Update filters and retrieve books that fill the conditions
+    private void executeFilter() {
+        retrieveSpinnersItems();
+        retrieveBooksToKeep();
     }
 }
