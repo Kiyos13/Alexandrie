@@ -20,9 +20,9 @@ class Ideone {
             @Override
             public int compare(Integer i, Integer j) {
                 if (way.equals("descending"))
-                    return -key.get(i).compareTo(key.get(j));
+                    return -((String) key.get(i)).toUpperCase().compareTo(((String) key.get(j)).toUpperCase());
                 else
-                    return key.get(i).compareTo(key.get(j));
+                    return ((String) key.get(i)).toUpperCase().compareTo(((String) key.get(j)).toUpperCase());
             }
         });
 
