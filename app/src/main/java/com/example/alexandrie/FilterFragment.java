@@ -110,8 +110,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 retrieveSpinnersItems();
-                if (!selectedItemSpinnerGenres.equals(listBookGenresLabel))
-                    retrieveBooksToKeep();
+                retrieveBooksToKeep();
+
             }
 
             @Override
@@ -122,8 +122,7 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 retrieveSpinnersItems();
-                if (!selectedItemSpinnerSeries.equals(listBookSeriesLabel))
-                    retrieveBooksToKeep();
+                retrieveBooksToKeep();
             }
 
             @Override
@@ -134,8 +133,7 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 retrieveSpinnersItems();
-                if (!selectedItemSpinnerAuthors.equals(listBookAuthorsLabel))
-                    retrieveBooksToKeep();
+                retrieveBooksToKeep();
             }
 
             @Override
