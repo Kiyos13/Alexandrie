@@ -83,9 +83,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 retrieveSpinnersItems();
-                if (!selectedItemSpinnerGenres.equals(listBookGenresLabel)) {
-                    retrieveBooksSpinnersFromListWithSpinners();
-                }
+                if (!selectedItemSpinnerGenres.equals(listBookGenresLabel))
+                    retrieveBooksToKeep();
             }
 
             @Override
@@ -96,9 +95,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 retrieveSpinnersItems();
-                if (!selectedItemSpinnerSeries.equals(listBookSeriesLabel)) {
-                    retrieveBooksSpinnersFromListWithSpinners();
-                }
+                if (!selectedItemSpinnerSeries.equals(listBookSeriesLabel))
+                    retrieveBooksToKeep();
             }
 
             @Override
@@ -109,9 +107,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 retrieveSpinnersItems();
-                if (!selectedItemSpinnerAuthors.equals(listBookAuthorsLabel)) {
-                    retrieveBooksSpinnersFromListWithSpinners();
-                }
+                if (!selectedItemSpinnerAuthors.equals(listBookAuthorsLabel))
+                    retrieveBooksToKeep();
             }
 
             @Override
@@ -166,8 +163,8 @@ public class FilterFragment extends Fragment {
         selectedItemSpinnerAuthors = spinnerAuthor.getSelectedItem().toString();
     }
 
-    // Retrieve books infos from SharedPreferences to fill spinnerLists
-    private void retrieveBooksSpinnersFromListWithSpinners() {
+    // Retrieve books depending on spinners
+    private void retrieveBooksToKeep() {
         // Retrieve all SharedPrefs to update listBooksInSharedPrefs
         retrieveBooksFromSharedPreferences(sharedPrefBooks);
 
