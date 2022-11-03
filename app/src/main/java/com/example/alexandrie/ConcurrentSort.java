@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Ideone {
+class ConcurrentSort {
 
     public static <T extends Comparable<T>> void concurrentSort(String way, final List<T> key, ArrayList<ArrayList<T>> arrayList) {
         // Create a List of indices
