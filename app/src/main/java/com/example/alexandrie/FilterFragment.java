@@ -10,6 +10,8 @@ import static com.example.alexandrie.OrderFragment.SortBooksArrayListOfArrayList
 import static com.example.alexandrie.OrderFragment.currentOrderIndexInSharedPrefs;
 import static com.example.alexandrie.OrderFragment.currentWayOrder;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -20,19 +22,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class FilterFragment extends Fragment {
 
     private Spinner spinnerGenre, spinnerSerie, spinnerAuthor;
+    //private TextView spinnerGenreTxtV, spinnerSerieTxtV, spinnerAuthorTxtV;
     private ArrayList<String> listBookGenres, listBookSeries, listBookAuthors;
     private String listBookGenresLabel, listBookSeriesLabel, listBookAuthorsLabel;
     private String selectedItemSpinnerGenres, selectedItemSpinnerSeries, selectedItemSpinnerAuthors;
+    private CheckBox readCheckBox, notReadCheckBox;
+    private Boolean readChecked, notReadChecked;
 
     public FilterFragment() {
         // Required empty public constructor
@@ -53,6 +62,18 @@ public class FilterFragment extends Fragment {
         spinnerGenre = view.findViewById(R.id.spinnerGenre);
         spinnerSerie = view.findViewById(R.id.spinnerSerie);
         spinnerAuthor = view.findViewById(R.id.spinnerAuthor);
+
+        /*
+        spinnerGenreTxtV = view.findViewById(R.id.spinnerGenreTxtV);
+        spinnerSerieTxtV = view.findViewById(R.id.spinnerSerieTxtV);
+        spinnerAuthorTxtV = view.findViewById(R.id.spinnerAuthorTxtV);
+        */
+
+        readCheckBox = view.findViewById(R.id.readCheckBox);
+        notReadCheckBox = view.findViewById(R.id.notReadCheckBox);
+
+        readCheckBox.setChecked(true);
+        notReadCheckBox.setChecked(true);
 
         listBookGenres = new ArrayList<String>();
         listBookSeries = new ArrayList<String>();
@@ -77,7 +98,6 @@ public class FilterFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listBookAuthors);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAuthor.setAdapter(adapter);
-
 
         spinnerGenre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -113,6 +133,22 @@ public class FilterFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        readCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                retrieveSpinnersItems();
+                retrieveBooksToKeep();
+            }
+        });
+
+        notReadCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                retrieveSpinnersItems();
+                retrieveBooksToKeep();
+            }
         });
 
         return view;
@@ -161,6 +197,8 @@ public class FilterFragment extends Fragment {
         selectedItemSpinnerGenres = spinnerGenre.getSelectedItem().toString();
         selectedItemSpinnerSeries = spinnerSerie.getSelectedItem().toString();
         selectedItemSpinnerAuthors = spinnerAuthor.getSelectedItem().toString();
+        readChecked = readCheckBox.isChecked();
+        notReadChecked = notReadCheckBox.isChecked();
     }
 
     // Retrieve books depending on spinners
@@ -177,16 +215,20 @@ public class FilterFragment extends Fragment {
         };
 
         for (int i = 0; i < nbBooks; i++) {
-            String currentGenre1, currentGenre2, currentGenre3, currentSerie, currentAuthor;
+            String currentGenre1, currentGenre2, currentGenre3, currentSerie, currentAuthor, currentReadStatus;
             currentSerie = listBooksInSharedPrefs.get(3).get(i);
             currentAuthor = listBooksInSharedPrefs.get(4).get(i);
             currentGenre1 = listBooksInSharedPrefs.get(5).get(i);
             currentGenre2 = listBooksInSharedPrefs.get(6).get(i);
             currentGenre3 = listBooksInSharedPrefs.get(7).get(i);
+            currentReadStatus = listBooksInSharedPrefs.get(8).get(i);
 
             Boolean genreNotSelected = selectedItemSpinnerGenres.equals(listBookGenresLabel);
             Boolean serieNotSelected = selectedItemSpinnerSeries.equals(listBookSeriesLabel);
             Boolean authorNotSelected = selectedItemSpinnerAuthors.equals(listBookAuthorsLabel);
+            Boolean readStatusIsOkRead = readChecked && (currentReadStatus.equals("true"));
+            Boolean readStatusIsOkNotRead = notReadChecked && (!currentReadStatus.equals("true"));
+            Boolean readStatusIsOk = readStatusIsOkRead || readStatusIsOkNotRead;
 
             if (!(genreNotSelected && serieNotSelected && authorNotSelected)) {
                 Boolean serieConditionIsOk = (currentSerie.equals(selectedItemSpinnerSeries)) || serieNotSelected;
@@ -196,7 +238,7 @@ public class FilterFragment extends Fragment {
                 Boolean genre3ConditionIsOk = currentGenre3.equals(selectedItemSpinnerGenres);
                 Boolean genreConditionIsOk = genre1ConditionIsOk || genre2ConditionIsOk || genre3ConditionIsOk || genreNotSelected;
 
-                if (serieConditionIsOk && authorConditionIsOk && genreConditionIsOk) {
+                if (serieConditionIsOk && authorConditionIsOk && genreConditionIsOk && readStatusIsOk) {
                     // Book check all filter conditions -> add the book to de list
                     for (int j = 0; j < nbFields; j++) {
                         newlistBooks.get(j).add(listBooksInSharedPrefs.get(j).get(i));
@@ -204,9 +246,11 @@ public class FilterFragment extends Fragment {
                 }
             }
             else {
-                // No filter -> add every book in SharedPrefs to the list
-                for (int j = 0; j < nbFields; j++) {
-                    newlistBooks.get(j).add(listBooksInSharedPrefs.get(j).get(i));
+                if (readStatusIsOk) {
+                    // No filter -> add every book in SharedPrefs to the list
+                    for (int j = 0; j < nbFields; j++) {
+                        newlistBooks.get(j).add(listBooksInSharedPrefs.get(j).get(i));
+                    }
                 }
             }
         }

@@ -35,6 +35,50 @@
                 android:layout_marginLeft="@dimen/spinners_left_right_margins"
                 android:layout_marginRight="@dimen/spinners_left_right_margins" >
 
+                <!--
+                <TextView
+                    android:id="@+id/spinnerGenreTxtV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/background_filters"
+                    android:drawableRight="@android:drawable/arrow_down_float"
+                    android:drawableTint="@color/background_color"
+                    android:textColorHint="@color/background_color"
+                    android:hint="Genre"
+                    android:drawablePadding="@dimen/filter_spinner_drawable_padding"
+                    android:padding="@dimen/filter_spinner_padding" />
+
+                <TextView
+                    android:id="@+id/spinnerSerieTxtV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/background_filters"
+                    android:drawableRight="@android:drawable/arrow_down_float"
+                    android:drawableTint="@color/background_color"
+                    android:textColorHint="@color/background_color"
+                    android:hint="Serie"
+                    android:drawablePadding="@dimen/filter_spinner_drawable_padding"
+                    android:padding="@dimen/filter_spinner_padding" />
+
+                <TextView
+                    android:id="@+id/spinnerAuthorTxtV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/background_filters"
+                    android:drawableRight="@android:drawable/arrow_down_float"
+                    android:drawableTint="@color/background_color"
+                    android:textColorHint="@color/background_color"
+                    android:hint="Auteur"
+                    android:drawablePadding="@dimen/filter_spinner_drawable_padding"
+                    android:padding="@dimen/filter_spinner_padding" />
+                -->
+
                 <Spinner
                     android:id="@+id/spinnerGenre"
                     android:layout_width="match_parent"

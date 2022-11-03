@@ -51,6 +51,8 @@
     <dimen name="filter_and_order_fragments_height">200dp</dimen>
     <dimen name="icon_order_top_right_margin">15dp</dimen>
     <dimen name="filter_order_title_size">20dp</dimen>
+    <dimen name="filter_spinner_drawable_padding">16dp</dimen>
+    <dimen name="filter_spinner_padding">12dp</dimen>
     <dimen name="rbuttons_rbuttons_margin">20dp</dimen>
     <dimen name="rbuttons_top_bottom_margin">20dp</dimen>
     <dimen name="rbuttons_rbuttons_top_bottom_margin">10dp</dimen>
