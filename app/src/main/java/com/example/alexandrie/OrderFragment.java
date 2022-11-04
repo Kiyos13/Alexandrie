@@ -46,6 +46,8 @@ public class OrderFragment extends Fragment {
         releaseDateRadioButton = view.findViewById(R.id.releaseDateRadioBtn);
         orderIcon = view.findViewById(R.id.orderIcon);
 
+        checkCurrentRadioButton();
+
         titleRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +122,34 @@ public class OrderFragment extends Fragment {
         serieRadioButton.setChecked(false); // Unchecked the serie radio button
         addDateRadioButton.setChecked(false); // Unchecked the add date radio button
         releaseDateRadioButton.setChecked(false); // Unchecked the release date radio button
+    }
+
+    // Check the current radio button according to currentOrderIndexInSharedPrefs value
+    private void checkCurrentRadioButton() {
+        switch (currentOrderIndexInSharedPrefs) {
+            case 1:
+                uncheckAllRadioButtons();
+                titleRadioButton.setChecked(true);
+                break;
+            case 4:
+                uncheckAllRadioButtons();
+                authorRadioButton.setChecked(true);
+                break;
+            case 3:
+                uncheckAllRadioButtons();
+                serieRadioButton.setChecked(true);
+                break;
+            case 10:
+                uncheckAllRadioButtons();
+                addDateRadioButton.setChecked(true);
+                break;
+            case 11:
+                uncheckAllRadioButtons();
+                releaseDateRadioButton.setChecked(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public static ArrayList<String> SortBooksArrayListOfArrayLists(int indexList, String way, int totalNbLists) {
