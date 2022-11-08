@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginConnectionActivity"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    tools:context=".LoginConnectionActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/topBarLogCoFragContainerV"
@@ -13,40 +13,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_app_bar" />
 
     <LinearLayout
         android:id="@+id/loginCoGlobalLyt"
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:background="@color/background_color"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/background_color">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="113dp"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round_logo"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@drawable/logo_white"
+                android:backgroundTint="@color/first_dominant_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.601" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -69,24 +73,24 @@
                     app:boxCornerRadiusTopStart="@dimen/standard_radius"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@drawable/ic_login"
-                    app:startIconTint="@color/background_color"
-                    app:hintEnabled="false" >
+                    app:startIconTint="@color/input_textcolor">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/inputs_left_right_margins"
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
-                        android:backgroundTint="@color/foreground_color"
+                        android:backgroundTint="#CDBFAA"
                         android:hint="Identifiant"
-                        android:textColorHint="@color/background_color"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                        android:textColor="@color/background_color"
+                        android:textColor="@color/foreground_color"
+                        android:textColorHint="@color/input_textcolor"
                         android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,35 +101,35 @@
                     android:layout_marginLeft="@dimen/inputs_left_right_margins"
                     android:layout_marginTop="@dimen/standard_top_bottom_margin"
                     android:layout_marginRight="@dimen/inputs_left_right_margins"
-                    android:textColorHint="@color/background_color"
+                    android:textColorHint="@color/foreground_color"
                     app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
                     app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                     app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                     app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                    app:boxStrokeWidthFocused="0dp"
                     app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/identifierInputLyt"
-                    app:startIconDrawable="@drawable/ic_password"
-                    app:startIconTint="@color/background_color"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/background_color"
-                    app:hintEnabled="false" >
+                    app:passwordToggleTint="@color/input_textcolor"
+                    app:startIconDrawable="@drawable/ic_password"
+                    app:startIconTint="@color/input_textcolor">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/inputs_left_right_margins"
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
-                        android:backgroundTint="@color/foreground_color"
+                        android:backgroundTint="#CDBFAA"
                         android:hint="Mot de passe"
-                        android:textColorHint="@color/background_color"
+                        android:inputType="textPassword"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/background_color"
-                        android:textCursorDrawable="@null"
-                        android:inputType="textPassword" />
+                        android:textColorHint="@color/input_textcolor"
+                        android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <android.widget.Button
@@ -133,7 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/buttons_left_right_margins"
-                    android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                    android:layout_marginTop="28dp"
                     android:layout_marginRight="@dimen/buttons_left_right_margins"
                     android:background="@drawable/round_corners"
                     android:backgroundTint="@color/first_dominant_color"
@@ -142,11 +146,22 @@
                     android:text="Se connecter"
                     android:textAllCaps="false"
                     android:textColor="@color/background_color"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/passwordInputLyt" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/forgotPasswordBtn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:text="@string/forgotten_password"
+                android:textAllCaps="false"
+                android:textColor="@color/foreground_color" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,36 +169,21 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <Button
-                android:id="@+id/forgotPasswordBtn"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/buttons_left_right_margins"
-                android:layout_marginRight="@dimen/buttons_left_right_margins"
-                android:backgroundTint="@color/transparent"
-                android:text="Mot de passe oublié ?"
-                android:textAllCaps="false"
-                android:textColor="@color/foreground_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
+            <android.widget.Button
                 android:id="@+id/createAccountBtn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/buttons_left_right_margins"
-                android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="@dimen/buttons_left_right_margins"
-                android:backgroundTint="@color/transparent"
+                android:background="@drawable/round_corners_empty"
                 android:text="Créer un compte"
                 android:textAllCaps="false"
-                android:textColor="@color/foreground_color"
+                android:textColor="@color/first_dominant_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forgotPasswordBtn" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/googleImg"
@@ -200,8 +200,10 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/popupCoFragContainerV"
+        android:name="com.example.alexandrie.AddFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

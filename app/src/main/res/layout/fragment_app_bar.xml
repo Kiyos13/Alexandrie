@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
-    tools:context=".AppBarFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/first_dominant_color">
+    android:background="@color/first_dominant_color"
+    tools:context=".AppBarFragment">
 
     <ImageView
         android:id="@+id/returnArrowImgV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_return_arrow"
-        android:layout_marginLeft="@dimen/top_fragment_return_arrow_left_margin"
         android:layout_gravity="left|center_vertical"
-        app:tint="@color/background_color"
-        android:visibility="gone" />
+        android:layout_marginLeft="@dimen/top_fragment_return_arrow_left_margin"
+        android:src="@drawable/ic_return_arrow"
+        android:visibility="gone"
+        app:tint="@color/background_color" />
 
-    <TextView
-        android:id="@+id/appName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:text="Alexandrie"
-        android:textColor="@color/background_color"
-        android:textSize="@dimen/title_font_size"
-        android:textStyle="bold" />
+        android:src="@drawable/ic_app_logo"
+        app:tint="#FFFFFF" />
 
     <LinearLayout
         android:id="@+id/topBarFilterIconsLyt"
@@ -34,7 +32,7 @@
         android:layout_gravity="right|center_vertical"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/orderImgV"
