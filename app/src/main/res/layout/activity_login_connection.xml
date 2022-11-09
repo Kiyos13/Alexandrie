@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/loginCoGlobalLyt"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"

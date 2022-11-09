@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
@@ -19,6 +20,7 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
     private Button sendEmailButton;
     private TextInputLayout emailInputLyt;
     private String email;
+    private View loginFPGlobalLyt;
     private String errorTitle, errorText;
 
     @Override
@@ -33,6 +35,7 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
         Intent returnIntent = new Intent(LoginForgottenPasswordActivity.this, LoginConnectionActivity.class);
         fragmentManager.beginTransaction().add(R.id.topBarLogFPFragContainerV, new AppBarFragment(returnIntent)).commit();
 
+        loginFPGlobalLyt  = findViewById(R.id.loginFPGlobalLyt);
         sendEmailButton = findViewById(R.id.sendEmailBtn);
         emailInputLyt = findViewById(R.id.emailInputLyt);
 
@@ -66,7 +69,8 @@ public class LoginForgottenPasswordActivity extends AppCompatActivity {
             errorText = "L'email que vous avez entré est vide.";
             // Put a new MessagePopupFragment in the popupFPFragContainerV in LoginForgottenPasswordActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().add(R.id.popupFPFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+            fragmentManager.beginTransaction().add(R.id.popupFPFragContainerV, new MessagePopupFragment(loginFPGlobalLyt, errorTitle, errorText)).commit();
+            enableDisableView(loginFPGlobalLyt, false);
             return true;
         }
         return false;

@@ -3,6 +3,7 @@ package com.example.alexandrie;
 import static com.example.alexandrie.LoginConnectionActivity.SharedPrefLength;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import java.util.Set;
 public class LoginCreateAccountActivity extends AppCompatActivity {
 
     private android.widget.Button createAccountButton;
+    private View loginCrGlobalLyt;
     private TextInputLayout identifierInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
     private String identifier, password, secondPassword, email;
     private String errorTitle, errorText;
@@ -44,6 +46,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         Intent returnIntent = new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class);
         fragmentManager.beginTransaction().add(R.id.topBarLogCrFragContainerV, new AppBarFragment(returnIntent)).commit();
 
+        loginCrGlobalLyt = findViewById(R.id.loginCrGlobalLyt);
         createAccountButton = findViewById(R.id.createAcountBtn);
         identifierInputLyt = findViewById(R.id.identifierInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
@@ -70,7 +73,8 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                         errorTitle = "Erreur de création de compte";
                         errorText = "Malheureusement, le nom d'utilisateur que vous avez entré est déjà pris. Veuillez en enter un autre différent.";
                         FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+                        fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(loginCrGlobalLyt, errorTitle, errorText)).commit();
+                        enableDisableView(loginCrGlobalLyt, false);
                     }
                 }
             }
@@ -123,7 +127,8 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         if (!infosAreValid) {
             // Display error message if information is not valid
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+            fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(loginCrGlobalLyt, errorTitle, errorText)).commit();
+            enableDisableView(loginCrGlobalLyt, false);
         }
 
         return infosAreValid;

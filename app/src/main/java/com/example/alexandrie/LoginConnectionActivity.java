@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
     private String identifier, password;
     public static SharedPreferences sharedPrefLogs;
     private String errorTitle, errorText;
+    private View loginCoGlobalLyt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
         createAccountButton = findViewById(R.id.createAccountBtn);
         identifierInputLyt = findViewById(R.id.identifierInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
+        loginCoGlobalLyt = findViewById(R.id.loginCoGlobalLyt);
         sharedPrefLogs = getSharedPreferences("SharedPrefLogs", MODE_PRIVATE);
         // sharedPrefLogs.edit().clear().commit(); // Clean SharedPreferences
 
@@ -77,7 +80,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
                         errorTitle = "Erreur de connexion";
                         errorText = "Aucun compte ne correspond au nom d'utilisateur que vous avez entré.";
                         FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+                        fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, errorTitle, errorText)).commit();
+                        enableDisableView(loginCoGlobalLyt, false);
                     }
                 }
             }
@@ -141,7 +145,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
         if (hasToDisplayPopup) {
             // Display error message according to the errors
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+            fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, errorTitle, errorText)).commit();
+            enableDisableView(loginCoGlobalLyt, false);
         }
 
         return hasToDisplayPopup;
@@ -202,10 +207,20 @@ public class LoginConnectionActivity extends AppCompatActivity {
                 errorTitle = "Erreur de connexion";
                 errorText = "Votre mot de passe ne correspond pas à votre nom d'utilisateur.";
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+                fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, errorTitle, errorText)).commit();
+                enableDisableView(loginCoGlobalLyt, false);
                 return 2;
             }
         }
         return 0;
+    }
+
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int idx = 0; idx < group.getChildCount(); idx++)
+                enableDisableView(group.getChildAt(idx), enabled);
+        }
     }
 }
