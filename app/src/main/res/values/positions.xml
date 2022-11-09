@@ -99,8 +99,14 @@
     <dimen name="account_settings_inputs_right_margin">10dp</dimen>
 
 
-    <dimen name="genres_selector_recycler_margins">20dp</dimen>
-    <dimen name="genres_selector_recycler_bottom_margin">140dp</dimen>
+    <dimen name="genres_selector_recycler_margins">50dp</dimen>
+    <dimen name="genres_selector_recycler_intern_margins">8dp</dimen>
+    <dimen name="genres_selector_button_left_right_margins">50dp</dimen>
+    <dimen name="genres_selector_recycler_bottom_margin">70dp</dimen>
     <dimen name="genres_selector_recycler_button_margin">10dp</dimen>
     <dimen name="one_genre_in_selector_text_margin">10dp</dimen>
+    <dimen name="one_genre_in_selector_lyt_left_right_margins">10dp</dimen>
+    <dimen name="one_genre_in_selector_lyt_top_bottom_margins">4dp</dimen>
+    <dimen name="one_genre_in_selector_radius">8dp</dimen>
+    <dimen name="genres_selector_recycler_border">8dp</dimen>
 </resources>
