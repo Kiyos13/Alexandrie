@@ -9,6 +9,7 @@ import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
 import static com.example.alexandrie.ListBooksActivity.retrieveBooksFromSharedPreferences;
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
 import static com.example.alexandrie.OneBookAllInfoActivity.genresListTxtVEdit;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
@@ -56,6 +57,7 @@ public class FilterFragment extends Fragment {
     private CheckBox readCheckBox, notReadCheckBox;
     private Boolean readChecked, notReadChecked;
     private TextView genresTxtV;
+    private View globalLyt;
 
     public FilterFragment() {
         // Required empty public constructor
@@ -71,6 +73,8 @@ public class FilterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
+
+        globalLyt = view.findViewById(R.id.filterFragGlobalLyt);
 
         spinnerSerie = view.findViewById(R.id.spinnerSerie);
         spinnerAuthor = view.findViewById(R.id.spinnerAuthor);
@@ -104,7 +108,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Display genres selector fragment
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorInFilterFragContainerV, new GenresSelectorFragment("filter")).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorInFilterFragContainerV, new GenresSelectorFragment(globalLyt, "filter")).commit();
+                enableDisableView(globalLyt, false);
             }
         });
 

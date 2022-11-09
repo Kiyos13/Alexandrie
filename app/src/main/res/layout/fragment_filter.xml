@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/filterFragGlobalLyt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -51,8 +52,8 @@
                         android:drawableRight="@drawable/ic_arrow_drop_down"
                         android:drawableTint="@color/foreground_color"
                         android:text="Genres"
-                        android:textStyle="bold"
-                        android:textColor="@color/foreground_color" />
+                        android:textColor="@color/foreground_color"
+                        android:textStyle="bold" />
 
                     <Spinner
                         android:id="@+id/spinnerSerie"

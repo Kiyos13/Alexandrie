@@ -20,6 +20,7 @@
             android:visibility="visible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/oneBookInfosGlobalLytEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -286,11 +287,11 @@
                         android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
                         android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:drawableTint="@color/foreground_color"
                         android:text="Genre"
                         android:textColor="@color/foreground_color"
-                        android:textSize="@dimen/title_font_size"
-                        android:drawableRight="@drawable/ic_arrow_drop_down"
-                        android:drawableTint="@color/foreground_color"/>
+                        android:textSize="@dimen/title_font_size" />
 
                     <TextView
                         android:id="@+id/genresListOneBookTxtVEdit"

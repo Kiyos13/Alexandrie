@@ -6,6 +6,7 @@ import static com.example.alexandrie.GenresSelectorFragment.listBookGenresSelect
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 
 import static java.lang.String.valueOf;
 
@@ -32,7 +33,7 @@ import java.util.Set;
 
 public class OneBookAllInfoActivity extends AppCompatActivity {
 
-    private View editLayout, seeLayout;
+    private View editLayout, seeLayout, globalLytEdit;
     private String mode, previousActivity;
     private android.widget.Button saveBookButton, saveEditBookButton;
     private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit;
@@ -59,6 +60,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
         editLayout = findViewById(R.id.oneBookAllLytEdit);
         seeLayout = findViewById(R.id.oneBookAllLytSee);
+        globalLytEdit = findViewById(R.id.oneBookInfosGlobalLytEdit);
         saveBookButton = findViewById(R.id.saveOneBookBtnEdit);
         saveEditBookButton = findViewById(R.id.saveEditOneBookBtnEdit);
 
@@ -216,7 +218,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 updateListBookGenresSelectedFromTags();
 
                 // Display genres selector fragment
-                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment("nonFilter")).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment(globalLytEdit, "nonFilter")).commit();
+                enableDisableView(globalLytEdit, false);
             }
         });
     }

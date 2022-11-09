@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 import static com.example.alexandrie.OneBookAllInfoActivity.genresListTxtVEdit;
 
 import android.os.Bundle;
@@ -24,9 +25,11 @@ public class GenresSelectorFragment extends Fragment {
     public static ArrayList<String> listBookGenres = new ArrayList<>(), listBookKeptGenres = new ArrayList<>();
     public static ArrayList<Boolean> listBookGenresSelected = new ArrayList<>();
     public static ObservableInteger hasToExecuteFilter = new ObservableInteger();
+    private View viewToEnableDisable;
     private String modeFilterOrNot;
 
-    public GenresSelectorFragment(String mode) {
+    public GenresSelectorFragment(View view, String mode) {
+        viewToEnableDisable = view;
         modeFilterOrNot = mode;
     }
 
@@ -75,6 +78,10 @@ public class GenresSelectorFragment extends Fragment {
                     // Notify the filter fragment that it has to execute the filters
                     hasToExecuteFilter.set(1);
                 }
+
+                // Enable view
+                if (viewToEnableDisable != null)
+                    enableDisableView(viewToEnableDisable, true);
             }
         });
 
