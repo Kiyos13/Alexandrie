@@ -110,6 +110,10 @@ public class FilterFragment extends Fragment {
                 // Display genres selector fragment
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorInFilterFragContainerV, new GenresSelectorFragment(globalLyt, "filter")).commit();
                 enableDisableView(globalLyt, false);
+
+                // Remove AddFragment
+                Fragment addFragment = getParentFragmentManager().findFragmentById(R.id.addDelFragContainerV);
+                getParentFragmentManager().beginTransaction().remove(addFragment).commit();
             }
         });
 

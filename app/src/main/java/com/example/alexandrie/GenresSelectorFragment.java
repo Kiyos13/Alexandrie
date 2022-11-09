@@ -7,6 +7,7 @@ import static com.example.alexandrie.OneBookAllInfoActivity.genresListTxtVEdit;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,6 +78,10 @@ public class GenresSelectorFragment extends Fragment {
                     }
                     // Notify the filter fragment that it has to execute the filters
                     hasToExecuteFilter.set(1);
+
+                    // Add / Display AddFragment
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new AddFragment()).commit();
                 }
 
                 // Enable view
