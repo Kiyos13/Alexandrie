@@ -16,9 +16,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,7 +37,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private android.widget.Button saveBookButton, saveEditBookButton;
     private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit;
     private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee;
-    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTxtVEdit, showcasesListTxtVSee;
+    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTitleTxtVEdit, showcasesListTxtVSee;
+    public static TextView genresListTxtVEdit;
     private ImageView readImgVEdit, notReadImgVEdit, readImgVSee, notReadImgVSee;
     private ImageView favoriteImgVEdit, notFavoriteImgVEdit, favoriteImgVSee, notFavoriteImgVSee;
     private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description;
@@ -53,31 +51,11 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     public static int indexInSharedPrefBooksReleaseDate = 11, indexInSharedPrefBooksIsFavorite = 12;
     public static int nbFieldsInSharedPrefBooks = 12;
 
-    public static TextView genresListOneBookTxtVEdit;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_book_all_info);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
-
-        genresListTxtVEdit = findViewById(R.id.genreOneBookTxtVEdit);
-        genresListTxtVEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Update listBookGenresSelected from the selected genres of the book
-                updateBookInfosCreateAndEditModes();
-
-                // Update
-                updateListBookGenresSelectedFromTags();
-
-                // Display genres selector fragment
-                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment()).commit();
-            }
-        });
-        genresListOneBookTxtVEdit = findViewById(R.id.genresListOneBookTxtVEdit);
-
 
         editLayout = findViewById(R.id.oneBookAllLytEdit);
         seeLayout = findViewById(R.id.oneBookAllLytSee);
@@ -91,6 +69,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDateTxtVEdit = findViewById(R.id.addDateOneBookInfoTxtInputLytEdit);
         releaseDateTxtInputLytEdit = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
         descriptionTxtInputLytEdit = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
+        genresListTitleTxtVEdit = findViewById(R.id.genreOneBookTxtVEdit);
+        genresListTxtVEdit = findViewById(R.id.genresListOneBookTxtVEdit);
         readImgVEdit = findViewById(R.id.fullCandleImgVEdit);
         notReadImgVEdit = findViewById(R.id.emptyCandleImgVEdit);
         favoriteImgVEdit = findViewById(R.id.favoriteFullImgVEdit);
@@ -190,6 +170,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             }
         });
 
+        // Save modifications on a book button click listener
         saveEditBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,6 +204,21 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Genres selector click listener
+        genresListTitleTxtVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Update listBookGenresSelected from the selected genres of the book
+                updateBookInfosCreateAndEditModes();
+
+                // Update
+                updateListBookGenresSelectedFromTags();
+
+                // Display genres selector fragment
+                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment()).commit();
+            }
+        });
     }
 
     private Set<String> createAndFillSet() {
@@ -251,26 +247,18 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDate = releaseDateTxtInputLytEdit.getEditText().getText().toString(); // Set the release date
         description = descriptionTxtInputLytEdit.getEditText().getText().toString(); // Set the description
 
-        String genres = genresListOneBookTxtVEdit.getText().toString();
-        List<String> genresList = new ArrayList<String>(Arrays.asList(genres.split("\n")));
+        String genres = genresListTxtVEdit.getText().toString();
+        List<String> genresList = new ArrayList<>(Arrays.asList(genres.split("\n")));
+        tags[0] = "";
+        tags[1] = "";
+        tags[2] = "";
         if (genresList.size() >= 1) {
             tags[0] = genresList.get(0);
             if (genresList.size() >= 2) {
                 tags[1] = genresList.get(1);
                 if (genresList.size() >= 3)
                     tags[2] = genresList.get(2);
-                else
-                    tags[2] = "";
             }
-            else {
-                tags[1] = "";
-                tags[2] = "";
-            }
-        }
-        else {
-            tags[0] = "";
-            tags[1] = "";
-            tags[2] = "";
         }
     }
 
@@ -303,7 +291,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         descriptionTxtInputLytEdit.getEditText().setText(description); // Set the description
         // showcasesListTxtVSee;
 
-        genresListOneBookTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
+        genresListTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
 
         readImgVSee = findViewById(R.id.fullCandleImgVEdit);
         notReadImgVSee = findViewById(R.id.emptyCandleImgVEdit);

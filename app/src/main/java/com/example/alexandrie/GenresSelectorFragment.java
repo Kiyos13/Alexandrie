@@ -1,11 +1,8 @@
 package com.example.alexandrie;
 
-import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
-import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
-import static com.example.alexandrie.OneBookAllInfoActivity.genresListOneBookTxtVEdit;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
+import static com.example.alexandrie.OneBookAllInfoActivity.genresListTxtVEdit;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -58,13 +55,13 @@ public class GenresSelectorFragment extends Fragment {
                 getParentFragmentManager().beginTransaction().remove(GenresSelectorFragment.this).commit();
 
                 // Set the list in genresListOneBookTxtVEdit
-                genresListOneBookTxtVEdit.setText("");
+                genresListTxtVEdit.setText("");
                 for (int i = 0; i < listBookGenresSelected.size(); i++) {
                     if (listBookGenresSelected.get(i)) {
-                        if (genresListOneBookTxtVEdit.getText().length() != 0)
-                            genresListOneBookTxtVEdit.setText(genresListOneBookTxtVEdit.getText() + "\n" + listBookGenres.get(i));
+                        if (genresListTxtVEdit.getText().length() != 0)
+                            genresListTxtVEdit.setText(genresListTxtVEdit.getText() + "\n" + listBookGenres.get(i));
                         else
-                            genresListOneBookTxtVEdit.setText(listBookGenres.get(i));
+                            genresListTxtVEdit.setText(listBookGenres.get(i));
                     }
                 }
             }

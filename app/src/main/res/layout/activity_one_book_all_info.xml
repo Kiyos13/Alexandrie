@@ -283,9 +283,9 @@
                         android:id="@+id/genreOneBookTxtVEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
-                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Genre"
                         android:textColor="@color/foreground_color"
                         android:textSize="@dimen/title_font_size" />
@@ -294,52 +294,40 @@
                         android:id="@+id/genresListOneBookTxtVEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spinners_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
-                        android:layout_marginRight="@dimen/spinners_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
                         android:text=""
                         android:textColor="@color/foreground_color" />
-
-                    <!--
-                    <Spinner
-                        android:id="@+id/spinnerGenreOneBookInfoTxtInputLytEdit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
-                        android:textColor="@color/foreground_color"
-                        android:backgroundTint="@color/foreground_color"
-                        android:layout_marginLeft="@dimen/spinners_left_right_margins"
-                        android:layout_marginRight="@dimen/spinners_left_right_margins"  />
-                    -->
 
                     <TextView
                         android:id="@+id/showcasesOneBookTxtVEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
-                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Vitrines"
                         android:textColor="@color/foreground_color"
                         android:textSize="@dimen/title_font_size" />
 
-                    <Spinner
-                        android:id="@+id/spinnerShowcasesOneBookInfoTxtInputLytEdit"
+                    <TextView
+                        android:id="@+id/showcasesListOneBookTxtVEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spinners_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
-                        android:layout_marginRight="@dimen/spinners_left_right_margins"
-                        android:backgroundTint="@color/foreground_color"
+                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:text=""
                         android:textColor="@color/foreground_color" />
 
                     <TextView
                         android:id="@+id/descriptionOneBookTxtVEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
-                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Description"
                         android:textColor="@color/foreground_color"
                         android:textSize="@dimen/title_font_size" />
@@ -697,9 +685,9 @@
                         android:id="@+id/genreOneBookTxtVSee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
-                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Genre"
                         android:textColor="@color/foreground_color"
                         android:textSize="@dimen/title_font_size" />
@@ -718,9 +706,9 @@
                         android:id="@+id/showcasesOneBookTxtVSee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
-                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Vitrines"
                         android:textColor="@color/foreground_color"
                         android:textSize="@dimen/title_font_size" />
@@ -739,9 +727,9 @@
                         android:id="@+id/descriptionOneBookTxtVSee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
-                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Description"
                         android:textColor="@color/foreground_color"
                         android:textSize="@dimen/title_font_size" />

@@ -20,9 +20,11 @@ import java.util.ArrayList;
 public class GenresSelectorAdapter extends RecyclerView.Adapter<GenresSelectorAdapter.GenresSelectorViewHolder> {
 
     private Context context;
+    private int counterSelectedGenres;
 
     public GenresSelectorAdapter(Context ctx) {
         context = ctx;
+        setHasStableIds(true);
     }
 
     @NonNull
@@ -38,10 +40,20 @@ public class GenresSelectorAdapter extends RecyclerView.Adapter<GenresSelectorAd
         holder.genreTxtV.setText(listBookGenres.get(position));
         holder.genreCheckBox.setChecked(listBookGenresSelected.get(position));
 
+        int counterSelectedGenresPlusOrMinus = (holder.genreCheckBox.isChecked()) ? 1 : 0;
+        counterSelectedGenres = counterSelectedGenres + counterSelectedGenresPlusOrMinus;
+
         holder.genreCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 listBookGenresSelected.set(position, holder.genreCheckBox.isChecked());
+                int counterSelectedGenresPlusOrMinus = (holder.genreCheckBox.isChecked()) ? 1 : -1;
+                counterSelectedGenres = counterSelectedGenres + counterSelectedGenresPlusOrMinus;
+
+                if (counterSelectedGenres > 3) {
+                    holder.genreCheckBox.setChecked(false);
+                    listBookGenresSelected.set(position, false);
+                }
             }
         });
     }
