@@ -184,12 +184,21 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     bundle.putString("author", holder.authorTxt.getText().toString());
                     bundle.putString("releaseDate", holder.releaseDateTxt);
                     bundle.putString("addDate", holder.addDateTxt);
-                    bundle.putString("tag1", holder.tag1Txt.getText().toString().substring(1));
-                    bundle.putString("tag2", holder.tag2Txt.getText().toString().substring(1));
-                    bundle.putString("tag3", holder.tag3Txt.getText().toString().substring(1));
                     bundle.putBoolean("readStatus", holder.isRead);
                     bundle.putString("description", holder.descriptionTxt);
                     bundle.putBoolean("isFavorite", holder.isFavorite);
+                    String tag1 = holder.tag1Txt.getText().toString();
+                    String tag2 = holder.tag2Txt.getText().toString();
+                    String tag3 = holder.tag3Txt.getText().toString();
+                    if (tag1.length() != 0)
+                        tag1 = tag1.substring(1);
+                    if (tag2.length() != 0)
+                        tag2 = tag2.substring(1);
+                    if (tag3.length() != 0)
+                        tag3 = tag3.substring(1);
+                    bundle.putString("tag1", tag1);
+                    bundle.putString("tag2", tag2);
+                    bundle.putString("tag3", tag3);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }

@@ -42,10 +42,10 @@ import java.util.Map;
 
 public class FilterFragment extends Fragment {
 
-    private Spinner spinnerGenre, spinnerSerie, spinnerAuthor;
+    private Spinner spinnerSerie, spinnerAuthor;
     //private TextView spinnerGenreTxtV, spinnerSerieTxtV, spinnerAuthorTxtV;
-    private ArrayList<String> listBookGenres, listBookSeries, listBookAuthors;
-    private String listBookGenresLabel, listBookSeriesLabel, listBookAuthorsLabel;
+    private ArrayList<String> listBookSeries, listBookAuthors;
+    private String listBookSeriesLabel, listBookAuthorsLabel;
     private String selectedItemSpinnerGenres, selectedItemSpinnerSeries, selectedItemSpinnerAuthors;
     private CheckBox readCheckBox, notReadCheckBox;
     private Boolean readChecked, notReadChecked;
@@ -56,7 +56,6 @@ public class FilterFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        listBookGenresLabel = "Genre";
         listBookSeriesLabel = "Serie";
         listBookAuthorsLabel = "Auteur";
         super.onCreate(savedInstanceState);
@@ -66,15 +65,8 @@ public class FilterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
 
-        spinnerGenre = view.findViewById(R.id.spinnerGenre);
         spinnerSerie = view.findViewById(R.id.spinnerSerie);
         spinnerAuthor = view.findViewById(R.id.spinnerAuthor);
-
-        /*
-        spinnerGenreTxtV = view.findViewById(R.id.spinnerGenreTxtV);
-        spinnerSerieTxtV = view.findViewById(R.id.spinnerSerieTxtV);
-        spinnerAuthorTxtV = view.findViewById(R.id.spinnerAuthorTxtV);
-        */
 
         readCheckBox = view.findViewById(R.id.readCheckBox);
         notReadCheckBox = view.findViewById(R.id.notReadCheckBox);
@@ -82,21 +74,15 @@ public class FilterFragment extends Fragment {
         readCheckBox.setChecked(true);
         notReadCheckBox.setChecked(true);
 
-        listBookGenres = new ArrayList<String>();
         listBookSeries = new ArrayList<String>();
         listBookAuthors = new ArrayList<String>();
 
-        listBookGenres.add(listBookGenresLabel);
         listBookSeries.add(listBookSeriesLabel);
         listBookAuthors.add(listBookAuthorsLabel);
 
         retrieveBooksSpinnersFromSharedPreferences(sharedPrefBooks);
 
         ArrayAdapter<String> adapter;
-
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listBookGenres);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGenre.setAdapter(adapter);
 
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listBookSeries);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -106,16 +92,6 @@ public class FilterFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAuthor.setAdapter(adapter);
 
-        spinnerGenre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                executeFilter();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        });
 
         spinnerSerie.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -182,19 +158,12 @@ public class FilterFragment extends Fragment {
                 currentElement = bookDataList.get(indexInSharedPrefBooksAuthor);
                 if (!listBookAuthors.contains(currentElement) && (currentElement.length() != 0))
                     listBookAuthors.add(currentElement);
-
-                for (int i = indexInSharedPrefBooksTag1; i <= indexInSharedPrefBooksTag3; i++) {
-                    currentElement = bookDataList.get(i);
-                    if (!listBookGenres.contains(currentElement) && (currentElement.length() != 0))
-                        listBookGenres.add(currentElement);
-                }
             }
         }
     }
 
     // Update spinners current item selected
     private void retrieveSpinnersItems() {
-        selectedItemSpinnerGenres = spinnerGenre.getSelectedItem().toString();
         selectedItemSpinnerSeries = spinnerSerie.getSelectedItem().toString();
         selectedItemSpinnerAuthors = spinnerAuthor.getSelectedItem().toString();
         readChecked = readCheckBox.isChecked();
@@ -223,22 +192,17 @@ public class FilterFragment extends Fragment {
             currentGenre3 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag3).get(i);
             currentReadStatus = listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).get(i);
 
-            Boolean genreNotSelected = selectedItemSpinnerGenres.equals(listBookGenresLabel);
             Boolean serieNotSelected = selectedItemSpinnerSeries.equals(listBookSeriesLabel);
             Boolean authorNotSelected = selectedItemSpinnerAuthors.equals(listBookAuthorsLabel);
             Boolean readStatusIsOkRead = readChecked && (currentReadStatus.equals("true"));
             Boolean readStatusIsOkNotRead = notReadChecked && (!currentReadStatus.equals("true"));
             Boolean readStatusIsOk = readStatusIsOkRead || readStatusIsOkNotRead;
 
-            if (!(genreNotSelected && serieNotSelected && authorNotSelected)) {
+            if (!(serieNotSelected && authorNotSelected)) {
                 Boolean serieConditionIsOk = (currentSerie.equals(selectedItemSpinnerSeries)) || serieNotSelected;
                 Boolean authorConditionIsOk = (currentAuthor.equals(selectedItemSpinnerAuthors)) || authorNotSelected;
-                Boolean genre1ConditionIsOk = currentGenre1.equals(selectedItemSpinnerGenres);
-                Boolean genre2ConditionIsOk = currentGenre2.equals(selectedItemSpinnerGenres);
-                Boolean genre3ConditionIsOk = currentGenre3.equals(selectedItemSpinnerGenres);
-                Boolean genreConditionIsOk = genre1ConditionIsOk || genre2ConditionIsOk || genre3ConditionIsOk || genreNotSelected;
 
-                if (serieConditionIsOk && authorConditionIsOk && genreConditionIsOk && readStatusIsOk) {
+                if (serieConditionIsOk && authorConditionIsOk && readStatusIsOk) {
                     // Book check all filter conditions -> add the book to de list
                     for (int j = 0; j < nbFields; j++) {
                         newlistBooks.get(j).add(listBooksInSharedPrefs.get(j).get(i));

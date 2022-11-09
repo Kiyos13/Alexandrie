@@ -1,5 +1,8 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.GenresSelectorFragment.initListBookGenresAndListBookGenresSelected;
+import static com.example.alexandrie.GenresSelectorFragment.listBookGenres;
+import static com.example.alexandrie.GenresSelectorFragment.listBookGenresSelected;
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
@@ -37,14 +40,12 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private android.widget.Button saveBookButton, saveEditBookButton;
     private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit;
     private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee;
-    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, showcasesListTxtVSee;
+    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTxtVEdit, showcasesListTxtVSee;
     private ImageView readImgVEdit, notReadImgVEdit, readImgVSee, notReadImgVSee;
     private ImageView favoriteImgVEdit, notFavoriteImgVEdit, favoriteImgVSee, notFavoriteImgVSee;
     private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description;
     private String[] tags;
     private Boolean isRead, isFavorite;
-    private Spinner spinnerGenre;
-    private ArrayList<String> listBookGenres;
     public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
     public static int indexInSharedPrefBooksSerie = 3, indexInSharedPrefBooksAuthor = 4, indexInSharedPrefBooksTag1 = 5;
     public static int indexInSharedPrefBooksTag2 = 6, indexInSharedPrefBooksTag3 = 7, indexInSharedPrefBooksReadStatus = 8;
@@ -52,11 +53,31 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     public static int indexInSharedPrefBooksReleaseDate = 11, indexInSharedPrefBooksIsFavorite = 12;
     public static int nbFieldsInSharedPrefBooks = 12;
 
+    public static TextView genresListOneBookTxtVEdit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_book_all_info);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
+
+        genresListTxtVEdit = findViewById(R.id.genreOneBookTxtVEdit);
+        genresListTxtVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Update listBookGenresSelected from the selected genres of the book
+                updateBookInfosCreateAndEditModes();
+
+                // Update
+                updateListBookGenresSelectedFromTags();
+
+                // Display genres selector fragment
+                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment()).commit();
+            }
+        });
+        genresListOneBookTxtVEdit = findViewById(R.id.genresListOneBookTxtVEdit);
+
 
         editLayout = findViewById(R.id.oneBookAllLytEdit);
         seeLayout = findViewById(R.id.oneBookAllLytSee);
@@ -70,7 +91,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDateTxtVEdit = findViewById(R.id.addDateOneBookInfoTxtInputLytEdit);
         releaseDateTxtInputLytEdit = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
         descriptionTxtInputLytEdit = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
-        spinnerGenre = findViewById(R.id.spinnerGenreOneBookInfoTxtInputLytEdit);
         readImgVEdit = findViewById(R.id.fullCandleImgVEdit);
         notReadImgVEdit = findViewById(R.id.emptyCandleImgVEdit);
         favoriteImgVEdit = findViewById(R.id.favoriteFullImgVEdit);
@@ -89,13 +109,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
         isFavorite = false;
         isRead = false;
-
-        listBookGenres = new ArrayList<String>();
-        retrieveBooksGenresFromSharedPreferences(sharedPrefBooks);
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listBookGenres);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGenre.setAdapter(adapter);
 
         Bundle bundle = getIntent().getExtras();
         mode = bundle.getString("mode");
@@ -125,19 +138,19 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             editLayout.setVisibility(View.GONE);
             seeLayout.setVisibility(View.VISIBLE);
 
-            RetrieveBookInfosFromBundle(bundle);
+            retrieveBookInfosFromBundle(bundle);
             String[] strings = {
                     indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, tags[0], tags[1], tags[2],
             };
             Boolean[] booleans = { isRead, isFavorite };
-            fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, "verticalList", strings, booleans, listBookGenres)).commit();
-            SetBookInfosConnectionSee(bundle);
+            fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, "verticalList", strings, booleans)).commit();
+            setBookInfosConnectionSee(bundle);
         }
         else if (mode.equals("edit")) {
             saveEditBookButton.setVisibility(View.VISIBLE);
             saveBookButton.setVisibility(View.GONE);
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVEdit, new AppBarFragment(returnIntent)).commit();
-            SetBookInfosConnectionEdit(bundle);
+            setBookInfosEdit(bundle);
         }
 
         // Save a book button click listener
@@ -145,7 +158,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (previousActivity.equals("verticalList")) {
-                    UpdateBookInfosCreateAndEditModes(); // Retrieve and update book infos
+                    updateBookInfosCreateAndEditModes(); // Retrieve and update book infos
 
                     int indexBook = 0, maxIndexBooks = 0;
                     String bookData;
@@ -167,7 +180,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                     indexBook++;
                     indexInSharedPrefs = String.valueOf(indexBook);
 
-                    Set<String> set = CreateAndFillSet(); // Create Set
+                    Set<String> set = createAndFillSet(); // Create Set
                     SharedPreferences.Editor editor = sharedPrefBooks.edit();
                     editor.putStringSet(String.valueOf(indexBook), set); // Add current set to SharedPreferences
                     editor.commit();
@@ -180,9 +193,9 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         saveEditBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateBookInfosCreateAndEditModes();
+                updateBookInfosCreateAndEditModes();
 
-                Set<String> set = CreateAndFillSet(); // Create Set
+                Set<String> set = createAndFillSet(); // Create Set
                 // Edit SharedPrefs
                 SharedPreferences.Editor editor = sharedPrefBooks.edit();
                 editor.remove(indexInSharedPrefs).commit();
@@ -212,16 +225,16 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         });
     }
 
-    private Set<String> CreateAndFillSet() {
+    private Set<String> createAndFillSet() {
         Set<String> set = new HashSet<>();
         set.add("a_" + indexInSharedPrefs); // Add title
         set.add("b_" + title); // Add title
         set.add("c_" + volume); // Add volume
         set.add("d_" + serie); // Add serie
         set.add("e_" + author); // Add author
-        set.add("f_" + "t1"); // Add first tag
-        set.add("g_" + "t2"); // Add second tag
-        set.add("h_" + "t3"); // Add third tag
+        set.add("f_" + tags[0]); // Add first tag
+        set.add("g_" + tags[1]); // Add second tag
+        set.add("h_" + tags[2]); // Add third tag
         set.add("i_" + isRead.toString()); // Add isRead
         set.add("j_" + description); // Add description
         set.add("k_" + addDate); // Add releaseDate
@@ -230,16 +243,38 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         return set;
     }
 
-    private void UpdateBookInfosCreateAndEditModes() {
+    private void updateBookInfosCreateAndEditModes() {
         title = titleTxtInputLytEdit.getEditText().getText().toString(); // Set the title
         volume = volumeTxtInputLytEdit.getEditText().getText().toString(); // Set the volume
         serie = serieTxtInputLytEdit.getEditText().getText().toString(); // Set the serie
         author = authorTxtInputLytEdit.getEditText().getText().toString(); // Set the author
         releaseDate = releaseDateTxtInputLytEdit.getEditText().getText().toString(); // Set the release date
         description = descriptionTxtInputLytEdit.getEditText().getText().toString(); // Set the description
+
+        String genres = genresListOneBookTxtVEdit.getText().toString();
+        List<String> genresList = new ArrayList<String>(Arrays.asList(genres.split("\n")));
+        if (genresList.size() >= 1) {
+            tags[0] = genresList.get(0);
+            if (genresList.size() >= 2) {
+                tags[1] = genresList.get(1);
+                if (genresList.size() >= 3)
+                    tags[2] = genresList.get(2);
+                else
+                    tags[2] = "";
+            }
+            else {
+                tags[1] = "";
+                tags[2] = "";
+            }
+        }
+        else {
+            tags[0] = "";
+            tags[1] = "";
+            tags[2] = "";
+        }
     }
 
-    private void RetrieveBookInfosFromBundle(Bundle bundle) {
+    private void retrieveBookInfosFromBundle(Bundle bundle) {
         indexInSharedPrefs = bundle.getString("indexInSharedPrefs");
         title = bundle.getString("title");
         volume = bundle.getString("volume");
@@ -257,8 +292,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     }
 
     // Set book infos (edit mode)
-    private void SetBookInfosConnectionEdit(Bundle bundle) {
-        RetrieveBookInfosFromBundle(bundle);
+    private void setBookInfosEdit(Bundle bundle) {
+        retrieveBookInfosFromBundle(bundle);
 
         titleTxtInputLytEdit.getEditText().setText(title); // Set the title
         volumeTxtInputLytEdit.getEditText().setText(volume); // Set the volume
@@ -267,6 +302,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDateTxtInputLytEdit.getEditText().setText(releaseDate); // Set the release date
         descriptionTxtInputLytEdit.getEditText().setText(description); // Set the description
         // showcasesListTxtVSee;
+
+        genresListOneBookTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
 
         readImgVSee = findViewById(R.id.fullCandleImgVEdit);
         notReadImgVSee = findViewById(R.id.emptyCandleImgVEdit);
@@ -292,8 +329,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     }
 
     // Set book infos (see mode)
-    private void SetBookInfosConnectionSee(Bundle bundle) {
-        RetrieveBookInfosFromBundle(bundle);
+    private void setBookInfosConnectionSee(Bundle bundle) {
+        retrieveBookInfosFromBundle(bundle);
 
         titleTxtInputLytSee.getEditText().setText(title); // Set the title
         volumeTxtInputLytSee.getEditText().setText(volume); // Set the volume
@@ -328,33 +365,20 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         }
     }
 
-    // Retrieve books genres from SharedPreferences to fill spinnerList
-    private void retrieveBooksGenresFromSharedPreferences(SharedPreferences sharedPreferences) {
-        Map<String, ?> allEntries = sharedPreferences.getAll();
-        String bookData;
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            bookData = entry.getValue().toString();
-            bookData = bookData.substring(1);
-            bookData = bookData.substring(0, bookData.length() - 1);
-
-            List<String> bookDataList = new ArrayList<String>(Arrays.asList(bookData.split(", ")));
-            SortStringListByFirstChar(bookDataList);
-
-            int bookDataListLength = bookDataList.size();
-            String currentData;
-            for (int i = 0; i < bookDataListLength; i++) {
-                currentData = bookDataList.get(i).substring(2);
-                bookDataList.set(i, currentData);
-            }
-
-            String currentElement;
-            if (bookDataList.size() >= nbFieldsInSharedPrefBooks) {
-                for (int i = indexInSharedPrefBooksTag1; i < indexInSharedPrefBooksTag3; i++) {
-                    currentElement = bookDataList.get(i);
-                    if (!listBookGenres.contains(currentElement) && (currentElement.length() != 0))
-                        listBookGenres.add(currentElement);
-                }
-            }
+    private void updateListBookGenresSelectedFromTags() {
+        String[] genresArray = getResources().getStringArray(R.array.all_book_genres);
+        initListBookGenresAndListBookGenresSelected(genresArray);
+        String currentGenre;
+        Boolean firstTag, secondTag, thirdTag;
+        for (int i = 0; i < listBookGenres.size(); i++) {
+            currentGenre = listBookGenres.get(i);
+            firstTag = currentGenre.equals(tags[0]);
+            secondTag = currentGenre.equals(tags[1]);
+            thirdTag = currentGenre.equals(tags[2]);
+            if (firstTag || secondTag || thirdTag)
+                listBookGenresSelected.set(i, true);
+            else
+                listBookGenresSelected.set(i, false);
         }
     }
 }

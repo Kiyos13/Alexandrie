@@ -96,4 +96,10 @@
     <dimen name="account_settings_text_and_input_top_bottom_margins">30dp</dimen>
     <dimen name="account_settings_text_to_input_top_bottom_margins">10dp</dimen>
     <dimen name="account_settings_inputs_right_margin">10dp</dimen>
+
+
+    <dimen name="genres_selector_recycler_margins">20dp</dimen>
+    <dimen name="genres_selector_recycler_bottom_margin">140dp</dimen>
+    <dimen name="genres_selector_recycler_button_margin">10dp</dimen>
+    <dimen name="one_genre_in_selector_text_margin">10dp</dimen>
 </resources>

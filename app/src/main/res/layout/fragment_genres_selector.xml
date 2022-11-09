@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GenresSelectorFragment"
+    android:background="@color/transparent">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/blurryGenresSelectorFragContainerV"
+        android:name="com.example.alexandrie.BlurryBackgroundFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genresSelectorRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/genres_selector_recycler_margins"
+            android:layout_marginTop="@dimen/genres_selector_recycler_margins"
+            android:layout_marginRight="@dimen/genres_selector_recycler_margins"
+            android:layout_marginBottom="@dimen/genres_selector_recycler_bottom_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.widget.Button
+            android:id="@+id/genresSelectorOkBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/buttons_left_right_margins"
+            android:layout_marginRight="@dimen/buttons_left_right_margins"
+            android:layout_marginTop="@dimen/genres_selector_recycler_button_margin"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/first_dominant_color"
+            android:paddingTop="@dimen/buttons_top_bottom_padding"
+            android:paddingBottom="@dimen/buttons_top_bottom_padding"
+            android:text="Ok"
+            android:textAllCaps="false"
+            android:textColor="@color/background_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genresSelectorRecyclerView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

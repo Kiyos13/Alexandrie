@@ -30,7 +30,6 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
     private String previousActivity;
     private String[] bookStrings;
     private Boolean[] bookBooleans;
-    private ArrayList<String> bookGenres;
 
     public AppBarFragment() {
         // Required empty public constructor
@@ -54,7 +53,7 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
         hasEditMode = false;
     }
 
-    public AppBarFragment(Intent intent, String edit, String[] strings, Boolean[] booleans, ArrayList<String> genres) {
+    public AppBarFragment(Intent intent, String edit, String[] strings, Boolean[] booleans) {
         // Set activity to return to
         returnIntent = intent;
         hasReturnArrow = true;
@@ -63,8 +62,6 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
         previousActivity = edit;
         bookStrings = strings;
         bookBooleans = booleans;
-        bookGenres = genres;
-        System.out.println("\t title = " + strings[0]);
     }
 
     @Override
