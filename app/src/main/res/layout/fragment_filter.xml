@@ -1,118 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background_color"
     tools:context=".FilterFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/filterTitleTxtV"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/text_top_bottom_margin"
-            android:text="Filtrer par :"
-            android:textColor="@color/foreground_color"
-            android:textSize="@dimen/filter_order_title_size"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/filterTitleTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/text_top_bottom_margin"
+                android:text="Filtrer par :"
+                android:textColor="@color/foreground_color"
+                android:textSize="@dimen/filter_order_title_size"
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/spinners_left_right_margins"
-                android:layout_marginRight="@dimen/spinners_left_right_margins" >
+                android:orientation="horizontal">
 
-                <!--
-                <Spinner
-                    android:id="@+id/spinnerGenre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
-                    android:textColor="@color/foreground_color"
-                    android:backgroundTint="@color/foreground_color" />
-                -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/spinners_left_right_margins"
+                    android:layout_marginRight="@dimen/spinners_left_right_margins"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/spinnerSerie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
-                    android:textColor="@color/foreground_color"
-                    android:backgroundTint="@color/foreground_color" />
+                    <TextView
+                        android:id="@+id/genresInFilter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:drawableTint="@color/foreground_color"
+                        android:text="Genres"
+                        android:textStyle="bold"
+                        android:textColor="@color/foreground_color" />
 
-                <Spinner
-                    android:id="@+id/spinnerAuthor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
-                    android:textColor="@color/foreground_color"
-                    android:backgroundTint="@color/foreground_color" />
+                    <Spinner
+                        android:id="@+id/spinnerSerie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
+                        android:backgroundTint="@color/foreground_color"
+                        android:textColor="@color/foreground_color" />
+
+                    <Spinner
+                        android:id="@+id/spinnerAuthor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spinner_spiner_top_bottom_margins"
+                        android:backgroundTint="@color/foreground_color"
+                        android:textColor="@color/foreground_color" />
+                </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spinner_other_top_bottom_margins"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/readCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:buttonTint="@color/foreground_color"
+                        android:text="Lu"
+                        android:textColor="@color/foreground_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/notReadCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:buttonTint="@color/foreground_color"
+                        android:text="Non lu"
+                        android:textColor="@color/foreground_color" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:background="@color/foreground_color" />
+
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/genresSelectorInFilterFragContainerV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spinner_other_top_bottom_margins"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <CheckBox
-                    android:id="@+id/readCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/foreground_color"
-                    android:textColor="@color/foreground_color"
-                    android:background="@color/transparent"
-                    android:text="Lu" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <CheckBox
-                    android:id="@+id/notReadCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/foreground_color"
-                    android:textColor="@color/foreground_color"
-                    android:background="@color/transparent"
-                    android:text="Non lu" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:layout_marginLeft="@dimen/line_left_margin"
-            android:layout_marginRight="@dimen/line_right_margin"
-            android:background="@color/foreground_color" />
-
-    </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

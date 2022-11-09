@@ -216,7 +216,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 updateListBookGenresSelectedFromTags();
 
                 // Display genres selector fragment
-                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment()).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment("nonFilter")).commit();
             }
         });
     }

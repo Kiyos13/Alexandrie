@@ -15,20 +15,19 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class GenresSelectorFragment extends Fragment {
 
     private RecyclerView genresSelectorRecyclerView;
     private android.widget.Button okButton;
     public static RecyclerView.Adapter genresSelectorAdapter;
-    public static ArrayList<String> listBookGenres = new ArrayList<>();
+    public static ArrayList<String> listBookGenres = new ArrayList<>(), listBookKeptGenres = new ArrayList<>();
     public static ArrayList<Boolean> listBookGenresSelected = new ArrayList<>();
+    public static ObservableInteger hasToExecuteFilter = new ObservableInteger();
+    private String modeFilterOrNot;
 
-    public GenresSelectorFragment() {
-        // Required empty public constructor
+    public GenresSelectorFragment(String mode) {
+        modeFilterOrNot = mode;
     }
 
     @Override
@@ -54,15 +53,27 @@ public class GenresSelectorFragment extends Fragment {
                 // Remove genres selector fragment on click on Ok button
                 getParentFragmentManager().beginTransaction().remove(GenresSelectorFragment.this).commit();
 
-                // Set the list in genresListOneBookTxtVEdit
-                genresListTxtVEdit.setText("");
-                for (int i = 0; i < listBookGenresSelected.size(); i++) {
-                    if (listBookGenresSelected.get(i)) {
-                        if (genresListTxtVEdit.getText().length() != 0)
-                            genresListTxtVEdit.setText(genresListTxtVEdit.getText() + "\n" + listBookGenres.get(i));
-                        else
-                            genresListTxtVEdit.setText(listBookGenres.get(i));
+                if (modeFilterOrNot.equals("nonFilter")) {
+                    // Set the list in genresListOneBookTxtVEdit
+                    genresListTxtVEdit.setText("");
+                    for (int i = 0; i < listBookGenresSelected.size(); i++) {
+                        if (listBookGenresSelected.get(i)) {
+                            if (genresListTxtVEdit.getText().length() != 0)
+                                genresListTxtVEdit.setText(genresListTxtVEdit.getText() + "\n" + listBookGenres.get(i));
+                            else
+                                genresListTxtVEdit.setText(listBookGenres.get(i));
+                        }
                     }
+                }
+                else if (modeFilterOrNot.equals("filter")) {
+                    listBookKeptGenres = new ArrayList<>();
+                    for (int i = 0; i < listBookGenresSelected.size(); i++) {
+                        if (listBookGenresSelected.get(i)) {
+                            listBookKeptGenres.add(listBookGenres.get(i));
+                        }
+                    }
+                    // Notify the filter fragment that it has to execute the filters
+                    hasToExecuteFilter.set(1);
                 }
             }
         });
