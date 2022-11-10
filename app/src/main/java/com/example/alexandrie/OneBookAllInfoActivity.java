@@ -16,8 +16,10 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -33,6 +35,7 @@ import java.util.Set;
 
 public class OneBookAllInfoActivity extends AppCompatActivity {
 
+    private ScrollView oneBookAllInfosScrollV;
     private View editLayout, seeLayout, globalLytEdit;
     private String mode, previousActivity;
     private android.widget.Button saveBookButton, saveEditBookButton;
@@ -57,6 +60,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_book_all_info);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
+
+        oneBookAllInfosScrollV = findViewById(R.id.oneBookAllInfosScrollV);
 
         editLayout = findViewById(R.id.oneBookAllLytEdit);
         seeLayout = findViewById(R.id.oneBookAllLytSee);
@@ -218,8 +223,23 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 updateListBookGenresSelectedFromTags();
 
                 // Display genres selector fragment
-                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment(globalLytEdit, "nonFilter")).commit();
+                getSupportFragmentManager().beginTransaction().add(R.id.genresSelectorFragContainerVEdit, new GenresSelectorFragment(globalLytEdit, oneBookAllInfosScrollV, "nonFilter")).commit();
                 enableDisableView(globalLytEdit, false);
+
+                // Scroll to the top
+                oneBookAllInfosScrollV.post(new Runnable() {
+                    public void run() {
+                        oneBookAllInfosScrollV.fullScroll(oneBookAllInfosScrollV.FOCUS_UP);
+                    }
+                });
+
+                // Disable scroll
+                oneBookAllInfosScrollV.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
             }
         });
     }

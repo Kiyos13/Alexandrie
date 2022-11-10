@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ import java.util.Arrays;
 public class GenresSelectorFragment extends Fragment {
 
     private RecyclerView genresSelectorRecyclerView;
+    private ScrollView scrollViewToEnableDisable;
     private android.widget.Button okButton;
     public static RecyclerView.Adapter genresSelectorAdapter;
     public static ArrayList<String> listBookGenres = new ArrayList<>(), listBookKeptGenres = new ArrayList<>();
@@ -31,6 +34,13 @@ public class GenresSelectorFragment extends Fragment {
 
     public GenresSelectorFragment(View view, String mode) {
         viewToEnableDisable = view;
+        scrollViewToEnableDisable = null;
+        modeFilterOrNot = mode;
+    }
+
+    public GenresSelectorFragment(View view, ScrollView scrollView, String mode) {
+        viewToEnableDisable = view;
+        scrollViewToEnableDisable = scrollView;
         modeFilterOrNot = mode;
     }
 
@@ -68,6 +78,15 @@ public class GenresSelectorFragment extends Fragment {
                                 genresListTxtVEdit.setText(listBookGenres.get(i));
                         }
                     }
+
+                    // Enable scrolling
+                    if (scrollViewToEnableDisable != null)
+                        scrollViewToEnableDisable.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                return false;
+                            }
+                        });
                 }
                 else if (modeFilterOrNot.equals("filter")) {
                     listBookKeptGenres = new ArrayList<>();
