@@ -1,5 +1,7 @@
 package com.example.alexandrie;
 
+import java.util.ArrayList;
+
 public class Book
 {
     Integer image;
@@ -7,6 +9,8 @@ public class Book
     String author;
     String summary;
     Integer average_rating;
+    String isbn;
+    ArrayList<String> list_of_tags;
 
     public Book(Integer image, String title, String author, Integer average_rating)
     {
@@ -25,6 +29,16 @@ public class Book
         this.average_rating = average_rating;
     }
 
+    public Book(Integer image, String title, String author, String summary, Integer average_rating, String isbn, ArrayList<String> list_of_tags)
+    {
+        this.image = image;
+        this.title = title;
+        this.author = author;
+        this.summary = summary;
+        this.average_rating = average_rating;
+        this.isbn = isbn;
+        this.list_of_tags = list_of_tags;
+    }
 
     public String getTitle()
     {
@@ -68,6 +82,22 @@ public class Book
 
     public void setAverage_rating(Integer average_rating) {
         this.average_rating = average_rating;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public ArrayList<String> getList_of_tags() {
+        return list_of_tags;
+    }
+
+    public void setList_of_tags(ArrayList<String> list_of_tags) {
+        this.list_of_tags = list_of_tags;
     }
 }
 

@@ -80,5 +80,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) { }
+    public void onClick(View view)
+    { }
 }

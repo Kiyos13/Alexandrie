@@ -51,8 +51,8 @@
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_swipe_text.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_top_icons.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/drawable/round_button_first_dominant.xml" value="0.193" />
-        <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_comment_item_row.xml" value="0.1" />
-        <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_display_detail_book.xml" value="0.1" />
+        <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_comment_item_row.xml" value="0.25" />
+        <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_display_detail_book.xml" value="0.2" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_display_menu.xml" value="0.23550724637681159" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_list_books.xml" value="0.175" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_login_connection.xml" value="0.175" />
@@ -60,6 +60,7 @@
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_login_forgotten_password.xml" value="0.175" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_main_adapter.xml" value="0.175" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_menu_item_row.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_menu_sup_item.xml" value="0.1" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_one_book_in_list_books.xml" value="0.175" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/activity_scan_qrcode.xml" value="0.175" />
         <entry key="..\:/Users/praba/Desktop/A5 - Trimestre 1/Programmation_plateformes_mobiles/Alexandrie/app/src/main/res/layout/fragment_add.xml" value="0.175" />

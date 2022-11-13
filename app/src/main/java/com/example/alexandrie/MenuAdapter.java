@@ -16,11 +16,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
 {
     private final RecyclerViewInterface recycler_view_interface;
     ArrayList<Book> books;
-    Context context;
 
-    public MenuAdapter(Context context, ArrayList<Book> books, RecyclerViewInterface recycler_view_interface)
+    public MenuAdapter(ArrayList<Book> books, RecyclerViewInterface recycler_view_interface)
     {
-        this.context = context;
         this.books = books;
         this.recycler_view_interface = recycler_view_interface;
     }
