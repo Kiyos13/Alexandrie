@@ -1,5 +1,6 @@
 package com.example.alexandrie;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class AppBarFragment extends Fragment implements View.OnClickListener {
 
@@ -20,13 +24,18 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
     private Fragment filterFragment, orderFragment, searchFragment;
     private FragmentManager fragmentManager;
     // Booleans to display one fragment at a time (filter or order or search)
-    private Boolean filterIsDisplayed, orderIsDisplayed, searchIsDisplayed, hasFilterIcons, hasReturnArrow;
+    private Boolean filterIsDisplayed, orderIsDisplayed, searchIsDisplayed, hasFilterIcons, hasReturnArrow, hasEditMode;
     private View iconsLyt;
+    private TextView editModeTxtV;
+    private String previousActivity;
+    private String[] bookStrings;
+    private Boolean[] bookBooleans;
 
     public AppBarFragment() {
         // Required empty public constructor
         hasFilterIcons = false;
         hasReturnArrow = false;
+        hasEditMode = false;
     }
 
     public AppBarFragment(Intent intent) {
@@ -34,12 +43,25 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
         returnIntent = intent;
         hasReturnArrow = true;
         hasFilterIcons = false;
+        hasEditMode = false;
     }
 
     public AppBarFragment(Boolean hasIcons) {
         // Set activity to return to
         hasReturnArrow = false;
         hasFilterIcons = hasIcons;
+        hasEditMode = false;
+    }
+
+    public AppBarFragment(Intent intent, String edit, String[] strings, Boolean[] booleans) {
+        // Set activity to return to
+        returnIntent = intent;
+        hasReturnArrow = true;
+        hasFilterIcons = false;
+        hasEditMode = true;
+        previousActivity = edit;
+        bookStrings = strings;
+        bookBooleans = booleans;
     }
 
     @Override
@@ -55,9 +77,12 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
         filterIcon = view.findViewById(R.id.filterImgV);
         orderIcon = view.findViewById(R.id.orderImgV);
         searchIcon = view.findViewById(R.id.searchImgV);
+        editModeTxtV = view.findViewById(R.id.editModeAppBar);
+
         filterIsDisplayed = false;
         orderIsDisplayed = false;
         searchIsDisplayed = false;
+
         if (hasFilterIcons) {
             iconsLyt = view.findViewById(R.id.topBarFilterIconsLyt);
             iconsLyt.setVisibility(View.VISIBLE);
@@ -65,6 +90,9 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
         if (hasReturnArrow) {
             returnArrow = view.findViewById(R.id.returnArrowImgV);
             returnArrow.setVisibility(View.VISIBLE);
+        }
+        if (hasEditMode) {
+            editModeTxtV.setVisibility(View.VISIBLE);
         }
 
         // Return arrow click listener
@@ -163,6 +191,35 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
                     FragmentManager fragmentManager = getParentFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.searchFragContainerV, new SearchFragment()).commit();
                     searchIsDisplayed = true;
+                }
+            }
+        });
+
+        editModeTxtV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View InputFragmentView) {
+                Activity activity = getActivity();
+                if (activity instanceof OneBookAllInfoActivity) {
+                    // Replace current activity by the same but in edit mode
+                    Intent intent = new Intent(activity, OneBookAllInfoActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mode", "edit");
+                    bundle.putString("prevActivity", previousActivity);
+                    bundle.putString("indexInSharedPrefs", bookStrings[0]);
+                    bundle.putString("title", bookStrings[1]);
+                    bundle.putString("volume", bookStrings[2]);
+                    bundle.putString("serie", bookStrings[3]);
+                    bundle.putString("author", bookStrings[4]);
+                    bundle.putString("addDate", bookStrings[5]);
+                    bundle.putString("releaseDate", bookStrings[6]);
+                    bundle.putString("description", bookStrings[7]);
+                    bundle.putString("tag1", bookStrings[8]);
+                    bundle.putString("tag2", bookStrings[9]);
+                    bundle.putString("tag3", bookStrings[10]);
+                    bundle.putBoolean("readStatus", bookBooleans[0]);
+                    bundle.putBoolean("isFavorite", bookBooleans[1]);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         });

@@ -38,15 +38,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/loginCrGlobalLyt"
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:background="@color/background_color"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/background_color">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -77,7 +78,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/userNameInputLyt"
+                    android:id="@+id/identifierInputLyt"
                     android:layout_width="407dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/inputs_left_right_margins"
@@ -87,14 +88,14 @@
                     app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                     app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                     app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                    app:boxStrokeWidthFocused="0dp"
                     app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@drawable/ic_login"
-                    app:startIconTint="@color/background_color"
-                    app:hintEnabled="false" >
+                    app:startIconTint="@color/background_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -102,11 +103,11 @@
                         android:layout_marginLeft="@dimen/inputs_left_right_margins"
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
                         android:backgroundTint="@color/foreground_color"
-                        android:hint="Nom d'utilisateur"
-                        android:textColorHint="@color/background_color"
+                        android:hint="Identifiant"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/background_color"
+                        android:textColorHint="@color/background_color"
                         android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,16 +123,16 @@
                     app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                     app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                     app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                    app:boxStrokeWidthFocused="0dp"
                     app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/userNameInputLyt"
-                    app:startIconDrawable="@drawable/ic_password"
-                    app:startIconTint="@color/background_color"
+                    app:layout_constraintTop_toBottomOf="@+id/identifierInputLyt"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/background_color"
-                    app:hintEnabled="false" >
+                    app:startIconDrawable="@drawable/ic_password"
+                    app:startIconTint="@color/background_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -140,12 +141,12 @@
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
                         android:backgroundTint="@color/foreground_color"
                         android:hint="Mot de passe"
-                        android:textColorHint="@color/background_color"
+                        android:inputType="textPassword"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/background_color"
-                        android:textCursorDrawable="@null"
-                        android:inputType="textPassword"/>
+                        android:textColorHint="@color/background_color"
+                        android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -160,16 +161,16 @@
                     app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                     app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                     app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                    app:boxStrokeWidthFocused="0dp"
                     app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/passwordInputLyt"
-                    app:startIconDrawable="@drawable/ic_password"
-                    app:startIconTint="@color/background_color"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/background_color"
-                    app:hintEnabled="false" >
+                    app:startIconDrawable="@drawable/ic_password"
+                    app:startIconTint="@color/background_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -178,12 +179,12 @@
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
                         android:backgroundTint="@color/foreground_color"
                         android:hint="Répétez le mot de passe"
-                        android:textColorHint="@color/background_color"
+                        android:inputType="textPassword"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/background_color"
-                        android:textCursorDrawable="@null"
-                        android:inputType="textPassword" />
+                        android:textColorHint="@color/background_color"
+                        android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -198,14 +199,14 @@
                     app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                     app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                     app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                    app:boxStrokeWidthFocused="0dp"
                     app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/repeatPasswordInputLyt"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/background_color"
-                    app:hintEnabled="false" >
+                    app:startIconTint="@color/background_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -214,10 +215,10 @@
                         android:layout_marginRight="@dimen/inputs_left_right_margins"
                         android:backgroundTint="@color/foreground_color"
                         android:hint="Email"
-                        android:textColorHint="@color/background_color"
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/background_color"
+                        android:textColorHint="@color/background_color"
                         android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 

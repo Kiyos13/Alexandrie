@@ -1,5 +1,6 @@
 package com.example.alexandrie;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,10 +33,22 @@ public class AddFragment extends Fragment {
         addBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                // Remove MenuFragment
-                // getParentFragmentManager().beginTransaction().remove(AddFragment.this).commit();
                 // Change activity to ScanQRCodeActivity
-                startActivity(new Intent(getActivity(), ScanQRCodeActivity.class));
+                // startActivity(new Intent(getActivity(), ScanQRCodeActivity.class));
+
+                // Bypass scan activity
+                // /*
+                Intent intent = new Intent(getActivity(), OneBookAllInfoActivity.class);
+                Bundle bundle = new Bundle();
+                //bundle.putString("mode", "see");
+                //bundle.putString("mode", "edit");
+                bundle.putString("mode", "create");
+                //bundle.putString("prevActivity", "horizontalList");
+                bundle.putString("prevActivity", "verticalList");
+                intent.putExtras(bundle);
+                startActivity(intent);
+                getActivity().finish();
+                // */
             }
         });
 

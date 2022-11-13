@@ -6,7 +6,8 @@
     <color name="first_dominant_light">#FF7570</color>
     <color name="second_dominant">#DE9528</color>
     <color name="background_color">#FAE9D5</color>
-    <color name="foreground_color">#614100</color>
+    <!--<color name="foreground_color">#614100</color>-->
+    <color name="foreground_color">#554e41</color>
     <color name="first_dominant_color">#C71C52</color>
     <color name="second_dominant_color">#DE9528</color>
 

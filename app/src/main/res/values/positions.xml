@@ -51,11 +51,13 @@
     <dimen name="filter_and_order_fragments_height">200dp</dimen>
     <dimen name="icon_order_top_right_margin">15dp</dimen>
     <dimen name="filter_order_title_size">20dp</dimen>
+    <dimen name="filter_spinner_drawable_padding">16dp</dimen>
+    <dimen name="filter_spinner_padding">12dp</dimen>
     <dimen name="rbuttons_rbuttons_margin">20dp</dimen>
     <dimen name="rbuttons_top_bottom_margin">20dp</dimen>
     <dimen name="rbuttons_rbuttons_top_bottom_margin">10dp</dimen>
 
-    <dimen name="spinner_spiner_top_bottom_margins">10dp</dimen>
+    <dimen name="spinner_spiner_top_bottom_margins">20dp</dimen>
     <dimen name="spinner_other_top_bottom_margins">20dp</dimen>
     <dimen name="checkbox_checkbox_left_right_margins">20dp</dimen>
 
@@ -73,9 +75,38 @@
     <dimen name="top_fragment_return_arrow_left_margin">20dp</dimen>
     <dimen name="top_fragment_icons_right_margin">20dp</dimen>
     <dimen name="top_fragment_icons_padding">10dp</dimen>
+    <dimen name="top_fragment_edit_right_margin">20dp</dimen>
 
     <dimen name="round_buttons_width_height">56dp</dimen>
     <dimen name="round_button_add_padding">5dp</dimen>
     <dimen name="round_button_del_padding">10dp</dimen>
 
+    <dimen name="one_book_text_input_left_right_margins">10dp</dimen>
+    <dimen name="one_book_same_text_spinner_margin">10dp</dimen>
+    <dimen name="one_book_diff_text_spinner_margin">20dp</dimen>
+    <dimen name="one_book_text_input_margin">10dp</dimen>
+    <dimen name="one_book_description_height">500dp</dimen>
+    <dimen name="one_book_titles_left_right_margins">10dp</dimen>
+    <dimen name="one_book_texts_left_right_margins">20dp</dimen>
+    <dimen name="favorite_icon_size">50dp</dimen>
+    <dimen name="candle_icon_size">70dp</dimen>
+
+    <dimen name="spinners_left_right_margins">20dp</dimen>
+
+    <dimen name="account_settings_text_left_right_margins">10dp</dimen>
+    <dimen name="account_settings_text_and_input_top_bottom_margins">30dp</dimen>
+    <dimen name="account_settings_text_to_input_top_bottom_margins">10dp</dimen>
+    <dimen name="account_settings_inputs_right_margin">10dp</dimen>
+
+
+    <dimen name="genres_selector_recycler_margins">50dp</dimen>
+    <dimen name="genres_selector_recycler_intern_margins">8dp</dimen>
+    <dimen name="genres_selector_button_left_right_margins">50dp</dimen>
+    <dimen name="genres_selector_recycler_bottom_margin">70dp</dimen>
+    <dimen name="genres_selector_recycler_button_margin">10dp</dimen>
+    <dimen name="one_genre_in_selector_text_margin">10dp</dimen>
+    <dimen name="one_genre_in_selector_lyt_left_right_margins">10dp</dimen>
+    <dimen name="one_genre_in_selector_lyt_top_bottom_margins">4dp</dimen>
+    <dimen name="one_genre_in_selector_radius">8dp</dimen>
+    <dimen name="genres_selector_recycler_border">8dp</dimen>
 </resources>

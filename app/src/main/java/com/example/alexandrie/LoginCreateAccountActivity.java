@@ -3,18 +3,16 @@ package com.example.alexandrie;
 import static com.example.alexandrie.LoginConnectionActivity.SharedPrefLength;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -28,9 +26,13 @@ import java.util.Set;
 public class LoginCreateAccountActivity extends AppCompatActivity {
 
     private android.widget.Button createAccountButton;
-    private TextInputLayout userNameInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
-    private String userName, password, secondPassword, email;
+    private View loginCrGlobalLyt;
+    private TextInputLayout identifierInputLyt, passwordInputLyt, repeatPasswordInputLyt, emailInputLyt;
+    private String identifier, password, secondPassword, email;
     private String errorTitle, errorText;
+    public static int indexInSharedPrefLogsIndex = 0, indexInSharedPrefLogsIdentifier = 1;
+    public static int indexInSharedPrefLogsPassword = 2, indexInSharedPrefLogsEmail = 3;
+    public static int nbFieldsInSharedPrefLogs = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,9 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         Intent returnIntent = new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class);
         fragmentManager.beginTransaction().add(R.id.topBarLogCrFragContainerV, new AppBarFragment(returnIntent)).commit();
 
+        loginCrGlobalLyt = findViewById(R.id.loginCrGlobalLyt);
         createAccountButton = findViewById(R.id.createAcountBtn);
-        userNameInputLyt = findViewById(R.id.userNameInputLyt);
+        identifierInputLyt = findViewById(R.id.identifierInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
         repeatPasswordInputLyt = findViewById(R.id.repeatPasswordInputLyt);
         emailInputLyt = findViewById(R.id.emailInputLyt);
@@ -58,7 +61,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                 boolean infosAreValid = UserNameEmailPasswordAreValid(); // Checks infos are valid
 
                 if (infosAreValid) {
-                    if (UserNameIsFree(sharedPrefLogs, userName)) {
+                    if (UserNameIsFree(sharedPrefLogs, identifier)) {
                         // If the infos are valid and the user name is not already taken, creation of a new account in SharedPreferences
                         AddAccountToSharedPrefs(sharedPrefLogs);
                         // Return to the LoginConnectionActivity
@@ -70,7 +73,8 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                         errorTitle = "Erreur de création de compte";
                         errorText = "Malheureusement, le nom d'utilisateur que vous avez entré est déjà pris. Veuillez en enter un autre différent.";
                         FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+                        fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(loginCrGlobalLyt, errorTitle, errorText)).commit();
+                        enableDisableView(loginCrGlobalLyt, false);
                     }
                 }
             }
@@ -79,7 +83,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
 
     // Set the user information
     private void SetUserInfos() {
-        userName = userNameInputLyt.getEditText().getText().toString(); // Set user name
+        identifier = identifierInputLyt.getEditText().getText().toString(); // Set user name
         password = passwordInputLyt.getEditText().getText().toString(); // Set password
         secondPassword = repeatPasswordInputLyt.getEditText().getText().toString(); // Set password confirmation
         email = emailInputLyt.getEditText().getText().toString(); // Set email
@@ -92,7 +96,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
 
     // Checks that the user name, the email and the password are valid (not empty)
     private boolean UserNameEmailPasswordAreValid() {
-        boolean emptyUserName = (userName.length() == 0);
+        boolean emptyUserName = (identifier.length() == 0);
         boolean emptyPassword = (password.length() == 0);
         boolean emptyEmail = (email.length() == 0);
         boolean passwordsAreEquals = FirstAndSecondPasswordsAreEquals();
@@ -123,7 +127,8 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         if (!infosAreValid) {
             // Display error message if information is not valid
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+            fragmentManager.beginTransaction().add(R.id.popupCrFragContainerV, new MessagePopupFragment(loginCrGlobalLyt, errorTitle, errorText)).commit();
+            enableDisableView(loginCrGlobalLyt, false);
         }
 
         return infosAreValid;
@@ -142,7 +147,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
             currentSet = sharedPrefs.getStringSet(String.valueOf(nbAccounts), new HashSet<>());
             currentAccount = new ArrayList<String>(currentSet);
             SortStringListByFirstChar(currentAccount); // Sort the set
-            currentUserName = currentAccount.get(1); // Retrieve user name from set
+            currentUserName = currentAccount.get(indexInSharedPrefLogsIdentifier); // Retrieve user name from set
             currentUserName = currentUserName.substring(2); // Removing 2 firsts char from user name : "1_"
             // If the current user name equals the input user name then it's already taken and the user will have to choose another one
             if (currentUserName.equals(name))
@@ -162,7 +167,7 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
         // Add information to the hashSet
         // Add numbers before info to sort it later on retrieve
         hashSetAccount.add("0_" + String.valueOf(nbAccountsAlreadyExisting));
-        hashSetAccount.add("1_" + userName);
+        hashSetAccount.add("1_" + identifier);
         hashSetAccount.add("2_" + password);
         hashSetAccount.add("3_" + email);
 

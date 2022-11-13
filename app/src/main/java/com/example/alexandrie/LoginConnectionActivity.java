@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,10 +33,11 @@ public class LoginConnectionActivity extends AppCompatActivity {
 
     private android.widget.Button connectButton;
     private Button forgottenPasswordButton, createAccountButton;
-    private TextInputLayout userNameInputLyt, passwordInputLyt;
-    private String userName, password;
+    private TextInputLayout identifierInputLyt, passwordInputLyt;
+    private String identifier, password;
     public static SharedPreferences sharedPrefLogs;
     private String errorTitle, errorText;
+    private View loginCoGlobalLyt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,9 @@ public class LoginConnectionActivity extends AppCompatActivity {
         connectButton = findViewById(R.id.connectBtn);
         forgottenPasswordButton = findViewById(R.id.forgotPasswordBtn);
         createAccountButton = findViewById(R.id.createAccountBtn);
-        userNameInputLyt = findViewById(R.id.userNameInputLyt);
+        identifierInputLyt = findViewById(R.id.identifierInputLyt);
         passwordInputLyt = findViewById(R.id.passwordInputLyt);
+        loginCoGlobalLyt = findViewById(R.id.loginCoGlobalLyt);
         sharedPrefLogs = getSharedPreferences("SharedPrefLogs", MODE_PRIVATE);
         // sharedPrefLogs.edit().clear().commit(); // Clean SharedPreferences
 
@@ -77,7 +80,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
                         errorTitle = "Erreur de connexion";
                         errorText = "Aucun compte ne correspond au nom d'utilisateur que vous avez entré.";
                         FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+                        fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, errorTitle, errorText)).commit();
+                        enableDisableView(loginCoGlobalLyt, false);
                     }
                 }
             }
@@ -114,13 +118,13 @@ public class LoginConnectionActivity extends AppCompatActivity {
 
     // Set user infos
     private void SetUserInfosConnection() {
-        userName = userNameInputLyt.getEditText().getText().toString(); // Set user name
+        identifier = identifierInputLyt.getEditText().getText().toString(); // Set user name
         password = passwordInputLyt.getEditText().getText().toString(); // Set password
     }
 
     // Checks if user name and password are empty
     private boolean UserNameAndOrPasswordIsEmpty() {
-        boolean emptyUserName = (userName.length() == 0);
+        boolean emptyUserName = (identifier.length() == 0);
         boolean emptyPassword = (password.length() == 0);
         boolean hasToDisplayPopup = false;
         errorTitle = "Erreur de connexion";
@@ -141,7 +145,8 @@ public class LoginConnectionActivity extends AppCompatActivity {
         if (hasToDisplayPopup) {
             // Display error message according to the errors
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+            fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, errorTitle, errorText)).commit();
+            enableDisableView(loginCoGlobalLyt, false);
         }
 
         return hasToDisplayPopup;
@@ -179,9 +184,7 @@ public class LoginConnectionActivity extends AppCompatActivity {
     public static void SortStringListByFirstChar(List<String> list) {
         Collections.sort(list, new Comparator<String>() {
             @Override
-            public int compare(String s1, String s2) {
-                return s1.compareTo(s2);
-            }
+            public int compare(String s1, String s2) { return s1.compareTo(s2); }
         });
     }
 
@@ -196,18 +199,28 @@ public class LoginConnectionActivity extends AppCompatActivity {
             currentPassword = currentAccountInfos.get(2); // Retrieve password
             currentPassword = currentPassword.substring(2); // password without 2 firsts char : "2_"
 
-            if (currentUserName.equals(userName) && currentPassword.equals(password))
+            if (currentUserName.equals(identifier) && currentPassword.equals(password))
                 return 1;
-            else if (currentUserName.equals(userName) && !currentPassword.equals(password)) {
+            else if (currentUserName.equals(identifier) && !currentPassword.equals(password)) {
                 System.out.println("\tWrong password !");
                 // Display error message if the password is not good but the user name exists
                 errorTitle = "Erreur de connexion";
                 errorText = "Votre mot de passe ne correspond pas à votre nom d'utilisateur.";
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(errorTitle, errorText)).commit();
+                fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, errorTitle, errorText)).commit();
+                enableDisableView(loginCoGlobalLyt, false);
                 return 2;
             }
         }
         return 0;
+    }
+
+    public static void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int idx = 0; idx < group.getChildCount(); idx++)
+                enableDisableView(group.getChildAt(idx), enabled);
+        }
     }
 }

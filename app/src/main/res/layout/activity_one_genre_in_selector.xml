@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".OneGenreInSelectorActivity"
+    android:orientation="horizontal"
+    android:background="@color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/one_genre_in_selector_lyt_left_right_margins"
+        android:layout_marginRight="@dimen/one_genre_in_selector_lyt_left_right_margins"
+        android:layout_marginTop="@dimen/one_genre_in_selector_lyt_top_bottom_margins"
+        android:layout_marginBottom="@dimen/one_genre_in_selector_lyt_top_bottom_margins"
+        android:background="@drawable/background_one_genre_in_list">
+
+        <TextView
+            android:id="@+id/oneGenreInListTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/one_genre_in_selector_text_margin"
+            android:text="Genre"
+            android:textColor="@color/foreground_color"/>
+
+        <CheckBox
+            android:id="@+id/oneGenreInListCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/foreground_color"
+            android:textColor="@color/foreground_color"
+            android:background="@color/transparent" />
+
+    </LinearLayout>
+
+</LinearLayout>

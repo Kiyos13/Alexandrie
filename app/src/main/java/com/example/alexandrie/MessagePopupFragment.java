@@ -1,5 +1,7 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -15,13 +17,15 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
 
     private android.widget.Button okButton;
     private TextView titleTxtV, textTxtV;
+    private View viewToEnableDisable;
     private String titleTxt, textTxt;
 
     public MessagePopupFragment() {
         // Required empty public constructor
     }
 
-    public MessagePopupFragment(String messageTitle, String messageText) {
+    public MessagePopupFragment(View view, String messageTitle, String messageText) {
+        viewToEnableDisable = view;
         titleTxt = messageTitle; // Set the title of the message
         textTxt = messageText; // Set the description of the message
     }
@@ -47,6 +51,10 @@ public class MessagePopupFragment extends Fragment implements View.OnClickListen
             public void onClick(View InputFragmentView) {
                 // Remove MessagePopupFragment for current activity
                 getParentFragmentManager().beginTransaction().remove(MessagePopupFragment.this).commit();
+
+                // Enable view
+                if (viewToEnableDisable != null)
+                    enableDisableView(viewToEnableDisable, true);
             }
         });
 

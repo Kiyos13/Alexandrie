@@ -1,13 +1,27 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksDescription;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIsFavorite;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReleaseDate;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksSerie;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag1;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag2;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag3;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTitle;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksVolume;
+
 import androidx.annotation.NonNull;
 
-import android.app.Activity;
-import android.text.Layout;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.content.Context;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -17,19 +31,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-    private String dataTitles[], dataVolumes[], dataAuthors[], dataTags1[], dataTags2[], dataTags3[], dataReadStatus[];
     private int images[];
     private Context context;
     private ViewGroup recyclerviewVG;
@@ -39,19 +47,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     private CheckBox selectAllItemsCheckbox;
     private TextView swipeTxtTV, nbSelectedBooksTxtTV;
     private ObservableInteger nbSelectedBooks = new ObservableInteger();
+    public static ArrayList<Integer> indexListSelectedItemBooks;
 
-    public BooksAdapter(Context ctx, String strTitles[], String strVolumes[], String strAuthors[],
-                        String strTags1[], String strTags2[], String strTags3[],
-                        String strReadStatus[], int imgs[], RecyclerView recyclerView,
-                        View checkboxView, TextView swipeTextTxtView, TextView nbSelectedBooksTextTxtV) {
+    public BooksAdapter(Context ctx, int imgs[], RecyclerView recyclerView,
+        View checkboxView, TextView swipeTextTxtView, TextView nbSelectedBooksTextTxtV) {
         context = ctx;
-        dataTitles = strTitles;
-        dataVolumes = strVolumes;
-        dataAuthors = strAuthors;
-        dataTags1 = strTags1;
-        dataTags2 = strTags2;
-        dataTags3 = strTags3;
-        dataReadStatus = strReadStatus;
         images = imgs;
         recyclerViewBooks = recyclerView;
         selectAllItemsCheckboxView = checkboxView;
@@ -97,45 +97,59 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_one_book_in_list_books, parent, false);
         recyclerviewVG = parent; // ViewGroup global variable
+        indexListSelectedItemBooks = new ArrayList<Integer>();
         return new BooksViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BooksViewHolder holder, int position) {
-        holder.titleTxt.setText(dataTitles[position]);
-        holder.volumeTxt.setText("Tome " + dataVolumes[position]);
-        holder.authorTxt.setText(dataAuthors[position]);
+    public void onBindViewHolder(@NonNull BooksViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.sharedPrefIndexTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).get(position);
+        holder.titleTxt.setText(listBooksInSharedPrefs.get(indexInSharedPrefBooksTitle).get(position));
+        holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(indexInSharedPrefBooksVolume).get(position));
+        holder.serieTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksSerie).get(position);
+        holder.authorTxt.setText(listBooksInSharedPrefs.get(indexInSharedPrefBooksAuthor).get(position));
+        holder.isRead = (listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).get(position).equals("true")) ? true : false;
+        holder.descriptionTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksDescription).get(position);
+        holder.addDateTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksAddDate).get(position);
+        holder.releaseDateTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksReleaseDate).get(position);
+        holder.isFavorite = (listBooksInSharedPrefs.get(indexInSharedPrefBooksIsFavorite).get(position).equals("true")) ? true : false;
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
-        holder.coverImgV.setImageResource(images[position]);
+        holder.coverImgV.setImageResource(images[0]);
 
         // Book item layout long click listener
         holder.oneBookInListLyt.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 System.out.println("\t\tLong click !");
-                isLongClicked = true; // Boolean to check if user has long clicked on item set to true
+                if (!isLongClicked) {
+                    isLongClicked = true; // Boolean to check if user has long clicked on item set to true
 
-                // Replace AddFragment by DeleteFragment
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
+                    // Replace AddFragment by DeleteFragment
+                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
 
-                // Replace swipe text by number off selected items text
-                swipeTxtTV.setVisibility(View.GONE);
-                nbSelectedBooksTxtTV.setVisibility(View.VISIBLE);
+                    // Replace swipe text by number off selected items text
+                    swipeTxtTV.setVisibility(View.GONE);
+                    nbSelectedBooksTxtTV.setVisibility(View.VISIBLE);
 
-                // Show checkbox to select all book items
-                selectAllItemsCheckboxView.setVisibility(View.VISIBLE);
+                    // Show checkbox to select all book items
+                    selectAllItemsCheckboxView.setVisibility(View.VISIBLE);
 
-                // Display and check checkbox user long click
-                // Change background of item under long click
-                holder.selectedBookCheckbox.setVisibility(View.VISIBLE);
-                holder.selectedBookCheckbox.setChecked(true);
-                holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
-                nbSelectedBooks.set(nbSelectedBooks.get() + 1);
+                    // Display and check checkbox user long click
+                    // Change background of item under long click
+                    holder.selectedBookCheckbox.setVisibility(View.VISIBLE);
+                    holder.selectedBookCheckbox.setChecked(true);
+                    holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
+                    nbSelectedBooks.set(nbSelectedBooks.get() + 1);
 
-                displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
-                return true;
+                    // Add current index to the list of selected book items
+                    indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
+
+                    displayAllCheckBoxes(); // Display all the checkboxes of all book items in recyclerView
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -156,7 +170,38 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.oneBookInListLyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                selectAndUnselectBooksInList(holder); // Select or Unselect item book
+                if (isLongClicked)
+                    selectAndUnselectBooksInList(holder); // Select or Unselect item book
+                else {
+                    Intent intent = new Intent(context, OneBookAllInfoActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mode", "see");
+                    bundle.putString("prevActivity", "verticalList");
+                    bundle.putString("indexInSharedPrefs", holder.sharedPrefIndexTxt);
+                    bundle.putString("title", holder.titleTxt.getText().toString());
+                    bundle.putString("volume", holder.volumeTxt.getText().toString());
+                    bundle.putString("serie", holder.serieTxt);
+                    bundle.putString("author", holder.authorTxt.getText().toString());
+                    bundle.putString("releaseDate", holder.releaseDateTxt);
+                    bundle.putString("addDate", holder.addDateTxt);
+                    bundle.putBoolean("readStatus", holder.isRead);
+                    bundle.putString("description", holder.descriptionTxt);
+                    bundle.putBoolean("isFavorite", holder.isFavorite);
+                    String tag1 = holder.tag1Txt.getText().toString();
+                    String tag2 = holder.tag2Txt.getText().toString();
+                    String tag3 = holder.tag3Txt.getText().toString();
+                    if (tag1.length() != 0)
+                        tag1 = tag1.substring(1);
+                    if (tag2.length() != 0)
+                        tag2 = tag2.substring(1);
+                    if (tag3.length() != 0)
+                        tag3 = tag3.substring(1);
+                    bundle.putString("tag1", tag1);
+                    bundle.putString("tag2", tag2);
+                    bundle.putString("tag3", tag3);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
             }
         });
 
@@ -176,33 +221,38 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.tag1Txt.setText("");
         holder.tag2Txt.setText("");
         holder.tag3Txt.setText("");
-        if (dataTags1[position].length() == 0) {
-            if (dataTags2[position].length() == 0) {
-                if (dataTags3[position].length() != 0)
-                    holder.tag1Txt.setText("#" + dataTags3[position]);
+
+        ArrayList<String> tags1 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag1);
+        ArrayList<String> tags2 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag2);
+        ArrayList<String> tags3 = listBooksInSharedPrefs.get(indexInSharedPrefBooksTag3);
+
+        if (tags1.get(position).length() == 0) {
+            if (tags2.get(position).length() == 0) {
+                if (tags3.get(position).length() != 0)
+                    holder.tag1Txt.setText("#" + tags3.get(position));
             }
             else {
-                holder.tag1Txt.setText("#" + dataTags2[position]);
-                if (dataTags3[position].length() != 0)
-                    holder.tag2Txt.setText("#" + dataTags3[position]);
+                holder.tag1Txt.setText("#" + tags2.get(position));
+                if (tags3.get(position).length() != 0)
+                    holder.tag2Txt.setText("#" + tags3.get(position));
                 else
                     holder.tag2Txt.setBackgroundResource(0);
                 holder.tag3Txt.setBackgroundResource(0);
             }
         }
         else {
-            holder.tag1Txt.setText("#" + dataTags1[position]);
-            if (dataTags2[position].length() == 0) {
-                if (dataTags3[position].length() != 0)
-                    holder.tag2Txt.setText("#" + dataTags3[position]);
+            holder.tag1Txt.setText("#" + tags1.get(position));
+            if (tags2.get(position).length() == 0) {
+                if (tags3.get(position).length() != 0)
+                    holder.tag2Txt.setText("#" + tags3.get(position));
                 else
                     holder.tag2Txt.setBackgroundResource(0);
                 holder.tag3Txt.setBackgroundResource(0);
             }
             else {
-                holder.tag2Txt.setText("#" + dataTags2[position]);
-                if (dataTags3[position].length() != 0)
-                    holder.tag3Txt.setText("#" + dataTags3[position]);
+                holder.tag2Txt.setText("#" + tags2.get(position));
+                if (tags3.get(position).length() != 0)
+                    holder.tag3Txt.setText("#" + tags3.get(position));
                 else
                     holder.tag3Txt.setBackgroundResource(0);
             }
@@ -211,8 +261,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     // Update book item icon (read/unread)
     private void onBindViewHolderReadStatus(@NonNull BooksViewHolder holder, int position) {
-        Boolean readStatus = dataReadStatus[position].equals("true"); // Check if book item status is read
-        if (readStatus) { // If the book is read
+        if (holder.isRead) { // If the book is read
             holder.unreadImgV.setVisibility(View.GONE); // Remove unread icon
             holder.readImgV.setVisibility(View.VISIBLE); // Display read icon
         }
@@ -246,6 +295,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 child.findViewById(R.id.oneBookInListLyt). setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
             }
         }
+        // Add all indexes to the list of selected book items
+        indexListSelectedItemBooks = new ArrayList<Integer>();
+        BooksViewHolder holder;
+        for (int i = 0; i < this.getItemCount(); i++) {
+            holder = (BooksViewHolder) recyclerViewBooks.findViewHolderForAdapterPosition(i);
+            indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
+        }
     }
 
     // Remove checkboxes of all book items
@@ -262,6 +318,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 child.findViewById(R.id.oneBookInListLyt).setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_background_color));
             }
         }
+        // Remove all indexes of the list of selected book items
+        indexListSelectedItemBooks = new ArrayList<Integer>();
     }
 
     // Select or Unselect book item when a long click on an item hapened
@@ -272,19 +330,25 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 // Change book item background
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_background_color));
                 nbSelectedBooks.set(nbSelectedBooks.get() - 1); // Decrease the number of selected items by one
+
+                // Remove current index from the list of selected book items
+                indexListSelectedItemBooks.remove(Integer.parseInt(holder.sharedPrefIndexTxt));
             }
             else {
                 holder.selectedBookCheckbox.setChecked(true); // Check the checkbox of the current book item
                 // Change book item background
                 holder.oneBookInListLyt.setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
                 nbSelectedBooks.set(nbSelectedBooks.get() + 1); // Increase the number of selected items by one
+
+                // Add current index to the list of selected book items
+                indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
             }
         }
     }
 
     @Override
     public int getItemCount() {
-        return dataTitles.length;
+        return listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).size();
     }
 
     @Override
@@ -304,6 +368,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         ImageView coverImgV, unreadImgV, readImgV;
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
+        Boolean isRead, isFavorite;
+        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt, sharedPrefIndexTxt;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);

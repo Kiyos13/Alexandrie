@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OneBookAllInfoActivity"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    android:id="@+id/oneBookAllInfosScrollV">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/oneBookAllLytEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/oneBookInfosGlobalLytEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/topBarOneBookInfoFragContainerVEdit"
+                    android:name="com.example.alexandrie.AppBarFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/oneBookFirstLytEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topBarOneBookInfoFragContainerVEdit">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        app:srcCompat="@drawable/ajin1" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/titleOneBookInfoTxtInputLytEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/foreground_color"
+                                android:hint="Titre"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/background_color"
+                                android:textColorHint="@color/background_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/volumeOneBookInfoTxtInputLytEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/foreground_color"
+                                android:hint="Tome"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/background_color"
+                                android:textColorHint="@color/background_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/serieOneBookInfoTxtInputLytEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/foreground_color"
+                                android:hint="Série"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/background_color"
+                                android:textColorHint="@color/background_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/authorOneBookInfoTxtInputLytEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/foreground_color"
+                                android:hint="Auteur"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/background_color"
+                                android:textColorHint="@color/background_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/releaseDateOneBookInfoTxtInputLytEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginBottom="@dimen/text_input_margin"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/foreground_color"
+                                android:hint="Date de publication"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/background_color"
+                                android:textColorHint="@color/background_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/oneBookFirstLytEdit">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/addDateOneBookInfoTxtInputLytEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                                android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                                android:text="Date d'ajout"
+                                android:textColor="@color/foreground_color"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/fullCandleImgVEdit"
+                                android:layout_width="@dimen/candle_icon_size"
+                                android:layout_height="@dimen/candle_icon_size"
+                                android:src="@drawable/ic_full_candle"
+                                android:visibility="gone"
+                                app:tint="@color/first_dominant_color"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/emptyCandleImgVEdit"
+                                android:layout_width="@dimen/candle_icon_size"
+                                android:layout_height="@dimen/candle_icon_size"
+                                android:src="@drawable/ic_empty_candle"
+                                app:tint="@color/first_dominant_color"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/favoriteFullImgVEdit"
+                                android:layout_width="@dimen/favorite_icon_size"
+                                android:layout_height="@dimen/favorite_icon_size"
+                                android:src="@drawable/ic_full_heart"
+                                android:visibility="gone"
+                                app:tint="@color/first_dominant_color"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/favoriteEmptyImgVEdit"
+                                android:layout_width="@dimen/favorite_icon_size"
+                                android:layout_height="@dimen/favorite_icon_size"
+                                android:src="@drawable/ic_empty_heart"
+                                app:tint="@color/first_dominant_color"></ImageView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/genreOneBookTxtVEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:drawableRight="@drawable/ic_arrow_drop_down"
+                        android:drawableTint="@color/foreground_color"
+                        android:text="Genre"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <TextView
+                        android:id="@+id/genresListOneBookTxtVEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:text=""
+                        android:textColor="@color/foreground_color" />
+
+                    <TextView
+                        android:id="@+id/showcasesOneBookTxtVEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Vitrines"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <TextView
+                        android:id="@+id/showcasesListOneBookTxtVEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_same_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:text=""
+                        android:textColor="@color/foreground_color" />
+
+                    <TextView
+                        android:id="@+id/descriptionOneBookTxtVEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Description"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/descriptionOneBookInfoTxtInputLytEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one_book_description_height"
+                        android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_text_input_margin"
+                        android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginBottom="@dimen/one_book_text_input_margin"
+                        android:textColorHint="@color/background_color"
+                        app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false"
+                        app:startIconTint="@color/background_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/one_book_description_height"
+                            android:backgroundTint="@color/foreground_color"
+                            android:gravity="top"
+                            android:hint="Description du livre"
+                            android:paddingTop="@dimen/inputs_top_bottom_padding"
+                            android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                            android:textColor="@color/background_color"
+                            android:textColorHint="@color/background_color"
+                            android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <android.widget.Button
+                        android:id="@+id/saveOneBookBtnEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                        android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                        android:layout_marginRight="@dimen/buttons_left_right_margins"
+                        android:layout_marginBottom="@dimen/standard_buttons_top_bottom_margin"
+                        android:background="@drawable/round_corners"
+                        android:backgroundTint="@color/first_dominant_color"
+                        android:paddingTop="@dimen/buttons_top_bottom_padding"
+                        android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                        android:text="Enregistrer le livre"
+                        android:textAllCaps="false"
+                        android:textColor="@color/background_color" />
+
+                    <android.widget.Button
+                        android:id="@+id/saveEditOneBookBtnEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                        android:layout_marginTop="@dimen/standard_buttons_top_bottom_margin"
+                        android:layout_marginRight="@dimen/buttons_left_right_margins"
+                        android:layout_marginBottom="@dimen/standard_buttons_top_bottom_margin"
+                        android:background="@drawable/round_corners"
+                        android:backgroundTint="@color/first_dominant_color"
+                        android:paddingTop="@dimen/buttons_top_bottom_padding"
+                        android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                        android:text="Enregistrer les modifications"
+                        android:textAllCaps="false"
+                        android:textColor="@color/background_color"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/genresSelectorFragContainerVEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/oneBookAllLytSee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/topBarOneBookInfoFragContainerVSee"
+                    android:name="com.example.alexandrie.AppBarFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/oneBookFirstLytSee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteY="1189dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topBarOneBookInfoFragContainerVSee">
+
+                    <ImageView
+                        android:id="@+id/coverOneBookInfoImgVSee"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        app:srcCompat="@drawable/ajin1" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/titleOneBookInfoTxtInputLytSee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:enabled="false"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/background_color"
+                                android:hint="Titre"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/volumeOneBookInfoTxtInputLytSee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:enabled="false"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/background_color"
+                                android:hint="Tome"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/serieOneBookInfoTxtInputLytSee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:enabled="false"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/background_color"
+                                android:hint="Série"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/authorOneBookInfoTxtInputLytSee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:enabled="false"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/background_color"
+                                android:hint="Auteur"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/releaseDateOneBookInfoTxtInputLytSee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginBottom="@dimen/text_input_margin"
+                            android:enabled="false"
+                            android:textColorHint="@color/background_color"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/background_color"
+                                android:hint="Date de publication"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteY="378dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/oneBookFirstLytSee">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/addDateOneBookInfoTxtInputLytSee"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                                android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                                android:text="Date d'ajout"
+                                android:textColor="@color/foreground_color"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/fullCandleImgVSee"
+                                android:layout_width="@dimen/candle_icon_size"
+                                android:layout_height="@dimen/candle_icon_size"
+                                android:src="@drawable/ic_full_candle"
+                                android:visibility="gone"
+                                app:tint="@color/first_dominant_color"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/emptyCandleImgVSee"
+                                android:layout_width="@dimen/candle_icon_size"
+                                android:layout_height="@dimen/candle_icon_size"
+                                android:src="@drawable/ic_empty_candle"
+                                app:tint="@color/first_dominant_color"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/favoriteFullImgVSee"
+                                android:layout_width="@dimen/favorite_icon_size"
+                                android:layout_height="@dimen/favorite_icon_size"
+                                android:src="@drawable/ic_full_heart"
+                                android:visibility="gone"
+                                app:tint="@color/first_dominant_color"></ImageView>
+
+                            <ImageView
+                                android:id="@+id/favoriteEmptyImgVSee"
+                                android:layout_width="@dimen/favorite_icon_size"
+                                android:layout_height="@dimen/favorite_icon_size"
+                                android:src="@drawable/ic_empty_heart"
+                                app:tint="@color/first_dominant_color"></ImageView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/genreOneBookTxtVSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Genre"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <TextView
+                        android:id="@+id/genresListOneBookTxtVSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:text=""
+                        android:textColor="@color/foreground_color" />
+
+                    <TextView
+                        android:id="@+id/showcasesOneBookTxtVSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Vitrines"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <TextView
+                        android:id="@+id/showcasesListOneBookTxtVSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_texts_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
+                        android:text=""
+                        android:textColor="@color/foreground_color" />
+
+                    <TextView
+                        android:id="@+id/descriptionOneBookTxtVSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Description"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/descriptionOneBookInfoTxtInputLytSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one_book_description_height"
+                        android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_text_input_margin"
+                        android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginBottom="@dimen/one_book_text_input_margin"
+                        android:enabled="false"
+                        android:textColorHint="@color/background_color"
+                        app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false"
+                        app:startIconTint="@color/background_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/one_book_description_height"
+                            android:backgroundTint="@color/background_color"
+                            android:gravity="top"
+                            android:hint="Description du livre"
+                            android:paddingTop="@dimen/inputs_top_bottom_padding"
+                            android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                            android:textColor="@color/foreground_color"
+                            android:textColorHint="@color/foreground_color"
+                            android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>

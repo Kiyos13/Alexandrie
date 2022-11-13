@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountSettingsActivity"
+    android:orientation="vertical"
+    android:background="@color/background_color">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/topBarAccSetFragContainerV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/accountSettingsTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Paramètres de compte"
+            android:textColor="@color/first_dominant_color"
+            android:textSize="@dimen/title_font_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/account_settings_text_left_right_margins"
+        android:layout_weight="2"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/userNameLabelAccountSettingsTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/account_settings_text_to_input_top_bottom_margins"
+                android:text="Nom d'utilisateur :"
+                android:textColor="@color/foreground_color"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/userNameAccountSettingsTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/foreground_color"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userNameAccountInputLyt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                android:layout_marginRight="@dimen/inputs_left_right_margins"
+                android:textColorHint="@color/background_color"
+                app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:startIconDrawable="@drawable/ic_login"
+                app:startIconTint="@color/background_color"
+                app:hintEnabled="false"
+                android:visibility="gone" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/foreground_color"
+                    android:hint="Nom d'utilisateur"
+                    android:textColorHint="@color/background_color"
+                    android:paddingTop="@dimen/inputs_top_bottom_padding"
+                    android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                    android:textColor="@color/background_color"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/account_settings_text_and_input_top_bottom_margins"
+            android:layout_marginBottom="@dimen/account_settings_text_and_input_top_bottom_margins"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/emailLabelAccountSettingsTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/account_settings_text_to_input_top_bottom_margins"
+                android:text="Email :"
+                android:textColor="@color/foreground_color"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/emailAccountSettingsTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/foreground_color"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailAccountInputLyt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                android:layout_marginRight="@dimen/inputs_left_right_margins"
+                android:textColorHint="@color/background_color"
+                app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/background_color"
+                app:hintEnabled="false"
+                android:visibility="gone" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/foreground_color"
+                    android:hint="Email"
+                    android:textColorHint="@color/background_color"
+                    android:paddingTop="@dimen/inputs_top_bottom_padding"
+                    android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                    android:textColor="@color/background_color"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/passwordLabelAccountSettingsTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/account_settings_text_to_input_top_bottom_margins"
+                android:text="Mot de passe :"
+                android:textColor="@color/foreground_color"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/passwordAccountSettingsTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/foreground_color"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordAccountInputLyt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/inputs_left_right_margins"
+                android:layout_marginRight="@dimen/inputs_left_right_margins"
+                android:textColorHint="@color/background_color"
+                app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxStrokeWidth="0dp"
+                app:startIconDrawable="@drawable/ic_password"
+                app:startIconTint="@color/background_color"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/background_color"
+                app:hintEnabled="false"
+                android:visibility="gone" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/foreground_color"
+                    android:hint="Mot de passe"
+                    android:textColorHint="@color/background_color"
+                    android:paddingTop="@dimen/inputs_top_bottom_padding"
+                    android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                    android:textColor="@color/background_color"
+                    android:textCursorDrawable="@null"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <android.widget.Button
+            android:id="@+id/editAccountSettingsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/buttons_left_right_margins"
+            android:layout_marginRight="@dimen/buttons_left_right_margins"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/first_dominant_color"
+            android:paddingTop="@dimen/buttons_top_bottom_padding"
+            android:paddingBottom="@dimen/buttons_top_bottom_padding"
+            android:text="Modifier le compte"
+            android:textAllCaps="false"
+            android:textColor="@color/background_color" />
+
+        <android.widget.Button
+            android:id="@+id/saveAccountSettingsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/buttons_left_right_margins"
+            android:layout_marginRight="@dimen/buttons_left_right_margins"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/first_dominant_color"
+            android:paddingTop="@dimen/buttons_top_bottom_padding"
+            android:paddingBottom="@dimen/buttons_top_bottom_padding"
+            android:text="Sauvegarder le compte"
+            android:textAllCaps="false"
+            android:textColor="@color/background_color"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

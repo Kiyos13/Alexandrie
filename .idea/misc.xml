@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable-xxxhdpi/background_one_book_in_list_background_color.xml" value="0.1015" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/background_filters.xml" value="0.168" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/background_genres_selector.xml" value="0.1645" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/background_one_book_in_list.xml" value="0.1505" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/background_one_book_in_list_bg_color.xml" value="0.1625" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/background_one_book_in_list_first_dom_light_color.xml" value="0.147" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/background_one_genre_in_list.xml" value="0.1645" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/borde.xml" value="0.2585" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/button_border_dominant.xml" value="0.2585" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/button_rounded_corners.xml" value="0.2595" />
@@ -21,6 +24,7 @@
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/round_logo_menu.xml" value="0.225" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/rounded_border_tags_foreground.xml" value="0.147" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/drawable/test.xml" value="0.2595" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_account_settings.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_action_bar.xml" value="0.1" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_list_books.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -29,8 +33,10 @@
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_login_create_acount.xml" value="0.25416666666666665" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_login_forgotten_password.xml" value="0.25416666666666665" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_one_book_all_info.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_one_book_in_list_books.xml" value="0.26480836236933797" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_one_check_in_list_books.xml" value="0.24728260869565216" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_one_genre_in_selector.xml" value="0.25416666666666665" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/activity_scan_qrcode.xml" value="0.2346014492753623" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/app_bar.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_action_bar.xml" value="0.25416666666666665" />
@@ -41,6 +47,7 @@
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_confirm_popup.xml" value="0.2427536231884058" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_delete.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_filter.xml" value="0.25416666666666665" />
+        <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_genres_selector.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_menu.xml" value="0.264" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_message_connection_empty_user_name_and_password.xml" value="0.24003623188405798" />
         <entry key="..\:/0_UQAC/8INF865_Programmation_de_plateformes_mobile/Alexandrie/app/src/main/res/layout/fragment_message_popup.xml" value="0.25416666666666665" />
