@@ -168,9 +168,11 @@ public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerV
         return booksForReader;
     }
 
+
     @Override
     public void onItemClick(int position)
     {
+        /*
         Intent intent = new Intent(ActivityDisplayMenu.this, DisplayDetailBook.class);
 
         ArrayList<Book> selected_item_list = books_well_rated;
@@ -181,5 +183,8 @@ public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerV
         intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
 
         startActivity(intent);
+
+         */
     }
+
 }
