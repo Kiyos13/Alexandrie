@@ -40,9 +40,14 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                // Put a new MenuFragment in the menuFragContainerV in BottomFragment
+                // Put a new MenuFragment in the menuFragContainerV or menuDisplayMenuFragContainerV in BottomFragment
                 FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.menuFragContainerV, new MenuFragment()).commit();
+                Activity currentActivity = getActivity();
+
+                if (currentActivity instanceof ListBooksActivity)
+                    fragmentManager.beginTransaction().replace(R.id.menuFragContainerV, new MenuFragment()).commit();
+                else if (currentActivity instanceof ActivityDisplayMenu)
+                    fragmentManager.beginTransaction().replace(R.id.menuDisplayMenuFragContainerV, new MenuFragment()).commit();
             }
         });
 
@@ -50,7 +55,13 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         switchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                // Switch activity between ListBooksActivity and ... (horizontal lists)
+                // Switch activity between ListBooksActivity and ActivityDisplayMenu
+                Activity currentActivity = getActivity();
+
+                if (currentActivity instanceof ListBooksActivity)
+                    startActivity(new Intent(currentActivity, ActivityDisplayMenu.class));
+                else if (currentActivity instanceof ActivityDisplayMenu)
+                    startActivity(new Intent(currentActivity, ListBooksActivity.class));
             }
         });
 
@@ -58,8 +69,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         shwocaseIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
-                // Switch activity between ListBooksActivity and ... (main showcase)
-                startActivity(new Intent(getActivity(), ActivityDisplayMenu.class));
+
             }
         });
 
