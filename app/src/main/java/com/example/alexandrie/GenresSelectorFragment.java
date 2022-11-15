@@ -61,6 +61,16 @@ public class GenresSelectorFragment extends Fragment {
         genresSelectorRecyclerView = view.findViewById(R.id.genresSelectorRecyclerView);
         okButton = view.findViewById(R.id.genresSelectorOkBtn);
 
+        /*
+        genresSelectorRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (isMaxScrollReached(genresSelectorRecyclerView))
+                    genresSelectorRecyclerView.smoothScrollToPosition(0);
+            }
+        });
+        */
+
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +125,12 @@ public class GenresSelectorFragment extends Fragment {
         genresSelectorRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
+    }
+
+    static private boolean isMaxScrollReached(RecyclerView recyclerView) {
+        int maxScroll = recyclerView.computeVerticalScrollRange();
+        int currentScroll = recyclerView.computeVerticalScrollOffset() + recyclerView.computeVerticalScrollExtent();
+        return currentScroll >= maxScroll;
     }
 
     public static void initListBookGenresAndListBookGenresSelected(String[] genresArray) {
