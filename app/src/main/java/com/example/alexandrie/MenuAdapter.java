@@ -1,5 +1,6 @@
 package com.example.alexandrie;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,21 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
 {
     private final RecyclerViewInterface recycler_view_interface;
     ArrayList<Book> books;
+    Context context;
 
-    public MenuAdapter(ArrayList<Book> books, RecyclerViewInterface recycler_view_interface)
+    public MenuAdapter(Context context, ArrayList<Book> books, RecyclerViewInterface recycler_view_interface)
     {
+        this.context = context;
         this.books = books;
         this.recycler_view_interface = recycler_view_interface;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
     }
 
     @NonNull

@@ -13,20 +13,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_layout_2"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/topBarDisplayDetailBook"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/topBarDisplayDetailBook"
-                android:name="com.example.alexandrie.AppBarFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_3"
@@ -89,7 +81,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:gravity="center"
                 android:textStyle="italic"/>
-=
+
             <RatingBar
                 android:id="@+id/rating_bar_view"
                 android:layout_width="240dp"
@@ -115,11 +107,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/comments_of_lectors"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

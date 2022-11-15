@@ -1,4 +1,5 @@
 package com.example.alexandrie;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 public class DisplayDetailBook extends AppCompatActivity
 {
-    ArrayList<Comment> comments_book;
+    ArrayList<Comment> comments_all_book;
     RecyclerView recycler_view_comments_book;
     RatingBar rating_bar;
 
@@ -24,11 +25,14 @@ public class DisplayDetailBook extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_detail_book);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Intent returnIntent = new Intent(DisplayDetailBook.this, ActivityDisplayMenu.class);
-        fragmentManager.beginTransaction().add(R.id.topBarDisplayDetailBook, new AppBarFragment(returnIntent)).commit();
-
         recycler_view_comments_book = findViewById(R.id.comments_of_lectors);
+        // Display return arrow (with linked intent)
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Intent intent;
+        intent = new Intent(DisplayDetailBook.this, ActivityDisplayMenu.class);
+        // if (activityToReturnStr.equals("ListBooksActivity"))
+        fragmentManager.beginTransaction().add(R.id.topBarDisplayDetailBook, new AppBarFragment(intent)).commit();
+
 
         Integer image = getIntent().getIntExtra("IMAGE", 0);
         String titre = getIntent().getStringExtra("TITRE");
@@ -45,12 +49,11 @@ public class DisplayDetailBook extends AppCompatActivity
         auteur_view.setText(auteur);
         resume_view.setText(resume);
 
-
-        comments_book = new ArrayList<>();
+        comments_all_book = new ArrayList<>();
         for(int i=0; i<3; i++)
         {
             Comment comment_to_add = new Comment("Sarah", "Trop bien");
-            comments_book.add(comment_to_add);
+            comments_all_book.add(comment_to_add);
         }
 
         LinearLayoutManager layoutManager_comments_book = new LinearLayoutManager(
@@ -60,7 +63,7 @@ public class DisplayDetailBook extends AppCompatActivity
         recycler_view_comments_book.setLayoutManager(layoutManager_comments_book);
         recycler_view_comments_book.setItemAnimator(new DefaultItemAnimator());
 
-        CommentsAdapter adapter_comments_book = new CommentsAdapter(DisplayDetailBook.this, comments_book);
+        CommentsAdapter adapter_comments_book = new CommentsAdapter(DisplayDetailBook.this, comments_all_book);
         recycler_view_comments_book.setAdapter(adapter_comments_book);
 
         rating_bar = (RatingBar) findViewById(R.id.rating_bar_view);

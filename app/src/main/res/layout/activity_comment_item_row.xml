@@ -6,8 +6,8 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_marginRight="10dp"
         android:backgroundTint="@color/foreground_color"
         app:cardCornerRadius="15dp">
@@ -16,12 +16,12 @@
             android:id="@+id/text_comment_view"
             android:layout_width="match_parent"
             android:layout_height="130dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
             android:text="Comment"
             android:textColor="@color/background_color"
             android:textSize="15sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:textStyle="italic" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="140dp"
             android:layout_marginEnd="10dp"
             android:gravity="right"
             android:text="Writer of the comment"

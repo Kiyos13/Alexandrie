@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Book
 {
@@ -8,32 +9,28 @@ public class Book
     String title;
     String author;
     String summary;
+    Date date;
     Integer average_rating;
     String isbn;
-    ArrayList<String> list_of_tags;
+    String[] list_of_tags;
 
-    public Book(Integer image, String title, String author, Integer average_rating)
+    public Book(Integer image, String title, String author, Date date, String summary, Integer average_rating, String[] list_of_tags)
     {
         this.image = image;
         this.title = title;
         this.author = author;
-        this.average_rating = average_rating;
-    }
-
-    public Book(Integer image, String title, String author, String summary, Integer average_rating)
-    {
-        this.image = image;
-        this.title = title;
-        this.author = author;
+        this.date = date;
         this.summary = summary;
         this.average_rating = average_rating;
+        this.list_of_tags = list_of_tags;
     }
 
-    public Book(Integer image, String title, String author, String summary, Integer average_rating, String isbn, ArrayList<String> list_of_tags)
+    public Book(Integer image, String title, String author, Date date, String summary, Integer average_rating, String isbn, String[] list_of_tags)
     {
         this.image = image;
         this.title = title;
         this.author = author;
+        this.date = date;
         this.summary = summary;
         this.average_rating = average_rating;
         this.isbn = isbn;
@@ -92,12 +89,20 @@ public class Book
         this.isbn = isbn;
     }
 
-    public ArrayList<String> getList_of_tags() {
+    public String[] getList_of_tags() {
         return list_of_tags;
     }
 
-    public void setList_of_tags(ArrayList<String> list_of_tags) {
+    public void setList_of_tags(String[] list_of_tags) {
         this.list_of_tags = list_of_tags;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
 

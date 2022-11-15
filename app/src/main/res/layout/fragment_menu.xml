@@ -101,7 +101,7 @@
                 android:layout_marginLeft="@dimen/line_left_margin"
                 android:layout_marginRight="@dimen/line_right_margin"
                 android:backgroundTint="@color/transparent"
-                android:text="Page d'acceuil"
+                android:text="Page d'accueil"
                 android:textAllCaps="false"
                 android:textColor="@color/background_color"
                 app:layout_constraintEnd_toEndOf="parent"
