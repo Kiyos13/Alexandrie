@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
     private View semitransparentView; // View to the right of the menu
@@ -54,7 +58,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 // Change activity by AccountSettingsActivity
                 Intent intent = new Intent(getActivity(), AccountSettingsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("activity", getActivity().toString());
+                List<String> activityStringList = new ArrayList<String>(Arrays.asList(getActivity().toString().split("@")));
+                String activityWithoutEnd = activityStringList.get(0);
+                activityStringList = new ArrayList<String>(Arrays.asList(activityWithoutEnd.split("\\.")));
+                String activityToPass = activityStringList.get(3);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

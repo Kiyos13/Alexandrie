@@ -42,9 +42,14 @@ public class AccountSettingsActivity extends AppCompatActivity {
         // Display return arrow (with linked intent)
         FragmentManager fragmentManager = getSupportFragmentManager();
         Intent intent;
-        intent = new Intent(AccountSettingsActivity.this, ListBooksActivity.class);
-        // if (activityToReturnStr.equals("ListBooksActivity"))
-        fragmentManager.beginTransaction().add(R.id.topBarAccSetFragContainerV, new AppBarFragment(intent)).commit();
+        if (activityToReturnStr.equals("ListBooksActivity")) {
+            intent = new Intent(AccountSettingsActivity.this, ListBooksActivity.class);
+            fragmentManager.beginTransaction().add(R.id.topBarAccSetFragContainerV, new AppBarFragment(intent)).commit();
+        }
+        else if (activityToReturnStr.equals("ActivityDisplayMenu")) {
+            intent = new Intent(AccountSettingsActivity.this, ActivityDisplayMenu.class);
+            fragmentManager.beginTransaction().add(R.id.topBarAccSetFragContainerV, new AppBarFragment(intent)).commit();
+        }
 
         editAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
