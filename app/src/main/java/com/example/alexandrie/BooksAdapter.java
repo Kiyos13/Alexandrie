@@ -230,6 +230,9 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             if (tags2.get(position).length() == 0) {
                 if (tags3.get(position).length() != 0)
                     holder.tag1Txt.setText("#" + tags3.get(position));
+                else
+                    holder.tag1Txt.setBackgroundResource(0);
+                holder.tag2Txt.setBackgroundResource(0);
             }
             else {
                 holder.tag1Txt.setText("#" + tags2.get(position));
@@ -237,8 +240,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     holder.tag2Txt.setText("#" + tags3.get(position));
                 else
                     holder.tag2Txt.setBackgroundResource(0);
-                holder.tag3Txt.setBackgroundResource(0);
             }
+            holder.tag3Txt.setBackgroundResource(0);
         }
         else {
             holder.tag1Txt.setText("#" + tags1.get(position));
