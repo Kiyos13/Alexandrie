@@ -11,6 +11,7 @@ import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
 import static com.example.alexandrie.LoginConnectionActivity.sharedPrefLogs;
+import static com.example.alexandrie.MenuFragment.isRightHand;
 import static com.example.alexandrie.OneBookAllInfoActivity.genresListTxtVEdit;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
@@ -112,7 +113,15 @@ public class FilterFragment extends Fragment {
                 enableDisableView(globalLyt, false);
 
                 // Remove AddFragment
-                Fragment addFragment = getParentFragmentManager().findFragmentById(R.id.addDelFragContainerV);
+                Fragment addFragment;
+                if (isRightHand == null)
+                    addFragment = getParentFragmentManager().findFragmentById(R.id.addDelFragContainerVRight);
+                else {
+                    if (isRightHand)
+                        addFragment = getParentFragmentManager().findFragmentById(R.id.addDelFragContainerVRight);
+                    else
+                        addFragment = getParentFragmentManager().findFragmentById(R.id.addDelFragContainerVLeft);
+                }
                 getParentFragmentManager().beginTransaction().remove(addFragment).commit();
             }
         });

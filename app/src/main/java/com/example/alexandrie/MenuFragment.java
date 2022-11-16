@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             public void onClick(View InputFragmentView) {
                 // Remove MenuFragment from activity
                 getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
+                // Refresh the activity to apply the menu changes
+                refreshActivity();
             }
         });
 
@@ -205,5 +208,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         leftHandBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
         rightHandBtn.setTextColor(getResources().getColor(R.color.foreground_color));
         rightHandBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
+    }
+
+    private void refreshActivity() {
+        Activity currentActivity = getActivity();
+        currentActivity.finish();
+        startActivity(currentActivity.getIntent());
     }
 }

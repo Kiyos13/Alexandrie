@@ -13,6 +13,7 @@
         android:clickable="true"
         android:src="@drawable/ic_add"
         android:layout_marginEnd="@dimen/add_fragment_right_left_margin"
+        android:layout_marginStart="@dimen/add_fragment_right_left_margin"
         android:layout_marginBottom="@dimen/add_fragment_bottom_margin"
         app:tint="@color/background_color"
         app:backgroundTint="@color/first_dominant_color"

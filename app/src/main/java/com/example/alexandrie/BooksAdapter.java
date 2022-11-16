@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
+import static com.example.alexandrie.MenuFragment.isRightHand;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksDescription;
@@ -134,7 +135,14 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     // Replace top bar (AppBarFragment) to add return arrow in order to leave multi-selection mode
                     fragmentManager.beginTransaction().replace(R.id.topBarLBFragContainerV, new AppBarFragment(new Intent(context, context.getClass()))).commit();
                     // Replace AddFragment by DeleteFragment
-                    fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
+                    if (isRightHand == null)
+                        fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVRight, new DeleteFragment()).commit();
+                    else {
+                        if (isRightHand)
+                            fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVRight, new DeleteFragment()).commit();
+                        else
+                            fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVLeft, new DeleteFragment()).commit();
+                    }
 
                     // Replace swipe text by number off selected items text
                     swipeTxtTV.setVisibility(View.GONE);

@@ -2,6 +2,7 @@ package com.example.alexandrie;
 
 
 import static com.example.alexandrie.LoginConnectionActivity.enableDisableView;
+import static com.example.alexandrie.MenuFragment.isRightHand;
 import static com.example.alexandrie.OneBookAllInfoActivity.genresListTxtVEdit;
 
 import android.os.Bundle;
@@ -110,7 +111,14 @@ public class GenresSelectorFragment extends Fragment {
 
                     // Add / Display AddFragment
                     FragmentManager fragmentManager = getParentFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new AddFragment()).commit();
+                    if (isRightHand == null)
+                        fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVRight, new AddFragment()).commit();
+                    else {
+                        if (isRightHand)
+                            fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVRight, new AddFragment()).commit();
+                        else
+                            fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVLeft, new AddFragment()).commit();
+                    }
                 }
 
                 // Enable view

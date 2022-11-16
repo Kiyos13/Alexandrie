@@ -2,6 +2,7 @@ package com.example.alexandrie;
 
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.MenuFragment.isRightHand;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
 import static com.example.alexandrie.OneBookAllInfoActivity.nbFieldsInSharedPrefBooks;
@@ -104,9 +105,19 @@ public class ListBooksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_books);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
-        // Display icons (filter, order, search) fragments on the top bar
+
         FragmentManager fragmentManager = getSupportFragmentManager();
+        // Display icons (filter, order, search) fragments on the top bar
         fragmentManager.beginTransaction().add(R.id.topBarLBFragContainerV, new AppBarFragment(true)).commit();
+        // Display add fragment
+        if (isRightHand == null)
+            fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVRight, new AddFragment()).commit();
+        else {
+            if (isRightHand)
+                fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVRight, new AddFragment()).commit();
+            else
+                fragmentManager.beginTransaction().replace(R.id.addDelFragContainerVLeft, new AddFragment()).commit();
+        }
 
         recyclerViewBooks = findViewById(R.id.recyclerViewBooks);
 
