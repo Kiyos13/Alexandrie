@@ -21,6 +21,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
     private View semitransparentView; // View to the right of the menu
     private Button accountButton, logoutButton, homePageButton;
+    private com.google.android.material.button.MaterialButton lightThemeBtn, darkThemeBtn, leftHandBtn, rightHandBtn;
+    public static Boolean isLightTheme, isRightHand;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -39,6 +41,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         accountButton = view.findViewById(R.id.accountBtn);
         logoutButton = view.findViewById(R.id.logoutBtn);
         homePageButton = view.findViewById(R.id.homePageBtn);
+        lightThemeBtn = view.findViewById(R.id.lightThemeBtn);
+        darkThemeBtn = view.findViewById(R.id.darkThemeBtn);
+        leftHandBtn = view.findViewById(R.id.leftHandBtn);
+        rightHandBtn = view.findViewById(R.id.rightHandBtn);
 
         // View to the right of the menu click listener : to close the menu
         semitransparentView.setOnClickListener(new View.OnClickListener() {
@@ -89,10 +95,119 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        // Light theme click listener
+        lightThemeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isLightTheme == null)
+                    setLightTheme();
+                else {
+                    if (!isLightTheme)
+                        setLightTheme();
+                }
+            }
+        });
+
+        // Dark theme click listener
+        darkThemeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isLightTheme == null)
+                    setDarkTheme();
+                else {
+                    if (isLightTheme)
+                        setDarkTheme();
+                }
+            }
+        });
+
+        // Left hand click listener
+        leftHandBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isRightHand == null)
+                    setLeftHand();
+                else {
+                    if (isRightHand)
+                        setLeftHand();
+                }
+            }
+        });
+
+        // Right hand click listener
+        rightHandBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isRightHand == null)
+                    setRightHand();
+                else {
+                    if (!isRightHand)
+                        setRightHand();
+                }
+            }
+        });
+
         return view;
     }
 
     @Override
     public void onClick(View view)
     { }
+
+    /******** THEME ********/
+
+    private void setLightTheme() {
+        isLightTheme = true;
+
+        lightThemeBtn.setTextColor(getResources().getColor(R.color.foreground_color));
+        lightThemeBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
+        darkThemeBtn.setTextColor(getResources().getColor(R.color.background_color));
+        darkThemeBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+    }
+
+    private void setDarkTheme() {
+        isLightTheme = false;
+
+        lightThemeBtn.setTextColor(getResources().getColor(R.color.background_color));
+        lightThemeBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+        darkThemeBtn.setTextColor(getResources().getColor(R.color.foreground_color));
+        darkThemeBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
+    }
+
+    private void switchColors() {
+
+        /*
+        <color name="foreground_color">#554e41</color>
+        <color name="background_color">#FAE9D5</color>
+        <color name="first_dominant_color">#C71C52</color>
+        <color name="second_dominant_color">#DE9528</color>
+
+        <color name="color_554e41">#554e41</color>
+        <color name="color_FAE9D5">#FAE9D5</color>
+        <color name="color_C71C52">#C71C52</color>
+        <color name="color_DE9528">#DE9528</color>
+         */
+
+
+    }
+
+    /******** HAND ********/
+
+    private void setLeftHand() {
+        isRightHand = false;
+
+        leftHandBtn.setTextColor(getResources().getColor(R.color.foreground_color));
+        leftHandBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
+        rightHandBtn.setTextColor(getResources().getColor(R.color.background_color));
+        rightHandBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+    }
+
+    private void setRightHand() {
+        isRightHand = true;
+
+        leftHandBtn.setTextColor(getResources().getColor(R.color.background_color));
+        leftHandBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+        rightHandBtn.setTextColor(getResources().getColor(R.color.foreground_color));
+        rightHandBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
+    }
 }

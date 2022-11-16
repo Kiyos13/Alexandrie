@@ -113,25 +113,117 @@
                 android:drawableLeft="@drawable/ic_home"
                 android:drawableTint="@color/background_color"/>
 
-            <Button
-                android:id="@+id/showcasesBtn"
-                style="?android:attr/borderlessButtonStyle"
+            <View
+                android:id="@+id/thirdLine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginTop="@dimen/logo_top_bottom_margins"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:background="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homePageBtn" />
+
+            <TextView
+                android:id="@+id/themeTxtV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/line_left_margin"
                 android:layout_marginRight="@dimen/line_right_margin"
-                android:backgroundTint="@color/transparent"
-                android:text="Vitrines"
-                android:textAllCaps="false"
+                android:text="Thème"
                 android:textColor="@color/background_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homePageBtn"
-                android:gravity="left|center_vertical"
                 android:textSize="@dimen/menu_font_size"
                 android:layout_marginTop="@dimen/menu_text_text_margin"
-                android:drawableLeft="@drawable/ic_showcase"
-                android:drawableTint="@color/background_color"/>
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thirdLine" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/themeMaterialBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleSelection="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/themeTxtV">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/lightThemeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialButtonOutlinedStyle"
+                    app:strokeColor="@color/background_color"
+                    app:rippleColor="@color/first_dominant_color"
+                    android:text="Clair"
+                    android:textAllCaps="false"
+                    android:textColor="@color/foreground_color"
+                    android:backgroundTint="@color/background_color"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/darkThemeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialButtonOutlinedStyle"
+                    app:strokeColor="@color/background_color"
+                    app:rippleColor="@color/first_dominant_color"
+                    android:text="Sombre"
+                    android:textAllCaps="false"
+                    android:textColor="@color/background_color"
+                    android:backgroundTint="@color/foreground_color" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <TextView
+                android:id="@+id/handTxtV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:text="Main dominante"
+                android:textColor="@color/background_color"
+                android:textSize="@dimen/menu_font_size"
+                android:layout_marginTop="@dimen/menu_text_text_margin"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/themeMaterialBtn" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/handMaterialBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleSelection="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/handTxtV">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/leftHandBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialButtonOutlinedStyle"
+                    app:strokeColor="@color/background_color"
+                    app:rippleColor="@color/first_dominant_color"
+                    android:text="Gauche"
+                    android:textAllCaps="false"
+                    android:textColor="@color/background_color"
+                    android:backgroundTint="@color/foreground_color"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/rightHandBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialButtonOutlinedStyle"
+                    app:strokeColor="@color/background_color"
+                    app:rippleColor="@color/first_dominant_color"
+                    android:text="Droite"
+                    android:textAllCaps="false"
+                    android:textColor="@color/foreground_color"
+                    android:backgroundTint="@color/background_color"/>
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
