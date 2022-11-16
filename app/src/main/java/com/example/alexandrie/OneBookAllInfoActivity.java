@@ -41,11 +41,15 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private android.widget.Button saveBookButton, saveEditBookButton;
     private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit, summaryTxtInputLytEdit;
     private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee, summaryTxtInputLytSee;
-    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTitleTxtVEdit, showcasesListTxtVSee;
+    private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTitleTxtVEdit;
     public static TextView genresListTxtVEdit;
     private ImageView readImgVEdit, notReadImgVEdit, readImgVSee, notReadImgVSee;
     private ImageView favoriteImgVEdit, notFavoriteImgVEdit, favoriteImgVSee, notFavoriteImgVSee;
-    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary;
+    private ImageView emptyStar1ImgVEdit, emptyStar2ImgVEdit, emptyStar3ImgVEdit, emptyStar4ImgVEdit, emptyStar5ImgVEdit;
+    private ImageView fullStar1ImgVEdit, fullStar2ImgVEdit, fullStar3ImgVEdit, fullStar4ImgVEdit, fullStar5ImgVEdit;
+    private ImageView emptyStar1ImgVSee, emptyStar2ImgVSee, emptyStar3ImgVSee, emptyStar4ImgVSee, emptyStar5ImgVSee;
+    private ImageView fullStar1ImgVSee, fullStar2ImgVSee, fullStar3ImgVSee, fullStar4ImgVSee, fullStar5ImgVSee;
+    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0";
     private String[] tags;
     private Boolean isRead, isFavorite;
     public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
@@ -53,8 +57,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     public static int indexInSharedPrefBooksTag2 = 6, indexInSharedPrefBooksTag3 = 7, indexInSharedPrefBooksReadStatus = 8;
     public static int indexInSharedPrefBooksDescription = 9, indexInSharedPrefBooksAddDate = 10;
     public static int indexInSharedPrefBooksReleaseDate = 11, indexInSharedPrefBooksIsFavorite = 12;
-    public static int indexInSharedPrefBooksSummary = 13;
-    public static int nbFieldsInSharedPrefBooks = 13;
+    public static int indexInSharedPrefBooksSummary = 13, indexInSharedPrefBooksMark = 14;
+    public static int nbFieldsInSharedPrefBooks = 14;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         saveBookButton = findViewById(R.id.saveOneBookBtnEdit);
         saveEditBookButton = findViewById(R.id.saveEditOneBookBtnEdit);
 
+        // EDIT
         titleTxtInputLytEdit = findViewById(R.id.titleOneBookInfoTxtInputLytEdit);
         volumeTxtInputLytEdit = findViewById(R.id.volumeOneBookInfoTxtInputLytEdit);
         serieTxtInputLytEdit = findViewById(R.id.serieOneBookInfoTxtInputLytEdit);
@@ -84,7 +89,18 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         notReadImgVEdit = findViewById(R.id.emptyCandleImgVEdit);
         favoriteImgVEdit = findViewById(R.id.favoriteFullImgVEdit);
         notFavoriteImgVEdit = findViewById(R.id.favoriteEmptyImgVEdit);
+        emptyStar1ImgVEdit = findViewById(R.id.emptyStar1ImgVEdit);
+        emptyStar2ImgVEdit = findViewById(R.id.emptyStar2ImgVEdit);
+        emptyStar3ImgVEdit = findViewById(R.id.emptyStar3ImgVEdit);
+        emptyStar4ImgVEdit = findViewById(R.id.emptyStar4ImgVEdit);
+        emptyStar5ImgVEdit = findViewById(R.id.emptyStar5ImgVEdit);
+        fullStar1ImgVEdit = findViewById(R.id.fullStar1ImgVEdit);
+        fullStar2ImgVEdit = findViewById(R.id.fullStar2ImgVEdit);
+        fullStar3ImgVEdit = findViewById(R.id.fullStar3ImgVEdit);
+        fullStar4ImgVEdit = findViewById(R.id.fullStar4ImgVEdit);
+        fullStar5ImgVEdit = findViewById(R.id.fullStar5ImgVEdit);
 
+        // SEE
         titleTxtInputLytSee = findViewById(R.id.titleOneBookInfoTxtInputLytSee);
         volumeTxtInputLytSee = findViewById(R.id.volumeOneBookInfoTxtInputLytSee);
         serieTxtInputLytSee = findViewById(R.id.serieOneBookInfoTxtInputLytSee);
@@ -98,8 +114,16 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
         favoriteImgVSee = findViewById(R.id.favoriteFullImgVSee);
         notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVSee);
-
-        showcasesListTxtVSee = findViewById(R.id.showcasesListOneBookTxtVSee);
+        emptyStar1ImgVSee = findViewById(R.id.emptyStar1ImgVSee);
+        emptyStar2ImgVSee = findViewById(R.id.emptyStar2ImgVSee);
+        emptyStar3ImgVSee = findViewById(R.id.emptyStar3ImgVSee);
+        emptyStar4ImgVSee = findViewById(R.id.emptyStar4ImgVSee);
+        emptyStar5ImgVSee = findViewById(R.id.emptyStar5ImgVSee);
+        fullStar1ImgVSee = findViewById(R.id.fullStar1ImgVSee);
+        fullStar2ImgVSee = findViewById(R.id.fullStar2ImgVSee);
+        fullStar3ImgVSee = findViewById(R.id.fullStar3ImgVSee);
+        fullStar4ImgVSee = findViewById(R.id.fullStar4ImgVSee);
+        fullStar5ImgVSee = findViewById(R.id.fullStar5ImgVSee);
 
         tags = new String[3];
 
@@ -135,7 +159,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
             retrieveBookInfosFromBundle(bundle);
             String[] strings = {
-                    indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, tags[0], tags[1], tags[2],
+                    indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark, tags[0], tags[1], tags[2]
             };
             Boolean[] booleans = { isRead, isFavorite };
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, "verticalList", strings, booleans)).commit();
@@ -211,6 +235,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 bundle.putString("releaseDate", releaseDate);
                 bundle.putString("description", description);
                 bundle.putString("summary", summary);
+                bundle.putString("mark", mark);
                 bundle.putString("tag1", tags[0]);
                 bundle.putString("tag2", tags[1]);
                 bundle.putString("tag3", tags[2]);
@@ -343,6 +368,184 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Mark empty edit mode
+        emptyStar1ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setOneStarMarkEdit();
+                }
+            }
+        });
+
+        emptyStar2ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setTwoStarsMarkEdit();
+                }
+            }
+        });
+
+        emptyStar3ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    System.out.println("\t HERE 1");
+                    setThreeStarsMarkEdit();
+                }
+            }
+        });
+
+        emptyStar4ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setFourStarsMarkEdit();
+                }
+            }
+        });
+
+        emptyStar5ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setFiveStarsMarkEdit();
+                }
+            }
+        });
+
+        // Mark full edit mode
+        fullStar1ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setOneStarMarkEdit();
+                }
+            }
+        });
+
+        fullStar2ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setTwoStarsMarkEdit();
+                }
+            }
+        });
+
+        fullStar3ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setThreeStarsMarkEdit();
+                }
+            }
+        });
+
+        fullStar4ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setFourStarsMarkEdit();
+                }
+            }
+        });
+
+        fullStar5ImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    setFiveStarsMarkEdit();
+                }
+            }
+        });
+
+    }
+
+    private void setOneStarMarkEdit() {
+        emptyStar1ImgVEdit.setVisibility(View.GONE);
+        fullStar1ImgVEdit.setVisibility(View.VISIBLE);
+        mark = "1";
+        emptyStar2ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar2ImgVEdit.setVisibility(View.GONE);
+        emptyStar3ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar3ImgVEdit.setVisibility(View.GONE);
+        emptyStar4ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar4ImgVEdit.setVisibility(View.GONE);
+        emptyStar5ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar5ImgVEdit.setVisibility(View.GONE);
+    }
+
+    private void setTwoStarsMarkEdit() {
+        emptyStar1ImgVEdit.setVisibility(View.GONE);
+        fullStar1ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar2ImgVEdit.setVisibility(View.GONE);
+        fullStar2ImgVEdit.setVisibility(View.VISIBLE);
+        mark = "2";
+        emptyStar3ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar3ImgVEdit.setVisibility(View.GONE);
+        emptyStar4ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar4ImgVEdit.setVisibility(View.GONE);
+        emptyStar5ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar5ImgVEdit.setVisibility(View.GONE);
+    }
+
+    private void setThreeStarsMarkEdit() {
+        System.out.println("\t HERE 2");
+        emptyStar1ImgVEdit.setVisibility(View.GONE);
+        fullStar1ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar2ImgVEdit.setVisibility(View.GONE);
+        fullStar2ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar3ImgVEdit.setVisibility(View.GONE);
+        fullStar3ImgVEdit.setVisibility(View.VISIBLE);
+        mark = "3";
+        emptyStar4ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar4ImgVEdit.setVisibility(View.GONE);
+        emptyStar5ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar5ImgVEdit.setVisibility(View.GONE);
+    }
+
+    private void setFourStarsMarkEdit() {
+        emptyStar1ImgVEdit.setVisibility(View.GONE);
+        fullStar1ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar2ImgVEdit.setVisibility(View.GONE);
+        fullStar2ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar3ImgVEdit.setVisibility(View.GONE);
+        fullStar3ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar4ImgVEdit.setVisibility(View.GONE);
+        fullStar4ImgVEdit.setVisibility(View.VISIBLE);
+        mark = "4";
+        emptyStar5ImgVEdit.setVisibility(View.VISIBLE);
+        fullStar5ImgVEdit.setVisibility(View.GONE);
+    }
+
+    private void setFiveStarsMarkEdit() {
+        emptyStar1ImgVEdit.setVisibility(View.GONE);
+        fullStar1ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar2ImgVEdit.setVisibility(View.GONE);
+        fullStar2ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar3ImgVEdit.setVisibility(View.GONE);
+        fullStar3ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar4ImgVEdit.setVisibility(View.GONE);
+        fullStar4ImgVEdit.setVisibility(View.VISIBLE);
+        emptyStar5ImgVEdit.setVisibility(View.GONE);
+        fullStar5ImgVEdit.setVisibility(View.VISIBLE);
+        mark = "5";
+    }
+
+    private void setStarsMarkSeeFromEdit() {
+        emptyStar1ImgVSee.setVisibility(emptyStar1ImgVEdit.getVisibility());
+        fullStar1ImgVSee.setVisibility(fullStar1ImgVEdit.getVisibility());
+        emptyStar2ImgVSee.setVisibility(emptyStar2ImgVEdit.getVisibility());
+        fullStar2ImgVSee.setVisibility(fullStar2ImgVEdit.getVisibility());
+        emptyStar3ImgVSee.setVisibility(emptyStar3ImgVEdit.getVisibility());
+        fullStar3ImgVSee.setVisibility(fullStar3ImgVEdit.getVisibility());
+        emptyStar4ImgVSee.setVisibility(emptyStar4ImgVEdit.getVisibility());
+        fullStar4ImgVSee.setVisibility(fullStar4ImgVEdit.getVisibility());
+        emptyStar5ImgVSee.setVisibility(emptyStar5ImgVEdit.getVisibility());
+        fullStar5ImgVSee.setVisibility(fullStar5ImgVEdit.getVisibility());
     }
 
     private Set<String> createAndFillSet() {
@@ -361,6 +564,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         set.add("l_" + releaseDate); // Add releaseDate
         set.add("m_" + isFavorite.toString()); // Add isFavorite
         set.add("n_" + summary); // Add summary
+        set.add("o_" + mark); // Add mark
         return set;
     }
 
@@ -398,12 +602,24 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDate = bundle.getString("releaseDate");
         description = bundle.getString("description");
         summary = bundle.getString("summary");
+        mark = bundle.getString("mark");
         tags[0] = bundle.getString("tag1");
         tags[1] = bundle.getString("tag2");
         tags[2] = bundle.getString("tag3");
         isRead = (bundle.getBoolean("readStatus"));
         isFavorite = (bundle.getBoolean("isFavorite"));
-        // vitrines
+
+        if (mark.equals("1"))
+            setOneStarMarkEdit();
+        else if (mark.equals("2"))
+            setTwoStarsMarkEdit();
+        else if (mark.equals("3"))
+            setThreeStarsMarkEdit();
+        else if (mark.equals("4"))
+            setFourStarsMarkEdit();
+        else if (mark.equals("5"))
+            setFiveStarsMarkEdit();
+        setStarsMarkSeeFromEdit();
     }
 
     // Set book infos (edit mode)
@@ -417,7 +633,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDateTxtInputLytEdit.getEditText().setText(releaseDate); // Set the release date
         descriptionTxtInputLytEdit.getEditText().setText(description); // Set the description
         summaryTxtInputLytEdit.getEditText().setText(summary); // Set the summary
-        // showcasesListTxtVSee;
 
         genresListTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
 
@@ -457,7 +672,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         descriptionTxtInputLytSee.getEditText().setText(description); // Set the description
         summaryTxtInputLytSee.getEditText().setText(summary); // Set the summary
         genresListTxtVSee.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]); // Set the tags
-        // showcasesListTxtVSee;
 
         readImgVSee = findViewById(R.id.fullCandleImgVSee);
         notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);

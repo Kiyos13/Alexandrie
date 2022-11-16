@@ -6,6 +6,7 @@ import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBoo
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksDescription;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIndex;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIsFavorite;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksMark;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReleaseDate;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksSerie;
@@ -115,6 +116,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.releaseDateTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksReleaseDate).get(position);
         holder.isFavorite = (listBooksInSharedPrefs.get(indexInSharedPrefBooksIsFavorite).get(position).equals("true")) ? true : false;
         holder.summaryTxt = (listBooksInSharedPrefs.get(indexInSharedPrefBooksSummary).get(position));
+        holder.markTxt = (listBooksInSharedPrefs.get(indexInSharedPrefBooksMark).get(position));
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
         holder.coverImgV.setImageResource(images[0]);
@@ -189,6 +191,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     bundle.putBoolean("readStatus", holder.isRead);
                     bundle.putString("description", holder.descriptionTxt);
                     bundle.putString("summary", holder.summaryTxt);
+                    bundle.putString("mark", holder.markTxt);
                     bundle.putBoolean("isFavorite", holder.isFavorite);
                     String tag1 = holder.tag1Txt.getText().toString();
                     String tag2 = holder.tag2Txt.getText().toString();
@@ -375,7 +378,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
         Boolean isRead, isFavorite;
-        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt, sharedPrefIndexTxt, summaryTxt;
+        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt, sharedPrefIndexTxt, summaryTxt, markTxt;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
