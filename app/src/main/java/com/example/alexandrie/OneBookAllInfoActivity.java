@@ -91,7 +91,13 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDateTxtInputLytSee = findViewById(R.id.releaseDateOneBookInfoTxtInputLytSee);
         descriptionTxtInputLytSee = findViewById(R.id.descriptionOneBookInfoTxtInputLytSee);
         genresListTxtVSee = findViewById(R.id.genresListOneBookTxtVSee);
+        readImgVSee = findViewById(R.id.fullCandleImgVSee);
+        notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
+        favoriteImgVSee = findViewById(R.id.favoriteFullImgVSee);
+        notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVSee);
+
         showcasesListTxtVSee = findViewById(R.id.showcasesListOneBookTxtVSee);
+
         tags = new String[3];
 
         isFavorite = false;
@@ -108,7 +114,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             returnIntent = new Intent(OneBookAllInfoActivity.this, ScanQRCodeActivity.class);
         else
             returnIntent = new Intent(OneBookAllInfoActivity.this, ListBooksActivity.class);
-        // if (previousActivity.equals("verticalList"))
 
         if (mode.equals("create")) {
             editLayout.setVisibility(View.VISIBLE);
@@ -240,6 +245,98 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+            }
+        });
+
+        // Read status icon click listener (see)
+        readImgVSee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    readImgVSee.setVisibility(View.GONE);
+                    notReadImgVSee.setVisibility(View.VISIBLE);
+                    isRead = false;
+                }
+            }
+        });
+
+        notReadImgVSee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    readImgVSee.setVisibility(View.VISIBLE);
+                    notReadImgVSee.setVisibility(View.GONE);
+                    isRead = true;
+                }
+            }
+        });
+
+        // Read status icon click listener (edit)
+        readImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    readImgVEdit.setVisibility(View.GONE);
+                    notReadImgVEdit.setVisibility(View.VISIBLE);
+                    isRead = false;
+                }
+            }
+        });
+
+        notReadImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    readImgVEdit.setVisibility(View.VISIBLE);
+                    notReadImgVEdit.setVisibility(View.GONE);
+                    isRead = true;
+                }
+            }
+        });
+
+        // Favorite status icon click listener (see)
+        favoriteImgVSee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    favoriteImgVSee.setVisibility(View.GONE);
+                    notFavoriteImgVSee.setVisibility(View.VISIBLE);
+                    isFavorite = false;
+                }
+            }
+        });
+
+        notFavoriteImgVSee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    favoriteImgVSee.setVisibility(View.VISIBLE);
+                    notFavoriteImgVSee.setVisibility(View.GONE);
+                    isFavorite = true;
+                }
+            }
+        });
+
+        // Favorite status icon click listener (edit)
+        favoriteImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    favoriteImgVEdit.setVisibility(View.GONE);
+                    notFavoriteImgVEdit.setVisibility(View.VISIBLE);
+                    isFavorite = false;
+                }
+            }
+        });
+
+        notFavoriteImgVEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mode.equals("see")) {
+                    favoriteImgVEdit.setVisibility(View.VISIBLE);
+                    notFavoriteImgVEdit.setVisibility(View.GONE);
+                    isFavorite = true;
+                }
             }
         });
     }
