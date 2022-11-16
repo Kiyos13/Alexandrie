@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 
@@ -163,6 +164,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         lightThemeBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
         darkThemeBtn.setTextColor(getResources().getColor(R.color.background_color));
         darkThemeBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
+
+        switchToLightColors();
     }
 
     private void setDarkTheme() {
@@ -172,23 +175,16 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         lightThemeBtn.setBackgroundColor(getResources().getColor(R.color.foreground_color));
         darkThemeBtn.setTextColor(getResources().getColor(R.color.foreground_color));
         darkThemeBtn.setBackgroundColor(getResources().getColor(R.color.background_color));
+
+        switchToDarkColors();
     }
 
-    private void switchColors() {
+    private void switchToLightColors() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
 
-        /*
-        <color name="foreground_color">#554e41</color>
-        <color name="background_color">#FAE9D5</color>
-        <color name="first_dominant_color">#C71C52</color>
-        <color name="second_dominant_color">#DE9528</color>
-
-        <color name="color_554e41">#554e41</color>
-        <color name="color_FAE9D5">#FAE9D5</color>
-        <color name="color_C71C52">#C71C52</color>
-        <color name="color_DE9528">#DE9528</color>
-         */
-
-
+    private void switchToDarkColors() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     /******** HAND ********/
