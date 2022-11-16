@@ -66,69 +66,9 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_one_book_all_info);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
-        oneBookAllInfosScrollV = findViewById(R.id.oneBookAllInfosScrollV);
-
-        editLayout = findViewById(R.id.oneBookAllLytEdit);
-        seeLayout = findViewById(R.id.oneBookAllLytSee);
-        globalLytEdit = findViewById(R.id.oneBookInfosGlobalLytEdit);
-        saveBookButton = findViewById(R.id.saveOneBookBtnEdit);
-        saveEditBookButton = findViewById(R.id.saveEditOneBookBtnEdit);
-
-        // EDIT
-        titleTxtInputLytEdit = findViewById(R.id.titleOneBookInfoTxtInputLytEdit);
-        volumeTxtInputLytEdit = findViewById(R.id.volumeOneBookInfoTxtInputLytEdit);
-        serieTxtInputLytEdit = findViewById(R.id.serieOneBookInfoTxtInputLytEdit);
-        authorTxtInputLytEdit = findViewById(R.id.authorOneBookInfoTxtInputLytEdit);
-        addDateTxtVEdit = findViewById(R.id.addDateOneBookInfoTxtInputLytEdit);
-        releaseDateTxtInputLytEdit = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
-        descriptionTxtInputLytEdit = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
-        summaryTxtInputLytEdit = findViewById(R.id.summaryOneBookInfoTxtInputLytEdit);
-        genresListTitleTxtVEdit = findViewById(R.id.genreOneBookTxtVEdit);
-        genresListTxtVEdit = findViewById(R.id.genresListOneBookTxtVEdit);
-        readImgVEdit = findViewById(R.id.fullCandleImgVEdit);
-        notReadImgVEdit = findViewById(R.id.emptyCandleImgVEdit);
-        favoriteImgVEdit = findViewById(R.id.favoriteFullImgVEdit);
-        notFavoriteImgVEdit = findViewById(R.id.favoriteEmptyImgVEdit);
-        emptyStar1ImgVEdit = findViewById(R.id.emptyStar1ImgVEdit);
-        emptyStar2ImgVEdit = findViewById(R.id.emptyStar2ImgVEdit);
-        emptyStar3ImgVEdit = findViewById(R.id.emptyStar3ImgVEdit);
-        emptyStar4ImgVEdit = findViewById(R.id.emptyStar4ImgVEdit);
-        emptyStar5ImgVEdit = findViewById(R.id.emptyStar5ImgVEdit);
-        fullStar1ImgVEdit = findViewById(R.id.fullStar1ImgVEdit);
-        fullStar2ImgVEdit = findViewById(R.id.fullStar2ImgVEdit);
-        fullStar3ImgVEdit = findViewById(R.id.fullStar3ImgVEdit);
-        fullStar4ImgVEdit = findViewById(R.id.fullStar4ImgVEdit);
-        fullStar5ImgVEdit = findViewById(R.id.fullStar5ImgVEdit);
-
-        // SEE
-        titleTxtInputLytSee = findViewById(R.id.titleOneBookInfoTxtInputLytSee);
-        volumeTxtInputLytSee = findViewById(R.id.volumeOneBookInfoTxtInputLytSee);
-        serieTxtInputLytSee = findViewById(R.id.serieOneBookInfoTxtInputLytSee);
-        authorTxtInputLytSee = findViewById(R.id.authorOneBookInfoTxtInputLytSee);
-        addDateTxtVSee = findViewById(R.id.addDateOneBookInfoTxtInputLytSee);
-        releaseDateTxtInputLytSee = findViewById(R.id.releaseDateOneBookInfoTxtInputLytSee);
-        descriptionTxtInputLytSee = findViewById(R.id.descriptionOneBookInfoTxtInputLytSee);
-        summaryTxtInputLytSee = findViewById(R.id.summaryOneBookInfoTxtInputLytSee);
-        genresListTxtVSee = findViewById(R.id.genresListOneBookTxtVSee);
-        readImgVSee = findViewById(R.id.fullCandleImgVSee);
-        notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
-        favoriteImgVSee = findViewById(R.id.favoriteFullImgVSee);
-        notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVSee);
-        emptyStar1ImgVSee = findViewById(R.id.emptyStar1ImgVSee);
-        emptyStar2ImgVSee = findViewById(R.id.emptyStar2ImgVSee);
-        emptyStar3ImgVSee = findViewById(R.id.emptyStar3ImgVSee);
-        emptyStar4ImgVSee = findViewById(R.id.emptyStar4ImgVSee);
-        emptyStar5ImgVSee = findViewById(R.id.emptyStar5ImgVSee);
-        fullStar1ImgVSee = findViewById(R.id.fullStar1ImgVSee);
-        fullStar2ImgVSee = findViewById(R.id.fullStar2ImgVSee);
-        fullStar3ImgVSee = findViewById(R.id.fullStar3ImgVSee);
-        fullStar4ImgVSee = findViewById(R.id.fullStar4ImgVSee);
-        fullStar5ImgVSee = findViewById(R.id.fullStar5ImgVSee);
-
-        tags = new String[3];
-
-        isFavorite = false;
-        isRead = false;
+        initGlobalLyts();
+        initEditElements();
+        initSeeElements();
 
         Bundle bundle = getIntent().getExtras();
         mode = bundle.getString("mode");
@@ -392,7 +332,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!mode.equals("see")) {
-                    System.out.println("\t HERE 1");
                     setThreeStarsMarkEdit();
                 }
             }
@@ -464,6 +403,71 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
     }
 
+    private void initGlobalLyts() {
+        oneBookAllInfosScrollV = findViewById(R.id.oneBookAllInfosScrollV);
+        editLayout = findViewById(R.id.oneBookAllLytEdit);
+        seeLayout = findViewById(R.id.oneBookAllLytSee);
+        globalLytEdit = findViewById(R.id.oneBookInfosGlobalLytEdit);
+        saveBookButton = findViewById(R.id.saveOneBookBtnEdit);
+        saveEditBookButton = findViewById(R.id.saveEditOneBookBtnEdit);
+        tags = new String[3];
+        isFavorite = false;
+        isRead = false;
+    }
+
+    private void initEditElements() {
+        titleTxtInputLytEdit = findViewById(R.id.titleOneBookInfoTxtInputLytEdit);
+        volumeTxtInputLytEdit = findViewById(R.id.volumeOneBookInfoTxtInputLytEdit);
+        serieTxtInputLytEdit = findViewById(R.id.serieOneBookInfoTxtInputLytEdit);
+        authorTxtInputLytEdit = findViewById(R.id.authorOneBookInfoTxtInputLytEdit);
+        addDateTxtVEdit = findViewById(R.id.addDateOneBookInfoTxtInputLytEdit);
+        releaseDateTxtInputLytEdit = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
+        descriptionTxtInputLytEdit = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
+        summaryTxtInputLytEdit = findViewById(R.id.summaryOneBookInfoTxtInputLytEdit);
+        genresListTitleTxtVEdit = findViewById(R.id.genreOneBookTxtVEdit);
+        genresListTxtVEdit = findViewById(R.id.genresListOneBookTxtVEdit);
+        readImgVEdit = findViewById(R.id.fullCandleImgVEdit);
+        notReadImgVEdit = findViewById(R.id.emptyCandleImgVEdit);
+        favoriteImgVEdit = findViewById(R.id.favoriteFullImgVEdit);
+        notFavoriteImgVEdit = findViewById(R.id.favoriteEmptyImgVEdit);
+        emptyStar1ImgVEdit = findViewById(R.id.emptyStar1ImgVEdit);
+        emptyStar2ImgVEdit = findViewById(R.id.emptyStar2ImgVEdit);
+        emptyStar3ImgVEdit = findViewById(R.id.emptyStar3ImgVEdit);
+        emptyStar4ImgVEdit = findViewById(R.id.emptyStar4ImgVEdit);
+        emptyStar5ImgVEdit = findViewById(R.id.emptyStar5ImgVEdit);
+        fullStar1ImgVEdit = findViewById(R.id.fullStar1ImgVEdit);
+        fullStar2ImgVEdit = findViewById(R.id.fullStar2ImgVEdit);
+        fullStar3ImgVEdit = findViewById(R.id.fullStar3ImgVEdit);
+        fullStar4ImgVEdit = findViewById(R.id.fullStar4ImgVEdit);
+        fullStar5ImgVEdit = findViewById(R.id.fullStar5ImgVEdit);
+    }
+
+    private void initSeeElements() {
+        titleTxtInputLytSee = findViewById(R.id.titleOneBookInfoTxtInputLytSee);
+        volumeTxtInputLytSee = findViewById(R.id.volumeOneBookInfoTxtInputLytSee);
+        serieTxtInputLytSee = findViewById(R.id.serieOneBookInfoTxtInputLytSee);
+        authorTxtInputLytSee = findViewById(R.id.authorOneBookInfoTxtInputLytSee);
+        addDateTxtVSee = findViewById(R.id.addDateOneBookInfoTxtInputLytSee);
+        releaseDateTxtInputLytSee = findViewById(R.id.releaseDateOneBookInfoTxtInputLytSee);
+        descriptionTxtInputLytSee = findViewById(R.id.descriptionOneBookInfoTxtInputLytSee);
+        summaryTxtInputLytSee = findViewById(R.id.summaryOneBookInfoTxtInputLytSee);
+        genresListTxtVSee = findViewById(R.id.genresListOneBookTxtVSee);
+        readImgVSee = findViewById(R.id.fullCandleImgVSee);
+        notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
+        favoriteImgVSee = findViewById(R.id.favoriteFullImgVSee);
+        notFavoriteImgVSee = findViewById(R.id.favoriteEmptyImgVSee);
+        emptyStar1ImgVSee = findViewById(R.id.emptyStar1ImgVSee);
+        emptyStar2ImgVSee = findViewById(R.id.emptyStar2ImgVSee);
+        emptyStar3ImgVSee = findViewById(R.id.emptyStar3ImgVSee);
+        emptyStar4ImgVSee = findViewById(R.id.emptyStar4ImgVSee);
+        emptyStar5ImgVSee = findViewById(R.id.emptyStar5ImgVSee);
+        fullStar1ImgVSee = findViewById(R.id.fullStar1ImgVSee);
+        fullStar2ImgVSee = findViewById(R.id.fullStar2ImgVSee);
+        fullStar3ImgVSee = findViewById(R.id.fullStar3ImgVSee);
+        fullStar4ImgVSee = findViewById(R.id.fullStar4ImgVSee);
+        fullStar5ImgVSee = findViewById(R.id.fullStar5ImgVSee);
+    }
+
     private void setOneStarMarkEdit() {
         emptyStar1ImgVEdit.setVisibility(View.GONE);
         fullStar1ImgVEdit.setVisibility(View.VISIBLE);
@@ -493,7 +497,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     }
 
     private void setThreeStarsMarkEdit() {
-        System.out.println("\t HERE 2");
         emptyStar1ImgVEdit.setVisibility(View.GONE);
         fullStar1ImgVEdit.setVisibility(View.VISIBLE);
         emptyStar2ImgVEdit.setVisibility(View.GONE);

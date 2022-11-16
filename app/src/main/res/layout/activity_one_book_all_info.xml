@@ -428,7 +428,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/summaryOneBookInfoTxtInputLytEdit"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/one_book_summary_height"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_text_input_margin"
                         android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
@@ -445,7 +445,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/one_book_summary_height"
+                        android:layout_height="wrap_content"
                         android:backgroundTint="@color/foreground_color"
                         android:gravity="top"
                         android:hint="Résumé du livre"
@@ -470,7 +470,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/descriptionOneBookInfoTxtInputLytEdit"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/one_book_description_height"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_text_input_margin"
                         android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
@@ -487,7 +487,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/one_book_description_height"
+                            android:layout_height="wrap_content"
                             android:backgroundTint="@color/foreground_color"
                             android:gravity="top"
                             android:hint="Impressions sur le livre"
@@ -961,7 +961,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/summaryOneBookInfoTxtInputLytSee"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/one_book_summary_height"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_text_input_margin"
                         android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
@@ -979,7 +979,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/one_book_description_height"
+                            android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_color"
                             android:gravity="top"
                             android:hint="Impressions sur le livre"
@@ -1004,7 +1004,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/descriptionOneBookInfoTxtInputLytSee"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/one_book_description_height"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
                         android:layout_marginTop="@dimen/one_book_text_input_margin"
                         android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
@@ -1022,7 +1022,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/one_book_description_height"
+                            android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_color"
                             android:gravity="top"
                             android:hint="Description du livre"
