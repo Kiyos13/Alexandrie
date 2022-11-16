@@ -129,8 +129,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                 if (!isLongClicked) {
                     isLongClicked = true; // Boolean to check if user has long clicked on item set to true
 
-                    // Replace AddFragment by DeleteFragment
+                    // Manage fragments
                     FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    // Replace top bar (AppBarFragment) to add return arrow in order to leave multi-selection mode
+                    fragmentManager.beginTransaction().replace(R.id.topBarLBFragContainerV, new AppBarFragment(new Intent(context, context.getClass()))).commit();
+                    // Replace AddFragment by DeleteFragment
                     fragmentManager.beginTransaction().replace(R.id.addDelFragContainerV, new DeleteFragment()).commit();
 
                     // Replace swipe text by number off selected items text
