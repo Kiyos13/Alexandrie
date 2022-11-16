@@ -8,6 +8,7 @@
     android:background="@color/transparent">
 
     <LinearLayout
+        android:id="@+id/oneGenreAllItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/one_genre_in_selector_lyt_left_right_margins"

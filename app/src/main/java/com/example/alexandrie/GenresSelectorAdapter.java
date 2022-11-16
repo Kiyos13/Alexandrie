@@ -50,10 +50,18 @@ public class GenresSelectorAdapter extends RecyclerView.Adapter<GenresSelectorAd
                 int counterSelectedGenresPlusOrMinus = (holder.genreCheckBox.isChecked()) ? 1 : -1;
                 counterSelectedGenres = counterSelectedGenres + counterSelectedGenresPlusOrMinus;
 
+                // Max 3 tags
                 if (counterSelectedGenres > 3) {
                     holder.genreCheckBox.setChecked(false);
                     listBookGenresSelected.set(position, false);
                 }
+            }
+        });
+
+        holder.allItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.genreCheckBox.setChecked(!holder.genreCheckBox.isChecked());
             }
         });
     }
@@ -65,11 +73,13 @@ public class GenresSelectorAdapter extends RecyclerView.Adapter<GenresSelectorAd
 
     public class GenresSelectorViewHolder extends RecyclerView.ViewHolder {
 
+        View allItem;
         TextView genreTxtV;
         CheckBox genreCheckBox;
 
         public GenresSelectorViewHolder(@NonNull View itemView) {
             super(itemView);
+            allItem = itemView.findViewById(R.id.oneGenreAllItem);
             genreTxtV = itemView.findViewById(R.id.oneGenreInListTxtV);
             genreCheckBox = itemView.findViewById(R.id.oneGenreInListCheckBox);
         }
