@@ -54,6 +54,19 @@ public class LoginConnectionActivity extends AppCompatActivity {
         sharedPrefLogs = getSharedPreferences("SharedPrefLogs", MODE_PRIVATE);
         // sharedPrefLogs.edit().clear().commit(); // Clean SharedPreferences
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Boolean accountJustCreated = bundle.getBoolean("account created");
+            if (accountJustCreated) {
+                // Message account created
+                String messageTitle = "Création de compte";
+                String messageText = "Votre compte a bien été créé.";
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().add(R.id.popupCoFragContainerV, new MessagePopupFragment(loginCoGlobalLyt, messageTitle, messageText)).commit();
+                enableDisableView(loginCoGlobalLyt, false);
+            }
+        }
+
         // Connect button click listener
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override

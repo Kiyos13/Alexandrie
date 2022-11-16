@@ -65,7 +65,11 @@ public class LoginCreateAccountActivity extends AppCompatActivity {
                         // If the infos are valid and the user name is not already taken, creation of a new account in SharedPreferences
                         AddAccountToSharedPrefs(sharedPrefLogs);
                         // Return to the LoginConnectionActivity
-                        startActivity(new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class));
+                        Intent intent = new Intent(LoginCreateAccountActivity.this, LoginConnectionActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("account created", true);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                     else {
                         System.out.println("\tUser name already taken !");
