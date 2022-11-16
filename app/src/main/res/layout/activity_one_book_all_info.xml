@@ -326,6 +326,48 @@
                         android:textColor="@color/foreground_color" />
 
                     <TextView
+                        android:id="@+id/summaryOneBookTxtVEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Résumé"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/summaryOneBookInfoTxtInputLytEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one_book_summary_height"
+                        android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_text_input_margin"
+                        android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginBottom="@dimen/one_book_text_input_margin"
+                        android:textColorHint="@color/background_color"
+                        app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false"
+                        app:startIconTint="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one_book_summary_height"
+                        android:backgroundTint="@color/foreground_color"
+                        android:gravity="top"
+                        android:hint="Résumé du livre"
+                        android:paddingTop="@dimen/inputs_top_bottom_padding"
+                        android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                        android:textColor="@color/background_color"
+                        android:textColorHint="@color/background_color"
+                        android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
                         android:id="@+id/descriptionOneBookTxtVEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -359,7 +401,7 @@
                             android:layout_height="@dimen/one_book_description_height"
                             android:backgroundTint="@color/foreground_color"
                             android:gravity="top"
-                            android:hint="Description du livre"
+                            android:hint="Impressions sur le livre"
                             android:paddingTop="@dimen/inputs_top_bottom_padding"
                             android:paddingBottom="@dimen/inputs_top_bottom_padding"
                             android:textColor="@color/background_color"
@@ -726,6 +768,49 @@
                         android:layout_marginRight="@dimen/one_book_texts_left_right_margins"
                         android:text=""
                         android:textColor="@color/foreground_color" />
+
+                    <TextView
+                        android:id="@+id/summaryOneBookTxtVSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/one_book_titles_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_diff_text_spinner_margin"
+                        android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
+                        android:text="Résumé"
+                        android:textColor="@color/foreground_color"
+                        android:textSize="@dimen/title_font_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/summaryOneBookInfoTxtInputLytSee"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/one_book_summary_height"
+                        android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginTop="@dimen/one_book_text_input_margin"
+                        android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                        android:layout_marginBottom="@dimen/one_book_text_input_margin"
+                        android:enabled="false"
+                        android:textColorHint="@color/background_color"
+                        app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                        app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:hintEnabled="false"
+                        app:startIconTint="@color/background_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/one_book_description_height"
+                            android:backgroundTint="@color/background_color"
+                            android:gravity="top"
+                            android:hint="Impressions sur le livre"
+                            android:paddingTop="@dimen/inputs_top_bottom_padding"
+                            android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                            android:textColor="@color/foreground_color"
+                            android:textColorHint="@color/foreground_color"
+                            android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:id="@+id/descriptionOneBookTxtVSee"

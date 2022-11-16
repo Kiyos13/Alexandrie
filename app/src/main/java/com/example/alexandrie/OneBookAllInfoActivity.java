@@ -39,13 +39,13 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private View editLayout, seeLayout, globalLytEdit;
     private String mode, previousActivity;
     private android.widget.Button saveBookButton, saveEditBookButton;
-    private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit;
-    private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee;
+    private TextInputLayout titleTxtInputLytEdit, volumeTxtInputLytEdit, serieTxtInputLytEdit, authorTxtInputLytEdit, releaseDateTxtInputLytEdit, descriptionTxtInputLytEdit, summaryTxtInputLytEdit;
+    private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee, summaryTxtInputLytSee;
     private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTitleTxtVEdit, showcasesListTxtVSee;
     public static TextView genresListTxtVEdit;
     private ImageView readImgVEdit, notReadImgVEdit, readImgVSee, notReadImgVSee;
     private ImageView favoriteImgVEdit, notFavoriteImgVEdit, favoriteImgVSee, notFavoriteImgVSee;
-    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description;
+    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary;
     private String[] tags;
     private Boolean isRead, isFavorite;
     public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
@@ -53,7 +53,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     public static int indexInSharedPrefBooksTag2 = 6, indexInSharedPrefBooksTag3 = 7, indexInSharedPrefBooksReadStatus = 8;
     public static int indexInSharedPrefBooksDescription = 9, indexInSharedPrefBooksAddDate = 10;
     public static int indexInSharedPrefBooksReleaseDate = 11, indexInSharedPrefBooksIsFavorite = 12;
-    public static int nbFieldsInSharedPrefBooks = 12;
+    public static int indexInSharedPrefBooksSummary = 13;
+    public static int nbFieldsInSharedPrefBooks = 13;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDateTxtVEdit = findViewById(R.id.addDateOneBookInfoTxtInputLytEdit);
         releaseDateTxtInputLytEdit = findViewById(R.id.releaseDateOneBookInfoTxtInputLytEdit);
         descriptionTxtInputLytEdit = findViewById(R.id.descriptionOneBookInfoTxtInputLytEdit);
+        summaryTxtInputLytEdit = findViewById(R.id.summaryOneBookInfoTxtInputLytEdit);
         genresListTitleTxtVEdit = findViewById(R.id.genreOneBookTxtVEdit);
         genresListTxtVEdit = findViewById(R.id.genresListOneBookTxtVEdit);
         readImgVEdit = findViewById(R.id.fullCandleImgVEdit);
@@ -90,6 +92,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDateTxtVSee = findViewById(R.id.addDateOneBookInfoTxtInputLytSee);
         releaseDateTxtInputLytSee = findViewById(R.id.releaseDateOneBookInfoTxtInputLytSee);
         descriptionTxtInputLytSee = findViewById(R.id.descriptionOneBookInfoTxtInputLytSee);
+        summaryTxtInputLytSee = findViewById(R.id.summaryOneBookInfoTxtInputLytSee);
         genresListTxtVSee = findViewById(R.id.genresListOneBookTxtVSee);
         readImgVSee = findViewById(R.id.fullCandleImgVSee);
         notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
@@ -132,7 +135,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
             retrieveBookInfosFromBundle(bundle);
             String[] strings = {
-                    indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, tags[0], tags[1], tags[2],
+                    indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, tags[0], tags[1], tags[2],
             };
             Boolean[] booleans = { isRead, isFavorite };
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, "verticalList", strings, booleans)).commit();
@@ -207,6 +210,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 bundle.putString("addDate", addDate);
                 bundle.putString("releaseDate", releaseDate);
                 bundle.putString("description", description);
+                bundle.putString("summary", summary);
                 bundle.putString("tag1", tags[0]);
                 bundle.putString("tag2", tags[1]);
                 bundle.putString("tag3", tags[2]);
@@ -356,6 +360,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         set.add("k_" + addDate); // Add releaseDate
         set.add("l_" + releaseDate); // Add releaseDate
         set.add("m_" + isFavorite.toString()); // Add isFavorite
+        set.add("n_" + summary); // Add summary
         return set;
     }
 
@@ -366,6 +371,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         author = authorTxtInputLytEdit.getEditText().getText().toString(); // Set the author
         releaseDate = releaseDateTxtInputLytEdit.getEditText().getText().toString(); // Set the release date
         description = descriptionTxtInputLytEdit.getEditText().getText().toString(); // Set the description
+        summary = summaryTxtInputLytEdit.getEditText().getText().toString(); // Set the summary
 
         String genres = genresListTxtVEdit.getText().toString();
         List<String> genresList = new ArrayList<>(Arrays.asList(genres.split("\n")));
@@ -391,6 +397,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDate = bundle.getString("addDate");
         releaseDate = bundle.getString("releaseDate");
         description = bundle.getString("description");
+        summary = bundle.getString("summary");
         tags[0] = bundle.getString("tag1");
         tags[1] = bundle.getString("tag2");
         tags[2] = bundle.getString("tag3");
@@ -409,6 +416,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         authorTxtInputLytEdit.getEditText().setText(author); // Set the author
         releaseDateTxtInputLytEdit.getEditText().setText(releaseDate); // Set the release date
         descriptionTxtInputLytEdit.getEditText().setText(description); // Set the description
+        summaryTxtInputLytEdit.getEditText().setText(summary); // Set the summary
         // showcasesListTxtVSee;
 
         genresListTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
@@ -447,6 +455,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         addDateTxtVSee.setText(addDate); // Set the add date
         releaseDateTxtInputLytSee.getEditText().setText(releaseDate); // Set the release date
         descriptionTxtInputLytSee.getEditText().setText(description); // Set the description
+        summaryTxtInputLytSee.getEditText().setText(summary); // Set the summary
         genresListTxtVSee.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]); // Set the tags
         // showcasesListTxtVSee;
 
