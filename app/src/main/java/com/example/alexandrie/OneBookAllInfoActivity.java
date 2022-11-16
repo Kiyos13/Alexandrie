@@ -636,8 +636,18 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDateTxtInputLytEdit.getEditText().setText(releaseDate); // Set the release date
         descriptionTxtInputLytEdit.getEditText().setText(description); // Set the description
         summaryTxtInputLytEdit.getEditText().setText(summary); // Set the summary
-
-        genresListTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
+        // Set the tags
+        Boolean isNullLengthTag1 = (tags[0].length() == 0);
+        Boolean isNullLengthTag2 = (tags[1].length() == 0);
+        Boolean isNullLengthTag3 = (tags[2].length() == 0);
+        if (isNullLengthTag1 && isNullLengthTag2 && isNullLengthTag3)
+            genresListTxtVEdit.setText("");
+        else if (isNullLengthTag2 && isNullLengthTag3)
+            genresListTxtVEdit.setText(tags[0]);
+        else if (isNullLengthTag3)
+            genresListTxtVEdit.setText(tags[0] + "\n" + tags[1]);
+        else
+            genresListTxtVEdit.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
 
         readImgVSee = findViewById(R.id.fullCandleImgVEdit);
         notReadImgVSee = findViewById(R.id.emptyCandleImgVEdit);
@@ -674,7 +684,18 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         releaseDateTxtInputLytSee.getEditText().setText(releaseDate); // Set the release date
         descriptionTxtInputLytSee.getEditText().setText(description); // Set the description
         summaryTxtInputLytSee.getEditText().setText(summary); // Set the summary
-        genresListTxtVSee.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]); // Set the tags
+        // Set the tags
+        Boolean isNullLengthTag1 = (tags[0].length() == 0);
+        Boolean isNullLengthTag2 = (tags[1].length() == 0);
+        Boolean isNullLengthTag3 = (tags[2].length() == 0);
+        if (isNullLengthTag1 && isNullLengthTag2 && isNullLengthTag3)
+            genresListTxtVSee.setText("");
+        else if (isNullLengthTag2 && isNullLengthTag3)
+            genresListTxtVSee.setText(tags[0]);
+        else if (isNullLengthTag3)
+            genresListTxtVSee.setText(tags[0] + "\n" + tags[1]);
+        else
+            genresListTxtVSee.setText(tags[0] + "\n" + tags[1] + "\n" + tags[2]);
 
         readImgVSee = findViewById(R.id.fullCandleImgVSee);
         notReadImgVSee = findViewById(R.id.emptyCandleImgVSee);
