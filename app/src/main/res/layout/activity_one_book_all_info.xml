@@ -756,6 +756,94 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/emptyStar1ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_empty_star"
+                            android:visibility="visible"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/fullStar1ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_full_star"
+                            android:visibility="gone"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/emptyStar2ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_empty_star"
+                            android:visibility="visible"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/fullStar2ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_full_star"
+                            android:visibility="gone"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/emptyStar3ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_empty_star"
+                            android:visibility="visible"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/fullStar3ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_full_star"
+                            android:visibility="gone"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/emptyStar4ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_empty_star"
+                            android:visibility="visible"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/fullStar4ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_full_star"
+                            android:visibility="gone"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/emptyStar5ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_empty_star"
+                            android:visibility="visible"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                        <ImageView
+                            android:id="@+id/fullStar5ImgVSee"
+                            android:layout_width="@dimen/candle_icon_size"
+                            android:layout_height="@dimen/candle_icon_size"
+                            android:src="@drawable/ic_full_star"
+                            android:visibility="gone"
+                            app:tint="@color/first_dominant_color"></ImageView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -774,95 +862,6 @@
                                 android:text="Date d'ajout"
                                 android:textColor="@color/foreground_color"
                                 android:textStyle="italic" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:id="@+id/emptyStar1ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_star"
-                                android:visibility="visible"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/fullStar1ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_star"
-                                android:visibility="gone"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/emptyStar2ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_star"
-                                android:visibility="visible"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/fullStar2ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_star"
-                                android:visibility="gone"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/emptyStar3ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_star"
-                                android:visibility="visible"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/fullStar3ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_star"
-                                android:visibility="gone"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/emptyStar4ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_star"
-                                android:visibility="visible"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/fullStar4ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_star"
-                                android:visibility="gone"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/emptyStar5ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_star"
-                                android:visibility="visible"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-                            <ImageView
-                                android:id="@+id/fullStar5ImgVSee"
-                                android:layout_width="@dimen/candle_icon_size"
-                                android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_star"
-                                android:visibility="gone"
-                                app:tint="@color/first_dominant_color"></ImageView>
-
-
                         </LinearLayout>
 
                         <LinearLayout
