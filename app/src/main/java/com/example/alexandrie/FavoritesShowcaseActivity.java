@@ -1,6 +1,8 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
+import static com.example.alexandrie.ListBooksActivity.retrieveBooksFromSharedPreferences;
+import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksIsFavorite;
 import static com.example.alexandrie.OneBookAllInfoActivity.nbFieldsInSharedPrefBooks;
@@ -61,6 +63,9 @@ public class FavoritesShowcaseActivity extends AppCompatActivity {
 
     private void retrieveFavoriteBooks() {
         initGlobalListFavoriteBooks();
+
+        // Retrieve all SharedPrefs to update listBooksInSharedPrefs
+        retrieveBooksFromSharedPreferences(sharedPrefBooks);
 
         for (int i = 0; i < listBooksInSharedPrefs.get(0).size(); i++) {
             if (listBooksInSharedPrefs.get(indexInSharedPrefBooksIsFavorite).get(i).equals("true")) {
