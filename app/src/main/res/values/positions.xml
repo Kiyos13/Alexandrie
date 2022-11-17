@@ -99,7 +99,6 @@
     <dimen name="account_settings_text_to_input_top_bottom_margins">10dp</dimen>
     <dimen name="account_settings_inputs_right_margin">10dp</dimen>
 
-
     <dimen name="genres_selector_recycler_margins">50dp</dimen>
     <dimen name="genres_selector_recycler_intern_margins">8dp</dimen>
     <dimen name="genres_selector_button_left_right_margins">50dp</dimen>
@@ -110,4 +109,14 @@
     <dimen name="one_genre_in_selector_lyt_top_bottom_margins">4dp</dimen>
     <dimen name="one_genre_in_selector_radius">8dp</dimen>
     <dimen name="genres_selector_recycler_border">8dp</dimen>
+
+    <dimen name="favorite_recyclerView_left_right_margins">10dp</dimen>
+    <dimen name="favorite_recyclerView_top_margin">10dp</dimen>
+    <dimen name="favorite_recyclerView_bottom_margin">60dp</dimen>
+    <dimen name="favorite_recyclerView_bottom_padding">80dp</dimen>
+    <dimen name="favorite_recyclerView_title_cover_margin">10dp</dimen>
+    <dimen name="favorite_recyclerView_margin_btw_favorites">2dp</dimen>
+    <dimen name="one_favorite_cover_height">300dp</dimen>
+    <dimen name="favorite_showcase_title_font_size">30sp</dimen>
+    <dimen name="favorite_showcase_title_top_bottom_margins">50dp</dimen>
 </resources>

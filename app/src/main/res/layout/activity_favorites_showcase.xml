@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".FavoritesShowcaseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/topBarFavoritesFragContainerV"
+            android:name="com.example.alexandrie.AppBarFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/titleFavoriteShowcaseTxtV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/favorite_showcase_title_top_bottom_margins"
+            android:layout_marginBottom="@dimen/favorite_showcase_title_top_bottom_margins"
+            android:gravity="center"
+            android:textColor="@color/first_dominant_color"
+            android:textSize="@dimen/favorite_showcase_title_font_size"
+            android:text="Ma vitrine de favoris"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/favorite_recyclerView_left_right_margins"
+            android:layout_marginTop="@dimen/favorite_recyclerView_top_margin"
+            android:layout_marginRight="@dimen/favorite_recyclerView_left_right_margins"
+            android:layout_marginBottom="@dimen/favorite_recyclerView_bottom_margin"
+            android:paddingBottom="@dimen/favorite_recyclerView_bottom_padding"
+            android:clipToPadding="false"
+            android:orientation="horizontal" />
+
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/bottomFavoritesShowcaseFragContainerV"
+        android:name="com.example.alexandrie.BottomFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/menuFavoritesShowcaseFragContainerV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Alexandrie"
         tools:targetApi="31">
         <activity
+            android:name=".FavoritesShowcaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OneFavoriteInFavoritesShowcaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivityContactUsForm"
             android:exported="false" />
         <activity

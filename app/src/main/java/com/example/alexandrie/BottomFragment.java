@@ -48,6 +48,8 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
                     fragmentManager.beginTransaction().replace(R.id.menuFragContainerV, new MenuFragment()).commit();
                 else if (currentActivity instanceof ActivityDisplayMenu)
                     fragmentManager.beginTransaction().replace(R.id.menuDisplayMenuFragContainerV, new MenuFragment()).commit();
+                else if (currentActivity instanceof FavoritesShowcaseActivity)
+                    fragmentManager.beginTransaction().replace(R.id.menuFavoritesShowcaseFragContainerV, new MenuFragment()).commit();
             }
         });
 
@@ -58,10 +60,10 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
                 // Switch activity between ListBooksActivity and ActivityDisplayMenu
                 Activity currentActivity = getActivity();
 
-                if (currentActivity instanceof ListBooksActivity)
-                    startActivity(new Intent(currentActivity, ActivityDisplayMenu.class));
-                else if (currentActivity instanceof ActivityDisplayMenu)
+                if (currentActivity instanceof ActivityDisplayMenu)
                     startActivity(new Intent(currentActivity, ListBooksActivity.class));
+                else
+                    startActivity(new Intent(currentActivity, ActivityDisplayMenu.class));
             }
         });
 
@@ -69,7 +71,11 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         shwocaseIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
+                // Switch activity to Favorites showcase
+                Activity currentActivity = getActivity();
 
+                if (!(currentActivity instanceof FavoritesShowcaseActivity))
+                    startActivity(new Intent(currentActivity, FavoritesShowcaseActivity.class));
             }
         });
 

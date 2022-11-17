@@ -79,6 +79,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         Intent returnIntent;
         if (previousActivity.equals("scan"))
             returnIntent = new Intent(OneBookAllInfoActivity.this, ScanQRCodeActivity.class);
+        else if (previousActivity.equals("favoriteList"))
+            returnIntent = new Intent(OneBookAllInfoActivity.this, FavoritesShowcaseActivity.class);
         else
             returnIntent = new Intent(OneBookAllInfoActivity.this, ListBooksActivity.class);
 
@@ -102,7 +104,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                     indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark, tags[0], tags[1], tags[2]
             };
             Boolean[] booleans = { isRead, isFavorite };
-            fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, "verticalList", strings, booleans)).commit();
+            fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, previousActivity, strings, booleans)).commit();
             setBookInfosConnectionSee(bundle);
         }
         else if (mode.equals("edit")) {
@@ -116,7 +118,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         saveBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (previousActivity.equals("verticalList")) {
+                if (previousActivity.equals("verticalList") || previousActivity.equals("favoriteList")) {
                     updateBookInfosCreateAndEditModes(); // Retrieve and update book infos
 
                     int indexBook = 0, maxIndexBooks = 0;
