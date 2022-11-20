@@ -14,8 +14,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
-public class AccountSettingsActivity extends AppCompatActivity {
-
+public class AccountSettingsActivity extends AppCompatActivity
+{
     private TextView userNameTxtV, emailTxtV, passwordTxtV;
     private TextInputLayout userNameTxtLyt, emailTxtLyt, passwordTxtLyt;
     private android.widget.Button editAccountButton, saveAccountButton;

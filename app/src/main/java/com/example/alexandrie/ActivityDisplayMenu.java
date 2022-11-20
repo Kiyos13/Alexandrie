@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerViewInterface
+public class ActivityDisplayMenu extends AppCompatActivity
 {
     ArrayList<Book> all_books;
 
@@ -57,7 +57,7 @@ public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerV
         );
         recycler_view_books_well_rated.setLayoutManager(layoutManager_books_well_rated);
         recycler_view_books_well_rated.setItemAnimator(new DefaultItemAnimator());
-        menuAdapter_books_well_rated = new MenuAdapter(ActivityDisplayMenu.this, books_well_rated, this);
+        menuAdapter_books_well_rated = new MenuAdapter(ActivityDisplayMenu.this, books_well_rated);
         recycler_view_books_well_rated.setAdapter(menuAdapter_books_well_rated);
 
         // RecyclerView pour les nouveautés
@@ -67,7 +67,7 @@ public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerV
         );
         recycler_view_books_recently_published.setLayoutManager(layoutManager_recently_published);
         recycler_view_books_recently_published.setItemAnimator(new DefaultItemAnimator());
-        menuAdapter_recently_published = new MenuAdapter(ActivityDisplayMenu.this, books_recently_published, this);
+        menuAdapter_recently_published = new MenuAdapter(ActivityDisplayMenu.this, books_recently_published);
         recycler_view_books_recently_published.setAdapter(menuAdapter_recently_published);
 
         // RecyclerView pour les recommandations en fonction des tags
@@ -78,7 +78,7 @@ public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerV
         );
         recycler_view_books_for_reader.setLayoutManager(layoutManager_currently_read);
         recycler_view_books_for_reader.setItemAnimator(new DefaultItemAnimator());
-        menuAdapter_for_reader = new MenuAdapter(ActivityDisplayMenu.this, books_for_reader , this);
+        menuAdapter_for_reader = new MenuAdapter(ActivityDisplayMenu.this, books_for_reader);
         recycler_view_books_for_reader .setAdapter(menuAdapter_for_reader );
     }
 
@@ -166,25 +166,6 @@ public class ActivityDisplayMenu extends AppCompatActivity  implements RecyclerV
         }
 
         return booksForReader;
-    }
-
-
-    @Override
-    public void onItemClick(int position)
-    {
-        /*
-        Intent intent = new Intent(ActivityDisplayMenu.this, DisplayDetailBook.class);
-
-        ArrayList<Book> selected_item_list = books_well_rated;
-
-        intent.putExtra("IMAGE", selected_item_list.get(position).getImage());
-        intent.putExtra("TITRE", selected_item_list.get(position).getTitle());
-        intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthor());
-        intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
-
-        startActivity(intent);
-
-         */
     }
 
 }

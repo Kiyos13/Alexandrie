@@ -16,18 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements RecyclerViewInterface
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 {
-    private final RecyclerViewInterface recycler_view_interface;
     ArrayList<Book> books;
-
     Context context;
 
-    public MenuAdapter(Context context, ArrayList<Book> books, RecyclerViewInterface recycler_view_interface)
+    public MenuAdapter(Context context, ArrayList<Book> books)
     {
         this.context = context;
         this.books = books;
-        this.recycler_view_interface = recycler_view_interface;
     }
 
     public ArrayList<Book> getBooks() {
@@ -43,7 +40,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_menu_item_row, parent, false);
-        return new ViewHolder(view, recycler_view_interface);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -77,11 +74,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
         return books.size();
     }
 
-    @Override
-    public void onItemClick(int position)
-    {
-
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
@@ -90,7 +82,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
         TextView titreView;
         TextView auteurView;
 
-        public ViewHolder(@NonNull View itemView, RecyclerViewInterface recycler_view_interface)
+        public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
 
@@ -98,26 +90,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
             imageView = itemView.findViewById(R.id.image_view);
             titreView = itemView.findViewById(R.id.titre_view);
             auteurView = itemView.findViewById(R.id.auteur_view);
-
-            /*
-            itemView.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if (recycler_view_interface != null)
-                    {
-                        int pos = getAdapterPosition();
-
-                        if (pos != RecyclerView.NO_POSITION)
-                        {
-                            recycler_view_interface.onItemClick(pos);
-                        }
-                    }
-                }
-            });
-
-             */
         }
     }
 }
