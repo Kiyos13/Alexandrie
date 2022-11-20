@@ -72,6 +72,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 String activityWithoutEnd = activityStringList.get(0);
                 activityStringList = new ArrayList<String>(Arrays.asList(activityWithoutEnd.split("\\.")));
                 String activityToPass = activityStringList.get(3);
+                bundle.putString("activity", activityToPass);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -17,7 +17,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -34,24 +35,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-            <ImageView
-                android:id="@+id/profilePhoto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/persuasion" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,26 +130,26 @@
                 android:layout_marginLeft="@dimen/inputs_left_right_margins"
                 android:layout_marginRight="@dimen/inputs_left_right_margins"
                 android:textColorHint="@color/background_color"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
                 app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                 app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                 app:boxCornerRadiusTopStart="@dimen/standard_radius"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                app:startIconDrawable="@drawable/ic_email"
-                app:startIconTint="@color/background_color"
                 app:hintEnabled="false"
-                android:visibility="gone" >
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/background_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/foreground_color"
                     android:hint="Email"
-                    android:textColorHint="@color/background_color"
                     android:paddingTop="@dimen/inputs_top_bottom_padding"
                     android:paddingBottom="@dimen/inputs_top_bottom_padding"
                     android:textColor="@color/background_color"
+                    android:textColorHint="@color/background_color"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,30 +186,30 @@
                 android:layout_marginLeft="@dimen/inputs_left_right_margins"
                 android:layout_marginRight="@dimen/inputs_left_right_margins"
                 android:textColorHint="@color/background_color"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
                 app:boxCornerRadiusBottomStart="@dimen/standard_radius"
                 app:boxCornerRadiusTopEnd="@dimen/standard_radius"
                 app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                app:boxStrokeWidthFocused="0dp"
                 app:boxStrokeWidth="0dp"
-                app:startIconDrawable="@drawable/ic_password"
-                app:startIconTint="@color/background_color"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/background_color"
-                app:hintEnabled="false"
-                android:visibility="gone" >
+                app:startIconDrawable="@drawable/ic_password"
+                app:startIconTint="@color/background_color">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/foreground_color"
                     android:hint="Mot de passe"
-                    android:textColorHint="@color/background_color"
+                    android:inputType="textPassword"
                     android:paddingTop="@dimen/inputs_top_bottom_padding"
                     android:paddingBottom="@dimen/inputs_top_bottom_padding"
                     android:textColor="@color/background_color"
-                    android:textCursorDrawable="@null"
-                    android:inputType="textPassword" />
+                    android:textColorHint="@color/background_color"
+                    android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

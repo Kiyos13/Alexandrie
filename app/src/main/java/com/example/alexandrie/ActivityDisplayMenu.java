@@ -1,5 +1,7 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -36,6 +38,7 @@ public class ActivityDisplayMenu extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_menu);
+        colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
         // Display return arrow (with linked intent)
         FragmentManager fragmentManager = getSupportFragmentManager();

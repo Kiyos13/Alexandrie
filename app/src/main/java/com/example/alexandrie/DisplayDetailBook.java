@@ -1,5 +1,7 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,6 +26,7 @@ public class DisplayDetailBook extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_detail_book);
+        colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
         recycler_view_comments_book = findViewById(R.id.comments_of_lectors);
         // Display return arrow (with linked intent)
