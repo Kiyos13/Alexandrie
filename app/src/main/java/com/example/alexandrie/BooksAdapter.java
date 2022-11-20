@@ -108,7 +108,10 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     public void onBindViewHolder(@NonNull BooksViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.sharedPrefIndexTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).get(position);
         holder.titleTxt.setText(listBooksInSharedPrefs.get(indexInSharedPrefBooksTitle).get(position));
-        holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(indexInSharedPrefBooksVolume).get(position));
+        if (listBooksInSharedPrefs.get(indexInSharedPrefBooksVolume).get(position).length() != 0)
+            holder.volumeTxt.setText("Tome " + listBooksInSharedPrefs.get(indexInSharedPrefBooksVolume).get(position));
+        else
+            holder.volumeTxt.setText("");
         holder.serieTxt = listBooksInSharedPrefs.get(indexInSharedPrefBooksSerie).get(position);
         holder.authorTxt.setText(listBooksInSharedPrefs.get(indexInSharedPrefBooksAuthor).get(position));
         holder.isRead = (listBooksInSharedPrefs.get(indexInSharedPrefBooksReadStatus).get(position).equals("true")) ? true : false;
