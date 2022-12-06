@@ -52,12 +52,8 @@ public class DisplayDetailBook extends AppCompatActivity
         auteur_view.setText(auteur);
         resume_view.setText(resume);
 
-        comments_all_book = new ArrayList<>();
-        for(int i=0; i<3; i++)
-        {
-            Comment comment_to_add = new Comment("Sarah", "Trop bien");
-            comments_all_book.add(comment_to_add);
-        }
+        API api_books = new API();
+        comments_all_book = api_books.getAllComments();
 
         LinearLayoutManager layoutManager_comments_book = new LinearLayoutManager(
                 DisplayDetailBook.this, LinearLayoutManager.HORIZONTAL, false

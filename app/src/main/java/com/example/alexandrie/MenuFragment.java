@@ -22,7 +22,7 @@ import java.util.List;
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
     private View semitransparentView; // View to the right of the menu
-    private Button accountButton, logoutButton, homePageButton;
+    private Button accountButton, logoutButton, homePageButton, contactButton;
     private com.google.android.material.button.MaterialButton lightThemeBtn, darkThemeBtn, leftHandBtn, rightHandBtn;
     public static Boolean isLightTheme, isRightHand;
 
@@ -41,6 +41,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
         semitransparentView = view.findViewById(R.id.semitransparentView);
         accountButton = view.findViewById(R.id.accountBtn);
+        contactButton = view.findViewById(R.id.contactBtn);
         logoutButton = view.findViewById(R.id.logoutBtn);
         homePageButton = view.findViewById(R.id.homePageBtn);
         lightThemeBtn = view.findViewById(R.id.lightThemeBtn);
@@ -75,6 +76,16 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("activity", activityToPass);
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+        });
+
+        // Logout click listener
+        contactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View InputFragmentView) {
+                // Remove MenuFragment
+                getParentFragmentManager().beginTransaction().remove(MenuFragment.this).commit();
+                startActivity(new Intent(getActivity(), ActivityContactUsForm.class));
             }
         });
 

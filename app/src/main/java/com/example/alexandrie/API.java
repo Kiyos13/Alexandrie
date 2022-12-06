@@ -6,10 +6,12 @@ import java.util.Date;
 public class API
 {
     ArrayList<Book> all_books_from_api;
+    ArrayList<Comment> all_books_comments;
 
-    public API(ArrayList<Book> all_books_from_api)
+    public API(ArrayList<Book> all_books_from_api, ArrayList<Comment> all_books_comments)
     {
         this.all_books_from_api = all_books_from_api;
+        this.all_books_comments = all_books_comments;
     }
 
     public API()
@@ -58,5 +60,43 @@ public class API
         }
 
         return this.all_books_from_api;
+    }
+
+    public ArrayList<Comment> getAllComments()
+    {
+        this.all_books_comments = new ArrayList<>();
+
+        String[] name_of_writer_comment = {"Loic", "Léa", "Lisa"};
+        String[] title_of_commented_book = {"Central Park", "Central Park", "Central Park"};
+        String [] author_of_commented_book = {"Guillaume Musso", "Guillaume Musso", "Guillaume Musso"};
+        String[]  text =  {"Rythmé, étonnant. Un récit fluide avec des parenthèses au changement de narrateur originales et sympa.",
+        "Ce roman est certainement un des meilleurs de l'auteur. Avec plein de rebondissements, de suspens.",
+        "Une histoire tellement bien raconté qu on ne s arrête plus . Une belle découverte"};
+
+        for (int i=0; i<name_of_writer_comment.length; i++)
+        {
+            Comment livre_à_ajouter = new Comment(name_of_writer_comment[i], title_of_commented_book[i], author_of_commented_book[i],text[i]);
+            this.all_books_comments.add(livre_à_ajouter);
+        }
+
+        return this.all_books_comments;
+    }
+
+    public ArrayList<Comment> findComments(String title_of_book, String author_of_book)
+    {
+        ArrayList<Comment> specific_book_comment = new ArrayList<>();
+        ArrayList<Comment> all_comments = this.getAllComments();
+
+        for (int i=0; i<all_comments.size(); i++)
+        {
+            if(all_comments.get(i).getTitle_of_commented_book() == title_of_book)
+            {
+                if (all_comments.get(i).getAuthor_of_commented_book() == author_of_book)
+                {
+                    specific_book_comment.add(all_comments.get(i));
+                }
+            }
+        }
+        return specific_book_comment;
     }
 }

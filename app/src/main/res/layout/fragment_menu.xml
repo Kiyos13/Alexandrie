@@ -62,6 +62,26 @@
                 android:drawableTint="@color/background_color"/>
 
             <Button
+                android:id="@+id/contactBtn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/line_left_margin"
+                android:layout_marginRight="@dimen/line_right_margin"
+                android:backgroundTint="@color/transparent"
+                android:text="Contact"
+                android:textAllCaps="false"
+                android:textColor="@color/background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accountBtn"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/menu_font_size"
+                android:layout_marginTop="@dimen/menu_text_text_margin"
+                android:drawableLeft="@drawable/ic_contact_us"
+                android:drawableTint="@color/background_color"/>
+
+            <Button
                 android:id="@+id/logoutBtn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
@@ -74,7 +94,7 @@
                 android:textColor="@color/background_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accountBtn"
+                app:layout_constraintTop_toBottomOf="@+id/contactBtn"
                 android:gravity="left|center_vertical"
                 android:textSize="@dimen/menu_font_size"
                 android:layout_marginTop="@dimen/menu_text_text_margin"
