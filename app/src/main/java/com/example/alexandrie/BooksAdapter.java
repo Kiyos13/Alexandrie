@@ -1,6 +1,7 @@
 package com.example.alexandrie;
 
 import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
+import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.MenuFragment.isRightHand;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
@@ -38,6 +39,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
@@ -307,23 +309,25 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     // Select checkboxes of all book items
     private void selectAllCheckBoxes() {
         View child;
-        for (int i = 0; i <= recyclerviewVG.getChildCount(); i++) {
+        indexListSelectedItemBooks = new ArrayList<Integer>();
+        int totalNbItems = recyclerViewBooks.getAdapter().getItemCount();
+
+        // Set the number of selected book items to the maximum
+        nbSelectedBooks.set(totalNbItems);
+        for (int i = 0; i <= totalNbItems; i++) {
             child = recyclerviewVG.getChildAt(i); // Retrieve child in groupView
-            // Set the number of selected book items to the maximum
-            nbSelectedBooks.set(recyclerViewBooks.getAdapter().getItemCount());
             if (child != null) {
                 // Check the child checkbox
                 ((CheckBox) child.findViewById(R.id.checkReadNotRead)).setChecked(true);
                 // Change the child background
-                child.findViewById(R.id.oneBookInListLyt). setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
+                child.findViewById(R.id.oneBookInListLyt).setBackground(context.getResources().getDrawable(R.drawable.background_one_book_in_list_first_dom_light_color));
             }
         }
-        // Add all indexes to the list of selected book items
-        indexListSelectedItemBooks = new ArrayList<Integer>();
-        BooksViewHolder holder;
-        for (int i = 0; i < this.getItemCount(); i++) {
-            holder = (BooksViewHolder) recyclerViewBooks.findViewHolderForAdapterPosition(i);
-            indexListSelectedItemBooks.add(Integer.parseInt(holder.sharedPrefIndexTxt));
+
+        // Retrieve all indexes from shared prefs to put in selected books list
+        Map<String, ?> allEntries = sharedPrefBooks.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            indexListSelectedItemBooks.add(Integer.parseInt(entry.getKey()));
         }
     }
 
