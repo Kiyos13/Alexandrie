@@ -51,9 +51,9 @@
         <item></item>
     </string-array>
 
-    <string-array name="contact_reasons">
-        <item>Problem in my account</item>
-        <item>Delete my account</item>
+    <string-array name="reasons_for_spinner_contact_form">
+        <item>Problème sur mon compte</item>
+        <item>Suppression de compte</item>
         <item>Other</item>
     </string-array>
 
