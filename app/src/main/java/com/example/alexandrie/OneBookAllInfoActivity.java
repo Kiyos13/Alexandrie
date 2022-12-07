@@ -51,7 +51,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private ImageView fullStar1ImgVEdit, fullStar2ImgVEdit, fullStar3ImgVEdit, fullStar4ImgVEdit, fullStar5ImgVEdit;
     private ImageView emptyStar1ImgVSee, emptyStar2ImgVSee, emptyStar3ImgVSee, emptyStar4ImgVSee, emptyStar5ImgVSee;
     private ImageView fullStar1ImgVSee, fullStar2ImgVSee, fullStar3ImgVSee, fullStar4ImgVSee, fullStar5ImgVSee;
-    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0";
+    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0", coverUrl;
     private String[] tags;
     private Boolean isRead, isFavorite;
     public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
@@ -59,8 +59,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     public static int indexInSharedPrefBooksTag2 = 6, indexInSharedPrefBooksTag3 = 7, indexInSharedPrefBooksReadStatus = 8;
     public static int indexInSharedPrefBooksDescription = 9, indexInSharedPrefBooksAddDate = 10;
     public static int indexInSharedPrefBooksReleaseDate = 11, indexInSharedPrefBooksIsFavorite = 12;
-    public static int indexInSharedPrefBooksSummary = 13, indexInSharedPrefBooksMark = 14;
-    public static int nbFieldsInSharedPrefBooks = 14;
+    public static int indexInSharedPrefBooksSummary = 13, indexInSharedPrefBooksMark = 14, getIndexInSharedPrefBooksCoverUrl = 15;
+    public static int nbFieldsInSharedPrefBooks = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +93,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             seeLayout.setVisibility(View.GONE);
 
             // Set book cover from url
-            String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
-            Thread thread = onBindViewHolderCover(this, coverEdit, urlStr);
+            coverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
+            Thread thread = onBindViewHolderCover(this, coverEdit, coverUrl);
             thread.start();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -108,8 +108,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             seeLayout.setVisibility(View.VISIBLE);
 
             // Set book cover from url
-            String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
-            Thread thread = onBindViewHolderCover(this, coverSee, urlStr);
+            coverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
+            Thread thread = onBindViewHolderCover(this, coverSee, coverUrl);
             thread.start();
 
             retrieveBookInfosFromBundle(bundle);
@@ -125,8 +125,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             saveBookButton.setVisibility(View.GONE);
 
             // Set book cover from url
-            String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
-            Thread thread = onBindViewHolderCover(this, coverEdit, urlStr);
+            coverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
+            Thread thread = onBindViewHolderCover(this, coverEdit, coverUrl);
             thread.start();
 
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVEdit, new AppBarFragment(returnIntent)).commit();
@@ -200,6 +200,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 bundle.putString("tag1", tags[0]);
                 bundle.putString("tag2", tags[1]);
                 bundle.putString("tag3", tags[2]);
+                bundle.putString("coverUrl", coverUrl);
                 bundle.putBoolean("readStatus", isRead);
                 bundle.putBoolean("isFavorite", isFavorite);
                 intent.putExtras(bundle);
@@ -591,6 +592,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         set.add("m_" + isFavorite.toString()); // Add isFavorite
         set.add("n_" + summary); // Add summary
         set.add("o_" + mark); // Add mark
+        set.add("p_" + coverUrl); // Add cover url
         return set;
     }
 
@@ -634,6 +636,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         tags[2] = bundle.getString("tag3");
         isRead = (bundle.getBoolean("readStatus"));
         isFavorite = (bundle.getBoolean("isFavorite"));
+        coverUrl = bundle.getString("coverUrl");
 
         if (mark.equals("1"))
             setOneStarMarkEdit();
