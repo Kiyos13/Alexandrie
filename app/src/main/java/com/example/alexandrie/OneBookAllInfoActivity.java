@@ -1,5 +1,6 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.BooksAdapter.onBindViewHolderCover;
 import static com.example.alexandrie.GenresSelectorFragment.initListBookGenresAndListBookGenresSelected;
 import static com.example.alexandrie.GenresSelectorFragment.listBookGenres;
 import static com.example.alexandrie.GenresSelectorFragment.listBookGenresSelected;
@@ -43,6 +44,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private TextInputLayout titleTxtInputLytSee, volumeTxtInputLytSee, serieTxtInputLytSee, authorTxtInputLytSee, releaseDateTxtInputLytSee, descriptionTxtInputLytSee, summaryTxtInputLytSee;
     private TextView addDateTxtVEdit, addDateTxtVSee, genresListTxtVSee, genresListTitleTxtVEdit;
     public static TextView genresListTxtVEdit;
+    private ImageView coverSee, coverEdit;
     private ImageView readImgVEdit, notReadImgVEdit, readImgVSee, notReadImgVSee;
     private ImageView favoriteImgVEdit, notFavoriteImgVEdit, favoriteImgVSee, notFavoriteImgVSee;
     private ImageView emptyStar1ImgVEdit, emptyStar2ImgVEdit, emptyStar3ImgVEdit, emptyStar4ImgVEdit, emptyStar5ImgVEdit;
@@ -89,6 +91,12 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             saveBookButton.setVisibility(View.VISIBLE);
             saveEditBookButton.setVisibility(View.GONE);
             seeLayout.setVisibility(View.GONE);
+
+            // Set book cover from url
+            String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
+            Thread thread = onBindViewHolderCover(this, coverEdit, urlStr);
+            thread.start();
+
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date(System.currentTimeMillis());
             addDate = formatter.format(date); // Set the add date
@@ -98,6 +106,11 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         else if (mode.equals("see")) {
             editLayout.setVisibility(View.GONE);
             seeLayout.setVisibility(View.VISIBLE);
+
+            // Set book cover from url
+            String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
+            Thread thread = onBindViewHolderCover(this, coverSee, urlStr);
+            thread.start();
 
             retrieveBookInfosFromBundle(bundle);
             String[] strings = {
@@ -110,6 +123,12 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         else if (mode.equals("edit")) {
             saveEditBookButton.setVisibility(View.VISIBLE);
             saveBookButton.setVisibility(View.GONE);
+
+            // Set book cover from url
+            String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
+            Thread thread = onBindViewHolderCover(this, coverEdit, urlStr);
+            thread.start();
+
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVEdit, new AppBarFragment(returnIntent)).commit();
             setBookInfosEdit(bundle);
         }
@@ -442,6 +461,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         fullStar3ImgVEdit = findViewById(R.id.fullStar3ImgVEdit);
         fullStar4ImgVEdit = findViewById(R.id.fullStar4ImgVEdit);
         fullStar5ImgVEdit = findViewById(R.id.fullStar5ImgVEdit);
+        coverEdit = findViewById(R.id.coverOneBookInfoImgVEdit);
     }
 
     private void initSeeElements() {
@@ -468,6 +488,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         fullStar3ImgVSee = findViewById(R.id.fullStar3ImgVSee);
         fullStar4ImgVSee = findViewById(R.id.fullStar4ImgVSee);
         fullStar5ImgVSee = findViewById(R.id.fullStar5ImgVSee);
+        coverSee = findViewById(R.id.coverOneBookInfoImgVSee);
     }
 
     private void setOneStarMarkEdit() {

@@ -48,7 +48,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/topBarOneBookInfoFragContainerVEdit">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/coverOneBookInfoImgVEdit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"

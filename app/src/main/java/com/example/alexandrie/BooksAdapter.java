@@ -23,7 +23,11 @@ import androidx.annotation.NonNull;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.content.Context;
@@ -38,6 +42,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -125,7 +137,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         holder.markTxt = (listBooksInSharedPrefs.get(indexInSharedPrefBooksMark).get(position));
         onBindViewHolderTags(holder, position); // Set tags
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
-        holder.coverImgV.setImageResource(images[0]);
+
+        // Set book cover from url
+        String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
+        Thread thread = onBindViewHolderCover(context, holder.coverImgV, urlStr);
+        thread.start();
 
         // Book item layout long click listener
         holder.oneBookInListLyt.setOnLongClickListener(new View.OnLongClickListener() {
@@ -296,6 +312,39 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         }
     }
 
+    public static Thread onBindViewHolderCover(Context ctx, ImageView cover, String urlStr) {
+        // Set book cover from url
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL url = null;
+                try {
+                    url = new URL(urlStr);
+                    try {
+                        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                        // Get a handler that can be used to post to the main thread
+                        Handler mainHandler = new Handler(ctx.getMainLooper());
+
+                        Runnable myRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                cover.setImageBitmap(bmp);
+                            }
+                        };
+
+                        mainHandler.post(myRunnable);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return thread;
+    }
+
     // Display checkboxes of all book items
     private void displayAllCheckBoxes() {
         View child;
@@ -349,7 +398,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         indexListSelectedItemBooks = new ArrayList<Integer>();
     }
 
-    // Select or Unselect book item when a long click on an item hapened
+    // Select or Unselect book item when a long click on an item happened
     private void selectAndUnselectBooksInList(@NonNull BooksViewHolder holder) {
         if (isLongClicked) {
             if (holder.selectedBookCheckbox.isChecked()) {
