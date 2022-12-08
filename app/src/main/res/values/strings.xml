@@ -10,22 +10,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
-    <string-array name="all_book_types">
-        <item>Roman</item>
-        <item>Manga</item>
-        <item>BD</item>
-        <item>Magasine</item>
-        <item>Nouvelle</item>
-        <item>Poème</item>
-        <item>Conte</item>
-        <item>Biographie</item>
-        <item>Autobiographie</item>
-        <item>Journal</item>
-        <item>Mythe</item>
-        <item>Légende</item>
-        <item>Chronique</item>
-    </string-array>
-
     <string-array name="all_book_genres">
         <item>Action</item>
         <item>Aventure</item>
@@ -41,14 +25,19 @@
         <item>Policier</item>
         <item>Mystère</item>
         <item>Thriller</item>
-    </string-array>
-
-    <string-array name="all_series">
-        <item></item>
-    </string-array>
-
-    <string-array name="all_authors">
-        <item></item>
+        <item>Roman</item>
+        <item>Manga</item>
+        <item>BD</item>
+        <item>Magasine</item>
+        <item>Nouvelle</item>
+        <item>Poème</item>
+        <item>Conte</item>
+        <item>Biographie</item>
+        <item>Autobiographie</item>
+        <item>Journal</item>
+        <item>Mythe</item>
+        <item>Légende</item>
+        <item>Chronique</item>
     </string-array>
 
     <string-array name="reasons_for_spinner_contact_form">

@@ -1,9 +1,15 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.GenresSelectorFragment.initListBookGenresAndListBookGenresSelected;
+import static com.example.alexandrie.GenresSelectorFragment.listBookGenres;
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.LoginConnectionActivity.SortStringListByFirstChar;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksReadStatus;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag1;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag2;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTag3;
 import static com.example.alexandrie.OneBookAllInfoActivity.nbFieldsInSharedPrefBooks;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +24,11 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +70,8 @@ public class ActivityDisplayMenu extends AppCompatActivity
         all_books = api_books.getAllBooks();
 
         // RecyclerView for the books of the most added genre
-        books_favorite_genre = getWellRatedBooks(all_books);
+        // books_favorite_genre = getWellRatedBooks(all_books);
+        books_favorite_genre = retrieveBooksFromCondition(sharedPrefBooks, "favoriteGenre");
         LinearLayoutManager layoutManager_books_favorite_genre = new LinearLayoutManager(
                 ActivityDisplayMenu.this, LinearLayoutManager.HORIZONTAL, false
         );
@@ -71,7 +81,8 @@ public class ActivityDisplayMenu extends AppCompatActivity
         recycler_view_books_favorite_genre.setAdapter(menuAdapter_books_favorite_genre);
 
         // RecyclerView for recently added books
-        books_recently_added = getRecentBooks(all_books);
+        // books_recently_added = getRecentBooks(all_books);
+        books_recently_added = retrieveBooksFromCondition(sharedPrefBooks, "recentlyAdded");
         LinearLayoutManager layoutManager_recently_added = new LinearLayoutManager(
                 ActivityDisplayMenu.this, LinearLayoutManager.HORIZONTAL, false
         );
@@ -83,7 +94,7 @@ public class ActivityDisplayMenu extends AppCompatActivity
         // RecyclerView for books not read yet
         // String[] reader_tags = {"fantastique", "manga"};
         // books_not_read = getBooksForReader(all_books, reader_tags);
-        books_not_read = retrieveNotReadBooks(sharedPrefBooks);
+        books_not_read = retrieveBooksFromCondition(sharedPrefBooks, "notRead");
         LinearLayoutManager layoutManager_not_read = new LinearLayoutManager(
                 ActivityDisplayMenu.this, LinearLayoutManager.HORIZONTAL, false
         );
@@ -94,7 +105,8 @@ public class ActivityDisplayMenu extends AppCompatActivity
     }
 
 
-    private ArrayList<Book> retrieveNotReadBooks(SharedPreferences sharedPreferences) {
+
+    private ArrayList<Book> retrieveBooksFromCondition(SharedPreferences sharedPreferences, String condition) {
         ArrayList<ArrayList<String>> books = new ArrayList<>();
         for (int i = 0; i <= nbFieldsInSharedPrefBooks; i++) {
             books.add(i, new ArrayList<String>());
@@ -118,10 +130,41 @@ public class ActivityDisplayMenu extends AppCompatActivity
             }
 
             int nbFields = books.size();
-            boolean isNotRead = (Boolean.parseBoolean(bookDataList.get(indexInSharedPrefBooksReadStatus)) == false);
-            if ((bookDataList.size() >= nbFields) && isNotRead) {
-                for (int i = 0; i < nbFields; i++)
-                    books.get(i).add(bookDataList.get(i));
+
+            if (condition.equals("favoriteGenre")) {
+                String favoriteGenre = retrieveFavoriteGenreFromSharedPreferences(sharedPreferences);
+                boolean hasFavoriteGenreTag1 = (bookDataList.get(indexInSharedPrefBooksTag1).equals(favoriteGenre));
+                boolean hasFavoriteGenreTag2 = (bookDataList.get(indexInSharedPrefBooksTag2).equals(favoriteGenre));
+                boolean hasFavoriteGenreTag3 = (bookDataList.get(indexInSharedPrefBooksTag3).equals(favoriteGenre));
+                boolean hasFavoriteGenreTag = hasFavoriteGenreTag1 || hasFavoriteGenreTag2 || hasFavoriteGenreTag3;
+                if ((bookDataList.size() >= nbFields) && hasFavoriteGenreTag) {
+                    for (int i = 0; i < nbFields; i++)
+                        books.get(i).add(bookDataList.get(i));
+                }
+            }
+            else if (condition.equals("notRead")) {
+                boolean isNotRead = (Boolean.parseBoolean(bookDataList.get(indexInSharedPrefBooksReadStatus)) == false);
+                if ((bookDataList.size() >= nbFields) && isNotRead) {
+                    for (int i = 0; i < nbFields; i++)
+                        books.get(i).add(bookDataList.get(i));
+                }
+            }
+            else if (condition.equals("recentlyAdded")) {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date date = formatter.parse(bookDataList.get(indexInSharedPrefBooksAddDate));
+                    Date now = new Date(System.currentTimeMillis());
+                    long difference = Math.abs(date.getTime() - now.getTime());
+                    long differenceDatesInDays = difference / (24 * 60 * 60 * 1000);
+                    boolean dateIsLessThan90Days = (differenceDatesInDays <= 90);
+                    if ((bookDataList.size() >= nbFields) && dateIsLessThan90Days) {
+                        for (int i = 0; i < nbFields; i++)
+                            books.get(i).add(bookDataList.get(i));
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -138,6 +181,53 @@ public class ActivityDisplayMenu extends AppCompatActivity
         }
         return books;
     }
+
+    private String retrieveFavoriteGenreFromSharedPreferences(SharedPreferences sharedPreferences) {
+        String[] genresArray = getResources().getStringArray(R.array.all_book_genres);
+        initListBookGenresAndListBookGenresSelected(genresArray);
+        int nbGenres = listBookGenres.size();
+        ArrayList<Integer> genresOccurrences = new ArrayList<>();
+        for (int i = 0; i < nbGenres; i++)
+            genresOccurrences.add(0);
+
+        Map<String, ?> allEntries = sharedPreferences.getAll();
+        String bookData;
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            bookData = entry.getValue().toString();
+            bookData = bookData.substring(1);
+            bookData = bookData.substring(0, bookData.length() - 1);
+
+            List<String> bookDataList = new ArrayList<String>(Arrays.asList(bookData.split(", ")));
+            SortStringListByFirstChar(bookDataList);
+
+            int bookDataListLength = bookDataList.size();
+            String currentData;
+            for (int i = 0; i < bookDataListLength; i++) {
+                currentData = bookDataList.get(i).substring(2);
+                bookDataList.set(i, currentData);
+            }
+
+            for (int i = 0; i < nbGenres; i++) {
+                if (bookDataList.size() >= nbFieldsInSharedPrefBooks) {
+                    boolean tag1 = listBookGenres.get(i).equals(bookDataList.get(indexInSharedPrefBooksTag1));
+                    boolean tag2 = listBookGenres.get(i).equals(bookDataList.get(indexInSharedPrefBooksTag2));
+                    boolean tag3 = listBookGenres.get(i).equals(bookDataList.get(indexInSharedPrefBooksTag3));
+                    if (tag1 || tag2 || tag3) {
+                        genresOccurrences.set(i, genresOccurrences.get(i) + 1);
+                    }
+                }
+            }
+        }
+
+        Integer maxOccurrence = Collections.max(genresOccurrences);
+        Integer maxIndex = genresOccurrences.indexOf(maxOccurrence);
+
+        return listBookGenres.get(maxIndex);
+    }
+
+
+
+
 
 
     private ArrayList<Book> getRecentBooks(ArrayList<Book> allBooksReceived)
