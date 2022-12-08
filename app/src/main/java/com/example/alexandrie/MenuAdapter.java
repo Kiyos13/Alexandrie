@@ -85,18 +85,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
                 bundle.putString("mark", selected_item_list.get(position).getMarkParam());
                 bundle.putBoolean("isFavorite", selected_item_list.get(position).getIsFavoriteParam());
                 bundle.putString("coverUrl", selected_item_list.get(position).getCoverUrlParam());
-                String tag1 = selected_item_list.get(position).getTag1Param();
-                String tag2 = selected_item_list.get(position).getTag2Param();
-                String tag3 = selected_item_list.get(position).getTag3Param();
-                if (tag1.length() != 0)
-                    tag1 = tag1.substring(1);
-                if (tag2.length() != 0)
-                    tag2 = tag2.substring(1);
-                if (tag3.length() != 0)
-                    tag3 = tag3.substring(1);
-                bundle.putString("tag1", tag1);
-                bundle.putString("tag2", tag2);
-                bundle.putString("tag3", tag3);
+                bundle.putString("tag1", selected_item_list.get(position).getTag1Param());
+                bundle.putString("tag2", selected_item_list.get(position).getTag2Param());
+                bundle.putString("tag3", selected_item_list.get(position).getTag3Param());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 

@@ -134,9 +134,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVEdit, new AppBarFragment(returnIntent)).commit();
             setBookInfosEdit(bundle);
         }
-        else {
-            System.out.println("\n\n\t NOTHING \n\n");
-        }
 
         // Save a book button click listener
         saveBookButton.setOnClickListener(new View.OnClickListener() {
