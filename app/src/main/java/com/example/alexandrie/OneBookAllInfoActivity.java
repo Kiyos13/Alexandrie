@@ -51,7 +51,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private ImageView fullStar1ImgVEdit, fullStar2ImgVEdit, fullStar3ImgVEdit, fullStar4ImgVEdit, fullStar5ImgVEdit;
     private ImageView emptyStar1ImgVSee, emptyStar2ImgVSee, emptyStar3ImgVSee, emptyStar4ImgVSee, emptyStar5ImgVSee;
     private ImageView fullStar1ImgVSee, fullStar2ImgVSee, fullStar3ImgVSee, fullStar4ImgVSee, fullStar5ImgVSee;
-    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0", coverUrl;
+    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0", coverUrl, calculatedCoverUrl;
     private String[] tags;
     private Boolean isRead, isFavorite;
     public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
@@ -67,6 +67,9 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_book_all_info);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
+
+        calculatedCoverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
+        coverUrl = calculatedCoverUrl;
 
         initGlobalLyts();
         initEditElements();
@@ -95,7 +98,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             seeLayout.setVisibility(View.GONE);
 
             // Set book cover from url
-            coverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
             Thread thread = onBindViewHolderCover(this, coverEdit, coverUrl);
             thread.start();
 
@@ -110,7 +112,6 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             seeLayout.setVisibility(View.VISIBLE);
 
             // Set book cover from url
-            coverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
             Thread thread = onBindViewHolderCover(this, coverSee, coverUrl);
             thread.start();
 
@@ -127,12 +128,14 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             saveBookButton.setVisibility(View.GONE);
 
             // Set book cover from url
-            coverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
             Thread thread = onBindViewHolderCover(this, coverEdit, coverUrl);
             thread.start();
 
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVEdit, new AppBarFragment(returnIntent)).commit();
             setBookInfosEdit(bundle);
+        }
+        else {
+            System.out.println("\n\n\t NOTHING \n\n");
         }
 
         // Save a book button click listener
@@ -428,6 +431,12 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        coverUrl = calculatedCoverUrl;
+        super.onResume();
     }
 
     private void initGlobalLyts() {
