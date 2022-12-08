@@ -25,13 +25,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
-            android:text="Nouveautés"
+            android:text="Derniers ajouts"
             android:textColor="@color/foreground_color"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layout_books_recently_published"
+            android:id="@+id/layout_books_recently_added"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Appréciés sur Alexandrie"
+            android:text="Genre préféré"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
             android:textColor="@color/foreground_color"
@@ -48,7 +48,7 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layout_books_well_rated"
+            android:id="@+id/layout_books_favorite_genre"
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="180dp"
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notre sélection pour vous"
+            android:text="Non lus"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
             android:textColor="@color/foreground_color"
@@ -65,7 +65,7 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layout_books_for_reader"
+            android:id="@+id/layout_books_not_read"
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="180dp" />

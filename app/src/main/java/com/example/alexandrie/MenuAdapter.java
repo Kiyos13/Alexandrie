@@ -1,6 +1,9 @@
 package com.example.alexandrie;
 
 
+import static com.example.alexandrie.BooksAdapter.onBindViewHolderCover;
+import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksTitle;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -46,9 +49,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position)
     {
+        /*
         holder.imageView.setImageResource(books.get(position).getImage());
         holder.titreView.setText(books.get(position).getTitle());
         holder.auteurView.setText(books.get(position).getAuthor());
+         */
+
+        String imageUrl = books.get(position).getCoverUrlParam();
+        Thread thread = onBindViewHolderCover(context, holder.imageView, imageUrl);
+        thread.start();
+        holder.titreView.setText(books.get(position).getTitleParam());
+        holder.auteurView.setText(books.get(position).getAuthorParam());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,10 +69,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 
                 ArrayList<Book> selected_item_list = books;
 
+                /*
                 intent.putExtra("IMAGE", selected_item_list.get(position).getImage());
                 intent.putExtra("TITRE", selected_item_list.get(position).getTitle());
                 intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthor());
                 intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
+                 */
+
+                intent.putExtra("COVER", selected_item_list.get(position).getCoverUrlParam());
+                intent.putExtra("TITRE", selected_item_list.get(position).getTitleParam());
+                intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthorParam());
+                intent.putExtra("RESUME", selected_item_list.get(position).getSummaryParam());
 
                 context.startActivity(intent);
             }

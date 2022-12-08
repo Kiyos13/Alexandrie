@@ -1,5 +1,6 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.BooksAdapter.onBindViewHolderCover;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +38,8 @@ public class DisplayDetailBook extends AppCompatActivity
         fragmentManager.beginTransaction().add(R.id.topBarDisplayDetailBook, new AppBarFragment(intent)).commit();
 
 
-        Integer image = getIntent().getIntExtra("IMAGE", 0);
+        // Integer image = getIntent().getIntExtra("IMAGE", 0);
+        String cover = getIntent().getStringExtra("COVER");
         String titre = getIntent().getStringExtra("TITRE");
         String auteur = getIntent().getStringExtra("AUTEUR");
         String resume = getIntent().getStringExtra("RESUME");
@@ -47,7 +49,9 @@ public class DisplayDetailBook extends AppCompatActivity
         TextView auteur_view = findViewById(R.id.auteur_view_edit);
         TextView resume_view = findViewById(R.id.resume_view_edit);
 
-        image_view.setImageResource(image);
+        // image_view.setImageResource(image);
+        Thread thread = onBindViewHolderCover(this, image_view, cover);
+        thread.start();
         titre_view.setText(titre);
         auteur_view.setText(auteur);
         resume_view.setText(resume);
