@@ -96,15 +96,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
 
                 ArrayList<Book> selected_item_list = books;
 
-                // intent.putExtra("IMAGE", selected_item_list.get(position).getImage());
-                // intent.putExtra("TITRE", selected_item_list.get(position).getTitle());
-                // intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthor());
-                // intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
-
-                intent.putExtra("COVER", selected_item_list.get(position).getCoverUrlParam());
-                intent.putExtra("TITRE", selected_item_list.get(position).getTitleParam());
-                intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthorParam());
-                intent.putExtra("RESUME", selected_item_list.get(position).getSummaryParam());
+                intent.putExtra("IMAGE", selected_item_list.get(position).getImage());
+                intent.putExtra("TITRE", selected_item_list.get(position).getTitle());
+                intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthor());
+                intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
 
                 context.startActivity(intent);
                  */
