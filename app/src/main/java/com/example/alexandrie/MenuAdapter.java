@@ -7,6 +7,7 @@ import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBoo
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,16 +66,49 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             @Override
             public void onClick(View view)
             {
+                ArrayList<Book> selected_item_list = books;
+
+                Intent intent = new Intent(context, OneBookAllInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mode", "see");
+                bundle.putString("prevActivity", "horizontalList");
+                bundle.putString("indexInSharedPrefs", selected_item_list.get(position).getIndexParam());
+                bundle.putString("title", selected_item_list.get(position).getTitleParam());
+                bundle.putString("volume", selected_item_list.get(position).getVolumeParam());
+                bundle.putString("serie", selected_item_list.get(position).getSerieParam());
+                bundle.putString("author", selected_item_list.get(position).getAuthorParam());
+                bundle.putString("releaseDate", selected_item_list.get(position).getReleaseDateParam());
+                bundle.putString("addDate", selected_item_list.get(position).getAddDateParam());
+                bundle.putBoolean("readStatus", selected_item_list.get(position).getIsReadParam());
+                bundle.putString("description", selected_item_list.get(position).getDescriptionParam());
+                bundle.putString("summary", selected_item_list.get(position).getSummaryParam());
+                bundle.putString("mark", selected_item_list.get(position).getMarkParam());
+                bundle.putBoolean("isFavorite", selected_item_list.get(position).getIsFavoriteParam());
+                bundle.putString("coverUrl", selected_item_list.get(position).getCoverUrlParam());
+                String tag1 = selected_item_list.get(position).getTag1Param();
+                String tag2 = selected_item_list.get(position).getTag2Param();
+                String tag3 = selected_item_list.get(position).getTag3Param();
+                if (tag1.length() != 0)
+                    tag1 = tag1.substring(1);
+                if (tag2.length() != 0)
+                    tag2 = tag2.substring(1);
+                if (tag3.length() != 0)
+                    tag3 = tag3.substring(1);
+                bundle.putString("tag1", tag1);
+                bundle.putString("tag2", tag2);
+                bundle.putString("tag3", tag3);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+
+                /*
                 Intent intent = new Intent(context, DisplayDetailBook.class);
 
                 ArrayList<Book> selected_item_list = books;
 
-                /*
-                intent.putExtra("IMAGE", selected_item_list.get(position).getImage());
-                intent.putExtra("TITRE", selected_item_list.get(position).getTitle());
-                intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthor());
-                intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
-                 */
+                // intent.putExtra("IMAGE", selected_item_list.get(position).getImage());
+                // intent.putExtra("TITRE", selected_item_list.get(position).getTitle());
+                // intent.putExtra("AUTEUR", selected_item_list.get(position).getAuthor());
+                // intent.putExtra("RESUME", selected_item_list.get(position).getSummary());
 
                 intent.putExtra("COVER", selected_item_list.get(position).getCoverUrlParam());
                 intent.putExtra("TITRE", selected_item_list.get(position).getTitleParam());
@@ -82,6 +116,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
                 intent.putExtra("RESUME", selected_item_list.get(position).getSummaryParam());
 
                 context.startActivity(intent);
+                 */
             }
         });
     }

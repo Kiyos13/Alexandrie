@@ -229,7 +229,7 @@ public class ActivityDisplayMenu extends AppCompatActivity
 
 
 
-
+    /*
     private ArrayList<Book> getRecentBooks(ArrayList<Book> allBooksReceived)
     {
         ArrayList<Book> recentBooks = new ArrayList<>();
@@ -289,5 +289,6 @@ public class ActivityDisplayMenu extends AppCompatActivity
 
         return booksForReader;
     }
+    */
 
 }

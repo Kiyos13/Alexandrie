@@ -83,6 +83,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             returnIntent = new Intent(OneBookAllInfoActivity.this, ScanQRCodeActivity.class);
         else if (previousActivity.equals("favoriteList"))
             returnIntent = new Intent(OneBookAllInfoActivity.this, FavoritesShowcaseActivity.class);
+        else if (previousActivity.equals("horizontalList"))
+            returnIntent = new Intent(OneBookAllInfoActivity.this, ActivityDisplayMenu.class);
         else
             returnIntent = new Intent(OneBookAllInfoActivity.this, ListBooksActivity.class);
 
@@ -137,7 +139,10 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         saveBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (previousActivity.equals("verticalList") || previousActivity.equals("favoriteList")) {
+                Boolean isVertical = previousActivity.equals("verticalList");
+                Boolean isHorizontal = previousActivity.equals("horizontalList");
+                Boolean isFavorite = previousActivity.equals("favoriteList");
+                if (isVertical || isHorizontal || isFavorite) {
                     updateBookInfosCreateAndEditModes(); // Retrieve and update book infos
 
                     int indexBook = 0, maxIndexBooks = 0;

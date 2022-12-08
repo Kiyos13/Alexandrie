@@ -140,6 +140,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
         // Set book cover from url
         String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
+        holder.coverUrl = urlStr;
         Thread thread = onBindViewHolderCover(context, holder.coverImgV, urlStr);
         thread.start();
 
@@ -225,6 +226,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
                     bundle.putString("summary", holder.summaryTxt);
                     bundle.putString("mark", holder.markTxt);
                     bundle.putBoolean("isFavorite", holder.isFavorite);
+                    bundle.putString("coverUrl", holder.coverUrl);
                     String tag1 = holder.tag1Txt.getText().toString();
                     String tag2 = holder.tag2Txt.getText().toString();
                     String tag3 = holder.tag3Txt.getText().toString();
@@ -445,7 +447,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         View oneBookInListLyt;
         CheckBox selectedBookCheckbox;
         Boolean isRead, isFavorite;
-        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt, sharedPrefIndexTxt, summaryTxt, markTxt;
+        String serieTxt, releaseDateTxt, addDateTxt, descriptionTxt, sharedPrefIndexTxt, summaryTxt, markTxt, coverUrl;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
