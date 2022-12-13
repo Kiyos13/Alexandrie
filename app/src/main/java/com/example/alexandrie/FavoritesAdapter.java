@@ -1,6 +1,8 @@
 package com.example.alexandrie;
 
+import static com.example.alexandrie.BooksAdapter.onBindViewHolderCover;
 import static com.example.alexandrie.FavoritesShowcaseActivity.listFavoriteBooksInSharedPrefs;
+import static com.example.alexandrie.OneBookAllInfoActivity.getIndexInSharedPrefBooksCoverUrl;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksDescription;
@@ -52,7 +54,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.FavoritesViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.cover.setImageResource(favoriteBooksCovers[0]);
+        //holder.cover.setImageResource(favoriteBooksCovers[0]);
+
+        String imageUrl = listFavoriteBooksInSharedPrefs.get(getIndexInSharedPrefBooksCoverUrl).get(position % listFavoriteBooksInSharedPrefs.get(0).size());
+        Thread thread = onBindViewHolderCover(context, holder.cover, imageUrl);
+        thread.start();
         holder.titleTxtV.setText(listFavoriteBooksInSharedPrefs.get(indexInSharedPrefBooksTitle).get(position % listFavoriteBooksInSharedPrefs.get(0).size()));
         holder.sharedPrefIndexTxt = listFavoriteBooksInSharedPrefs.get(indexInSharedPrefBooksIndex).get(position % listFavoriteBooksInSharedPrefs.get(0).size());
 
@@ -80,22 +86,25 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 bundle.putString("tag1", listFavoriteBooksInSharedPrefs.get(indexInSharedPrefBooksTag1).get(position % listFavoriteBooksInSharedPrefs.get(0).size()));
                 bundle.putString("tag2", listFavoriteBooksInSharedPrefs.get(indexInSharedPrefBooksTag2).get(position % listFavoriteBooksInSharedPrefs.get(0).size()));
                 bundle.putString("tag3", listFavoriteBooksInSharedPrefs.get(indexInSharedPrefBooksTag3).get(position % listFavoriteBooksInSharedPrefs.get(0).size()));
+                bundle.putString("coverUrl", listFavoriteBooksInSharedPrefs.get(getIndexInSharedPrefBooksCoverUrl).get(position % listFavoriteBooksInSharedPrefs.get(0).size()));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
     }
 
-    /*
+    // Ordinary
     @Override
     public int getItemCount() {
         return listFavoriteBooksInSharedPrefs.get(0).size();
     }
-    */
+    /*
+    // Infinite
     @Override
     public int getItemCount() {
         return listFavoriteBooksInSharedPrefs.get(0) == null ? 0 : listFavoriteBooksInSharedPrefs.get(0).size() * 2;
     }
+    */
 
     public class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
