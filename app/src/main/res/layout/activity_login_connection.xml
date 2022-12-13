@@ -78,7 +78,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@drawable/ic_login"
-                    app:startIconTint="@color/input_textcolor">
+                    app:startIconTint="@color/foreground_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/foreground_color"
-                        android:textColorHint="@color/input_textcolor"
+                        android:textColorHint="@color/foreground_color"
                         android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,9 +113,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/identifierInputLyt"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/input_textcolor"
+                    app:passwordToggleTint="@color/foreground_color"
                     app:startIconDrawable="@drawable/ic_password"
-                    app:startIconTint="@color/input_textcolor">
+                    app:startIconTint="@color/foreground_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                         android:paddingTop="@dimen/inputs_top_bottom_padding"
                         android:paddingBottom="@dimen/inputs_top_bottom_padding"
                         android:textColor="@color/background_color"
-                        android:textColorHint="@color/input_textcolor"
+                        android:textColorHint="@color/foreground_color"
                         android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -200,7 +200,6 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/popupCoFragContainerV"
-        android:name="com.example.alexandrie.AddFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
