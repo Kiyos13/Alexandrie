@@ -40,7 +40,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         semitransparentView = view.findViewById(R.id.semitransparentView);
-        accountButton = view.findViewById(R.id.accountBtn);
+        //accountButton = view.findViewById(R.id.accountBtn);
         contactButton = view.findViewById(R.id.contactBtn);
         logoutButton = view.findViewById(R.id.logoutBtn);
         homePageButton = view.findViewById(R.id.homePageBtn);
@@ -61,6 +61,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         });
 
         // Account click listener
+        /*
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View InputFragmentView) {
@@ -78,6 +79,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             }
         });
+         */
 
         // Logout click listener
         contactButton.setOnClickListener(new View.OnClickListener() {

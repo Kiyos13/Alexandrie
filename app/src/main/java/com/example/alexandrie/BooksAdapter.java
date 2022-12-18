@@ -3,6 +3,7 @@ package com.example.alexandrie;
 import static com.example.alexandrie.ListBooksActivity.listBooksInSharedPrefs;
 import static com.example.alexandrie.ListBooksActivity.sharedPrefBooks;
 import static com.example.alexandrie.MenuFragment.isRightHand;
+import static com.example.alexandrie.OneBookAllInfoActivity.getIndexInSharedPrefBooksCoverUrl;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAddDate;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksAuthor;
 import static com.example.alexandrie.OneBookAllInfoActivity.indexInSharedPrefBooksDescription;
@@ -139,9 +140,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         onBindViewHolderReadStatus(holder, position); // Set read status and corresponding icon
 
         // Set book cover from url
-        String urlStr = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg";
-        holder.coverUrl = urlStr;
-        Thread thread = onBindViewHolderCover(context, holder.coverImgV, urlStr);
+        holder.coverUrl = listBooksInSharedPrefs.get(getIndexInSharedPrefBooksCoverUrl).get(position);
+        Thread thread = onBindViewHolderCover(context, holder.coverImgV, holder.coverUrl);
         thread.start();
 
         // Book item layout long click listener

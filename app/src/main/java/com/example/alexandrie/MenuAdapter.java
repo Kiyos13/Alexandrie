@@ -60,7 +60,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
         Thread thread = onBindViewHolderCover(context, holder.imageView, imageUrl);
         thread.start();
         holder.titreView.setText(books.get(position).getTitleParam());
-        holder.auteurView.setText(books.get(position).getAuthorParam());
+        //holder.auteurView.setText(books.get(position).getAuthorParam());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +119,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
         CardView cardView;
         ImageView imageView;
         TextView titreView;
-        TextView auteurView;
+        //TextView auteurView;
 
         public ViewHolder(@NonNull View itemView)
         {
@@ -128,7 +128,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>
             cardView = itemView.findViewById(R.id.cardview);
             imageView = itemView.findViewById(R.id.image_view);
             titreView = itemView.findViewById(R.id.titre_view);
-            auteurView = itemView.findViewById(R.id.auteur_view);
+            //auteurView = itemView.findViewById(R.id.auteur_view);
         }
     }
 }

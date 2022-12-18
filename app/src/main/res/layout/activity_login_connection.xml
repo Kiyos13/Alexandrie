@@ -185,6 +185,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--
             <ImageView
                 android:id="@+id/googleImg"
                 android:layout_width="@dimen/google_button_side"
@@ -194,6 +195,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createAccountBtn"
                 app:srcCompat="@drawable/logo_google" />
+                -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

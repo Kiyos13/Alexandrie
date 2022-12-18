@@ -18,16 +18,30 @@
             android:orientation="vertical"
             android:background="@color/menu_background_color">
 
-
+            <!--
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_logo_menu"
+                android:background="@drawable/ic_app_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="@dimen/logo_top_bottom_margins"/>
+                -->
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@drawable/logo_white"
+                android:backgroundTint="@color/first_dominant_color"
+                android:layout_marginTop="@dimen/logo_top_bottom_margins"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.601" />
 
             <View
                 android:id="@+id/firstLine"
@@ -41,6 +55,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logo" />
 
+            <!--
             <Button
                 android:id="@+id/accountBtn"
                 style="?android:attr/borderlessButtonStyle"
@@ -60,6 +75,7 @@
                 android:layout_marginTop="@dimen/menu_text_text_margin"
                 android:drawableLeft="@drawable/ic_account"
                 android:drawableTint="@color/menu_text_color"/>
+                -->
 
             <Button
                 android:id="@+id/contactBtn"
@@ -74,7 +90,7 @@
                 android:textColor="@color/menu_text_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accountBtn"
+                app:layout_constraintTop_toBottomOf="@+id/firstLine"
                 android:gravity="left|center_vertical"
                 android:textSize="@dimen/menu_font_size"
                 android:layout_marginTop="@dimen/menu_text_text_margin"

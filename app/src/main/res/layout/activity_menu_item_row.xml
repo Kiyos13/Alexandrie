@@ -31,6 +31,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <!--
         <TextView
             android:id="@+id/auteur_view"
             android:layout_width="match_parent"
@@ -41,6 +42,7 @@
             android:textColor="@color/black"
             android:textSize="10sp"
             android:textStyle="bold" />
+            -->
 
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
