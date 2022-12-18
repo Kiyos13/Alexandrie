@@ -39,7 +39,13 @@ class BookAPIRequest extends AsyncTask<String, Void, List<BookAPIRequestResult>>
             URL requestUrl;
             HttpsURLConnection urlConnection = null;
 
-            String requestUrlString = "https://api2.isbndb.com/books/" + params[0]; // Main query (book title/author/whatever)
+            String requestUrlString = "https://api2.isbndb.com/book/";
+            if(params.length >= 2) {
+                if (params[1] == "SEARCH") {
+                    requestUrlString = "https://api2.isbndb.com/books/";
+                }
+            }
+            requestUrlString += params[0]; // Main query (book title/author/whatever)
             requestUrlString += "?page=1&pageSize=8"; // Params (we only want a few results)
 
             try {
@@ -53,11 +59,13 @@ class BookAPIRequest extends AsyncTask<String, Void, List<BookAPIRequestResult>>
 
                 int responseCode = urlConnection.getResponseCode();
                 if(responseCode == 404) { // NOT FOUND
+                    System.out.println("BOOK NOT FOUND");
                     notifyNoBookFound();
                     return null;
                 }
 
                 if(responseCode != 200) { // OK
+                    System.out.println("ERROR HANDLING BOOK:"+responseCode);
                     notifySomethingHappened(responseCode);
                     return null;
                 }
@@ -98,7 +106,9 @@ class BookAPIRequest extends AsyncTask<String, Void, List<BookAPIRequestResult>>
     @Override
     protected void onPostExecute(List<BookAPIRequestResult> bookList) {
 
+        System.out.println("BOAAAAAAAAAAAAP");
         if (bookList == null) return;
+        System.out.println("BOOK FOUND !!!!!");
 
         // Take only the first result
         BookAPIRequestResult book = null;
@@ -122,29 +132,50 @@ class BookAPIRequest extends AsyncTask<String, Void, List<BookAPIRequestResult>>
         String isbn = null, title = null, image = null, publishYear = null, publisher = null;
         List<String> authors = new ArrayList<String>();
 
-        // 3rd level - book information
+
+        // 2nd level - book information
         jsonReader.beginObject();
-        while(jsonReader.hasNext()) {
+        jsonReader.nextName();
+        jsonReader.beginObject();
+        while (jsonReader.hasNext()) {
 
             String key = jsonReader.nextName();
-            switch(key) {
-                case "isbn13": isbn = jsonReader.nextString(); break;
-                case "title": title = jsonReader.nextString(); break;
-                case "image": image = jsonReader.nextString(); break;
-                case "date_published": publishYear = jsonReader.nextString(); break;
-                case "publisher": publisher = jsonReader.nextString(); break;
+            switch (key) {
+                case "isbn13":
+                    isbn = jsonReader.nextString();
+                    break;
+                case "isbn10":
+                    isbn = jsonReader.nextString();
+                    break;
+                case "isbn":
+                    isbn = jsonReader.nextString();
+                    break;
+                case "title":
+                    title = jsonReader.nextString();
+                    break;
+                case "image":
+                    image = jsonReader.nextString();
+                    break;
+                case "date_published":
+                    publishYear = jsonReader.nextString();
+                    break;
+                case "publisher":
+                    publisher = jsonReader.nextString();
+                    break;
                 case "authors":
                     jsonReader.beginArray();
-                    while(jsonReader.hasNext()) {
+                    while (jsonReader.hasNext()) {
                         authors.add(jsonReader.nextString());
                     }
                     jsonReader.endArray();
                     break;
 
-                default: jsonReader.skipValue(); break;
+                default:
+                    jsonReader.skipValue();
+                    break;
             }
-
         }
+        jsonReader.endObject();
         jsonReader.endObject();
 
         foundBooks.add(new BookAPIRequestResult(isbn, title, authors, image, publishYear, publisher));
@@ -179,6 +210,8 @@ class BookAPIRequest extends AsyncTask<String, Void, List<BookAPIRequestResult>>
                         String key = jsonReader.nextName();
                         switch(key) {
                             case "isbn13": isbn = jsonReader.nextString(); break;
+                            case "isbn10": isbn = jsonReader.nextString(); break;
+                            case "isbn": isbn = jsonReader.nextString(); break;
                             case "title": title = jsonReader.nextString(); break;
                             case "image": image = jsonReader.nextString(); break;
                             case "date_published": publishYear = jsonReader.nextString(); break;

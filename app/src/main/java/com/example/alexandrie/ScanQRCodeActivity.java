@@ -133,8 +133,9 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                 //isbn = "9782344007440";
 
                 bookAPIRequest = new BookAPIRequest(context);
-                resultAPIRequest = bookAPIRequest.doInBackground(isbn);
+                resultAPIRequest = bookAPIRequest.doInBackground(isbn, "DEFAULT");
                 resultingBookAPIRequest = resultAPIRequest.get(0);
+                System.out.println(resultingBookAPIRequest.getTitle());
                 title = resultingBookAPIRequest.getTitle();
                 authors = resultingBookAPIRequest.getAuthors();
                 for (int i = 0; i < authors.size(); i++) {
