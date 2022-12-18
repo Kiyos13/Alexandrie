@@ -23,7 +23,7 @@
             android:layout_height="@dimen/one_favorite_cover_height"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/demain" />
+            app:srcCompat="@drawable/unknown" />
 
         <TextView
             android:id="@+id/titleFavoriteTxtV"
