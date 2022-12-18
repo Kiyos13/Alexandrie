@@ -24,7 +24,7 @@ public class OrderFragment extends Fragment {
     public static Integer currentOrderIndexInSharedPrefs = 1;
     private String ascendingOrder = "ascending", descendingOrder = "descending";
     public static String currentWayOrder = "ascending";
-    private ImageView orderIcon;
+    private ImageView orderIconDown, orderIconUp;
 
     public OrderFragment() {
         // Required empty public constructor
@@ -44,7 +44,8 @@ public class OrderFragment extends Fragment {
         serieRadioButton = view.findViewById(R.id.serieRadioBtn);
         addDateRadioButton = view.findViewById(R.id.addDateRadioBtn);
         releaseDateRadioButton = view.findViewById(R.id.releaseDateRadioBtn);
-        orderIcon = view.findViewById(R.id.orderIcon);
+        orderIconDown = view.findViewById(R.id.orderIconDown);
+        orderIconUp = view.findViewById(R.id.orderIconUp);
 
         checkCurrentRadioButton();
 
@@ -103,9 +104,22 @@ public class OrderFragment extends Fragment {
             }
         });
 
-        orderIcon.setOnClickListener(new View.OnClickListener() {
+        orderIconDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                orderIconDown.setVisibility(View.GONE);
+                orderIconUp.setVisibility(View.VISIBLE);
+                currentWayOrder = (currentWayOrder.equals(ascendingOrder)) ? descendingOrder : ascendingOrder;
+                listBooksInSharedPrefs.set(currentOrderIndexInSharedPrefs, SortBooksArrayListOfArrayLists(currentOrderIndexInSharedPrefs, currentWayOrder, listBooksInSharedPrefs.size()));
+                booksAdapter.notifyDataSetChanged();
+            }
+        });
+
+        orderIconUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                orderIconDown.setVisibility(View.VISIBLE);
+                orderIconUp.setVisibility(View.GONE);
                 currentWayOrder = (currentWayOrder.equals(ascendingOrder)) ? descendingOrder : ascendingOrder;
                 listBooksInSharedPrefs.set(currentOrderIndexInSharedPrefs, SortBooksArrayListOfArrayLists(currentOrderIndexInSharedPrefs, currentWayOrder, listBooksInSharedPrefs.size()));
                 booksAdapter.notifyDataSetChanged();

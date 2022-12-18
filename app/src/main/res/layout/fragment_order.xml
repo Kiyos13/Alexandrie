@@ -124,7 +124,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/orderIcon"
+                    android:id="@+id/orderIconDown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/icon_order_top_right_margin"
@@ -133,7 +133,21 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_order_down"
-                    app:tint="@color/foreground_color" />
+                    app:tint="@color/foreground_color"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/orderIconUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/icon_order_top_right_margin"
+                    android:layout_marginTop="@dimen/icon_order_top_right_margin"
+                    android:layout_marginRight="@dimen/icon_order_top_right_margin"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_order_up"
+                    app:tint="@color/foreground_color"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>
