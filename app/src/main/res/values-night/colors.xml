@@ -16,6 +16,8 @@
     <color name="menu_text_color">#b7aa9a</color>
     <color name="menu_background_color">#3f3136</color>
 
+    <color name="input_text_background">#443a3d</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

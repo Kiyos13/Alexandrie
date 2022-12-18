@@ -35,7 +35,43 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout="@layout/fragment_app_bar" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/titleOneBookInfoTxtInputLytEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColorHint="@color/background_color"
+                    app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                    app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintBottom_toTopOf="@+id/oneBookFirstLytEdit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topBarOneBookInfoFragContainerVEdit"
+                    app:startIconTint="@color/background_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/input_text_background"
+                        android:hint="Titre"
+                        android:paddingTop="@dimen/inputs_top_bottom_padding"
+                        android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                        android:textColor="@color/foreground_color"
+                        android:textColorHint="@color/foreground_color"
+                        android:textCursorDrawable="@null"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/oneBookFirstLytEdit"
@@ -45,12 +81,15 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/topBarOneBookInfoFragContainerVEdit">
+                    app:layout_constraintTop_toBottomOf="@+id/titleOneBookInfoTxtInputLytEdit">
 
                     <ImageView
                         android:id="@+id/coverOneBookInfoImgVEdit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:layout_weight="3"
                         app:srcCompat="@drawable/ajin1" />
 
@@ -60,35 +99,6 @@
                         android:layout_weight="5"
                         android:gravity="center"
                         android:orientation="vertical">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/titleOneBookInfoTxtInputLytEdit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
-                            android:layout_marginTop="@dimen/text_input_margin"
-                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
-                            android:textColorHint="@color/background_color"
-                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
-                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
-                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
-                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                            app:boxStrokeWidth="0dp"
-                            app:boxStrokeWidthFocused="0dp"
-                            app:hintEnabled="false"
-                            app:startIconTint="@color/background_color">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/foreground_color"
-                                android:hint="Titre"
-                                android:paddingTop="@dimen/inputs_top_bottom_padding"
-                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                                android:textColor="@color/background_color"
-                                android:textColorHint="@color/background_color"
-                                android:textCursorDrawable="@null" />
-                        </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/volumeOneBookInfoTxtInputLytEdit"
@@ -110,12 +120,12 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="@color/foreground_color"
+                                android:backgroundTint="@color/input_text_background"
                                 android:hint="Tome"
                                 android:paddingTop="@dimen/inputs_top_bottom_padding"
                                 android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                                android:textColor="@color/background_color"
-                                android:textColorHint="@color/background_color"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
                                 android:textCursorDrawable="@null" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,46 +149,17 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="@color/foreground_color"
+                                android:backgroundTint="@color/input_text_background"
                                 android:hint="Série"
                                 android:paddingTop="@dimen/inputs_top_bottom_padding"
                                 android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                                android:textColor="@color/background_color"
-                                android:textColorHint="@color/background_color"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
                                 android:textCursorDrawable="@null" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/authorOneBookInfoTxtInputLytEdit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
-                            android:layout_marginTop="@dimen/text_input_margin"
-                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
-                            android:textColorHint="@color/background_color"
-                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
-                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
-                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
-                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
-                            app:boxStrokeWidth="0dp"
-                            app:boxStrokeWidthFocused="0dp"
-                            app:hintEnabled="false"
-                            app:startIconTint="@color/background_color">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/foreground_color"
-                                android:hint="Auteur"
-                                android:paddingTop="@dimen/inputs_top_bottom_padding"
-                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                                android:textColor="@color/background_color"
-                                android:textColorHint="@color/background_color"
-                                android:textCursorDrawable="@null" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/releaseDateOneBookInfoTxtInputLytEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
@@ -198,13 +179,45 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:backgroundTint="@color/foreground_color"
+                                android:backgroundTint="@color/input_text_background"
+                                android:hint="Auteur"
+                                android:paddingTop="@dimen/inputs_top_bottom_padding"
+                                android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/releaseDateOneBookInfoTxtInputLytEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginTop="@dimen/text_input_margin"
+                            android:layout_marginRight="@dimen/one_book_text_input_left_right_margins"
+                            android:layout_marginBottom="@dimen/text_input_margin"
+                            android:textColorHint="@color/background_color"
+                            android:visibility="gone"
+                            app:boxCornerRadiusBottomEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusBottomStart="@dimen/standard_radius"
+                            app:boxCornerRadiusTopEnd="@dimen/standard_radius"
+                            app:boxCornerRadiusTopStart="@dimen/standard_radius"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:hintEnabled="false"
+                            app:startIconTint="@color/background_color">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/input_text_background"
                                 android:hint="Date de publication"
                                 android:paddingTop="@dimen/inputs_top_bottom_padding"
                                 android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                                android:textColor="@color/background_color"
-                                android:textColorHint="@color/background_color"
-                                android:textCursorDrawable="@null" />
+                                android:textColor="@color/foreground_color"
+                                android:textColorHint="@color/foreground_color"
+                                android:textCursorDrawable="@null"
+                                android:visibility="visible" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -226,86 +239,90 @@
 
                     <ImageView
                         android:id="@+id/emptyStar1ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_empty_star"
                         android:visibility="visible"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/fullStar1ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_full_star"
                         android:visibility="gone"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/emptyStar2ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_empty_star"
                         android:visibility="visible"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/fullStar2ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_full_star"
                         android:visibility="gone"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/emptyStar3ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_empty_star"
                         android:visibility="visible"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/fullStar3ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_full_star"
                         android:visibility="gone"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/emptyStar4ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_empty_star"
                         android:visibility="visible"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/fullStar4ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_full_star"
                         android:visibility="gone"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/emptyStar5ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_empty_star"
                         android:visibility="visible"
                         app:tint="@color/first_dominant_color"></ImageView>
 
                     <ImageView
                         android:id="@+id/fullStar5ImgVEdit"
-                        android:layout_width="@dimen/candle_icon_size"
-                        android:layout_height="@dimen/candle_icon_size"
+                        android:layout_width="@dimen/star_icon_size"
+                        android:layout_height="@dimen/star_icon_size"
                         android:src="@drawable/ic_full_star"
                         android:visibility="gone"
                         app:tint="@color/first_dominant_color"></ImageView>
 
 
                 </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -334,14 +351,19 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="center|right"
                             android:orientation="horizontal">
+
+                            <Space
+                                android:layout_width="16dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
 
                             <ImageView
                                 android:id="@+id/fullCandleImgVEdit"
                                 android:layout_width="@dimen/candle_icon_size"
                                 android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_candle"
+                                android:src="@drawable/candle_lit"
                                 android:visibility="gone"
                                 app:tint="@color/first_dominant_color"></ImageView>
 
@@ -349,14 +371,14 @@
                                 android:id="@+id/emptyCandleImgVEdit"
                                 android:layout_width="@dimen/candle_icon_size"
                                 android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_candle"
+                                android:src="@drawable/candle_unlit"
                                 app:tint="@color/first_dominant_color"></ImageView>
 
                             <ImageView
                                 android:id="@+id/favoriteFullImgVEdit"
                                 android:layout_width="@dimen/favorite_icon_size"
                                 android:layout_height="@dimen/favorite_icon_size"
-                                android:src="@drawable/ic_full_heart"
+                                android:src="@drawable/heart_full"
                                 android:visibility="gone"
                                 app:tint="@color/first_dominant_color"></ImageView>
 
@@ -364,8 +386,14 @@
                                 android:id="@+id/favoriteEmptyImgVEdit"
                                 android:layout_width="@dimen/favorite_icon_size"
                                 android:layout_height="@dimen/favorite_icon_size"
-                                android:src="@drawable/ic_empty_heart"
+                                android:src="@drawable/heart_empty"
                                 app:tint="@color/first_dominant_color"></ImageView>
+
+                            <Space
+                                android:layout_width="8dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25" />
+
                         </LinearLayout>
 
                     </LinearLayout>
@@ -381,7 +409,8 @@
                         android:drawableTint="@color/foreground_color"
                         android:text="Genre"
                         android:textColor="@color/foreground_color"
-                        android:textSize="@dimen/title_font_size" />
+                        android:textSize="@dimen/title_font_size"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/genresListOneBookTxtVEdit"
@@ -402,7 +431,8 @@
                         android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Résumé"
                         android:textColor="@color/foreground_color"
-                        android:textSize="@dimen/title_font_size" />
+                        android:textSize="@dimen/title_font_size"
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/summaryOneBookInfoTxtInputLytEdit"
@@ -422,17 +452,18 @@
                         app:hintEnabled="false"
                         app:startIconTint="@color/background_color">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/foreground_color"
-                        android:gravity="top"
-                        android:hint="Résumé du livre"
-                        android:paddingTop="@dimen/inputs_top_bottom_padding"
-                        android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                        android:textColor="@color/background_color"
-                        android:textColorHint="@color/background_color"
-                        android:textCursorDrawable="@null" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/input_text_background"
+                            android:gravity="top"
+                            android:hint="Résumé du livre"
+                            android:minHeight="120dp"
+                            android:paddingTop="@dimen/inputs_top_bottom_padding"
+                            android:paddingBottom="@dimen/inputs_top_bottom_padding"
+                            android:textColor="@color/foreground_color"
+                            android:textColorHint="@color/foreground_color"
+                            android:textCursorDrawable="@null" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -444,7 +475,8 @@
                         android:layout_marginRight="@dimen/one_book_titles_left_right_margins"
                         android:text="Description"
                         android:textColor="@color/foreground_color"
-                        android:textSize="@dimen/title_font_size" />
+                        android:textSize="@dimen/title_font_size"
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/descriptionOneBookInfoTxtInputLytEdit"
@@ -467,13 +499,14 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/foreground_color"
+                            android:backgroundTint="@color/input_text_background"
                             android:gravity="top"
                             android:hint="Impressions sur le livre"
+                            android:minHeight="120dp"
                             android:paddingTop="@dimen/inputs_top_bottom_padding"
                             android:paddingBottom="@dimen/inputs_top_bottom_padding"
-                            android:textColor="@color/background_color"
-                            android:textColorHint="@color/background_color"
+                            android:textColor="@color/foreground_color"
+                            android:textColorHint="@color/foreground_color"
                             android:textCursorDrawable="@null" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -491,7 +524,7 @@
                         android:paddingBottom="@dimen/buttons_top_bottom_padding"
                         android:text="Enregistrer le livre"
                         android:textAllCaps="false"
-                        android:textColor="@color/background_color" />
+                        android:textColor="@color/menu_text_color" />
 
                     <android.widget.Button
                         android:id="@+id/saveEditOneBookBtnEdit"
@@ -522,6 +555,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+                <!-- android:name="com.example.alexandrie.GenresSelectorFragment"
+                tools:layout="@layout/fragment_genres_selector" /> -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -542,7 +577,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout="@layout/fragment_app_bar" />
 
                 <LinearLayout
                     android:id="@+id/oneBookFirstLytSee"
