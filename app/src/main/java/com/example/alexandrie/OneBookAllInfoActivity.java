@@ -51,7 +51,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     private ImageView fullStar1ImgVEdit, fullStar2ImgVEdit, fullStar3ImgVEdit, fullStar4ImgVEdit, fullStar5ImgVEdit;
     private ImageView emptyStar1ImgVSee, emptyStar2ImgVSee, emptyStar3ImgVSee, emptyStar4ImgVSee, emptyStar5ImgVSee;
     private ImageView fullStar1ImgVSee, fullStar2ImgVSee, fullStar3ImgVSee, fullStar4ImgVSee, fullStar5ImgVSee;
-    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0", coverUrl, calculatedCoverUrl;
+    private String indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark = "0", coverUrl;
+    private String calculatedTitle, calculatedAuthor, calculatedCoverUrl, calculatedReleaseDate;
     private String[] tags;
     private Boolean isRead, isFavorite;
     public static int indexInSharedPrefBooksIndex = 0, indexInSharedPrefBooksTitle = 1, indexInSharedPrefBooksVolume = 2;
@@ -68,15 +69,13 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_one_book_all_info);
         colorSystemBarTop(getWindow(), getResources(), this); // Set the color of the system bar at the top
 
-        calculatedCoverUrl = "https://m.media-amazon.com/images/I/513TQ4ihqqL.jpg"; // Set the cover url // TODO : API
-        coverUrl = calculatedCoverUrl;
-
         initGlobalLyts();
         initEditElements();
         initSeeElements();
 
         Bundle bundle = getIntent().getExtras();
         mode = bundle.getString("mode");
+        retrieveAPIResultFromBundle(bundle);
         previousActivity = bundle.getString("prevActivity");
 
         // Display return arrow (with linked intent)
@@ -142,7 +141,8 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
                 Boolean isVertical = previousActivity.equals("verticalList");
                 Boolean isHorizontal = previousActivity.equals("horizontalList");
                 Boolean isFavorite = previousActivity.equals("favoriteList");
-                if (isVertical || isHorizontal || isFavorite) {
+                Boolean isScan = previousActivity.equals("scan");
+                if (isVertical || isHorizontal || isFavorite || isScan) {
                     updateBookInfosCreateAndEditModes(); // Retrieve and update book infos
 
                     int indexBook = 0, maxIndexBooks = 0;
@@ -432,7 +432,10 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        title = calculatedTitle;
+        author = calculatedAuthor;
         coverUrl = calculatedCoverUrl;
+        releaseDate = calculatedReleaseDate;
         super.onResume();
     }
 
@@ -504,12 +507,17 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
     }
 
     private void retrieveAPIResultFromBundle(Bundle bundle) {
-        title = bundle.getString("title");
-        author = bundle.getString("author");
-        coverUrl = bundle.getString("releaseDate");
-        releaseDate = bundle.getString("coverUrl");
+        calculatedTitle = bundle.getString("title");
+        calculatedAuthor = bundle.getString("author");
+        calculatedCoverUrl = bundle.getString("coverUrl");
+        calculatedReleaseDate = bundle.getString("releaseDate");
 
-        updateBookInfosCreateAndEditModes();
+        title = calculatedTitle;
+        author = calculatedAuthor;
+        coverUrl = calculatedCoverUrl;
+        releaseDate = calculatedReleaseDate;
+
+        setBookInfosEdit();
     }
 
     private void setOneStarMarkEdit() {
@@ -716,6 +724,13 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             favoriteImgVEdit.setVisibility(View.GONE);
             notFavoriteImgVEdit.setVisibility(View.VISIBLE);
         }
+    }
+
+    // Set book infos from API result (edit mode)
+    private void setBookInfosEdit() {
+        titleTxtInputLytEdit.getEditText().setText(title); // Set the title
+        authorTxtInputLytEdit.getEditText().setText(author); // Set the author
+        releaseDateTxtInputLytEdit.getEditText().setText(releaseDate); // Set the release date
     }
 
     // Set book infos (see mode)

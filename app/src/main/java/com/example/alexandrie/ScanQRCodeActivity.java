@@ -56,10 +56,11 @@ public class ScanQRCodeActivity extends AppCompatActivity {
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannerView);
 
+        /*
         Thread thread = onDecodeIsbnCode();
         thread.start();
+        */
 
-        /*
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
@@ -100,7 +101,6 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                 });
             }
         });
-        */
 
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +130,6 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                 isbn = "2765410054";
                 System.out.println("\tISBN code = " + isbn);
                 //Toast.makeText(ScanQRCodeActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-                //isbn = "9782344007440";
 
                 bookAPIRequest = new BookAPIRequest(context);
                 resultAPIRequest = bookAPIRequest.doInBackground(isbn, "DEFAULT");
@@ -146,6 +145,11 @@ public class ScanQRCodeActivity extends AppCompatActivity {
                 }
                 coverUrl = resultingBookAPIRequest.getCoverUrl();
                 publishYear = resultingBookAPIRequest.getPublishYear();
+
+                System.out.println("\ttitle = " + title);
+                System.out.println("\tauthor = " + author);
+                System.out.println("\tcoverUrl = " + coverUrl);
+                System.out.println("\tpublishYear = " + publishYear);
 
                 Intent intent = new Intent(ScanQRCodeActivity.this, OneBookAllInfoActivity.class);
                 Bundle bundle = new Bundle();
