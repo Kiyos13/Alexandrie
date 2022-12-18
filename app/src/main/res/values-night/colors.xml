@@ -8,10 +8,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--<color name="foreground_color">#614100</color>-->
-    <color name="foreground_color">#FAE9D5</color>
-    <color name="background_color">#554e41</color>
-    <color name="first_dominant_color">#C71C52</color>
+    <color name="foreground_color">#b7aa9a</color>
+    <color name="background_color">#272123</color>
+    <color name="first_dominant_color">#791232</color>
     <color name="second_dominant_color">#DE9528</color>
+
+    <color name="menu_text_color">#b7aa9a</color>
+    <color name="menu_background_color">#3f3136</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

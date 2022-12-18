@@ -16,6 +16,9 @@
     <color name="first_dominant_color">#C71C52</color>
     <color name="second_dominant_color">#DE9528</color>
 
+    <color name="menu_text_color">#FAE9D5</color>
+    <color name="menu_background_color">#554e41</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
