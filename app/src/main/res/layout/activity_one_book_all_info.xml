@@ -890,7 +890,7 @@
                                 android:id="@+id/fullCandleImgVSee"
                                 android:layout_width="@dimen/candle_icon_size"
                                 android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_full_candle"
+                                android:src="@drawable/candle_lit"
                                 android:visibility="gone"
                                 app:tint="@color/first_dominant_color"></ImageView>
 
@@ -898,14 +898,14 @@
                                 android:id="@+id/emptyCandleImgVSee"
                                 android:layout_width="@dimen/candle_icon_size"
                                 android:layout_height="@dimen/candle_icon_size"
-                                android:src="@drawable/ic_empty_candle"
+                                android:src="@drawable/candle_unlit"
                                 app:tint="@color/first_dominant_color"></ImageView>
 
                             <ImageView
                                 android:id="@+id/favoriteFullImgVSee"
                                 android:layout_width="@dimen/favorite_icon_size"
                                 android:layout_height="@dimen/favorite_icon_size"
-                                android:src="@drawable/ic_full_heart"
+                                android:src="@drawable/heart_full"
                                 android:visibility="gone"
                                 app:tint="@color/first_dominant_color"></ImageView>
 
@@ -913,7 +913,7 @@
                                 android:id="@+id/favoriteEmptyImgVSee"
                                 android:layout_width="@dimen/favorite_icon_size"
                                 android:layout_height="@dimen/favorite_icon_size"
-                                android:src="@drawable/ic_empty_heart"
+                                android:src="@drawable/heart_empty"
                                 app:tint="@color/first_dominant_color"></ImageView>
                         </LinearLayout>
 

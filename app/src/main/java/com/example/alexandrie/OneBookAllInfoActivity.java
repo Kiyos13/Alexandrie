@@ -97,8 +97,10 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
             seeLayout.setVisibility(View.GONE);
 
             // Set book cover from url
-            Thread thread = onBindViewHolderCover(this, coverEdit, coverUrl);
-            thread.start();
+            Thread threadSee = onBindViewHolderCover(this, coverSee, coverUrl);
+            Thread threadEdit = onBindViewHolderCover(this, coverEdit, coverUrl);
+            threadSee.start();
+            threadEdit.start();
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date(System.currentTimeMillis());
@@ -116,7 +118,7 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
 
             retrieveBookInfosFromBundle(bundle);
             String[] strings = {
-                    indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark, tags[0], tags[1], tags[2]
+                    indexInSharedPrefs, title, volume, serie, author, addDate, releaseDate, description, summary, mark, tags[0], tags[1], tags[2], coverUrl
             };
             Boolean[] booleans = { isRead, isFavorite };
             fragmentManager.beginTransaction().add(R.id.topBarOneBookInfoFragContainerVSee, new AppBarFragment(returnIntent, previousActivity, strings, booleans)).commit();

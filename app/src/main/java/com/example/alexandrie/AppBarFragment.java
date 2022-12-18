@@ -218,6 +218,7 @@ public class AppBarFragment extends Fragment implements View.OnClickListener {
                     bundle.putString("tag1", bookStrings[10]);
                     bundle.putString("tag2", bookStrings[11]);
                     bundle.putString("tag3", bookStrings[12]);
+                    bundle.putString("coverUrl", bookStrings[13]);
                     bundle.putBoolean("readStatus", bookBooleans[0]);
                     bundle.putBoolean("isFavorite", bookBooleans[1]);
                     intent.putExtras(bundle);

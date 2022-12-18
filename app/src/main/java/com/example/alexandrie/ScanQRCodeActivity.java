@@ -109,10 +109,10 @@ public class ScanQRCodeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Toast.makeText(ScanQRCodeActivity.this, "Livre correctement scanné.", Toast.LENGTH_SHORT).show();
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult.getContents() != null) {
+            Toast.makeText(ScanQRCodeActivity.this, "Livre correctement scanné.", Toast.LENGTH_SHORT).show();
             Thread thread = onDecodeIsbnCode(intentResult.getContents());
             thread.start();
         }
