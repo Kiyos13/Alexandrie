@@ -17,25 +17,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.budiyev.android.codescanner.CodeScannerView
-            android:id="@+id/scanner_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingClass" />
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/scanQRCodeTxtV"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/background_color"
-            android:gravity="center"
-            android:text="Scanner le QRCode du livre à ajouter"
-            android:textColor="@color/foreground_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <android.widget.Button
+                android:id="@+id/scanBarcodeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                android:layout_marginRight="@dimen/buttons_left_right_margins"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/first_dominant_color"
+                android:paddingTop="@dimen/buttons_top_bottom_padding"
+                android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                android:text="Scanner un livre"
+                android:textAllCaps="false"
+                android:textColor="@color/background_color"
+                android:textSize="18sp"
+                tools:ignore="MissingConstraints" />
+
+            <android.widget.Button
+                android:id="@+id/addManuallyBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/buttons_left_right_margins"
+                android:layout_marginRight="@dimen/buttons_left_right_margins"
+                android:layout_marginTop="@dimen/buttons_top_bottom_margins"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/first_dominant_color"
+                android:paddingTop="@dimen/buttons_top_bottom_padding"
+                android:paddingBottom="@dimen/buttons_top_bottom_padding"
+                android:text="Ajouter à la main"
+                android:textAllCaps="false"
+                android:textColor="@color/background_color"
+                android:textSize="18sp"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@
 
     <dimen name="inputs_left_right_margins">60dp</dimen>
     <dimen name="buttons_left_right_margins">100dp</dimen>
+    <dimen name="buttons_top_bottom_margins">100dp</dimen>
 
     <dimen name="inputs_top_bottom_padding">15dp</dimen>
     <dimen name="buttons_top_bottom_padding">15dp</dimen>

@@ -4,21 +4,35 @@ import static com.example.alexandrie.BooksAdapter.onBindViewHolderCover;
 import static com.example.alexandrie.LoginConnectionActivity.colorSystemBarTop;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.budiyev.android.codescanner.AutoFocusMode;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.budiyev.android.codescanner.ScanMode;
 import com.google.zxing.Result;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -26,13 +40,13 @@ import java.util.List;
 public class ScanQRCodeActivity extends AppCompatActivity {
 
     private Context context;
-    private CodeScanner codeScanner;
     private String isbn, previousActivity;
     private BookAPIRequest bookAPIRequest;
     private List<BookAPIRequestResult> resultAPIRequest;
     private BookAPIRequestResult resultingBookAPIRequest;
     private List<String> authors;
     private String title, author, coverUrl, publishYear;
+    private android.widget.Button scanBarcodeBtn, addManuallyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,59 +67,32 @@ public class ScanQRCodeActivity extends AppCompatActivity {
             returnIntent = new Intent(ScanQRCodeActivity.this, ListBooksActivity.class);
         fragmentManager.beginTransaction().add(R.id.topBarScanFragContainerV, new AppBarFragment(returnIntent)).commit();
 
-        CodeScannerView scannerView = findViewById(R.id.scanner_view);
-        codeScanner = new CodeScanner(this, scannerView);
 
-        /*
-        Thread thread = onDecodeIsbnCode();
-        thread.start();
-        */
+        scanBarcodeBtn = findViewById(R.id.scanBarcodeBtn);
+        addManuallyBtn = findViewById(R.id.addManuallyBtn);
 
-        codeScanner.setDecodeCallback(new DecodeCallback() {
+        scanBarcodeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDecoded(@NonNull final Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        isbn = result.getText();
-                        System.out.println("\tISBN code = " + isbn);
-                        Toast.makeText(ScanQRCodeActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-                        //isbn = "9782344007440";
-
-                        bookAPIRequest = new BookAPIRequest(context);
-                        resultAPIRequest = bookAPIRequest.doInBackground(isbn);
-                        resultingBookAPIRequest = resultAPIRequest.get(0);
-                        title = resultingBookAPIRequest.getTitle();
-                        authors = resultingBookAPIRequest.getAuthors();
-                        for (int i = 0; i < authors.size(); i++) {
-                            if (i == 0)
-                                author += authors.get(i);
-                            else
-                                author += " " + authors.get(i);
-                        }
-                        coverUrl = resultingBookAPIRequest.getCoverUrl();
-                        publishYear = resultingBookAPIRequest.getPublishYear();
-
-                        Intent intent = new Intent(ScanQRCodeActivity.this, OneBookAllInfoActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("mode", "create");
-                        bundle.putString("prevActivity", "scan");
-                        bundle.putString("title", title);
-                        bundle.putString("author", author);
-                        bundle.putString("releaseDate", publishYear);
-                        bundle.putString("coverUrl", coverUrl);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+            public void onClick(View view) {
+                IntentIntegrator intentIntegrator = new IntentIntegrator(ScanQRCodeActivity.this);
+                intentIntegrator.setPrompt("Pour utiliser le flash utilisez le bouton du volume");
+                intentIntegrator.setBeepEnabled(true);
+                intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.setCaptureActivity(Capture.class);
+                intentIntegrator.initiateScan();
             }
         });
 
-        scannerView.setOnClickListener(new View.OnClickListener() {
+        addManuallyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codeScanner.startPreview();
+                Intent intent = new Intent(ScanQRCodeActivity.this, OneBookAllInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mode", "create");
+                bundle.putString("prevActivity", "scan");
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -113,59 +100,81 @@ public class ScanQRCodeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        codeScanner.startPreview();
     }
 
     @Override
     protected void onPause() {
-        codeScanner.releaseResources();
         super.onPause();
     }
 
-    private Thread onDecodeIsbnCode() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Toast.makeText(ScanQRCodeActivity.this, "Livre correctement scanné.", Toast.LENGTH_SHORT).show();
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult.getContents() != null) {
+            Thread thread = onDecodeIsbnCode(intentResult.getContents());
+            thread.start();
+        }
+        else
+            showErrorBuilder("Résultat", "Oup ... Aucun code barre n'a été détecté.");
+    }
+
+    private Thread onDecodeIsbnCode(String scannedIsbn) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                //isbn = result.getText();
-                isbn = "2765410054";
-                System.out.println("\tISBN code = " + isbn);
-                //Toast.makeText(ScanQRCodeActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                // isbn = "2765410054"; // For tests
+                isbn = scannedIsbn;
 
                 bookAPIRequest = new BookAPIRequest(context);
                 resultAPIRequest = bookAPIRequest.doInBackground(isbn, "DEFAULT");
-                resultingBookAPIRequest = resultAPIRequest.get(0);
-                System.out.println(resultingBookAPIRequest.getTitle());
-                title = resultingBookAPIRequest.getTitle();
-                authors = resultingBookAPIRequest.getAuthors();
-                for (int i = 0; i < authors.size(); i++) {
-                    if (i == 0)
-                        author += authors.get(i);
-                    else
-                        author += " " + authors.get(i);
+                if (resultAPIRequest != null) {
+                    resultingBookAPIRequest = resultAPIRequest.get(0);
+                    System.out.println(resultingBookAPIRequest.getTitle());
+                    title = resultingBookAPIRequest.getTitle();
+                    authors = resultingBookAPIRequest.getAuthors();
+                    author = "";
+                    for (int i = 0; i < authors.size(); i++) {
+                        if (i == 0)
+                            author += authors.get(i);
+                        else
+                            author += " " + authors.get(i);
+                    }
+                    coverUrl = resultingBookAPIRequest.getCoverUrl();
+                    publishYear = resultingBookAPIRequest.getPublishYear();
+
+                    Intent intent = new Intent(ScanQRCodeActivity.this, OneBookAllInfoActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mode", "create");
+                    bundle.putString("prevActivity", "scan");
+                    bundle.putString("title", title);
+                    bundle.putString("author", author);
+                    bundle.putString("releaseDate", publishYear);
+                    bundle.putString("coverUrl", coverUrl);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
                 }
-                coverUrl = resultingBookAPIRequest.getCoverUrl();
-                publishYear = resultingBookAPIRequest.getPublishYear();
-
-                System.out.println("\ttitle = " + title);
-                System.out.println("\tauthor = " + author);
-                System.out.println("\tcoverUrl = " + coverUrl);
-                System.out.println("\tpublishYear = " + publishYear);
-
-                Intent intent = new Intent(ScanQRCodeActivity.this, OneBookAllInfoActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("mode", "create");
-                bundle.putString("prevActivity", "scan");
-                bundle.putString("title", title);
-                bundle.putString("author", author);
-                bundle.putString("releaseDate", publishYear);
-                bundle.putString("coverUrl", coverUrl);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
+                else
+                    showErrorBuilder("Résultat", "Oup ... Aucun code barre n'a été détecté.");
             }
         });
         return thread;
     }
+
+    private void showErrorBuilder(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+    }
 }
 
-// Source : https://github.com/yuriy-budiyev/code-scanner
+// Source : https://github.com/journeyapps/zxing-android-embedded
