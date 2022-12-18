@@ -503,6 +503,15 @@ public class OneBookAllInfoActivity extends AppCompatActivity {
         coverSee = findViewById(R.id.coverOneBookInfoImgVSee);
     }
 
+    private void retrieveAPIResultFromBundle(Bundle bundle) {
+        title = bundle.getString("title");
+        author = bundle.getString("author");
+        coverUrl = bundle.getString("releaseDate");
+        releaseDate = bundle.getString("coverUrl");
+
+        updateBookInfosCreateAndEditModes();
+    }
+
     private void setOneStarMarkEdit() {
         emptyStar1ImgVEdit.setVisibility(View.GONE);
         fullStar1ImgVEdit.setVisibility(View.VISIBLE);

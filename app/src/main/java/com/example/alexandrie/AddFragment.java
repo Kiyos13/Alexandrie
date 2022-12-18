@@ -35,20 +35,23 @@ public class AddFragment extends Fragment {
             public void onClick(View InputFragmentView) {
                 // Change activity to ScanQRCodeActivity
                 // startActivity(new Intent(getActivity(), ScanQRCodeActivity.class));
-
-                // Bypass scan activity
-                // /*
-                Intent intent = new Intent(getActivity(), OneBookAllInfoActivity.class);
+                Intent intent = new Intent(getActivity(), ScanQRCodeActivity.class);
                 Bundle bundle = new Bundle();
-                //bundle.putString("mode", "see");
-                //bundle.putString("mode", "edit");
-                bundle.putString("mode", "create");
-                //bundle.putString("prevActivity", "horizontalList");
                 bundle.putString("prevActivity", "verticalList");
                 intent.putExtras(bundle);
                 startActivity(intent);
                 getActivity().finish();
-                // */
+
+                // Bypass scan activity
+                /*
+                Intent intent = new Intent(getActivity(), OneBookAllInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mode", "create");
+                bundle.putString("prevActivity", "verticalList");
+                intent.putExtras(bundle);
+                startActivity(intent);
+                getActivity().finish();
+                */
             }
         });
 
